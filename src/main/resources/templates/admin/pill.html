@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>관리자페이지</title>
+        <link rel="stylesheet" href="../css/common.css" />
+        <link rel="stylesheet" href="../css/admin.css" />
+        <script defer src="../js/admin.js"></script>
+    </head>
+    <body>
+        <nav class="top-header">
+            <a href="#" class="logo"
+            ><img src="../images/common/logo_gray.svg" alt=""
+            /></a>
+        </nav>
+        <div class="layout-sidenav">
+            <h1 class="title">관리자 페이지</h1>
+            <nav class="menu-nav">
+            <ul>
+                <li><a href="index.html">회원 관리</a></li>
+                <li class="active"><a href="pill.html">약품 관리</a></li>
+                <li><a href="qna_board.html">게시판 관리</a></li>
+            </ul>
+            </nav>
+        </div>
+        <div class="layout-content">
+            <div class="member-list-wrap">
+                <form class="search-area" action="" method="get">
+                    <select name="" id="">
+                        <option value="">약품명</option>
+                        <option value="">회사명</option>
+                    </select>
+                    <label class="form-control">
+                        <input type="text" placeholder="Search Member">
+                    </label>
+                    <button class="btn-normal btn-primary" type="button">찾기</button>
+                </form>
+                <div class="tbl-row">
+                    <table style="table-layout: fixed;">
+                        <colgroup>
+                            <col style="width: 100px;">
+                            <col style="width: 140px;">
+                            <col style="width: 100px;">
+                            <col style="width: auto;">
+                            <col style="width: auto;">
+                            <col style="width: auto;">
+                            <col style="width: 120px;">
+                            <col style="width: auto;">
+                            <col style="width: 140px;" >
+                            <col style="width: 100px;">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>제조사명</th>
+                                <th>약품명</th>
+                                <th>등록일</th>
+                                <th>약효능</th>
+                                <th>복용/섭취방법</th>
+                                <th>섭취시 주의사항</th>
+                                <th>약형태 및 색상</th>
+                                <th>약보관방법</th>
+                                <th>약 사진</th>
+                                <th>옵션</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span>일동제약(주)</span>
+                                </td>
+                                <td>
+                                    <span>활명수</span>
+                                </td>
+                                <td>
+                                    <span>2000/01/01</span>
+                                </td>
+                                <td>
+                                    <span class="ellipsis">이 약은 식욕감퇴(식욕부진), 위부팽만감, 소화불량, 과식, 체함, 구역, 구토에 사용합니다</span>
+                                </td>
+                                <td>
+                                    <span class="ellipsis">만 15세 이상 및 성인은 1회 1병(75 mL), 만 11세이상~만 15세미만은 1회 2/3병(50 mL), 만 8세 이상~만 11세 미만은 1회 1/2병(37.5 mL), 만 5세 이상~만 8세 미만은 1회 1/3병(25 mL), 만 3세 이상~만 5세 미만은 1회 1/4병(18.75 mL), 만 1세 이상~만 3세 미만은 1회 1/5병(15 mL), 1일 3회 식후에 복용합니다. 복용간격은 4시간 이상으로 합니다.</span>
+                                </td>
+                                <td>
+                                    <span class="ellipsis">만 3개월 미만의 젖먹이는 이 약을 복용하지 마십시오. 이 약을 복용하기 전에 만 1세 미만의 젖먹이, 임부 또는 임신하고 있을 가능성이 있는 여성, 카라멜에 과민증 환자 또는 경험자, 나트륨 제한 식이를 하는 사람은 의사 또는 약사와 상의하십시오. 정해진 용법과 용량을 잘 지키십시오. 어린이에게 투여할 경우 보호자의 지도 감독하에 투여하십시오. 1개월 정도 복용하여도 증상의 개선이 없을 경우 복용을 즉각 중지하고 의사 또는 약사와 상의하십시오.</span>
+                                </td>
+                                <td>
+                                    <span>원형 / 하양</span>
+                                </td>
+                                <td>
+                                    <span class="ellipsis">습기와 빛을 피해 실온에서 보관하십시오.어린이의 손이 닿지 않는 곳에 보관하십시오.</span>
+                                </td>
+                                <td>
+                                    <span class="ellipsis">https://nedrug.mfds.go.kr/pbp/cmn/itemImageDownload/152035092098000085</span>
+                                </td>
+                                <td>
+                                    <div class="options">
+                                        <button class="btn-sm btn-light-primary" type="button">option</button>
+                                        <ul class="option-box">
+                                            <li><a href="#" class="btn-open-modal">Edit</a></li> 
+                                            <li><a href="#">Delete</a></li> 
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tb-footer-control">
+                    <ul class="pagination">
+                        <li class="page-item disabled"><a class="page-link previous" href="#"></a></li>
+                        <li class="page-item active"><a class="page-link " href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">4</a></li>
+                        <li class="page-item"><a class="page-link" href="#">5</a></li>
+                        <li class="page-item"><a class="page-link next" href="#"></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="modal-wrap type2" >
+            <div class="modal-header">
+                <h3 class="title">약품 관리</h3>
+                <button class="btn-close" type="button" onclick="closeModal()" >닫기</button>
+            </div>
+            <div class="modal-body">
+                <div class="pill-info">
+                    <div class="input-dual">
+                        <dl class="form-control">
+                            <dt class="tit">제조사명</dt>
+                            <dd class="cont">일동제약(주)</dd>
+                        </dl>
+                        <dl class="form-control">
+                            <dt class="tit">등록일</dt>
+                            <dd class="cont">2000년 1월 1일</dd>
+                        </dl>
+                    </div>
+                    <div class="input-dual">
+                        <label class="form-control">
+                            <span class="label-text">약품명</span>
+                            <input type="text" value="활명수" readonly>
+                        </label>
+                        <dla class="form-control">
+                            <dt class="tit">약형태 및 색상</dt>
+                            <dd class="cont">원형 / 하양</dd>
+                        </dla>
+                    </div>
+                    <dl class="form-control">
+                        <dt class="tit">약효능</dt>
+                        <dd class="cont">이 약은 식욕감퇴(식욕부진), 위부팽만감, 소화불량, 과식, 체함, 구역, 구토에 사용합니다</dd>
+                    </dl>
+                    <dl class="form-control">
+                        <dt class="tit">복용/섭취방법</dt>
+                        <dd class="cont">만 15세 이상 및 성인은 1회 1병(75 mL), 만 11세이상~만 15세미만은 1회 2/3병(50 mL), 만 8세 이상~만 11세 미만은 1회 1/2병(37.5 mL), 만 5세 이상~만 8세 미만은 1회 1/3병(25 mL), 만 3세 이상~만 5세 미만은 1회 1/4병(18.75 mL), 만 1세 이상~만 3세 미만은 1회 1/5병(15 mL), 1일 3회 식후에 복용합니다. 복용간격은 4시간 이상으로 합니다.</dd>
+                    </dl>
+                    <dl class="form-control">
+                        <dt class="tit">섭취시 주의사항</dt>
+                        <dd class="cont">만 3개월 미만의 젖먹이는 이 약을 복용하지 마십시오. 이 약을 복용하기 전에 만 1세 미만의 젖먹이, 임부 또는 임신하고 있을 가능성이 있는 여성, 카라멜에 과민증 환자 또는 경험자, 나트륨 제한 식이를 하는 사람은 의사 또는 약사와 상의하십시오. 정해진 용법과 용량을 잘 지키십시오. 어린이에게 투여할 경우 보호자의 지도 감독하에 투여하십시오. 1개월 정도 복용하여도 증상의 개선이 없을 경우 복용을 즉각 중지하고 의사 또는 약사와 상의하십시오.</dd>
+                    </dl>
+                    <dl class="form-control">
+                        <dt class="tit">약보관방법</dt>
+                        <dd class="cont">습기와 빛을 피해 실온에서 보관하십시오.어린이의 손이 닿지 않는 곳에 보관하십시오.</dd>
+                    </dl>
+                    <label class="form-control">
+                        <span class="label-text">약 사진</span>
+                        <input type="text" value="https://nedrug.mfds.go.kr/pbp/cmn/itemImageDownload/152035092098000085" readonly>
+                    </label>
+                </div>
+                <div class="btn-area">
+                    <button id="btn-modify" class="btn btn-light" type="button">수정</button>
+                    <button id="btn-check" onclick="closeModal()" class="btn btn-primary" type="button">확인</button>
+                    <button id="btn-back" class="btn btn-light" type="button">취소</button>
+                    <button id="btn-change-modify" class="btn btn-primary" type="button">적용</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

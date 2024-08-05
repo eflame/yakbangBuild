@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>관리자페이지</title>
+        <link rel="stylesheet" th:href="@{/css/common/common.css}" />
+        <link rel="stylesheet" th:href="@{/css/admin/admin.css}" />
+        <script defer th:src="@{/js/admin/admin.js}"></script>
+    </head>
+    <body>
+        <nav class="top-header">
+            <a href="#" class="logo"
+            ><img src="../images/common/logo_gray.svg" alt=""
+            /></a>
+        </nav>
+        <div class="layout-sidenav">
+            <h1 class="title">관리자 페이지</h1>
+            <nav class="menu-nav">
+                <ul>
+                    <li class="active"><a href="index.html">회원 관리</a></li>
+                    <li><a href="pill.html">약품 관리</a></li>
+                    <li><a href="qna_board.html">게시판 관리</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="layout-content">
+            <div class="tabs">
+                <a class="item" href="#">일반회원</a>
+                <a class="item active" href="#">전문회원</a>
+            </div>
+
+            <div class="member-list-wrap">
+                <form class="search-area" action="" method="get">
+                    <select name="" id="">
+                        <option value="">아이디</option>
+                        <option value="">이름</option>
+                    </select>
+                    <label class="form-control">
+                        <input type="text" placeholder="Search Member">
+                    </label>
+                    <button class="btn-normal btn-primary" type="button">찾기</button>
+                </form>
+                <div class="tbl-row">
+                    <table>
+                        <colgroup>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col style="width: 140px;">
+                            <col style="width: 140px;" >
+                            <col style="width: 100px;">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>아이디</th>
+                                <th>이름</th>
+                                <th>생년월일</th>
+                                <th>성별</th>
+                                <th>약국명</th>
+                                <th>약국 위치</th>
+                                <th>전화번호</th>
+                                <th>이메일</th>
+                                <th>옵션</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span>Test01</span>
+                                </td>
+                                <td>
+                                    <span>홍길동</span>
+                                </td>
+                                <td>
+                                    <span>2000년 00월 00일</span>
+                                </td>
+                                <td>
+                                    <span>남성</span>
+                                </td>
+                                <td>
+                                    <span>모두약국</span>
+                                </td>
+                                <td>
+                                    <span>서울특별시 노원구 상계로1길 34</span>
+                                </td>
+                                <td>
+                                    <span>010-1234-5678</span>
+                                </td>
+                                <td>
+                                    <span>text@test.com</span>
+                                </td>
+                                <td>
+                                    <div class="options">
+                                        <button class="btn-sm btn-light-primary" type="button">option</button>
+                                        <ul class="option-box">
+                                            <li><a class="btn-open-modal" href="#">View</a></li> 
+                                            <li><a href="#">Delete</a></li> 
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>Test01</span>
+                                </td>
+                                <td>
+                                    <span>홍길동</span>
+                                </td>
+                                <td>
+                                    <span>2000년 00월 00일</span>
+                                </td>
+                                <td>
+                                    <span>남성</span>
+                                </td>
+                                <td>
+                                    <span>모두약국</span>
+                                </td>
+                                <td>
+                                    <span>서울특별시 노원구 상계로1길 34</span>
+                                </td>
+                                <td>
+                                    <span>010-1234-5678</span>
+                                </td>
+                                <td>
+                                    <span>text@test.com</span>
+                                </td>
+                                <td>
+                                    <div class="options">
+                                        <button class="btn-sm btn-light-primary" type="button">option</button>
+                                        <ul class="option-box">
+                                            <li><a class="btn-open-modal" href="#">View</a></li> 
+                                            <li><a href="#">Delete</a></li> 
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>Test01</span>
+                                </td>
+                                <td>
+                                    <span>홍길동</span>
+                                </td>
+                                <td>
+                                    <span>2000년 00월 00일</span>
+                                </td>
+                                <td>
+                                    <span>남성</span>
+                                </td>
+                                <td>
+                                    <span>모두약국</span>
+                                </td>
+                                <td>
+                                    <span>서울특별시 노원구 상계로1길 34</span>
+                                </td>
+                                <td>
+                                    <span>010-1234-5678</span>
+                                </td>
+                                <td>
+                                    <span>text@test.com</span>
+                                </td>
+                                <td>
+                                    <div class="options">
+                                        <button class="btn-sm btn-light-primary" type="button">option</button>
+                                        <ul class="option-box">
+                                            <li><a class="btn-open-modal" href="#">View</a></li> 
+                                            <li><a href="#">Delete</a></li> 
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>Test01</span>
+                                </td>
+                                <td>
+                                    <span>홍길동</span>
+                                </td>
+                                <td>
+                                    <span>2000년 00월 00일</span>
+                                </td>
+                                <td>
+                                    <span>남성</span>
+                                </td>
+                                <td>
+                                    <span>모두약국</span>
+                                </td>
+                                <td>
+                                    <span>서울특별시 노원구 상계로1길 34</span>
+                                </td>
+                                <td>
+                                    <span>010-1234-5678</span>
+                                </td>
+                                <td>
+                                    <span>text@test.com</span>
+                                </td>
+                                <td>
+                                    <div class="options">
+                                        <button class="btn-sm btn-light-primary" type="button">option</button>
+                                        <ul class="option-box">
+                                            <li><a class="btn-open-modal" href="#">View</a></li> 
+                                            <li><a href="#">Delete</a></li> 
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>Test01</span>
+                                </td>
+                                <td>
+                                    <span>홍길동</span>
+                                </td>
+                                <td>
+                                    <span>2000년 00월 00일</span>
+                                </td>
+                                <td>
+                                    <span>남성</span>
+                                </td>
+                                <td>
+                                    <span>모두약국</span>
+                                </td>
+                                <td>
+                                    <span>서울특별시 노원구 상계로1길 34</span>
+                                </td>
+                                <td>
+                                    <span>010-1234-5678</span>
+                                </td>
+                                <td>
+                                    <span>text@test.com</span>
+                                </td>
+                                <td>
+                                    <div class="options">
+                                        <button class="btn-sm btn-light-primary" type="button">option</button>
+                                        <ul class="option-box">
+                                            <li><a class="btn-open-modal" href="#">View</a></li> 
+                                            <li><a href="#">Delete</a></li> 
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>Test01</span>
+                                </td>
+                                <td>
+                                    <span>홍길동</span>
+                                </td>
+                                <td>
+                                    <span>2000년 00월 00일</span>
+                                </td>
+                                <td>
+                                    <span>남성</span>
+                                </td>
+                                <td>
+                                    <span>모두약국</span>
+                                </td>
+                                <td>
+                                    <span>서울특별시 노원구 상계로1길 34</span>
+                                </td>
+                                <td>
+                                    <span>010-1234-5678</span>
+                                </td>
+                                <td>
+                                    <span>text@test.com</span>
+                                </td>
+                                <td>
+                                    <div class="options">
+                                        <button class="btn-sm btn-light-primary" type="button">option</button>
+                                        <ul class="option-box">
+                                            <li><a class="btn-open-modal" href="#">View</a></li> 
+                                            <li><a href="#">Delete</a></li> 
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>Test01</span>
+                                </td>
+                                <td>
+                                    <span>홍길동</span>
+                                </td>
+                                <td>
+                                    <span>2000년 00월 00일</span>
+                                </td>
+                                <td>
+                                    <span>남성</span>
+                                </td>
+                                <td>
+                                    <span>모두약국</span>
+                                </td>
+                                <td>
+                                    <span>서울특별시 노원구 상계로1길 34</span>
+                                </td>
+                                <td>
+                                    <span>010-1234-5678</span>
+                                </td>
+                                <td>
+                                    <span>text@test.com</span>
+                                </td>
+                                <td>
+                                    <div class="options">
+                                        <button class="btn-sm btn-light-primary" type="button">option</button>
+                                        <ul class="option-box">
+                                            <li><a class="btn-open-modal" href="#">View</a></li> 
+                                            <li><a href="#">Delete</a></li> 
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tb-footer-control">
+                <ul class="pagination">
+                    <li class="page-item disabled"><a class="page-link previous" href="#"></a></li>
+                    <li class="page-item active"><a class="page-link " href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">4</a></li>
+                    <li class="page-item"><a class="page-link" href="#">5</a></li>
+                    <li class="page-item"><a class="page-link next" href="#"></a></li>
+                </ul>
+                </div>
+            </div>
+        </div>
+        <div class="modal-wrap">
+            <div class="modal-header">
+                <button class="btn-close" type="button" onclick="closeModal()" >닫기</button>
+            </div>
+            <div class="modal-body">
+                <h3 class="title">회원정보</h3>
+                <div class="member-info">
+                    <dl class="form-control">
+                        <dt class="tit">아이디</dt>
+                        <dd class="cont">Test01</dd>
+                    </dl>
+                    <label class="form-control">
+                        <span class="label-text">회원 이름</span>
+                        <input type="text" value="홍길동" readonly>
+                    </label>
+                    <dl class="form-control">
+                        <dt class="tit">생년월일</dt>
+                        <dd class="cont">2000년 1월 1일</dd>
+                    </dl>
+                    <dl class="form-control">
+                        <dt class="tit">성별</dt>
+                        <dd class="cont">남</dd>
+                    </dl>
+                    <label class="form-control">
+                        <span class="label-text">약국명</span>
+                        <input type="text" value="모두약국" readonly>
+                    </label>
+                    <label class="form-control">
+                        <span class="label-text">약국 위치</span>
+                        <input type="text" value="서울특별시 노원구 상계로1길 34" readonly>
+                    </label>
+                    <label class="form-control">
+                        <span class="label-text">전화번호</span>
+                        <input type="text" value="010-1234-5678" readonly>
+                    </label>
+                    <label class="form-control">
+                        <span class="label-text">이메일</span>
+                        <input type="text" value="test@test.com" readonly>
+                    </label>
+                </div>
+                <div class="btn-area">
+                    <button id="btn-modify" class="btn btn-light" type="button">수정</button>
+                    <button id="btn-check" onclick="closeModal()" class="btn btn-primary" type="button">확인</button>
+                    <button id="btn-back" class="btn btn-light" type="button">취소</button>
+                    <button id="btn-change-modify" class="btn btn-primary" type="button">적용</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
