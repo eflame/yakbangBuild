@@ -1,0 +1,258 @@
+.main-content > .inner {
+  padding-top: 40px;
+}
+
+.review-tabs {
+  display: flex;
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    border-bottom: 1px solid #503396;
+  }
+  .item {
+    position: relative;
+    margin-bottom: 1px;
+    line-height: 40px;
+    text-align: center;
+    color: #222;
+    font-size: 1.0667em;
+    height: 42px;
+    margin: 0;
+    border: 1px solid #ebebeb;
+    text-decoration: none;
+    &.active {
+      border: 1px solid #503396;
+      border-bottom-color: #fff;
+    }
+  }
+
+  & > a {
+    width: 25%;
+  }
+}
+.review-count-info {
+  padding-top: 40px;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.review-top-info {
+  height: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.all-wrap {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.main-inner h2 {
+  color: #503396;
+}
+.register-btn {
+  text-decoration: none;
+  color: #444;
+  height: 36px;
+  margin: 0;
+  padding: 0 15px;
+  text-align: center;
+  line-height: 34px;
+  border: 1px solid #503396;
+  border-radius: 4px;
+  background-color: #fff;
+  cursor: pointer;
+  font-weight: 400;
+  /* position: absolute;
+  top: 15px;
+  right: 0; */
+}
+.inner-txt {
+  font-weight: 700;
+  color: #222;
+}
+.main-inner2 {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+}
+.inner-txt a {
+  text-decoration: none;
+  color: #222;
+}
+.review-wrap {
+  height: 850px;
+  display: flex;
+  justify-content: center;
+}
+.main-inner3 {
+  width: 100%;
+  display: flex;
+  /* background-color: bisque; */
+  flex-direction: column;
+}
+.comment,
+.request-comment {
+  height: 170px;
+  width: 100%;
+}
+.req-user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 105px;
+}
+.user-write {
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+  color: #666;
+  justify-content: center;
+  padding-left: 30px;
+  text-align: left;
+  font-size: large;
+}
+.line1 {
+  display: flex;
+  flex-direction: row;
+}
+.request-comment {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.right {
+  /* width: 25%; */
+  font-size: 18px;
+  padding: 60px 20px;
+  font-size: 18px;
+  font-weight: 400;
+}
+.count-text {
+  font-size: x-large;
+  font-weight: 600;
+}
+.user-container {
+  border-radius: 0 10px 10px 10px;
+  border: 1px solid #eaeaea;
+  background-color: #fff;
+  display: flex;
+  width: 90%;
+  justify-content: space-between;
+}
+.write-txt {
+  color: #666;
+  text-align: center;
+  cursor: pointer;
+}
+.comment {
+  /* background-color: antiquewhite; */
+  margin-top: 20px;
+}
+.review-area {
+  width: 100%;
+}
+.user-profile {
+  position: relative;
+  float: left;
+  width: 105px;
+  text-align: center;
+}
+.profile-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: 0 auto 10px;
+  overflow: hidden;
+  img {
+    width: 100%;
+  }
+}
+.review-box {
+  float: right;
+  position: relative;
+  width: calc(100% - 140px);
+  height: 84px;
+  padding: 0;
+}
+.tit {
+  float: left;
+  height: 84px;
+  width: 105px;
+  line-height: 82px;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 0 0 0 10px;
+  font-weight: 400;
+  background-color: #f8f8fa;
+  border: 1px solid #f2f4f5;
+  border-width: 1px 0 1px 1px;
+  color: #503396;
+}
+.review-cont {
+  background-color: #f8f8fa;
+  color: #503396;
+  border-radius: 0 10px 10px 0;
+  display: table;
+  float: left;
+  height: 84px;
+  padding: 0;
+  vertical-align: middle;
+  width: 1075px;
+}
+.story-point {
+  display: table-cell;
+  width: 90px;
+  height: 50px;
+  padding: 0;
+  text-align: center;
+  vertical-align: middle;
+  color: #503396;
+}
+.point-txt {
+  display: inline-block;
+  vertical-align: top;
+  font-size: 2.4em;
+  font-family: Roboto;
+  font-weight: 300;
+}
+.story-txt {
+  display: table-cell;
+  position: relative;
+  padding: 0 20px 0 30px;
+  text-align: left;
+  color: #666;
+  vertical-align: middle;
+  font-size: 0.9333em;
+  line-height: 1.4;
+  color: #503396;
+}
+.util {
+  display: table-cell;
+  position: relative;
+  width: 40px;
+  vertical-align: middle;
+}
+.post-funtion,
+.btn-alert {
+  text-indent: -10000px;
+  background: url(https://img.megabox.co.kr/static/pc/images/movie/btn-alert.png)
+    center no-repeat;
+  border: 0;
+  width: 50px;
+  height: 23px;
+  padding: 0;
+  margin: 0;
+  vertical-align: bottom;
+}

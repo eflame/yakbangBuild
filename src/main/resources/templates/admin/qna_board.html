@@ -4,30 +4,30 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>관리자페이지</title>
-        <link rel="stylesheet" href="../css/common.css" />
-        <link rel="stylesheet" href="../css/admin.css" />
-        <script defer src="../js/admin.js"></script>
+        <link rel="stylesheet" th:href="@{/css/common/common.css}" />
+        <link rel="stylesheet" th:href="@{/css/admin/admin.css}" />
+        <script defer th:src="@{/js/admin/admin.js}"></script>
     </head>
     <body>
         <nav class="top-header">
             <a href="#" class="logo"
-            ><img src="../images/common/logo_gray.svg" alt=""
+            ><img th:src="@{/images/common/logo_gray.svg}" alt=""
             /></a>
         </nav>
         <div class="layout-sidenav">
             <h1 class="title">관리자 페이지</h1>
             <nav class="menu-nav">
                 <ul>
-                    <li><a href="index.html">회원 관리</a></li>
-                    <li><a href="pill.html">약품 관리</a></li>
-                    <li class="active"><a href="qna_board.html">게시판 관리</a></li>
+                    <li><a th:href="@{/admin}">회원 관리</a></li>
+                    <li><a th:href="@{/admin/pill}">약품 관리</a></li>
+                    <li class="active"><a th:href="@{/admin/qna}">게시판 관리</a></li>
                 </ul>
             </nav>
         </div>
         <div class="layout-content">
             <div class="tabs">
-                <a class="item active" href="qna_board.html">Q&A 게시판</a>
-                <a class="item" href="review_board.html">리뷰 게시판</a>
+                <a class="item active" th:href="@{/admin/qna}">Q&A 게시판</a>
+                <a class="item" th:href="@{/admin/review}">리뷰 게시판</a>
             </div>
 
             <div class="member-list-wrap">
