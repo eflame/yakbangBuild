@@ -1,0 +1,73 @@
+
+.qna-container-wrap {
+  margin: 0 auto;
+  padding: 0;
+  max-width: 1320px;
+  /* background-color: aquamarine; */
+
+  .txt-popular {
+    font-weight: 700;
+    color: #101219;
+    line-height: 1;
+    font-size: 20px;
+    margin: 40px 30px;
+    display: block;
+  }
+  .qna-card {
+    width: 100%;
+    display: block;
+    padding: 25px 40px;
+    background: #ffffff;
+    border: 1px solid #e6e9ed;
+    box-shadow: 0px 2px 10px rgba(70, 56, 147, 0.1);
+    border-radius: 20px;
+    margin: 20px 0px 0px;
+    text-align: left;
+  }
+  a {
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .txt1 {
+    font-weight: 700;
+    display: block;
+    font-size: 18px;
+    line-height: 26px;
+    text-align: left;
+    color: #101219;
+  }
+  .txt2 {
+    font-weight: 500;
+    display: block;
+    text-align: left;
+    font-size: 16px;
+    line-height: 24px;
+    color: #787e8b;
+    margin: 8px 0px 0px;
+  }
+  .qna-user-wrap {
+    margin: 20px 0px 0px;
+    display: block;
+    width: 100%;
+  }
+  .qna-user-txt {
+    font-weight: 500;
+    color: #101219;
+    text-align: left;
+    line-height: 24px;
+    font-size: 16px;
+    overflow: hidden;
+    padding: 3px 0px 0px;
+  }
+  .user-info-row {
+    color: #787e8b;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 22px;
+  }
+  .qmark {
+    color: #16a87b;
+  }
+}

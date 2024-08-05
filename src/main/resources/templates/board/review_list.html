@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Review</title>
+    <link rel="stylesheet" th:href="@{/css/common/common.css}" />
+    <link rel="stylesheet" href="../css/review.css" />
+    <script defer src="../js/common.js" ></script>
+</head>
+<body>
+    <div class="all-wrap">
+        <header class="main-header">
+        <div class="inner">
+            <button class="btn-menu" type="button" title="메인메뉴 열기"></button>
+            <h1 class="header-logo"><a href="index.html" title="yakbang 약방 : 홈"><img th:src="@{/images/common/logo.svg}" alt=""></a></h1>
+            <div class="user-links">
+            <a href="login.html">로그인</a>
+            <a href="join_page.html">회원가입</a>
+            </div>
+        </div>
+        </header>
+        <aside class="main-menu">
+        <header class="top-area">
+            <h1 class="title"><a href="index.html"><img src="../images/common/logo_gray.svg" alt="" /></a></h1>
+            <button class="btn-close" type="button"></button>
+        </header>
+        <nav class="menu-area">
+            <ul>
+            <li class="item"><a href="pill_result.html">일반약 검색</a></li>
+            <li class="item"><a href="pill_result.html">추천 리스트</a></li>
+            <li class="item"><a href="qna_list.html">Q&A 게시판</a></li>
+            <li class="item"><a href="review_list.html">리뷰 게시판</a></li>
+            </ul>
+        </nav>
+        </aside>
+
+        <main class="contents">
+        <!-- 작업영역 -->
+        <div class="inner">
+            <div class="sub-header">
+                <h2 class="title">Review</h2>
+                <span class="sub-txt">직접 먹어본 분들의 리뷰</span>
+                <div class="search-area">
+                    <input class="input-search" type="text" title="review 검색어 입력" placeholder="무엇이 궁금하신가요?" >
+                    <button class="btn-search" title="검색 버튼"></button>
+                </div>
+                <a class="btn btn-primary" href="write.html">후기 작성</a>
+            </div>
+            <ul class="review-list type-oneline">
+                <li class="review-card">
+                    <div class="card-header">
+                        <div class="pill-info">
+                            <div class="rating-box">
+                                <!-- 평균점수 계산식 = (점수 - 1)/4*100 : width 값안에 적용 -->
+                                <div class="rating-select" style="width:100%"></div>
+                            </div>
+                            <div class="card-title">
+                                <span class="company">회사이름</span>
+                                <span class="product">제품명</span>
+                            </div>
+                        </div>
+                        <div class="user-info">
+                            <span class="user-name">김**</span>
+                            <span class="user-agegender">20대 / 여</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="review-txt ellipsis-line">
+                            타블렛이 싫은 분을 위한 비타민 투퍼데이는 첨부된 부가 성분을 최소화하고 비타민과 미네날을 충분히 함유하고그 성분도 활성화된 형태[비타민 B, D]나 특허받은 원료[아연, 셀레늄, 크롬]를 포함한 저렴한 가격의 좋은 품질을 지닌 비타민입니다.
+                            라이프익스텐션은 미국 내에서 미드 티어에서 조금 높은 순위를 가진보충제 회사로 평가 받고 있어 믿을 만한 회사이기도 합니다.
+                            저는 평소에 타블렛을 이용하나가끔씩 캡슐을 복용하기도 합니다.
+                            이론적으로는 캡슐이 타블렛 보다 흡수가 빠르다고 하는데[흡수율 자체에는 영향을 주지는 않음]
+                            개인적으로는 그리 큰 효과는 모르겠고타블릿을 삼키기 어려운 분들에는 대안이 될 수 있을 것입니다. 공복인 상태에서 먹게되면 간혹 어지럼증 속쓰림등의 증상이 있으니 주의하십시오
+                        </p>
+                    </div>
+                </li>
+                <li class="review-card">
+                    <div class="card-header">
+                        <div class="pill-info">
+                            <div class="rating-box">
+                                <!-- 평균점수 계산식 = (점수 - 1)/4*100 : width 값안에 적용 -->
+                                <div class="rating-select" style="width:100%"></div>
+                            </div>
+                            <div class="card-title">
+                                <span class="company">회사이름</span>
+                                <span class="product">제품명</span>
+                            </div>
+                        </div>
+                        <div class="user-info">
+                            <span class="user-name">김**</span>
+                            <span class="user-agegender">20대 / 여</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="review-txt ellipsis-line">
+                            타블렛이 싫은 분을 위한 비타민 투퍼데이는 첨부된 부가 성분을 최소화하고 비타민과 미네날을 충분히 함유하고그 성분도 활성화된 형태[비타민 B, D]나 특허받은 원료[아연, 셀레늄, 크롬]를 포함한 저렴한 가격의 좋은 품질을 지닌 비타민입니다.
+                            라이프익스텐션은 미국 내에서 미드 티어에서 조금 높은 순위를 가진보충제 회사로 평가 받고 있어 믿을 만한 회사이기도 합니다.
+                            저는 평소에 타블렛을 이용하나가끔씩 캡슐을 복용하기도 합니다.
+                            이론적으로는 캡슐이 타블렛 보다 흡수가 빠르다고 하는데[흡수율 자체에는 영향을 주지는 않음]
+                            개인적으로는 그리 큰 효과는 모르겠고타블릿을 삼키기 어려운 분들에는 대안이 될 수 있을 것입니다. 공복인 상태에서 먹게되면 간혹 어지럼증 속쓰림등의 증상이 있으니 주의하십시오
+                        </p>
+                    </div>
+                </li>
+                <li class="review-card">
+                    <div class="card-header">
+                        <div class="pill-info">
+                            <div class="rating-box">
+                                <!-- 평균점수 계산식 = (점수 - 1)/4*100 : width 값안에 적용 -->
+                                <div class="rating-select" style="width:100%"></div>
+                            </div>
+                            <div class="card-title">
+                                <span class="company">회사이름</span>
+                                <span class="product">제품명</span>
+                            </div>
+                        </div>
+                        <div class="user-info">
+                            <span class="user-name">김**</span>
+                            <span class="user-agegender">20대 / 여</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="review-txt ellipsis-line">타블렛이 싫은 분을 위한 비타민 투퍼데이는 첨부된 부가 성분을 최소화하고 비타민과 미네날을 충분히 함유하고그 성분도 활성화된 형태[비타민 B, D]나 특허받은 원료[아연, 셀레늄, 크롬]를포함한 저렴한 가격의 좋은 품질을 지닌 비타민입니다. 라이프익스텐션은 미국 내에서 미드 티어에서 조금 높은 순위를 가진보충제 회사로 평가 받고 있어 믿을 만한 회사이기도 합니다.
+                            저는 평소에 타블렛을 이용하나가끔씩 캡슐을 복용하기도 합니다.  이론적으로는 캡슐이 타블렛 보다 흡수가 빠르다고 하는데[흡수율 자체에는 영향을 주지는 않음]
+                            개인적으로는 그리 큰 효과는 모르겠고타블릿을 삼키기 어려운 분들에는 대안이 될 수 있을 것입니다. 공복인 상태에서 먹게되면 간혹 어지럼증 속쓰림등의 증상이 있으니 주의하십시오</p>                    </div>
+                </li>
+                <li class="review-card">
+                    <div class="card-header">
+                        <div class="pill-info">
+                            <div class="rating-box">
+                                <!-- 평균점수 계산식 = (점수 - 1)/4*100 : width 값안에 적용 -->
+                                <div class="rating-select" style="width:100%"></div>
+                            </div>
+                            <div class="card-title">
+                                <span class="company">회사이름</span>
+                                <span class="product">제품명</span>
+                            </div>
+                        </div>
+                        <div class="user-info">
+                            <span class="user-name">김**</span>
+                            <span class="user-agegender">20대 / 여</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="review-txt ellipsis-line">타블렛이 싫은 분을 위한 비타민 투퍼데이는 첨부된 부가 성분을 최소화하고 비타민과 미네날을 충분히 함유하고그 성분도 활성화된 형태[비타민 B, D]나 특허받은 원료[아연, 셀레늄, 크롬]를포함한 저렴한 가격의 좋은 품질을 지닌 비타민입니다. 라이프익스텐션은 미국 내에서 미드 티어에서 조금 높은 순위를 가진보충제 회사로 평가 받고 있어 믿을 만한 회사이기도 합니다.
+                            저는 평소에 타블렛을 이용하나가끔씩 캡슐을 복용하기도 합니다.  이론적으로는 캡슐이 타블렛 보다 흡수가 빠르다고 하는데[흡수율 자체에는 영향을 주지는 않음]
+                            개인적으로는 그리 큰 효과는 모르겠고타블릿을 삼키기 어려운 분들에는 대안이 될 수 있을 것입니다. 공복인 상태에서 먹게되면 간혹 어지럼증 속쓰림등의 증상이 있으니 주의하십시오</p>                    </div>
+                </li>
+                <li class="review-card">
+                    <div class="card-header">
+                        <div class="pill-info">
+                            <div class="rating-box">
+                                <!-- 평균점수 계산식 = (점수 - 1)/4*100 : width 값안에 적용 -->
+                                <div class="rating-select" style="width:100%"></div>
+                            </div>
+                            <div class="card-title">
+                                <span class="company">회사이름</span>
+                                <span class="product">제품명</span>
+                            </div>
+                        </div>
+                        <div class="user-info">
+                            <span class="user-name">김**</span>
+                            <span class="user-agegender">20대 / 여</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="review-txt ellipsis-line">타블렛이 싫은 분을 위한 비타민 투퍼데이는 첨부된 부가 성분을 최소화하고 비타민과 미네날을 충분히 함유하고그 성분도 활성화된 형태[비타민 B, D]나 특허받은 원료[아연, 셀레늄, 크롬]를포함한 저렴한 가격의 좋은 품질을 지닌 비타민입니다. 라이프익스텐션은 미국 내에서 미드 티어에서 조금 높은 순위를 가진보충제 회사로 평가 받고 있어 믿을 만한 회사이기도 합니다.
+                            저는 평소에 타블렛을 이용하나가끔씩 캡슐을 복용하기도 합니다.  이론적으로는 캡슐이 타블렛 보다 흡수가 빠르다고 하는데[흡수율 자체에는 영향을 주지는 않음]
+                            개인적으로는 그리 큰 효과는 모르겠고타블릿을 삼키기 어려운 분들에는 대안이 될 수 있을 것입니다. 공복인 상태에서 먹게되면 간혹 어지럼증 속쓰림등의 증상이 있으니 주의하십시오</p>                    </div>
+                </li>
+                <li class="review-card">
+                    <div class="card-header">
+                        <div class="pill-info">
+                            <div class="rating-box">
+                                <!-- 평균점수 계산식 = (점수 - 1)/4*100 : width 값안에 적용 -->
+                                <div class="rating-select" style="width:100%"></div>
+                            </div>
+                            <div class="card-title">
+                                <span class="company">회사이름</span>
+                                <span class="product">제품명</span>
+                            </div>
+                        </div>
+                        <div class="user-info">
+                            <span class="user-name">김**</span>
+                            <span class="user-agegender">20대 / 여</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="review-txt ellipsis-line">타블렛이 싫은 분을 위한 비타민 투퍼데이는 첨부된 부가 성분을 최소화하고 비타민과 미네날을 충분히 함유하고그 성분도 활성화된 형태[비타민 B, D]나 특허받은 원료[아연, 셀레늄, 크롬]를포함한 저렴한 가격의 좋은 품질을 지닌 비타민입니다. 라이프익스텐션은 미국 내에서 미드 티어에서 조금 높은 순위를 가진보충제 회사로 평가 받고 있어 믿을 만한 회사이기도 합니다.
+                            저는 평소에 타블렛을 이용하나가끔씩 캡슐을 복용하기도 합니다.  이론적으로는 캡슐이 타블렛 보다 흡수가 빠르다고 하는데[흡수율 자체에는 영향을 주지는 않음]
+                            개인적으로는 그리 큰 효과는 모르겠고타블릿을 삼키기 어려운 분들에는 대안이 될 수 있을 것입니다. 공복인 상태에서 먹게되면 간혹 어지럼증 속쓰림등의 증상이 있으니 주의하십시오</p>                    </div>
+                </li>
+            </ul>
+        </div>
+        </main>
+        <footer class="main-footer">
+        <div class="inner">
+            <a href="#" class="logo"
+            ><img src="../images/common/logo_gray.svg" alt=""
+            /></a>
+            <div class="footer-info">
+            <!-- <ul class="priv">
+                    <li><a href="#">이용약관</a></li>
+                    <li><a href="#">개인정보처리방침</a></li>
+                </ul> -->
+            <p>
+                주소: 06241 서울특별시 강남구 테헤란로0길 0, 000호 (역삼동)
+                <br />대표번호: 0000-0000 (유선 상담 불가)
+            </p>
+            <p>ⓒ 2024 yakbang. All rights reserved</p>
+            <p>
+                본 사이트의 모든 콘텐츠 및 게시물에 대한 무단적인 수집, 전재,
+                복사, 배포를 엄격히 금합니다.
+            </p>
+            </div>
+        </div>
+        </footer>
+    </div>
+</body>
+</html>
