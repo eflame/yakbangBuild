@@ -21,7 +21,7 @@ public class LoginController {
   public String login(@RequestParam String loginId, @RequestParam String password) {
 
 
-
+  return "member/login";
   }
 
   @GetMapping("/find_password")
