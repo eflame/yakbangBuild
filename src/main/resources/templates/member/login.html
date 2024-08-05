@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>로그인</title>
+<link rel="stylesheet" th:href="@{/css/common/common.css}">
+<link rel="stylesheet" th:href="@{/css/member/login.css}">
+<script defer th:src="@{/js/common/common.js}"></script>
+<script defer th:src="@{/js/member/login.js}"></script>
+</head>
+<body>
+<div class="all-wrap">
+  <header class="main-header">
+    <div class="inner">
+      <button class="btn-menu" type="button" title="메인메뉴 열기"></button>
+      <h1 class="header-logo"><a th:href="@{/admin/index.html}" title="yakbang 약방 : 홈"><img th:src="@{/images/common/logo.svg}" alt=""></a></h1>
+      <div class="user-links">
+        <a th:href="@{/login.html}">로그인</a>
+        <a th:href="@{/join_page.html}">회원가입</a>
+      </div>
+    </div>
+  </header>
+  <aside class="main-menu" >
+    <header class="top-area">
+      <h1 class="title"><a th:href="@{/admin/index.html}"><img th:src="@{/images/common/logo_gray.svg}" alt="" /></a></h1>
+      <button class="btn-close" type="button"></button>
+    </header>
+    <nav class="menu-area">
+      <ul>
+        <li class="item"><a href="pill_result.html">일반약 검색</a></li>
+        <li class="item"><a href="pill_result.html">추천 리스트</a></li>
+        <li class="item"><a href="qna-list.html">Q&A 게시판</a></li>
+        <li class="item"><a href="review-list.html">리뷰 게시판</a></li>
+      </ul>
+    </nav>
+  </aside>
+  <main class="contents">
+    <!-- 작업영역 -->
+    <div class="inner">
+      <div class="login-wrap">
+        <div class="login-main">
+          <div class="login-area">
+            <a th:href="@{/main.html}"><img th:src="@{/images/common/logo.svg}" alt=""></a>
+          </div>
+          <input type="hidden" name="login_tab" value="p" id="login_tab">
+          <ul class="tab_member_type" role="tablist">
+            <li class="tab-genral">
+              <button type="button" class="btn-tab-general" role="tab" tabindex="0" aria-selected="true" data-value="p">개인회원</button>
+            </li>
+            <li class="tab-pro">
+              <button type="button" class="btn-tab-pro" role="tab" tabindex="-1" aria-selected="false" data-value="c">전문가회원</button>
+            </li>
+          </ul>
+          <form class="form-area" action="#">
+            <div class="input-box">
+              <label class="form-control row">
+                <input type="text" id="username" placeholder="아이디" required/>
+              </label>
+            </div>
+            <div class="input-box">
+              <label class="form-control row">
+                <input type="password" id="password" placeholder="비밀번호" required/>
+              </label>
+            </div>
+            <div class="check-box-main">
+              <label class="check-box">
+                <input type="checkbox" id="save-login" />
+                <span class="label-text">로그인 정보 저장</span>
+              </label>
+            </div>
+            <button type="submit" class="btn-login">
+              <span class="btn-submit">로그인</span>
+            </button>
+          </form>
+          <div class="separator">소셜 계정으로 간편로그인</div>
+          <div class="login-img">
+            <div class="google">
+              <a href='#' target='_blank'><img th:src="@{/images/member/login/google.png}" alt=""></a>
+            </div>
+            <div class="kakao">
+              <a href='#' target='_blank'><img th:src="@{/images/member/login/kakao-black.png}" alt=""></a>
+            </div>
+            <div class="naver">
+              <a href='#' target='_blank'><img th:src="@{/images/member/login/naver.png}" alt=""></a>
+            </div>
+          </div>
+          <div class="line"></div>
+          <div class="member-function">
+            <div class="find-id">
+              <a th:href="@{/}">
+                <span>아이디찾기</span>
+              </a>
+            </div>
+            <div class="find-password">
+              <a th:href="@{/}">
+                <span>비밀번호찾기</span>
+              </a>
+            </div>
+            <div class="join-member">
+              <a th:href="@{/join_page.html}">
+                <span>회원가입</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 작업영역 -->
+  </main>
+  <footer class="main-footer">
+    <div class="inner">
+      <a href="#" class="logo"><img th:src="@{/images/common/logo_gray.svg}" alt=""></a>
+      <div class="footer-info">
+        <!-- <ul class="priv">
+            <li><a href="#">이용약관</a></li>
+            <li><a href="#">개인정보처리방침</a></li>
+        </ul> -->
+        <p>주소: 06241 서울특별시 강남구 테헤란로0길 0, 000호 (역삼동) 대표번호: 0000-0000 (유선 상담 불가)</p>
+        <p>ⓒ 2024 yakbang. All rights reserved</p>
+        <p>본 사이트의 모든 콘텐츠 및 게시물에 대한 무단적인 수집, 전재, 복사, 배포를 엄격히 금합니다.</p>
+      </div>
+    </div>
+  </footer>
+</div>
+</body>
+</html>
