@@ -4,14 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>관리자페이지</title>
-    <link rel="stylesheet" href="../css/common.css" />
-    <link rel="stylesheet" href="../css/admin.css" />
-    <script defer src="../js/admin.js"></script>
+    <link rel="stylesheet" th:href="@{/css/common/common.css}" />
+    <link rel="stylesheet" th:href="@{/css/admin/admin.css}" />
+    <script defer th:src="@{/js/admin/admin.js}"></script>
   </head>
   <body>
     <nav class="top-header">
       <a href="#" class="logo"
-        ><img src="../images/common/logo_gray.svg" alt=""
+      ><img th:src="@{/images/common/logo_gray.svg}" alt=""
       /></a>
     </nav>
     <div class="admin-wrap">

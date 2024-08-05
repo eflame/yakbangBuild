@@ -21,7 +21,7 @@
     width: 40px;
     height: 40px;
     border: none;
-    background: url("/images/admin/ico_hamburger.svg") 50%/85% no-repeat;
+    background: url("images/admin/ico_hamburger.svg") 50%/85% no-repeat;
     cursor: pointer;
   }
 }
@@ -53,13 +53,13 @@
       background-size: 20px;
     }
     li:nth-child(1) a {
-      background-image: url("/images/admin/ico_admin_01.png");
+      background-image: url("images/admin/ico_admin_01.png");
     }
     li:nth-child(2) a {
-      background-image: url("/images/admin/ico_admin_02.png");
+      background-image: url("images/admin/ico_admin_02.png");
     }
     li:nth-child(3) a {
-      background-image: url("/images/admin/ico_admin_03.png");
+      background-image: url("images/admin/ico_admin_03.png");
     }
     & li.active a {
       font-weight: 700;
@@ -155,7 +155,8 @@
     -ms-user-select: none;
     user-select: none;
   }
-  input[type="text"] {
+  input[type="text"],
+  input[type="password"] {
     padding: 8px;
     height: 44px;
     font-size: 16px;
@@ -177,7 +178,7 @@
     top: 0;
     opacity: 0;
     &:checked + .label-text {
-      background-image: url("/images/admin/bg_checkbox_active.svg");
+      background-image: url("images/admin/bg_checkbox_active.svg");
     }
   }
   .label-text {
@@ -186,7 +187,7 @@
     padding-left: 28px;
     color: #5c5c5c;
     font-size: 16px;
-    background-image: url("/images/admin/bg_checkbox.svg");
+    background-image: url("images/admin/bg_checkbox.svg");
     background-position: left 50%;
     background-repeat: no-repeat;
     cursor: pointer;
@@ -237,7 +238,7 @@
         padding-left: 46px;
         height: 40px;
         font-size: 14px;
-        background-image: url("/images/admin/ic_search_black.svg");
+        background-image: url("images/admin/ic_search_black.svg");
         background-position: left 12px top 50%;
         background-repeat: no-repeat;
       }
@@ -286,7 +287,7 @@
       width: 100px;
       border-radius: 8px;
       background-color: #fff;
-      box-shadow: 0px 0px 50px 0px rgba(82, 63, 105, 0.15);
+      box-shadow: 0 0 50px 0 rgba(82, 63, 105, 0.15);
       a {
         display: flex;
         align-items: center;
