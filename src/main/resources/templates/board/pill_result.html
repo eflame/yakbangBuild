@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>검색결과</title>
+<link rel="stylesheet" th:href="@{/css/common/common.css}" />
+<link rel="stylesheet" th:href="@{/css/admin/admin.css}" />
+<link rel="stylesheet" th:href="@{/css/board/pill.css}" />
+<script defer th:src="@{/js/admin/admin.js}"></script>
+</head>
+<body>
+<div class="all-wrap">
+    <header class="main-header">
+        <div class="inner">
+            <button class="btn-menu" type="button" title="메인메뉴 열기"></button>
+            <h1 class="header-logo"><a href="index.html" title="yakbang 약방 : 홈"><img th:src="@{/images/common/logo.svg}" alt=""></a></h1>
+            <div class="user-links">
+                <a href="login.html">로그인</a>
+                <a href="join_page.html">회원가입</a>
+            </div>
+        </div>
+    </header>
+    <aside class="main-menu" >
+        <header class="top-area">
+            <h1 class="title"><a href="index.html"><img th:src="@{/images/common/logo_gray.svg}" alt="" /></a></h1>
+            <button class="btn-close" type="button"></button>
+        </header>
+        <nav class="menu-area">
+            <ul>
+                <li class="item"><a href="pill_result.html">일반약 검색</a></li>
+                <li class="item"><a href="pill_result.html">추천 리스트</a></li>
+                <li class="item"><a href="qna_list.html">Q&A 게시판</a></li>
+                <li class="item"><a href="review_list.html">리뷰 게시판</a></li>
+            </ul>
+        </nav>
+    </aside>
+    <main class="contents">
+        <!-- 작업영역 -->
+        <div class="inner">
+            <section class="search-section">
+                <h2 class="search-text">검색 결과 <span>22</span>건</h2>
+                <div class="search-box">
+                    <input class="search-input" type="text" placeholder="제품명 검색해보세요!"
+                           value="감기"
+                    >
+                    <button class="btn-search" type="button">
+                        <img src="../images/common/ico_search_white.svg" alt="">
+                    </button>
+                </div>
+                <div class="search-etc">
+                    <h3 class="title">인기 검색어</h3>
+                    <div class="search-keywords">
+                        <a class="search-keyword" href="#">타이레놀</a>
+                        <a class="search-keyword" href="#">판피린</a>
+                        <a class="search-keyword" href="#">이지엔</a>
+                        <a class="search-keyword" href="#">부루펜</a>
+                        <a class="search-keyword" href="#">콜대원</a>
+                    </div>
+                </div>
+            </section>
+            <!-- 약 리스트 -->
+            <div class="search-list-wrap">
+                <div class="pill-list">
+                    <a href="pill_detail.html" class="pill-item">
+                        <img src="../images/common/img_pill_01.png" alt="#" class="pill-img type1" />
+                        <div class="info">
+                            <span class="brand">브랜드</span>
+                            <span class="pill-name">약 이름약 이름약 이름약 이름약 이름약 이름약 이름</span>
+                            <span class="review-score">4.68</span>
+                        </div>
+                    </a>
+                    <a href="#" class="pill-item">
+                        <img src="../images/common/img_pill_02.png" alt="#" class="pill-img type2" />
+                        <div class="info">
+                            <span class="brand">브랜드</span>
+                            <span class="pill-name">약 이름</span>
+                            <span class="review-score">4.68</span>
+                        </div>
+                    </a>
+                    <a href="#" class="pill-item">
+                        <img src="../images/common/img_pill_03.png" alt="#" class="pill-img type3" />
+                        <div class="info">
+                            <span class="brand">브랜드</span>
+                            <span class="pill-name">약 이름</span>
+                            <span class="review-score">4.68</span>
+                        </div>
+                    </a>
+                    <a href="#" class="pill-item">
+                        <img src="../images/common/img_pill.png" alt="#" class="pill-img" />
+                        <div class="info">
+                            <span class="brand">브랜드</span>
+                            <span class="pill-name">약 이름</span>
+                            <span class="review-score">4.68</span>
+                        </div>
+                    </a>
+                    <a href="#" class="pill-item">
+                        <img src="../images/common/img_pill.png" alt="#" class="pill-img" />
+                        <div class="info">
+                            <span class="brand">브랜드</span>
+                            <span class="pill-name">약 이름</span>
+                            <span class="review-score">4.68</span>
+                        </div>
+                    </a>
+                    <a href="#" class="pill-item">
+                        <img src="../images/common/img_pill.png" alt="#" class="pill-img" />
+                        <div class="info">
+                            <span class="brand">브랜드</span>
+                            <span class="pill-name">약 이름</span>
+                            <span class="review-score">4.68</span>
+                        </div>
+                    </a>
+                    <a href="#" class="pill-item">
+                        <img src="../images/common/img_pill.png" alt="#" class="pill-img" />
+                        <div class="info">
+                            <span class="brand">브랜드</span>
+                            <span class="pill-name">약 이름</span>
+                            <span class="review-score">4.68</span>
+                        </div>
+                    </a>
+                    <a href="#" class="pill-item">
+                        <img src="../images/common/img_pill.png" alt="#" class="pill-img" />
+                        <div class="info">
+                            <span class="brand">브랜드</span>
+                            <span class="pill-name">약 이름</span>
+                            <span class="review-score">4.68</span>
+                        </div>
+                    </a>
+                    <a href="#" class="pill-item">
+                        <img src="../images/common/img_pill.png" alt="#" class="pill-img" />
+                        <div class="info">
+                            <span class="brand">브랜드</span>
+                            <span class="pill-name">약 이름</span>
+                            <span class="review-score">4.68</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- 작업영역 -->
+    </main>
+    <footer class="main-footer">
+        <div class="inner">
+            <a href="#" class="logo"><img src="../images/common/logo_gray.svg" alt=""></a>
+            <div class="footer-info">
+                <!-- <ul class="priv">
+                    <li><a href="#">이용약관</a></li>
+                    <li><a href="#">개인정보처리방침</a></li>
+                </ul> -->
+                <p>주소: 06241 서울특별시 강남구 테헤란로0길 0, 000호 (역삼동) 대표번호: 0000-0000 (유선 상담 불가)</p>
+                <p>ⓒ 2024 yakbang. All rights reserved</p>
+                <p>본 사이트의 모든 콘텐츠 및 게시물에 대한 무단적인 수집, 전재, 복사, 배포를 엄격히 금합니다.</p>
+            </div>
+        </div>
+    </footer>
+</div>
+</body>
+</html>
