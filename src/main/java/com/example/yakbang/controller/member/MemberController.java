@@ -11,9 +11,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 public class MemberController {
 
-    @GetMapping("/join_page")
+    @GetMapping("/join")
     public String join() {
         return "member/join_page";
+    }
+
+    @GetMapping("/login")
+    public String login() {
+        return "member/login";
     }
 
     @GetMapping("/mypage")
