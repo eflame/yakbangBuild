@@ -4,12 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>회원가입</title>
-    <link
-      rel="stylesheet"
-      as="style"
-      crossorigin
-      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"
-    />
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"/>
     <link rel="stylesheet" th:href="@{/css/common/common.css}" />
     <link rel="stylesheet" th:href="@{/css/member/join_page.css}" />
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -22,31 +17,27 @@
         <div class="inner">
           <button class="btn-menu" type="button" title="메인메뉴 열기"></button>
           <h1 class="header-logo">
-            <a th:href="@{index.html}" title="yakbang 약방 : 홈"
-              ><img th:src="@{/images/common/logo.svg}" alt=""
-            /></a>
+            <a th:href="@{/}" title="yakbang 약방 : 홈">
+              <img th:src="@{/images/common/logo.svg}" alt=""/>
+            </a>
           </h1>
           <div class="user-links">
-            <a href="login.html">로그인</a>
-            <a th:href="@{/member/join_page}">회원가입</a>
+            <a th:href="@{/member/login}">로그인</a>
+            <a th:href="@{/member/join}">회원가입</a>
           </div>
         </div>
       </header>
       <aside class="main-menu">
         <header class="top-area">
-          <h1 class="title">
-            <a href="index.html"
-              ><img th:src="@{/images/common/logo_gray.svg}" alt=""
-            /></a>
-          </h1>
-          <butto class="btn-close" type="button"></butto>
+          <h1 class="title"><a th:href="@{/}"><img th:src="@{/images/common/logo_gray.svg}" alt=""/></a></h1>
+          <button class="btn-close" type="button"></button>
         </header>
         <nav class="menu-area">
           <ul>
-            <li class="item"><a th:href="@{pill_result.html}">일반약 검색</a></li>
-            <li class="item"><a th:href="@{pill_result.html}">추천 리스트</a></li>
-            <li class="item"><a th:href="@{qna.html}">Q&A 게시판</a></li>
-            <li class="item"><a th:href="@{review.html}">리뷰 게시판</a></li>
+            <li class="item"><a th:href="@{/board/pill_result}">일반약 검색</a></li>
+            <li class="item"><a th:href="@{/board/pill_result}">추천 리스트</a></li>
+            <li class="item"><a th:href="@{/board/qna_list}">Q&A 게시판</a></li>
+            <li class="item"><a th:href="@{/board/review_list}">리뷰 게시판</a></li>
           </ul>
         </nav>
       </aside>
@@ -57,27 +48,17 @@
             <img th:src="@{/images/common/logo.svg}" alt="" />
           </h3>
           <div class="join-base">
-            <form th:action="@{/member/join_page}" method="post" class="join-form">
+            <form th:action="@{/member/join}" method="post" class="join-form">
               <div class="join-checked">
                 <label class="input-check">
-                  <input
-                    type="checkbox"
-                    id="managerBtn"
-                    onclick="joinManagerBtn()"
-                  />
+                  <input type="checkbox" id="managerBtn" onclick="joinManagerBtn()"/>
                   <span class="input-text">전문가 체크</span>
                 </label>
               </div>
               <div class="join-item">
                 <label class="title" for="id">아이디</label>
                 <div class="join-type">
-                  <input
-                    type="text"
-                    id="id"
-                    class="join-text"
-                    placeholder="4~20자리/영문,숫자,특수문자'_'사용가능"
-                    required
-                  />
+                  <input type="text" id="id" class="join-text" placeholder="4~20자리/영문,숫자,특수문자'_'사용가능" required/>
                 </div>
                 <em class="join-msg" id="idCheckMsg1">
                   <span class="join-important"></span>
@@ -86,13 +67,7 @@
               <div class="join-item">
                 <label class="title" for="password">비밀번호</label>
                 <div class="join-type">
-                  <input
-                    type="password"
-                    id="password"
-                    class="join-text"
-                    placeholder="4~16자리 입력"
-                    required
-                  />
+                  <input type="password" id="password" class="join-text" placeholder="4~16자리 입력" required/>
                 </div>
                 <em class="join-msg" id="idCheckMsg2">
                   <span class="join-important"></span>
@@ -101,13 +76,7 @@
               <div class="join-item">
                 <label class="title" for="name">이름</label>
                 <div class="join-type">
-                  <input
-                    type="text"
-                    id="name"
-                    class="join-text"
-                    placeholder="이름 입력"
-                    required
-                  />
+                  <input type="text" id="name" class="join-text" placeholder="이름 입력" required/>
                 </div>
                 <em class="join-msg" id="idCheckMsg3">
                   <span class="join-important" id="name-error-msg"></span>
@@ -116,13 +85,7 @@
               <div class="join-item">
                 <label class="title" for="birth">생년월일</label>
                 <div class="join-type">
-                  <input
-                    type="text"
-                    id="birth"
-                    class="join-text"
-                    placeholder="YYYYMMDD"
-                    required
-                  />
+                  <input type="text" id="birth" class="join-text" placeholder="YYYYMMDD" required/>
                 </div>
                 <em class="join-msg" id="idCheckMsg5">
                   <span class="join-important" id="birth-error-msg"></span>
@@ -144,13 +107,7 @@
               <div class="join-item">
                 <label class="title" for="phone">전화번호</label>
                 <div class="join-type">
-                  <input
-                    type="text"
-                    id="phone"
-                    class="join-text"
-                    placeholder="전화번호 입력"
-                    required
-                  />
+                  <input type="text" id="phone" class="join-text" placeholder="전화번호 입력" required/>
                 </div>
                 <em class="join-msg" id="idCheckMsg4">
                   <span class="join-important" id="phone-error-msg"></span>
@@ -159,13 +116,7 @@
               <div class="join-item">
                 <label class="title" for="email">이메일</label>
                 <div class="join-type">
-                  <input
-                    type="email"
-                    id="email"
-                    class="join-text"
-                    placeholder="email@yakbang.com"
-                    required
-                  />
+                  <input type="email" id="email" class="join-text" placeholder="email@yakbang.com" required/>
                 </div>
                 <em class="join-msg" id="idCheckMsg6">
                   <span class="join-important" id="email-error-msg"></span>
@@ -173,20 +124,11 @@
               </div>
 
               <!--전문가 부분-->
-              <div
-                id="manager-input"
-                class="join-manager"
-                style="display: none"
-              >
+              <div id="manager-input" class="join-manager" style="display: none">
                 <div class="join-item">
                   <label class="title" for="job">직업</label>
                   <div class="join-type">
-                    <input
-                      type="text"
-                      id="job"
-                      class="join-text"
-                      placeholder="직업 입력"
-                    />
+                    <input type="text" id="job" class="join-text" placeholder="직업 입력"/>
                   </div>
                   <em class="join-msg" id="idCheckMsg7">
                     <span class="join-important" id="job-error-msg"></span>
@@ -215,9 +157,9 @@
       </main>
       <footer class="main-footer">
         <div class="inner">
-          <a th:href="@{#}" class="logo"
-            ><img th:src="@{/images/common/logo_gray.svg}" alt=""
-          /></a>
+          <a th:href="@{#}" class="logo">
+            <img th:src="@{/images/common/logo_gray.svg}" alt=""/>
+          </a>
           <div class="footer-info">
             <!-- <ul class="priv">
                 <li><a href="#">이용약관</a></li>
