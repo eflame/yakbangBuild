@@ -1,10 +1,10 @@
-.tilte-img{
+.title-img{
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.main-tilte-heder{
+.main-title-header{
     margin-top: 13vh;
     display: flex;
     justify-content: center;
@@ -60,7 +60,7 @@
 .box-obj{
     width: 48px;
     height: 48px;
-    background: url('/static/images/member/login/icon-easy.png') no-repeat;
+    background: url("/images/member/icon-easy.png") no-repeat;
     background-size: 100% 100%;
     display: inline-block;
     margin-left: 30px;
@@ -70,7 +70,7 @@
 .box-obj2{
     width: 30px;
     height: 30px;
-    background: url('/static/images/member/login/icon-arrow.png') no-repeat;
+    background: url("/images/member/icon-arrow.png") no-repeat;
     background-size: 100% 100%;
     display: inline-block;
     margin-left: 195px;
@@ -79,7 +79,7 @@
 .box2-obj{
     width: 48px;
     height: 48px;
-    background: url('/static/images/member/login/icon-phone.png') no-repeat;
+    background: url('/images/member/icon-phone.png') no-repeat;
     background-size: 100% 100%;
     display: inline-block;
     margin-left: 30px;
@@ -89,7 +89,7 @@
 #phone-certified{
     width: 30px;
     height: 30px;
-    background: url('/static/images/member/login/icon-arrow.png') no-repeat;
+    background: url('/images/member/icon-arrow.png') no-repeat;
     background-size: 100% 100%;
     display: inline-block;
     margin-left: 180px;
@@ -108,7 +108,7 @@
 .box3-obj{
     width: 48px;
     height: 48px;
-    background: url('/static/images/member/login/icon-toss.png') no-repeat;
+    background: url('/images/member/icon-toss.png') no-repeat;
     background-size: 100% 100%;
     display: inline-block;
     margin-left: 30px;
