@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>약 상세</title>
+        <link rel="stylesheet" th:href="@{/css/common/common.css}" />
+        <link rel="stylesheet" th:href="@{/css/admin/admin.css}" />
+        <link rel="stylesheet" th:href="@{/css/board/pill.css}" />
+        <script defer th:src="@{/js/admin/admin.js}"></script>
+    </head>
+<body>
+<div class="all-wrap">
+    <header class="main-header">
+        <div class="inner">
+            <button class="btn-menu" type="button" title="메인메뉴 열기"></button>
+            <h1 class="header-logo"><a href="index.html" title="yakbang 약방 : 홈"><img th:src="@{/images/common/logo.svg}"
+                                                                                     alt=""></a></h1>
+            <div class="user-links">
+                <a href="login.html">로그인</a>
+                <a href="join_page.html">회원가입</a>
+            </div>
+        </div>
+    </header>
+    <aside class="main-menu">
+        <header class="top-area">
+            <h1 class="title"><a href="index.html"><img th:src="@{/images/common/logo_gray.svg}" alt=""/></a></h1>
+            <button class="btn-close" type="button"></button>
+        </header>
+        <nav class="menu-area">
+            <ul>
+                <li class="item"><a href="pill_result.html">일반약 검색</a></li>
+                <li class="item"><a href="pill_result.html">추천 리스트</a></li>
+                <li class="item"><a href="qna_list.html">Q&A 게시판</a></li>
+                <li class="item"><a href="review_list.html">리뷰 게시판</a></li>
+            </ul>
+        </nav>
+    </aside>
+    <main class="contents">
+        <!-- 작업영역 -->
+        <div class="inner">
+            <div class="detail-section">
+                <div class="section-box">
+                    <div class="pill-detail-info">
+                        <div class="pill-img">
+                            <img src="../images/tmp/A11A1270A000801.jpg" alt="#"/>
+                        </div>
+                        <div class="info">
+                            <div class="company-name">켄뷰</div>
+                            <h1 class="product-name">타이레놀</h1>
+                            <dl class="shape-color">
+                                <dt>형태 및 색</dt>
+                                <dd>원형 / 하양</dd>
+                            </dl>
+                            <dl class="register-date">
+                                <dt>등록일</dt>
+                                <dd>2000. 01. 01</dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="total-grade-area">
+                        <div class="item">
+                            <span class="rating">4.61</span>
+                            <div class="rating-box">
+                                <div class="rating-select" style="width:calc((4.61 - 1) / 4 * 100%)"></div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="male-gauge">
+                                <div class="gauge" style="height: 80%"></div>
+                                <span class="num">80%</span>
+                            </div>
+                            <div class="female-gauge">
+                                <div class="gauge" style="height: 50%"></div>
+                                <span class="num">50%</span>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="bar-graph">
+                                <div class="bar-graph-one">
+                                    <div class="bar-graph-mark"><span>1000</span></div>
+                                    <div class="clearfix">
+                                        <div class="bar-graph-bg">
+                                            <div class="bar-graph-bar" style="width:66.974%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="bar-graph-txt">10대</div>
+                                </div>
+                                <div class="bar-graph-one">
+                                    <div class="bar-graph-mark"><span>543</span></div>
+                                    <div class="clearfix">
+                                        <div class="bar-graph-bg">
+                                            <div class="bar-graph-bar" style="width:27.846%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="bar-graph-txt">20대</div>
+                                </div>
+                                <div class="bar-graph-one">
+                                    <div class="bar-graph-mark"><span>88</span></div>
+                                    <div class="clearfix">
+                                        <div class="bar-graph-bg">
+                                            <div class="bar-graph-bar" style="width:4.513%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="bar-graph-txt">30대</div>
+                                </div>
+                                <div class="bar-graph-one">
+                                    <div class="bar-graph-mark"><span>13</span></div>
+                                    <div class="clearfix">
+                                        <div class="bar-graph-bg">
+                                            <div class="bar-graph-bar" style="width:0.667%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="bar-graph-txt">40대</div>
+                                </div>
+                                <div class="bar-graph-one">
+                                    <div class="bar-graph-mark"><span>0</span></div>
+                                    <div class="clearfix">
+                                        <div class="bar-graph-bg">
+                                            <div class="bar-graph-bar" style="width:10%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="bar-graph-txt">50대</div>
+                                </div>
+                                <div class="bar-graph-one">
+                                    <div class="bar-graph-mark"><span>110</span></div>
+                                    <div class="clearfix">
+                                        <div class="bar-graph-bg">
+                                            <div class="bar-graph-bar" style="width:30%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="bar-graph-txt">60대</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tabs">
+                <div class="tab-link">상세 정보</div>
+                <div class="tab-link">리뷰<span>1,873개</span></div>
+            </div>
+
+            <!-- 상세 정보 -->
+            <div class="tab-content">
+                <div class="detail-section">
+                    <h2 class="title-section">약 효능</h2>
+                    <div class="pill-effect">
+                        <h3 class="title">주요 기능</h3>
+                        <div class="effect-tag">두통</div>
+                        <div class="effect-tag">발열</div>
+                        <div class="effect-tag">근육통</div>
+                        <div class="show-more">
+                            <a href="#" class="show-more">더 보기</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h2 class="title-section">복용 방법</h2>
+                    <div class="section-box">
+                        <div class="img-when">
+                            <img class="adult" src="../images/common/adult-img.png" alt="adult"/>
+                            <span class="when">만 12세 이상 소아 및 성인은 1회 1~2정씩, 1일 3~4회(4~6시간 마다) 필요 시 복용</span>
+                        </div>
+                    </div>
+                    <h2 class="title-section">섭취 시 주의사항</h2>
+                    <div class="section-box">
+                        <div class="caution-method">
+                            <span class="text-info">
+                            (주의사항)
+                            이 약에 과민증, 소화성궤양, 심한 혈액 이상, 간장애, 신장(콩팥)장애,심장기능저하 환자, 아스피린 천식(비스테로이드성 소염(항염)제에 의한 천식발작 유발) 환자 또는 경험자, 바르비탈계 약물 또는 삼환계 항우울제 복용한 환자, 알코올을 복용한 사람, 12세 미만의 소아는 이 약을 복용하지 마십시오.</span>
+                            <div class="caution">
+                            <span>
+                                ❌ 부작용이 느껴지면 섭취량을 줄이거나 섭취를 중단하세요.
+                            </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="section-box">
+                        <div class="text-info">(복용 시 주의해야 할 약 / 음식)
+                            바르비탈계 약물, 삼환계 항우울제 및 알코올을 투여한 환자, 와파린, 플루클록사실린을 복용하는 환자는 의사 또는 약사와 상의하십시오.
+                        </div>
+                    </div>
+                    <div class="detail-section">
+                        <h2 class="title-section">보관 방법</h2>
+                        <div class="section-box">
+                            <div class="text-info">
+                                <li class="info-li">실온에서 보관하십시오.</li>
+                                <li class="info-li">어린이의 손이 닿지 않는 곳에 보관하십시오.</li>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 리뷰 영역 -->
+            <div class="tab-content">
+                <h2 class="title-section">의약품 리뷰</h2>
+                <div class="detail-section">
+                    <div class="section-box">
+                        <div class="detail-info-area">
+                            <button class="title"><span style="color: #16a87b;">트리플 스트렝스 오메가3 피쉬오일 (오메가3 1040mg)</span>에
+                                대해 실제 섭취한 유저들은 이렇게 평가해요
+                            </button>
+                            <div class="acodian-box">
+                                '트리플 스트렝스 오메가3 피쉬오일 (오메가3 1040mg)'을 실제로 섭취한 유저들은 주로 피로 개선(34%), 콜레스테롤 수치 개선(24%), 수면질
+                                개선(18%)등의 효과를 경험했어요.
+                                섭취한 유저들의 리뷰에 따르면 '트리플 스트렝스 오메가3 피쉬오일 (오메가3 1040mg)'의 부작용으로는 속 안좋음(4%), 속쓰림(2%),
+                                소화불량(2%)등을 꼽을 수 있으니, 관련 기저질환이 있거나 섭취 중 비슷한 부작용 증상이 있을 경우 섭취량을 줄이거나 중단하시는 게 좋아요.
+                                섭취한 유저들은 섭취 편의성에 대해 먹는 방법이 간편함(65%), 무미/무취(79%), 알약크기 큼(53%)이라고 평가하고 있으니 꾸준히 복용할만큼 기호에
+                                맞는지 확인하세요.
+                            </div>
+                        </div>
+                        <div class="total-reviews">
+                            <span>
+                                <h2 class="text-rv">리뷰 <span class="review-cnt">1,873</span>개</h2>
+                            </span>
+                            <div class="sort-bar">
+                                <button class="sort-btn">별점 높은 순</button>
+                                <div class="sort-content">
+                                    <a href="#">베스트 리뷰 순</a>
+                                    <a href="#">별점 높은 순</a>
+                                    <a href="#">별점 낮은 순</a>
+                                    <a href="#">최신 순</a>
+                                </div>
+                            </div>
+                        </div>
+                        <ul id="data-container" class="review-content-wrap">
+                            <li class="review-content">
+                                <span class="user-agesex">40대 / 남</span>
+                                <div class="review-info-row1">
+                                    <div class="rating-box">
+                                        <!-- 평균점수 계산식 = (점수 - 1)/4*100 : width 값안에 적용 -->
+                                        <div class="rating-select" style="width:100%"></div>
+                                    </div>
+                                    <span class="date">2023/03/12</span>
+                                </div>
+                                <p class="review-full-txt">코큐텐이 좋다고 해서 구매 후 복용했는데 먹기편하게 되어 있는건 좋았음</p>
+                                <p class="review-full-txt">먹은지 한달정도 후에 피부에 두드러기같은게 생김 처음엔 이것 때문인지 몰라 이것저것 병원도 가고 약도 먹고
+                                    해도 원인인 몰랐음 그래서 모든것을 다 끊고 기본으로 돌아가니 증상이 없어졌고 하나씩 조심히먹으며 원인을 찾던 도중 이거 먹고 20일쯤 지나니 증상이
+                                    다시시작됨 혹시나 싶어 이거 끊었더니 증상이 더 발전안되고 서서히 줄어드는중이라서 이거 때문임을 확신함</p>
+                            </li>
+
+                            <li class="review-content">
+                                <span class="user-agesex">40대 / 남</span>
+                                <div class="review-info-row1">
+                                    <div class="rating-box">
+                                        <!-- 평균점수 계산식 = (점수 - 1)/4*100 : width 값안에 적용 -->
+                                        <div class="rating-select" style="width:100%"></div>
+                                    </div>
+                                    <span class="date">2023/03/12</span>
+                                </div>
+                                <p class="review-full-txt">코큐텐이 좋다고 해서 구매 후 복용했는데 먹기편하게 되어 있는건 좋았음</p>
+                                <p class="review-full-txt">먹은지 한달정도 후에 피부에 두드러기같은게 생김 처음엔 이것 때문인지 몰라 이것저것 병원도 가고 약도 먹고
+                                    해도 원인인 몰랐음 그래서 모든것을 다 끊고 기본으로 돌아가니 증상이 없어졌고 하나씩 조심히먹으며 원인을 찾던 도중 이거 먹고 20일쯤 지나니 증상이
+                                    다시시작됨 혹시나 싶어 이거 끊었더니 증상이 더 발전안되고 서서히 줄어드는중이라서 이거 때문임을 확신함</p>
+                            </li>
+
+                            <li class="review-content">
+                                <span class="user-agesex">40대 / 남</span>
+                                <div class="review-info-row1">
+                                    <div class="rating-box">
+                                        <!-- 평균점수 계산식 = (점수 - 1)/4*100 : width 값안에 적용 -->
+                                        <div class="rating-select" style="width:100%"></div>
+                                    </div>
+                                    <span class="date">2023/03/12</span>
+                                </div>
+                                <p class="review-full-txt">코큐텐이 좋다고 해서 구매 후 복용했는데 먹기편하게 되어 있는건 좋았음</p>
+                                <p class="review-full-txt">먹은지 한달정도 후에 피부에 두드러기같은게 생김 처음엔 이것 때문인지 몰라 이것저것 병원도 가고 약도 먹고
+                                    해도 원인인 몰랐음 그래서 모든것을 다 끊고 기본으로 돌아가니 증상이 없어졌고 하나씩 조심히먹으며 원인을 찾던 도중 이거 먹고 20일쯤 지나니 증상이
+                                    다시시작됨 혹시나 싶어 이거 끊었더니 증상이 더 발전안되고 서서히 줄어드는중이라서 이거 때문임을 확신함</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 작업영역 -->
+    </main>
+    <footer class="main-footer">
+        <div class="inner">
+            <a href="#" class="logo"><img src="../images/common/logo_gray.svg" alt=""></a>
+            <div class="footer-info">
+                <!-- <ul class="priv">
+                    <li><a href="#">이용약관</a></li>
+                    <li><a href="#">개인정보처리방침</a></li>
+                </ul> -->
+                <p>주소: 06241 서울특별시 강남구 테헤란로0길 0, 000호 (역삼동) 대표번호: 0000-0000 (유선 상담 불가)</p>
+                <p>ⓒ 2024 yakbang. All rights reserved</p>
+                <p>본 사이트의 모든 콘텐츠 및 게시물에 대한 무단적인 수집, 전재, 복사, 배포를 엄격히 금합니다.</p>
+            </div>
+        </div>
+    </footer>
+</div>
+</body>
+</html>
