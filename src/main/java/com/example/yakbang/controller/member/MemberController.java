@@ -15,11 +15,6 @@ public class MemberController {
         return "member/join";
     }
 
-    @GetMapping("/login")
-    public String login() {
-        return "member/login";
-    }
-
     @GetMapping("/mypage")
     public String mypage() {
         return "member/mypage";
