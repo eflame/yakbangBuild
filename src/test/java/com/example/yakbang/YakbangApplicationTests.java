@@ -8,6 +8,7 @@ class YakbangApplicationTests {
 
     @Test
     void contextLoads() {
+
     }
 
 }

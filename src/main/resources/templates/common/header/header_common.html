@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<!--    <th:block th:fragment="common-set">-->
+<!--        <link rel="stylesheet" th:href="@{/css/common/common.css}">-->
+<!--        <script defer th:src="@{/js/common/common.js}" ></script>-->
+<!--    </th:block>-->
+</head>
+<body>
+<header class="main-header" th:fragment="main-header">
+    <div class="inner">
+        <button class="btn-menu" type="button" title="메인메뉴 열기"></button>
+        <h1 class="header-logo"><a th:href="@{/}" title="yakbang 약방 : 홈"><img th:src="@{/images/common/logo.svg}" alt=""></a></h1>
+        <div class="user-links">
+            <a th:href="@{/member/login}">로그인</a>
+            <a th:href="@{/member/join_page}">회원가입</a>
+        </div>
+    </div>
+</header>
+</body>
+</html>
