@@ -6,18 +6,19 @@
     <title>Q&A Detail</title>
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
     <link rel="stylesheet" th:href="@{/css/common/common.css}" />
-    <link rel="stylesheet" href="../css/qna_detail.css">
-    <script defer src="../js/common.js" ></script>
+    <link rel="stylesheet" th:href="@{/css/board/qna_detail.css}">
+    <script defer th:src="@{/js/common/common.js}" ></script>
+    <script defer th:src="@{/js/board/ration.js}" ></script>
 </head>
 <body>
     <div class="all-wrap">
         <header class="main-header">
             <div class="inner">
                 <button class="btn-menu" type="button" title="메인메뉴 열기"></button>
-                <h1 class="header-logo"><a href="index.html" title="yakbang 약방 : 홈"><img th:src="@{/images/common/logo.svg}" alt=""></a></h1>            <h1 class="header-logo"><a href="index.html" title="yakbang 약방 : 홈"><img src="../images/common/logo.svg" alt=""></a></h1>
+                <h1 class="header-logo"><a th:href="@{/}" title="yakbang 약방 : 홈"><img th:src="@{/images/common/logo.svg}" alt=""></a></h1>
                 <div class="user-links">
-                    <a href="login.html">로그인</a>
-                    <a href="join_page.html">회원가입</a>
+                    <a th:href="@{/} ">로그인</a>
+                    <a th:href="@{/member/join_page}">회원가입</a>
                 </div>
             </div>
         </header>
@@ -28,10 +29,10 @@
             </header>
             <nav class="menu-area">
                 <ul>
-                    <li class="item"><a href="pill_result.html">일반약 검색</a></li>
-                    <li class="item"><a href="pill_result.html">추천 리스트</a></li>
-                    <li class="item"><a href="qna_list.html">Q&A 게시판</a></li>
-                    <li class="item"><a href="review_list.html">리뷰 게시판</a></li>
+                    <li class="item"><a th:href="@{/board/pill_result}">일반약 검색</a></li>
+                    <li class="item"><a th:href="@{/board/pill_result}">추천 리스트</a></li>
+                    <li class="item"><a th:href="@{/board/qna-list}">Q&A 게시판</a></li>
+                    <li class="item"><a th:href="@{/board/review-list}">리뷰 게시판</a></li>
                 </ul>
             </nav>
         </aside>

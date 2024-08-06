@@ -6,17 +6,18 @@
     <title>Review</title>
     <link rel="stylesheet" th:href="@{/css/common/common.css}" />
     <link rel="stylesheet" href="../css/review.css" />
-    <script defer src="../js/common.js" ></script>
+    <script defer th:src="@{/js/common/common.js}" ></script>
+    <script defer th:src="@{/js/board/ration.js}" ></script>
 </head>
 <body>
     <div class="all-wrap">
         <header class="main-header">
         <div class="inner">
             <button class="btn-menu" type="button" title="메인메뉴 열기"></button>
-            <h1 class="header-logo"><a href="index.html" title="yakbang 약방 : 홈"><img th:src="@{/images/common/logo.svg}" alt=""></a></h1>
+            <h1 class="header-logo"><a th:href="@{/}" title="yakbang 약방 : 홈"><img th:src="@{/images/common/logo.svg}" alt=""></a></h1>
             <div class="user-links">
-            <a href="login.html">로그인</a>
-            <a href="join_page.html">회원가입</a>
+                <a th:href="@{/} ">로그인</a>
+                <a th:href="@{/member/join_page}">회원가입</a>
             </div>
         </div>
         </header>
@@ -27,10 +28,10 @@
         </header>
         <nav class="menu-area">
             <ul>
-            <li class="item"><a href="pill_result.html">일반약 검색</a></li>
-            <li class="item"><a href="pill_result.html">추천 리스트</a></li>
-            <li class="item"><a href="qna_list.html">Q&A 게시판</a></li>
-            <li class="item"><a href="review_list.html">리뷰 게시판</a></li>
+                <li class="item"><a th:href="@{/board/pill_result}">일반약 검색</a></li>
+                <li class="item"><a th:href="@{/board/pill_result}">추천 리스트</a></li>
+                <li class="item"><a th:href="@{/board/qna-list}">Q&A 게시판</a></li>
+                <li class="item"><a th:href="@{/board/review-list}">리뷰 게시판</a></li>
             </ul>
         </nav>
         </aside>
@@ -45,7 +46,7 @@
                     <input class="input-search" type="text" title="review 검색어 입력" placeholder="무엇이 궁금하신가요?" >
                     <button class="btn-search" title="검색 버튼"></button>
                 </div>
-                <a class="btn btn-primary" href="write.html">후기 작성</a>
+                <a class="btn btn-primary" th:href="@{/board/review-write}">후기 작성</a>
             </div>
             <ul class="review-list type-oneline">
                 <li class="review-card">

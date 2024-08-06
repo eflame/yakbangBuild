@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>작성 페이지</title>
+    <link rel="stylesheet" th:href="@{/css/common/common.css}">
+    <link rel="stylesheet" th:href="@{/css/board/write.css}">
+    <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.css" />
+    <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+    <script defer th:src="@{/js/common/common.js}" ></script>
+    <script defer th:src="@{/js/board/ration.js}" ></script>
+</head>
+<body>
+<div class="all-wrap">
+    <header class="main-header">
+        <div class="inner">
+            <button class="btn-menu" type="button" title="메인메뉴 열기"></button>
+            <h1 class="header-logo"><a th:href="@{/}" title="yakbang 약방 : 홈"><img th:src="@{/images/common/logo.svg}" alt=""></a></h1>
+            <div class="user-links">
+                <a th:href="@{/} ">로그인</a>
+                <a th:href="@{/member/join_page}">회원가입</a>
+            </div>
+        </div>
+    </header>
+    <aside class="main-menu" >
+        <header class="top-area">
+            <h1 class="title"><a href="index.html"><img th:src="@{/images/common/logo_gray.svg}" alt="" /></a></h1>
+            <button class="btn-close" type="button"></button>
+        </header>
+        <nav class="menu-area">
+            <ul>
+                <li class="item"><a th:href="@{/board/pill_result}">일반약 검색</a></li>
+                <li class="item"><a th:href="@{/board/pill_result}">추천 리스트</a></li>
+                <li class="item"><a th:href="@{/board/qna-list}">Q&A 게시판</a></li>
+                <li class="item"><a th:href="@{/board/review-list}">리뷰 게시판</a></li>
+            </ul>
+        </nav>
+    </aside>
+    <main class="contents">
+        <!-- 작업영역 -->
+        <div class="inner">
+            <form class="form-write" action="">
+                <div class="write-wrap">
+                    <p class="text_required">* 필수</p>
+
+                    <dl class="write-row">
+                        <dt class="title required">제목</dt>
+                        <dd class="content">
+                            <input class="input-box full" type="text" />
+                        </dd>
+                    </dl>
+                    <dl class="write-row">
+                        <dt class="title required">내용</dt>
+                        <dd class="content">
+                            <div class="textarea-box">
+                                <textarea onkeyup="textCount(this,2000)" ></textarea>
+                                <p class="count">
+                                    <span>0</span> / 2000
+                                </p>
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl class="write-row">
+                        <dt class="title">사진 첨부</dt>
+                        <dd class="content col">
+                            <label class="file-box">
+                                <input type="file" multiple >
+                                <span class="btn btn-gray">파일 선택</span>
+                            </label>
+                            <div class="tips">
+                                <p>* JPEG, PNG 형식의 5M 이하의 파일만 첨부 가능합니다. (최대 5개)</p>
+                                <p>* 개인정보가 포함된 이미지 등록은 자제하여 주시기 바랍니다.</p>
+                            </div>
+                        </dd>
+                    </dl>
+                </div>
+                <div class="btn-area">
+                    <a class="btn btn-light" href="qna_detail.html">뒤로가기</a>
+                    <button class="btn btn-primary" type="submit">작성 완료</button>
+                </div>
+            </form>
+        </div>
+        <!-- 작업영역 -->
+    </main>
+    <footer class="main-footer">
+        <div class="inner">
+            <a href="#" class="logo"><img th:src="@{/images/common/logo_gray.svg}" alt=""></a>
+            <div class="footer-info">
+                <p>주소: 06241 서울특별시 강남구 테헤란로0길 0, 000호 (역삼동) 대표번호: 0000-0000 (유선 상담 불가)</p>
+                <p>ⓒ 2024 yakbang. All rights reserved</p>
+                <p>본 사이트의 모든 콘텐츠 및 게시물에 대한 무단적인 수집, 전재, 복사, 배포를 엄격히 금합니다.</p>
+            </div>
+        </div>
+    </footer>
+</div>
+</body>
+</html>
