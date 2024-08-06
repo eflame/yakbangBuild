@@ -80,42 +80,39 @@
 }
 
 .btn-tab-general {
-  font-weight: 700;
-  position: relative;
-  color: #8491a7;
-  font-size: 24px;
-  line-height: 34px;
-  cursor: pointer;
-  background: transparent;
-  cursor: pointer;
+    font-weight: 700;
+    position: relative;
+    color: #8491a7;
+    font-size: 24px;
+    line-height: 34px;
+    cursor: pointer;
+    background: transparent;
 }
 
 .btn-tab-pro {
-  position: relative;
-  color: #8491a7;
-  font-size: 24px;
-  line-height: 34px;
-  cursor: pointer;
-  border: 0;
-  background: transparent;
-  cursor: pointer;
+    position: relative;
+    color: #8491a7;
+    font-size: 24px;
+    line-height: 34px;
+    cursor: pointer;
+    border: 0;
+    background: transparent;
 }
 
 .input-box {
-  margin: 0 auto;
-  vertical-align: middle;
-  padding: 0 16px;
-  height: 44px;
-  background-color: #f5f5f5;
-  align-items: center;
-  border-radius: 0.4rem;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: flex-start;
-  position: relative;
-  width: 400px;
-  margin-bottom: 8px;
-  justify-content: center;
+    margin: 0 auto;
+    vertical-align: middle;
+    padding: 0 16px;
+    height: 44px;
+    background-color: #f5f5f5;
+    align-items: center;
+    border-radius: 0.4rem;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    position: relative;
+    width: 400px;
+    margin-bottom: 8px;
+    justify-content: center;
 }
 .check-box-main {
   margin: 20px 0;
