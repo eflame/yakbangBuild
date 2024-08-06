@@ -23,7 +23,7 @@
           </h1>
           <div class="user-links">
             <a th:href="@{/member/login}">로그인</a>
-            <a th:href="@{/member/join_page}">회원가입</a>
+            <a th:href="@{/member/join}">회원가입</a>
           </div>
         </div>
       </header>
@@ -48,7 +48,7 @@
             <img th:src="@{/images/common/logo.svg}" alt="" />
           </h3>
           <div class="join-base">
-            <form th:action="@{/member/join_page}" method="post" class="join-form">
+            <form th:action="@{/member/join}" method="post" class="join-form">
               <div class="join-checked">
                 <label class="input-check">
                   <input type="checkbox" id="managerBtn" onclick="joinManagerBtn()"/>
