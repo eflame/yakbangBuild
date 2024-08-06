@@ -8,8 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class TimeMapperTest {
-    @Autowired
-    TimeMapper timeMapper;
+    @Autowired TimeMapper timeMapper;
 
     @Test
     void selectTime() {
