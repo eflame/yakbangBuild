@@ -6,15 +6,16 @@
 <title>검색결과</title>
 <link rel="stylesheet" th:href="@{/css/common/common.css}" />
 <link rel="stylesheet" th:href="@{/css/admin/admin.css}" />
-<link rel="stylesheet" th:href="@{/css/board/pill.css}" />
-<script defer th:src="@{/js/admin/admin.js}"></script>
+<link rel="stylesheet" th:href="@{/css/pill/pill.css}" />
+<script defer th:src="@{/js/common/common.js}"></script>
 </head>
 <body>
 <div class="all-wrap">
     <header class="main-header">
         <div class="inner">
             <button class="btn-menu" type="button" title="메인메뉴 열기"></button>
-            <h1 class="header-logo"><a href="index.html" title="yakbang 약방 : 홈"><img th:src="@{/images/common/logo.svg}" alt=""></a></h1>
+            <h1 class="header-logo"><a th:href="@{/main}" title="yakbang 약방 : 홈"><img th:src="@{/images/common/logo.svg}" alt=""></a></h1>
+
             <div class="user-links">
                 <a href="login.html">로그인</a>
                 <a href="join_page.html">회원가입</a>
@@ -23,15 +24,15 @@
     </header>
     <aside class="main-menu" >
         <header class="top-area">
-            <h1 class="title"><a href="index.html"><img th:src="@{/images/common/logo_gray.svg}" alt="" /></a></h1>
+            <h1 class="title"><a th:href="@{/main}"><img th:src="@{/images/common/logo_gray.svg}" alt="" /></a></h1>
             <button class="btn-close" type="button"></button>
         </header>
         <nav class="menu-area">
             <ul>
-                <li class="item"><a href="pill_result.html">일반약 검색</a></li>
-                <li class="item"><a href="pill_result.html">추천 리스트</a></li>
-                <li class="item"><a href="qna_list.html">Q&A 게시판</a></li>
-                <li class="item"><a href="review_list.html">리뷰 게시판</a></li>
+                <li class="item"><a th:href="@{/pill/list}">일반약 검색</a></li>
+                <li class="item"><a th:href="@{/pill/list}">추천 리스트</a></li>
+                <li class="item"><a href="/board/qna_list">Q&A 게시판</a></li>
+                <li class="item"><a href="/board/review_list">리뷰 게시판</a></li>
             </ul>
         </nav>
     </aside>
@@ -45,7 +46,7 @@
                            value="감기"
                     >
                     <button class="btn-search" type="button">
-                        <img src="../images/common/ico_search_white.svg" alt="">
+                        <img th:src="@{/images/common/ico_search_white.svg}" alt="">
                     </button>
                 </div>
                 <div class="search-etc">
@@ -62,72 +63,72 @@
             <!-- 약 리스트 -->
             <div class="search-list-wrap">
                 <div class="pill-list">
-                    <a href="pill_detail.html" class="pill-item">
-                        <img src="../images/common/img_pill_01.png" alt="#" class="pill-img type1" />
+                    <a th:href="@{/pill/detail}" class="pill-item">
+                        <img th:src="@{/images/common/img_pill_01.png}" alt="#" class="pill-img type1" />
                         <div class="info">
                             <span class="brand">브랜드</span>
                             <span class="pill-name">약 이름약 이름약 이름약 이름약 이름약 이름약 이름</span>
                             <span class="review-score">4.68</span>
                         </div>
                     </a>
-                    <a href="#" class="pill-item">
-                        <img src="../images/common/img_pill_02.png" alt="#" class="pill-img type2" />
+                    <a th:href="@{/pill/detail}" class="pill-item">
+                        <img th:src="@{/images/common/img_pill_02.png}" alt="#" class="pill-img type2" />
                         <div class="info">
                             <span class="brand">브랜드</span>
                             <span class="pill-name">약 이름</span>
                             <span class="review-score">4.68</span>
                         </div>
                     </a>
-                    <a href="#" class="pill-item">
-                        <img src="../images/common/img_pill_03.png" alt="#" class="pill-img type3" />
+                    <a th:href="@{/pill/detail}" class="pill-item">
+                        <img th:src="@{/images/common/img_pill_03.png}" alt="#" class="pill-img type3" />
                         <div class="info">
                             <span class="brand">브랜드</span>
                             <span class="pill-name">약 이름</span>
                             <span class="review-score">4.68</span>
                         </div>
                     </a>
-                    <a href="#" class="pill-item">
-                        <img src="../images/common/img_pill.png" alt="#" class="pill-img" />
+                    <a th:href="@{/pill/detail}" class="pill-item">
+                        <img th:src="@{/images/common/img_pill.png}" alt="#" class="pill-img" />
                         <div class="info">
                             <span class="brand">브랜드</span>
                             <span class="pill-name">약 이름</span>
                             <span class="review-score">4.68</span>
                         </div>
                     </a>
-                    <a href="#" class="pill-item">
-                        <img src="../images/common/img_pill.png" alt="#" class="pill-img" />
+                    <a th:href="@{/pill/detail}" class="pill-item">
+                        <img th:src="@{/images/common/img_pill.png}" alt="#" class="pill-img" />
                         <div class="info">
                             <span class="brand">브랜드</span>
                             <span class="pill-name">약 이름</span>
                             <span class="review-score">4.68</span>
                         </div>
                     </a>
-                    <a href="#" class="pill-item">
-                        <img src="../images/common/img_pill.png" alt="#" class="pill-img" />
+                    <a th:href="@{/pill/detail}" class="pill-item">
+                        <img th:src="@{/images/common/img_pill.png}" alt="#" class="pill-img" />
                         <div class="info">
                             <span class="brand">브랜드</span>
                             <span class="pill-name">약 이름</span>
                             <span class="review-score">4.68</span>
                         </div>
                     </a>
-                    <a href="#" class="pill-item">
-                        <img src="../images/common/img_pill.png" alt="#" class="pill-img" />
+                    <a th:href="@{/pill/detail}" class="pill-item">
+                        <img th:src="@{/images/common/img_pill.png}" alt="#" class="pill-img" />
                         <div class="info">
                             <span class="brand">브랜드</span>
                             <span class="pill-name">약 이름</span>
                             <span class="review-score">4.68</span>
                         </div>
                     </a>
-                    <a href="#" class="pill-item">
-                        <img src="../images/common/img_pill.png" alt="#" class="pill-img" />
+                    <a th:href="@{/pill/detail}" class="pill-item">
+                        <img th:src="@{/images/common/img_pill.png}" alt="#" class="pill-img" />
                         <div class="info">
                             <span class="brand">브랜드</span>
                             <span class="pill-name">약 이름</span>
                             <span class="review-score">4.68</span>
                         </div>
                     </a>
-                    <a href="#" class="pill-item">
-                        <img src="../images/common/img_pill.png" alt="#" class="pill-img" />
+                    <a th:href="@{/pill/detail}" class="pill-item">
+                        <img th:src="@{/images/common/img_pill.png}" alt="#" class="pill-img" />
                         <div class="info">
                             <span class="brand">브랜드</span>
                             <span class="pill-name">약 이름</span>
@@ -141,7 +142,7 @@
     </main>
     <footer class="main-footer">
         <div class="inner">
-            <a href="#" class="logo"><img src="../images/common/logo_gray.svg" alt=""></a>
+            <a href="#" class="logo"><img th:src="@{/images/common/logo_gray.svg}" alt=""></a>
             <div class="footer-info">
                 <!-- <ul class="priv">
                     <li><a href="#">이용약관</a></li>
