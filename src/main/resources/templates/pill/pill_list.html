@@ -14,25 +14,25 @@
     <header class="main-header">
         <div class="inner">
             <button class="btn-menu" type="button" title="메인메뉴 열기"></button>
-            <h1 class="header-logo"><a th:href="@{/main}" title="yakbang 약방 : 홈"><img th:src="@{/images/common/logo.svg}" alt=""></a></h1>
+            <h1 class="header-logo"><a th:href="@{/}" title="yakbang 약방 : 홈"><img th:src="@{/images/common/logo.svg}" alt=""></a></h1>
 
             <div class="user-links">
-                <a href="login.html">로그인</a>
-                <a href="join_page.html">회원가입</a>
+                <a th:href="@{/} ">로그인</a>
+                <a th:href="@{/member/join_page}">회원가입</a>
             </div>
         </div>
     </header>
     <aside class="main-menu" >
         <header class="top-area">
-            <h1 class="title"><a th:href="@{/main}"><img th:src="@{/images/common/logo_gray.svg}" alt="" /></a></h1>
+            <h1 class="title"><a th:href="@{/}"><img th:src="@{/images/common/logo_gray.svg}" alt="" /></a></h1>
             <button class="btn-close" type="button"></button>
         </header>
         <nav class="menu-area">
             <ul>
                 <li class="item"><a th:href="@{/pill/list}">일반약 검색</a></li>
                 <li class="item"><a th:href="@{/pill/list}">추천 리스트</a></li>
-                <li class="item"><a href="/board/qna_list">Q&A 게시판</a></li>
-                <li class="item"><a href="/board/review_list">리뷰 게시판</a></li>
+                <li class="item"><a th:href="@{/board/qna-list}">Q&A 게시판</a></li>
+                <li class="item"><a th:href="@{/board/review-list}">리뷰 게시판</a></li>
             </ul>
         </nav>
     </aside>
