@@ -76,7 +76,7 @@
             content: "";
             width: 20px;
             height: 20px;
-            background: url("../images/common/ico_star_on.png") left 0 top 50%/16px
+            background: url("/images/common/ico_star_on.png") left 0 top 50%/16px
             no-repeat;
             filter: invert(66%) sepia(96%) saturate(485%) hue-rotate(360deg)
             brightness(170%) contrast(105%);
@@ -399,22 +399,22 @@
         }
         &:not(.female-gauge) {
             width: 50px;
-            background-image: url("../images/common/bg_male.svg");
+            background-image: url("/images/common/bg_male.svg");
             .num {
                 color: #51c3c5;
             }
             .gauge {
-                background-image: url("../images/common/bg_male_on.svg");
+                background-image: url("/images/common/bg_male_on.svg");
             }
         }
         &:not(.male-gauge) {
             width: 49px;
-            background-image: url("../images/common/bg_female.svg");
+            background-image: url("/images/common/bg_female.svg");
             .num {
                 color: #fcde50;
             }
             .gauge {
-                background-image: url("../images/common/bg_female_on.svg");
+                background-image: url("/images/common/bg_female_on.svg");
             }
         }
     }
