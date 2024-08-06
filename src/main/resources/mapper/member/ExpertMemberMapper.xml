@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.yakbang.mapper.member.MemberMapper">
+
+    <!--    회원가입 처리-->
+    <insert id="insertMember">
+        <selectKey resultType="long" keyProperty="memberId" order="BEFORE">
+            SELECT SEQ_MEMBER.nextval FROM DUAL
+        </selectKey>
+        insert into TBL_EXPERT_MEMBER (EXPERT_ID, LOGIN_ID, PASSWORD, PHONE_NUMBER, NAME, BIRTH, EMAIL, GENDER, JOB,
+        PHARMACY_ADDRESS)
+        values (#{memberId},#{loginId},#{password},#{phoneNumber},#{name},#{birth},#{email},#{gender},#{job},#{pharmacyAddress});
+    </insert>
+
+    <!--    아이디 비밀번호 찾기-->
+    <select id="selectMemberId">
+        SELECT MEMBER_ID FROM TBL_MEMBER
+        WHERE LOGIN_ID = #{loginId} AND PASSWORD = #{password}
+    </select>
+
+    <!--    아이디 중복 확인용 -->
+    <select id="selectLoginIdCount">
+        SELECT COUNT(MEMBER_ID) FROM TBL_MEMBER
+        WHERE LOGIN_ID = #{loginId}
+    </select>
+
+</mapper>
