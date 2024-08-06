@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>로그인</title>
-    <link rel="stylesheet" th:href="@{/css/common/common.css}">
-    <link rel="stylesheet" th:href="@{/css/member/login.css}">
-    <script defer th:src="@{/js/common/common.js}" ></script>
-    <script defer th:src="@{/js/member/login.js}" ></script>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>로그인</title>
+<link rel="stylesheet" th:href="@{/css/common/common.css}">
+<link rel="stylesheet" th:href="@{/css/member/login.css}">
+<script defer th:src="@{/js/common/common.js}"></script>
+<script defer th:src="@{/js/member/login.js}"></script>
 </head>
 <body>
 <div class="all-wrap">
@@ -39,7 +40,7 @@
                                 <label class="form-control row">
                                     <input type="password" placeholder="비밀번호" required/>
                                 </label>
-                            </div> 
+                            </div>
                             <div class="check-box-main">
                                 <label class="check-box">
                                     <input type="checkbox" />
@@ -51,19 +52,19 @@
                             </button>
                         </form>
                         <div class="separator">소셜 계정으로 간편로그인</div>
-                            <div class="login-img">   
+                            <div class="login-img">
                                 <div class="google">
                                     <a href='#' target='_blank'><img th:src='@{/images/member/google.png}'></a>
                                 </div>
                                 <div class="kakao">
                                     <a href='#' target='_blank'><img th:src='@{/images/member/kakao-black.png}'></a>
                                 </div>
-                                <div class="naver">    
+                                <div class="naver">
                                     <a href='#' target='_blank'><img th:src='@{/images/member/naver.png}'></a>
                                 </div>
                         </div>
                     <div class="line"></div>
-                        <div class="member-function">    
+                        <div class="member-function">
                             <div class="find-id">
                                 <a th:href="@{#}">
                                     <span>아이디찾기</span>
