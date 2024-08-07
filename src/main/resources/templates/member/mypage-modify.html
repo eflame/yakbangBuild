@@ -7,6 +7,7 @@
     <link rel="stylesheet" th:href="@{/css/common/common.css}">
     <link rel="stylesheet" th:href="@{/css/member/mypage.css}">
     <script defer th:src="@{/js/common/common.js}" ></script>
+    <script defer th:src="@{/js/member/delete.js}" ></script>
 </head>
 <body>
 <div class="all-wrap">
@@ -50,27 +51,38 @@
                     </p> -->
                     <p class="info-txt">
                         이용을 중단하려면
-                        <a class="link" href="">회원탈퇴</a>
+                        <a class="btn-open-modal" href="">회원탈퇴</a>
                     </p>
+                </div>
+            </div>
+        </div>
+        <div id="myModal" class="mw">
+            <div class="mb">
+                <div class="modal-h"><button class="btn-close" type="button" onclick="closeModal()">닫기</button></div>
+                <h3 class="title">회원탈퇴</h3>
+                <div id="modal-in" class="mi">
+                    <dl class="form-control">
+                        <dt class="tit">회원탈퇴 시 계정 정보 및 보유중인 <br>포인트와 쿠폰은 삭제되며 복구가 되지 않습니다.</dt>
+                    </dl>
+                    <dl class="form-control">
+                        <dt class="tit">정말로 탈퇴하시겠어요?</dt>
+                    </dl>
+                </div>
+
+                <div id="completionMessage" style="display: none;">
+                    <dl class="fc">
+                        <dt>회원탈퇴가 완료되었습니다.</dt>
+                    </dl>
+                </div>
+                <div class="ba">
+                    <button id="btn-modify" class="btn btn-light" type="button" onclick="completeWithdrawal()">탈퇴하기</button>
+                    <button id="btn-check" onclick="closeModal()" class="btn btn-primary" type="button">돌아가기</button>
                 </div>
             </div>
         </div>
         <!-- 작업영역 -->
     </main>
-    <footer class="main-footer">
-        <div class="inner">
-            <a th:href="@{#}" class="logo"><img th:src="@{/images/common/logo_gray.svg}" alt=""></a>
-            <div class="footer-info">
-                <!-- <ul class="priv">
-                    <li><a href="#">이용약관</a></li>
-                    <li><a href="#">개인정보처리방침</a></li>
-                </ul> -->
-                <p>주소: 06241 서울특별시 강남구 테헤란로0길 0, 000호 (역삼동) 대표번호: 0000-0000 (유선 상담 불가)</p>
-                <p>ⓒ 2024 yakbang. All rights reserved</p>
-                <p>본 사이트의 모든 콘텐츠 및 게시물에 대한 무단적인 수집, 전재, 복사, 배포를 엄격히 금합니다.</p>
-            </div>
-        </div>
-    </footer>
+    <footer th:replace="~{common/footer/footer_common::main-fotter}"></footer>
 </div>
 </body>
 </html>
