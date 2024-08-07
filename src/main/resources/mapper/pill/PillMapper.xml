@@ -2,7 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.yakbang.mapper.pill.PillMapper">
     <insert id="insertPill">
-        INSERT INTO TBL_PILL(PILL_ID, CATEGORY_ID, PILL_NAME, UPDATE_DATE, DETAIL_CONTENT, PILL_HOWTO, SIDE_CAUTION, PILL_COLOR, PILL_SHAPE, PILL_DEPOSIT, PILL_IMAGE, COMPANY_NAME)
-        VALUES (SEQ_PILL.nextval, #{categoryId}, #{}, )
+        <selectKey resultType="long" keyProperty="pillId" order="BEFORE">
+            SELECT SEQ_PILL.nextval FROM DUAL
+        </selectKey>
+        INSERT INTO TBL_PILL(PILL_ID, CATEGORY_ID, PILL_NAME, UPDATE_DATE, DETAIL_CONTENT, PILL_HOWTO,
+        SIDE_CAUTION, PILL_COLOR, PILL_SHAPE, PILL_DEPOSIT, PILL_IMAGE, COMPANY_NAME)
+        VALUES (#{pillId}, #{categoryId}, #{pillName}, #{updateDate}, #{detailContent}, #{pillHowto}, #{sideCaution}, #{pillColor}, #{pillShape}, #{pillDeposit}, #{pillImage}, #{companyName})
     </insert>
 </mapper>
