@@ -25,6 +25,11 @@ public class MemberController {
         return "member/find_password";
     }
 
+    @GetMapping("/find_id_email")
+    public String findIdEmail() {
+        return "member/find_id_email";
+    }
+
     @GetMapping("/join")
     public String join() {
         return "member/join";
