@@ -60,7 +60,6 @@ function setSuccessStyles(messageElement, inputElement, message) {
   inputElement.style.borderColor = 'green';
 }
 
-
 //========================================================================
 
 

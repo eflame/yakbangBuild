@@ -37,7 +37,7 @@
       border: 1px solid #373f57;
       cursor: pointer;
       transition: all 0.3s;
-      background-image: url("../images/common/bg_check_white.svg");
+      background-image: url("/images/common/bg_check_white.svg");
       background-repeat: no-repeat;
       background-position: left -26px top 50%;
       background-size: 20px;
@@ -47,7 +47,7 @@
       color: #fff;
       border: 0;
       background-color: #52d7cf;
-      background-image: url("../images/common/bg_check_white.svg");
+      background-image: url("/images/common/bg_check_white.svg");
       background-position: left 4px top 50%;
     }
   }
@@ -145,4 +145,3 @@
     }
   }
 }
-
