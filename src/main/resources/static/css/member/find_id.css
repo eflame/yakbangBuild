@@ -60,7 +60,7 @@
 .box-obj{
     width: 48px;
     height: 48px;
-    background: url("/images/member/icon-easy.png") no-repeat;
+    background: url("/images/member/icon-phone.png") no-repeat;
     background-size: 100% 100%;
     display: inline-block;
     margin-left: 30px;
@@ -79,7 +79,7 @@
 .box2-obj{
     width: 48px;
     height: 48px;
-    background: url('/images/member/icon-phone.png') no-repeat;
+    background: url('/images/member/icon-email.png') no-repeat;
     background-size: 100% 100%;
     display: inline-block;
     margin-left: 30px;
@@ -104,15 +104,6 @@
 }
 .certified-box:visited {
     color: initial;
-}
-.box3-obj{
-    width: 48px;
-    height: 48px;
-    background: url('/images/member/icon-toss.png') no-repeat;
-    background-size: 100% 100%;
-    display: inline-block;
-    margin-left: 30px;
-    margin-right: 15px;
 }
 
 .bottom-text{

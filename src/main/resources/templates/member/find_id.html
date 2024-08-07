@@ -27,22 +27,15 @@
         <div class="certified-box-frame">
           <a href="#" class="certified-box">
             <span th:class="box-obj"></span>
-            <p>간편 인증</p>
-            <span th:class="box-obj2"></span>
-          </a>
-        </div>
-        <div class="certified-box-frame">
-          <a href="#" class="certified-box">
-            <span th:class="box2-obj"></span>
             <p>휴대폰 인증</p>
-            <span id="phone-certified" th:class="box-obj2"></span>
+            <span th:class="box-obj2"></span>
           </a>
         </div>
         <div class="certified-box-frame">
-          <a href="#" class="certified-box">
-            <span th:class="box3-obj"></span>
-            <p>토스 인증</p>
-            <span th:class="box-obj2"></span>
+          <a th:href="@{/member/find_id_email}" class="certified-box">
+            <span th:class="box2-obj"></span>
+            <p>이메일 인증</p>
+            <span id="phone-certified" th:class="box-obj2"></span>
           </a>
         </div>
         <div class="bottom-text">

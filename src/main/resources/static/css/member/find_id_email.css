@@ -1,45 +1,42 @@
-.main-container{
-<<<<<<< HEAD
-    margin: 20vh auto 30vh auto;
-=======
+.main-container {
     margin: 15vh auto 40vh auto;
->>>>>>> publish/work01
     width: 420px;
     height: 480px;
 }
 
-.tilte-img{
+.title-img {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.main-tilte-heder{
+.main-tilte-heder {
     display: flex;
     justify-content: center;
     align-items: center;
-    img{
-        width: 90%;
-    }
 }
 
-.frame-body-text1{
+.main-tilte-heder img {
+    width: 90%;
+}
+
+.frame-body-text1 {
     margin-top: 30px;
     margin-bottom: 20px;
 }
 
-.frame-body-text2{
+.frame-body-text2 {
     margin-bottom: 50px;
 }
 
-.body-text1{
+.body-text1 {
     color: rgba(31, 31, 31, 1);
     font-weight: 500;
     font-size: 22px;
     text-align: center;
 }
 
-.body-text2{
+.body-text2 {
     color: rgba(102, 102, 102, 1);
     font-weight: 400;
     font-size: 16px;
@@ -61,6 +58,11 @@
     width: 100%;
     justify-content: center;
 }
+
+#input-name {
+    margin-top: 10px;
+}
+
 .form-control input {
     background-color: transparent;
     border-width: 0;
@@ -125,33 +127,31 @@ input:focus {
     color: white;
 }
 
-.enabled{
+.enabled {
     background-color: #16a87b;
     color: white;
 }
-
 
 #login-btn-text.enabled {
     background-color: white;
 }
 
-.btn-login>span{
+.btn-login > span {
     color: rgba(102, 102, 102, 1);
 }
 
-
-.bottom-text{
+.bottom-text {
     margin-top: 50px;
 }
 
-.bottom-text>a{
+.bottom-text > a {
     margin-top: 5px;
     display: flex;
     justify-content: center;
     color: #16a87b;
     text-decoration: underline;
 }
-.bottom-text>a:visited{
+
+.bottom-text > a:visited {
     color: #16a87b;
 }
-
