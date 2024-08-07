@@ -7,11 +7,11 @@
         <selectKey resultType="long" keyProperty="memberId" order="BEFORE">
             SELECT SEQ_MEMBER.nextval FROM DUAL
         </selectKey>
-        INSERT INTO TBL_MEMBER (MEMBER_ID, LOGIN_ID, PASSWORD, PHONE_NUMBER, NAME, BIRTH, EMAIL, GENDER)
-        VALUES (#{memberId},#{loginId},#{password},#{phoneNumber},#{name},#{birth},#{email},#{gender});
+        INSERT INTO TBL_MEMBER(MEMBER_ID, LOGIN_ID, PASSWORD, PHONE_NUMBER, NAME, BIRTH, EMAIL, GENDER)
+        VALUES (#{memberId},#{loginId},#{password},#{phoneNumber},#{name},#{birth},#{email},#{gender})
     </insert>
 
-<!--    아이디 비밀번호 찾기-->
+<!--    로그인 처리-->
     <select id="selectMemberId">
         SELECT MEMBER_ID FROM TBL_MEMBER
         WHERE LOGIN_ID = #{loginId} AND PASSWORD = #{password}
@@ -22,4 +22,12 @@
         SELECT COUNT(MEMBER_ID) FROM TBL_MEMBER
         WHERE LOGIN_ID = #{loginId}
     </select>
+
+<!--    마이페이지 정보 조회용-->
+    <select id="findMemberInfo">
+        SELECT LOGIN_ID,NAME,BIRTH,PHONE_NUMBER,EMAIL
+        FROM TBL_MEMBER
+        WHERE LOGIN_ID=#{loginId} AND PASSWORD=#{password}
+    </select>
+
 </mapper>

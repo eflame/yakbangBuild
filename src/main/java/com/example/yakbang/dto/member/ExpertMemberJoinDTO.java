@@ -1,4 +1,4 @@
-package com.example.yakbang.dto.member;
+ package com.example.yakbang.dto.member;
 
 import lombok.*;
 
@@ -7,7 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor @Builder
 public class ExpertMemberJoinDTO {
-    private Long memberId;
+    private Long expertId;
     private String loginId;
     private String password;
     private String phoneNumber;
