@@ -54,7 +54,7 @@
         font-size: 12px;
         background-color: #fff;
         border: 1px solid #c9ccd2;
-        .link {
+        .btn-open-modal {
             display: inline-flex;
             position: relative;
             align-items: center;
@@ -85,6 +85,105 @@
                 transform: translateY(1px);
             }
         }
+    }
+}
+
+/* 모달 배경 */
+/*modal-wrap*/
+.mw {
+    display: none; /* 기본적으로 숨김 */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(128, 128, 128, 0.5); /* 회색빛 반투명 배경 */
+    overflow: auto; /* 필요 시 스크롤 가능 */
+
+    /* 모달 내용 */
+    /*modal-header*/
+    .modal-h{
+        padding-bottom: 30px;
+    }
+    /*modal-body*/
+    .mb {
+        background-color: #fff; /* 흰색 배경 */
+        margin: 10% auto;
+        padding: 20px;
+        border-radius: 8px;
+        width: 80%;
+        max-width: 500px;
+    }
+
+    .title{
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        font-size: 25px;
+        margin: 10px 0px 50px 0px;
+    }
+
+    /* 닫기 버튼 */
+    .btn-close {
+        font-size: 0px;
+        border: none;
+        padding: 10px 20px;
+        background: url('/images/common/ico_close_black.svg') 50%/20px no-repeat;
+        cursor: pointer;
+        float: right;
+        border-radius: 4px;
+    }
+
+    /* 버튼 영역 */
+    /*btn-area*/
+    .ba {
+        display: flex;
+        margin-top: 50px;
+        justify-content: center;
+        gap: 30px;
+    }
+
+    /* 일반 버튼 스타일 */
+    .btn {
+        padding: 10px 70px;
+        border: none;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+
+    /* 탈퇴 버튼 스타일 */
+    .btn-light {
+        background: #f0f0f0; /* 연한 회색 배경 */
+        color: #333; /* 검은색 글자 */
+    }
+
+    /* 취소 버튼 스타일 */
+    .btn-primary {
+        background: #52d7cf;
+        color: white;
+    }
+
+    /* 정보 버튼 영역 스타일 */
+    .info-btns {
+        margin: 20px 0;
+    }
+
+    .info-txt {
+        font-size: 16px;
+    }
+
+    .form-control{
+        margin: 20px;
+        font-size: 17px;
+    }
+    /*form-control 약자 따로만듬*/
+    .fc{
+        display: flex;
+        margin: 30px;
+        align-items: center;
+        justify-content: center;
+        font-size: 17px;
     }
 }
 

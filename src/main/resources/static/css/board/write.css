@@ -110,7 +110,7 @@
     border-radius: 4px;
     border: 1px solid #c9ccd2;
     outline: none;
-    background-image: url("../images/common/ico_search_black.png");
+    background-image: url("/images/common/ico_search_black.png");
     background-repeat: no-repeat;
     background-position: right 8px top 50%;
     background-size: 20px;
@@ -163,11 +163,11 @@
       display: block;
       position: relative;
       left: 0;
-      background-image: url("../images/common/ico_star_off.png");
+      background-image: url("/images/common/ico_star_off.png");
       background-repeat: no-repeat;
       background-size: 30px;
       &.filled {
-        background-image: url("../images/common/ico_star_on.png");
+        background-image: url("/images/common/ico_star_on.png");
         filter: invert(66%) sepia(96%) saturate(485%) hue-rotate(360deg) brightness(170%) contrast(105%);
       }
     }

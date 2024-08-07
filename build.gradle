@@ -45,6 +45,8 @@ dependencies {
     // OSDT Core 라이브러리 (기본 보안 기능 담당)
     implementation 'com.oracle.database.security:osdt_core'
 
+    implementation 'org.springframework.boot:spring-boot-starter-batch'
+    testImplementation 'org.springframework.batch:spring-batch-test'
 
 }
 

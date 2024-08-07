@@ -1,105 +1,94 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>로그인</title>
-<link rel="stylesheet" th:href="@{/css/common/common.css}">
-<link rel="stylesheet" th:href="@{/css/member/login.css}">
-<script defer th:src="@{/js/common/common.js}"></script>
-<script defer th:src="@{/js/member/login.js}"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>로그인</title>
+  <link rel="stylesheet" th:href="@{/css/common/common.css}">
+  <link rel="stylesheet" th:href="@{/css/member/login.css}">
+  <script defer th:src="@{/js/common/common.js}"></script>
+  <script defer th:src="@{/js/member/login.js}"></script>
 </head>
 <body>
 <div class="all-wrap">
-    <header th:replace="~{common/header/header_common::main-header}"></header>
-    <menu th:replace="~{common/menu/side_menu::side-menu}" ></menu>
-    <main class="contents">
-        <!-- 작업영역 -->
-        <div class="inner">
-            <div class="login-wrap">
-                <div class="login-main">
-                    <div class="login-area">
-                        <a th:href="@{#}"><img th:src="@{/images/common/logo.svg}" alt=""></a>
-                    </div>
-                        <input type="hidden" name="login_tab" value="p" id="login_tab">
-                        <ul class="tab_member_type" role="tablist">
-                            <li class="tab-genral">
-                                <button type="button" class="btn-tab-general" role="tab" tabindex="0" aria-selected="true" data-value="p">개인회원</button>
-                            </li>
-                            <li class="tab-pro">
-                                <button type="button" class="btn-tab-pro" role="tab" tabindex="-1" aria-selected="false" data-value="c">전문가회원</button>
-                            </li>
-                        </ul>
-                        <form class="form-area" action="#">
-                            <div class="input-box">
-                                <label class="form-control row">
-                                    <input type="text" placeholder="아이디" required/>
-                                </label>
-                            </div>
-                            <div class="input-box">
-                                <label class="form-control row">
-                                    <input type="password" placeholder="비밀번호" required/>
-                                </label>
-                            </div>
-                            <div class="check-box-main">
-                                <label class="check-box">
-                                    <input type="checkbox" />
-                                        <span class="label-text">로그인 정보 저장</span>
-                                </label>
-                            </div>
-                            <button type="submit" class="btn-login">
-                                <span class="btn-submit">로그인</span>
-                            </button>
-                        </form>
-                        <div class="separator">소셜 계정으로 간편로그인</div>
-                            <div class="login-img">
-                                <div class="google">
-                                    <a href='#' target='_blank'><img th:src='@{/images/member/google.png}'></a>
-                                </div>
-                                <div class="kakao">
-                                    <a href='#' target='_blank'><img th:src='@{/images/member/kakao-black.png}'></a>
-                                </div>
-                                <div class="naver">
-                                    <a href='#' target='_blank'><img th:src='@{/images/member/naver.png}'></a>
-                                </div>
-                        </div>
-                    <div class="line"></div>
-                        <div class="member-function">
-                            <div class="find-id">
-                                <a th:href="@{#}">
-                                    <span>아이디찾기</span>
-                                </a>
-                            </div>
-                            <div class="find-password">
-                                <a th:href="@{#}">
-                                    <span>비밀번호찾기</span>
-                                </a>
-                            </div>
-                            <div class="join-member">
-                                <a th:href="@{/member/join}">
-                                    <span>회원가입</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+  <header th:replace="~{common/header/header_common::main-header}"></header>
+  <menu th:replace="~{common/menu/side_menu::side-menu}"></menu>
+  <main class="contents">
+    <div class="inner">
+      <div class="login-wrap">
+        <div class="login-main">
+          <div class="login-area">
+            <a th:href="@{#}"><img th:src="@{/images/common/logo.svg}" alt=""></a>
+          </div>
+          <input type="hidden" name="login_tab" value="p" id="login_tab">
+          <ul class="tab_member_type" role="tablist">
+            <li class="tab-genral">
+              <button type="button" class="btn-tab-general" role="tab" tabindex="0" aria-selected="true" data-value="p">
+                개인회원
+              </button>
+            </li>
+            <li class="tab-pro">
+              <button type="button" class="btn-tab-pro" role="tab" tabindex="-1" aria-selected="false" data-value="c">
+                전문가회원
+              </button>
+            </li>
+          </ul>
+          <form class="form-area" action="#">
+            <div class="input-box">
+              <label class="form-control row">
+                <input type="text" placeholder="아이디" required/>
+              </label>
             </div>
-        </div>
-        <!-- 작업영역 -->
-    </main>
-    <footer class="main-footer">
-        <div class="inner">
-            <a th:href="@{#}" class="logo"><img th:src="@{/images/common/logo_gray.svg}" alt=""></a>
-            <div class="footer-info">
-                <!-- <ul class="priv">
-                    <li><a href="#">이용약관</a></li>
-                    <li><a href="#">개인정보처리방침</a></li>
-                </ul> -->
-                <p>주소: 06241 서울특별시 강남구 테헤란로0길 0, 000호 (역삼동) 대표번호: 0000-0000 (유선 상담 불가)</p>
-                <p>ⓒ 2024 yakbang. All rights reserved</p>
-                <p>본 사이트의 모든 콘텐츠 및 게시물에 대한 무단적인 수집, 전재, 복사, 배포를 엄격히 금합니다.</p>
+            <div class="input-box">
+              <label class="form-control row">
+                <input type="password" placeholder="비밀번호" required/>
+              </label>
             </div>
+            <div class="check-box-main">
+              <label class="check-box">
+                <input type="checkbox"/>
+                <span class="label-text">로그인 정보 저장</span>
+              </label>
+            </div>
+            <button type="submit" class="btn-login">
+              <span class="btn-submit">로그인</span>
+            </button>
+          </form>
+          <div class="separator">소셜 계정으로 간편로그인</div>
+          <div class="login-img">
+            <div class="google">
+              <a href='#' target='_blank'><img th:src='@{/images/member/google.png}' alt="구글로 로그인"></a>
+            </div>
+            <div class="kakao">
+              <a href='#' target='_blank'><img th:src='@{/images/member/kakao-black.png}' alt="카카오로 로그인"></a>
+            </div>
+            <div class="naver">
+              <a href='#' target='_blank'><img th:src='@{/images/member/naver.png}' alt="네이버로 로그인"></a>
+            </div>
+          </div>
+          <div class="line"></div>
+          <div class="member-function">
+            <div class="find-id">
+              <a th:href="@{/member/find_id}">
+                <span>아이디찾기</span>
+              </a>
+            </div>
+            <div class="find-password">
+              <a th:href="@{/member/find_password}">
+                <span>비밀번호찾기</span>
+              </a>
+            </div>
+            <div class="join-member">
+              <a th:href="@{/member/join}">
+                <span>회원가입</span>
+              </a>
+            </div>
+          </div>
         </div>
-    </footer>
+      </div>
+    </div>
+  </main>
+  <footer th:replace="~{/common/footer/footer_common::main-fotter}"></footer>
 </div>
 </body>
 </html>
