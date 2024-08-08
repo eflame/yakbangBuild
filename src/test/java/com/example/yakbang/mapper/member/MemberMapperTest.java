@@ -10,7 +10,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
@@ -29,6 +28,8 @@ class MemberMapperTest {
                 .birth("2024/08/07")
                 .email("test@gmail.com")
                 .gender("F").build();
+
+
     }
     @Test
     void insertMember() {
@@ -52,19 +53,42 @@ class MemberMapperTest {
     }
 
     @Test
-    void findMemberInfo() {
+    void selectMemberInfo() {
 //        given
         memberMapper.insertMember(memberJoinDTO);
 //        when
-        MemberMypageDTO memberMypageDTO = memberMapper.findMemberInfo(memberJoinDTO.getLoginId(),
-                                    memberJoinDTO.getPassword()).get();
+        MemberMypageDTO memberMypageDTO = memberMapper.selectMemberInfo(memberJoinDTO.getMemberId()).get();
 //        then
         Assertions.assertThat(memberMypageDTO.getName()).isEqualTo(memberJoinDTO.getName());
-
-
     }
 
+    @Test
+    void updateMemberInfo() {
+//        given
+        memberMapper.insertMember(memberJoinDTO);
+        MemberMypageDTO memberMypageDTO = MemberMypageDTO.builder()
+                .phoneNumber("010-1234-5678")
+                .email("update test@gmail.com")
+                .birth("2024/08/07")
+                .memberId(memberJoinDTO.getMemberId()).build();
+//        when
+        memberMapper.updateMemberInfo(memberMypageDTO);
+        Long memberId = memberMapper.selectMemberId(memberJoinDTO.getLoginId(), memberJoinDTO.getPassword()).get();
+//        then
+        assertThat(memberId).isEqualTo(memberMypageDTO.getMemberId());
+    }
 
+    @Test
+    void deleteMemberInfo() {
+        // given
+        memberMapper.insertMember(memberJoinDTO);
+        // when
+        memberMapper.deleteMemberInfo(memberJoinDTO.getMemberId());
+        // then
+        Long memberId = memberMapper.selectMemberId(memberJoinDTO.getLoginId(), memberJoinDTO.getPassword())
+                .orElse(null);
+        assertThat(memberId).isNull();
+    }
 }
 
 

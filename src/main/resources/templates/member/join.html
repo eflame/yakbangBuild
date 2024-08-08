@@ -32,7 +32,7 @@
               <div class="join-item">
                 <label class="title" for="id">아이디</label>
                 <div class="join-type">
-                  <input type="text" id="id" class="join-text" placeholder="4~20자리/영문,숫자,특수문자'_'사용가능" required/>
+                  <input type="text" id="id" name="loginId" class="join-text" placeholder="4~20자리/영문,숫자,특수문자'_'사용가능" required/>
                 </div>
                 <em class="join-msg" id="idCheckMsg1">
                   <span class="join-important"></span>
@@ -41,7 +41,7 @@
               <div class="join-item">
                 <label class="title" for="password">비밀번호</label>
                 <div class="join-type">
-                  <input type="password" id="password" class="join-text" placeholder="4~16자리 입력" required/>
+                  <input type="password" name="password" id="password" class="join-text" placeholder="4~16자리 입력" required/>
                 </div>
                 <em class="join-msg" id="idCheckMsg2">
                   <span class="join-important"></span>
@@ -50,7 +50,7 @@
               <div class="join-item">
                 <label class="title" for="name">이름</label>
                 <div class="join-type">
-                  <input type="text" id="name" class="join-text" placeholder="이름 입력" required/>
+                  <input type="text" id="name" name="name" class="join-text" placeholder="이름 입력" required/>
                 </div>
                 <em class="join-msg" id="idCheckMsg3">
                   <span class="join-important" id="name-error-msg"></span>
@@ -59,7 +59,7 @@
               <div class="join-item">
                 <label class="title" for="birth">생년월일</label>
                 <div class="join-type">
-                  <input type="text" id="birth" class="join-text" placeholder="YYYYMMDD" required/>
+                  <input type="text" id="birth" name="birth" class="join-text" placeholder="YYYYMMDD" required/>
                 </div>
                 <em class="join-msg" id="idCheckMsg5">
                   <span class="join-important" id="birth-error-msg"></span>
@@ -81,7 +81,7 @@
               <div class="join-item">
                 <label class="title" for="phone">전화번호</label>
                 <div class="join-type">
-                  <input type="text" id="phone" class="join-text" placeholder="전화번호 입력" required/>
+                  <input type="text" id="phone" name="phoneNumber" class="join-text" placeholder="전화번호 입력" required/>
                 </div>
                 <em class="join-msg" id="idCheckMsg4">
                   <span class="join-important" id="phone-error-msg"></span>
@@ -90,7 +90,7 @@
               <div class="join-item">
                 <label class="title" for="email">이메일</label>
                 <div class="join-type">
-                  <input type="email" id="email" class="join-text" placeholder="email@yakbang.com" required/>
+                  <input type="email" name="email" id="email" class="join-text" placeholder="email@yakbang.com" required/>
                 </div>
                 <em class="join-msg" id="idCheckMsg6">
                   <span class="join-important" id="email-error-msg"></span>
@@ -102,7 +102,7 @@
                 <div class="join-item">
                   <label class="title" for="job">직업</label>
                   <div class="join-type">
-                    <input type="text" id="job" class="join-text" placeholder="직업 입력"/>
+                    <input type="text" id="job" name="job" class="join-text" placeholder="직업 입력"/>
                   </div>
                   <em class="join-msg" id="idCheckMsg7">
                     <span class="join-important" id="job-error-msg"></span>
@@ -110,11 +110,11 @@
                 </div>
                 <div class="join-item">
                   <label for="address" class="title mng-gap">약국 주소</label>
-                  <button class="btn-addr" type="button" id="mng-addr-btn">
+                  <button class="btn-addr" type="button"  id="mng-addr-btn">
                     주소 찾기
                   </button>
                   <div class="join-type">
-                    <input type="text" id="address" class="join-text" />
+                    <input type="text" id="address" name="pharmacyAddress" class="join-text" />
                   </div>
                 </div>
               </div>
