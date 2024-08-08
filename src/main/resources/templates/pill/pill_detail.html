@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>약 상세</title>
-        <link rel="stylesheet" th:href="@{/css/common/common.css}" />
-        <link rel="stylesheet" th:href="@{/css/pill/pill.css}" />
-        <script defer th:src="@{/js/common/common.js}"></script>
-    </head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>약 상세</title>
+<link rel="stylesheet" th:href="@{/css/common/common.css}" />
+<link rel="stylesheet" th:href="@{/css/pill/pill.css}" />
+<script defer th:src="@{/js/common/common.js}"></script>
+</head>
 <body>
 <div class="all-wrap">
     <header class="main-header">
         <div class="inner">
             <button class="btn-menu" type="button" title="메인메뉴 열기"></button>
             <h1 class="header-logo"><a th:href="@{/}" title="yakbang 약방 : 홈"><img th:src="@{/images/common/logo.svg}"
-                                                                                     alt=""></a></h1>
+                                                                                  alt=""></a></h1>
             <div class="user-links">
                 <a th:href="@{/} ">로그인</a>
                 <a th:href="@{/member/join_page}">회원가입</a>
@@ -159,7 +159,7 @@
                     <div class="section-box">
                         <div class="img-when">
                             <img class="adult" th:src="@{/images/common/adult-img.png}" alt="adult"/>
-                            <span class="when">만 12세 이상 소아 및 성인은 1회 1~2정씩, 1일 3~4회(4~6시간 마다) 필요 시 복용</span>
+                            <span class="when">만 12세 이상 소아 및 성인은 1회 1~2정씩, 1일 3~4회(4~6시간마다) 필요 시 복용</span>
                         </div>
                     </div>
                     <h2 class="title-section">섭취 시 주의사항</h2>
@@ -167,19 +167,32 @@
                         <div class="caution-method">
                             <span class="text-info">
                             (주의사항)
-                            이 약에 과민증, 소화성궤양, 심한 혈액 이상, 간장애, 신장(콩팥)장애,심장기능저하 환자, 아스피린 천식(비스테로이드성 소염(항염)제에 의한 천식발작 유발) 환자 또는 경험자, 바르비탈계 약물 또는 삼환계 항우울제 복용한 환자, 알코올을 복용한 사람, 12세 미만의 소아는 이 약을 복용하지 마십시오.</span>
-                            <div class="caution">
-                            <span>
-                                ❌ 부작용이 느껴지면 섭취량을 줄이거나 섭취를 중단하세요.
-                            </span>
-                            </div>
+                           투석요법을 받고 있는 환자, 수유부, 만 7세 이하의 어린이, 갈락토오스 불내성, Lapp 유당분해효소 결핍증 또는 포도당-갈락토오스 흡수장애 등의 유전적인 문제가 있는 환자는 이 약을 복용하지 마십시오.</span>
                         </div>
                     </div>
                     <div class="section-box">
-                        <div class="text-info">(복용 시 주의해야 할 약 / 음식)
-                            바르비탈계 약물, 삼환계 항우울제 및 알코올을 투여한 환자, 와파린, 플루클록사실린을 복용하는 환자는 의사 또는 약사와 상의하십시오.
+                        <div class="caution-method">
+                            <span class="text-info">
+                            (주의사항)
+                            이 약을 복용하기 전에 이 약에 과민증 환자, 알레르기 체질, 알레르기 증상(발진, 충혈되어 붉어짐, 가려움 등) 경험자, 신장장애 환자, 임부 또는 임신하고 있을 가능성이 있는 여성, 나트륨 제한 식이를 하는 사람은 의사 또는 약사와 상의하십시오.정해진 용법과 용량을 잘 지키십시오.</span>
                         </div>
                     </div>
+
+                    <h2 class="title-section">복용 시 주의해야 할 약 · 음식</h2>
+                    <div class="section-box">
+                        <div class="text-info">(상호작용)
+                            위장진통ㆍ진경제, 테트라사이클린계 항생제와 함께 복용하지 마십시오.
+                        </div>
+                    </div>
+                    <h2 class="title-section">부작용</h2>
+                    <div class="section-box">
+                        <div class="caution">
+                            <span>
+                                ❌ 드물게 발진, 식욕부진, 구역, 구토, 위통 등이 나타나는 경우 복용을 즉각 중지하고 의사 또는 약사와 상의하십시오.
+                            </span>
+                        </div>
+                    </div>
+
                     <div class="detail-section">
                         <h2 class="title-section">보관 방법</h2>
                         <div class="section-box">
