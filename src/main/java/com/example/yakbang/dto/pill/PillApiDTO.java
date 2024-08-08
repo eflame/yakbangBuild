@@ -10,14 +10,14 @@ import java.util.List;
 
 @Getter @Setter @ToString
 @NoArgsConstructor
-public class PillApiDTO {
-    private Body body;
+public class PillApiDTO<T> {
+    private Body<T> body;
     @Getter @Setter @ToString
-    public static class Body {
+    @NoArgsConstructor
+    public static class Body<T> {
         private int PageNo;
         private int totalCount;
         private int numberOfRows;
-        private List<PillItemDTO> items;
-
+        private List<T> items;
     }
 }

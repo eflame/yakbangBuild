@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface PillMapper {
-    void insertPill(PillDTO pillDTO);
+    void insertPill(Object object);
 }
 
 
