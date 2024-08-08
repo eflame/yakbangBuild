@@ -1,5 +1,6 @@
 package com.example.yakbang.controller.member;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -38,7 +39,7 @@ public class MemberController {
     }
 
     @GetMapping("/mypage")
-    public String mypage() {
+    public String mypage(HttpSession session) {
         return "member/mypage";
     }
 

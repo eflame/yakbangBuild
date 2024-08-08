@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.yakbang.mapper.board.BoardMapper">
+<!-- 질문  -->
+    <insert id="insertBoardQuestion">
+        <selectKey resultType="long" keyProperty="questionId" order="BEFORE">
+            SELECT SEQ_BOARD.nextval FROM DUAL
+        </selectKey>
+        insert into TBL_QA (QUESTION_ID, MEMBER_ID, PILL_ID, TITLE, CONTENT)
+        values (#{questionId}, #{memberId}, #{pillId}, #{title}, #{content})
+    </insert>
+
+<!-- 질문 찾기 -->
+    <select id="selectQuestion">
+        SELECT QUESTION_ID, TITLE, CONTENT, MEMBER_ID
+        FROM TBL_QA
+        WHERE QUESTION_ID = #{questionId}
+    </select>
+
+<!--  질문 게시판  -->
+    <select id="selectQuestionList">
+        SELECT Q.MEMBER_ID, Q.TITLE, Q.CONTENT, Q.PILL_ID,
+               A.ANSWER_TITLE, A.ANSWER_NO
+        FROM TBL_QA Q JOIN TBL_ANSWER A
+            ON Q.QUESTION_ID = A.QUESTION_ID
+        WHERE Q.MEMBER_ID = #{memberId}
+    </select>
+
+<!-- 질문 게시판 상세  -->
+    <select id="selectQuestionDetail">
+        SELECT Q.QUESTION_ID, Q.MEMBER_ID, Q.PILL_ID, Q.TITLE, Q.CONTENT, Q.VIEW_COUNT, Q.WRITE_DATE,
+               A.ANSWER_CONTENT, A.ANSWER_DATE, A.ANSWER_NO
+        FROM TBL_QA Q JOIN TBL_ANSWER A
+            ON Q.QUESTION_ID = A.QUESTION_ID
+        WHERE Q.MEMBER_ID = #{memberId}
+    </select>
+
+</mapper>
