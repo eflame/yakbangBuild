@@ -24,10 +24,22 @@
     </select>
 
 <!--    마이페이지 정보 조회용-->
-    <select id="findMemberInfo">
+    <select id="selectMemberInfo">
         SELECT LOGIN_ID,NAME,BIRTH,PHONE_NUMBER,EMAIL
         FROM TBL_MEMBER
-        WHERE LOGIN_ID=#{loginId} AND PASSWORD=#{password}
+        WHERE MEMBER_ID=#{memberId}
     </select>
 
+<!--    마이페이지 정보 수정-->
+    <update id="updateMemberInfo">
+        update TBL_MEMBER
+        set  BIRTH=#{birth} , PHONE_NUMBER=#{phoneNumber} , EMAIL=#{email}
+        where MEMBER_ID=#{memberId}
+    </update>
+
+<!--    회원 탈퇴(회원 정보 삭제)-->
+    <delete id="deleteMemberInfo">
+        DELETE FROM TBL_MEMBER
+        WHERE MEMBER_ID=#{memberId}
+    </delete>
 </mapper>
