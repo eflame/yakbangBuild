@@ -6,34 +6,29 @@ import lombok.*;
 @Getter @Setter @ToString
 @NoArgsConstructor @AllArgsConstructor
 public class PillItemDTO {
-    //    private String itemSeq;
-    private int categoryId;
+    // e-약은요
+    @JsonProperty("entpName")
+    private String companyName; // 제조사
     @JsonProperty("itemName")
     private String pillName; // 제품명
-    @JsonProperty("updateDe")
-    private String updateDate; // 업데이트 날짜
+    private String itemSeq; // 상품시퀀스
     @JsonProperty("efcyQesitm")
     private String detailContent; // 효능
     @JsonProperty("useMethodQesitm")
     private String pillHowto; // 섭취방법
     @JsonProperty("atpnWarnQesitm")
-    private String sideCaution;// 섭취시주의사항
-
-    private String atpnWarnQesitm;
-    private String atpnQesitm;
-    private String intrcQesitm;
-    private String seQesitm;
-
-    @JsonProperty("COLOR_CLASS1")
-    private String pillColor; // 색상
-    @JsonProperty("SHAPE")
-    private String pillShape; // 형태
+    private String intakePrecautions;// 섭취시주의사항
+    @JsonProperty("atpnQesitm")
+    private String atpnQesitm; // 주의사항
+    @JsonProperty("intrcQesitm")
+    private String intrcQesitm; // 상호작용
+    @JsonProperty("seQesitm")
+    private String seQesitm;  // 부작용
     @JsonProperty("depositMethodQesitm")
     private String pillDeposit; // 보관방법
-    @JsonProperty("itemImage")
-    private String pillImage ; // 약 이미지
-    @JsonProperty("entpName")
-    private String companyName; // 제조사
-    @JsonProperty("ETC_OTC_NAME")
-    private String etcOtcName;
+    @JsonProperty("openDe")
+    private String openDate; // 공개 일자
+    @JsonProperty("updateDe")
+    private String updateDate; // 수정 날짜
+
 }

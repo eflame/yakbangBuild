@@ -22,13 +22,13 @@ public class PillItemReader implements ItemReader<PillItemDTO> {
     public PillItemDTO read() throws  Exception, UnexpectedInputException, ParseException, NonTransientResourceException {
 
         if (items == null) {
-            PillApiDTO pillApiDTO = pillApiService.findPillData();
-            items = pillApiDTO.getBody().getItems();
+            List<PillItemDTO> pillItemData = pillApiService.findPillData();
+            items = pillItemData;
         }
 
         PillItemDTO nextItemDTO = null;
 
-        if (nextIdx >= items.size()) {
+        if (nextIdx < items.size()) {
             nextItemDTO = items.get(nextIdx);
             nextIdx++;
         } else {
