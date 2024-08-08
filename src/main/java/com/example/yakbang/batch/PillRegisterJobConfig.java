@@ -2,6 +2,7 @@ package com.example.yakbang.batch;
 
 import com.example.yakbang.dto.pill.PillApiDTO;
 import com.example.yakbang.dto.pill.PillItemDTO;
+import com.example.yakbang.mapper.duplicate.DuplicateMapper;
 import com.example.yakbang.mapper.pill.PillMapper;
 import com.example.yakbang.service.pill.PillApiService;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +28,7 @@ public class PillRegisterJobConfig {
 
     private final PillMapper pillMapper;
     private final PillApiService pillApiService;
+    private final DuplicateMapper duplicateMapper;
 
     @Bean
     public ItemReader<PillItemDTO> apiItemReader(){
@@ -35,7 +37,7 @@ public class PillRegisterJobConfig {
 
     @Bean
     public ItemProcessor<PillItemDTO, PillItemDTO> apiItemProcessor(){
-        return item -> item;
+        return new PillItemProcessor(duplicateMapper);
     }
 
     @Bean
@@ -46,7 +48,7 @@ public class PillRegisterJobConfig {
     @Bean
     public Step apiStep(){
         return new StepBuilder("apiStep", jobRepository)
-                .<PillItemDTO, PillItemDTO>chunk(10, transactionManager)
+                .<PillItemDTO, PillItemDTO>chunk(100, transactionManager)
                 .reader(apiItemReader())
                 .processor(apiItemProcessor())
                 .writer(apiItemWriter())

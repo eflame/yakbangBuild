@@ -16,7 +16,7 @@ public class ApiBatchSchedule {
     private final JobLauncher jobLauncher;
     private final PillRegisterJobConfig pillRegisterJobConfig;
 
-    @Scheduled(cron = "0/10 * * * * ?")
+    @Scheduled(cron = "0 0 3 * * *")
     private void pillRegister() {
         JobParameters jobParameters = new JobParametersBuilder()
                 .addLong("time", System.currentTimeMillis())
