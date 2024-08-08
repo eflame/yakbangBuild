@@ -7,6 +7,7 @@ import lombok.*;
 @NoArgsConstructor @AllArgsConstructor
 public class PillItemDTO {
     // e-약은요
+    private Long pillId;
     @JsonProperty("entpName")
     private String companyName; // 제조사
     @JsonProperty("itemName")
@@ -30,5 +31,12 @@ public class PillItemDTO {
     private String openDate; // 공개 일자
     @JsonProperty("updateDe")
     private String updateDate; // 수정 날짜
+    @JsonProperty("itemImage")
+    private String pillImage;
 
+    public String getOpenDate(){
+        String[] strArr = this.openDate.split(" ");
+
+        return strArr[0];
+    }
 }

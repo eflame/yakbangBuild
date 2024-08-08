@@ -23,12 +23,12 @@ class PillMapperTest {
         // given
         pillDTO = PillDTO.builder()
 //                .itemSeq("201109900")
-                .categoryId(1)
+//                .categoryId(1)
                 .pillName("비맥스골드정")
                 .updateDate("2021-01-29")
                 .detailContent("효능")
                 .pillHowto("섭취방법")
-                .sideCaution("섭취시 주의사항1")
+//                .sideCaution("섭취시 주의사항1")
                 .pillColor("주황")
                 .pillShape("타원형")
                 .pillDeposit("보관방법")
@@ -36,7 +36,7 @@ class PillMapperTest {
                 .companyName("(유)한풍제약")
                 .build();
 
-        pillMapper.insertPill(pillDTO);
+//        pillMapper.insertPill(pillDTO);
 
         // when
 

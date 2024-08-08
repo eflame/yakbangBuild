@@ -5,7 +5,7 @@
         <selectKey resultType="long" keyProperty="pillId" order="BEFORE">
             SELECT SEQ_PILL.nextval FROM DUAL
         </selectKey>
-        INSERT INTO TBL_PILL(COMPANY_NAME, PILL_NAME, ITEM_SEQ, DETAIL_CONTENT, PILL_HOWTO, INTAKE_PRECAUTIONS, ATPNQESITM, INTRCQESITM, SEQESITM, PILL_DEPOSIT, OPEN_DATE, UPDATE_DATE, PILL_COLOR, PILL_SHAPE, PILL_IMAGE)
-        VALUES (#{pillId}, #{companyName}, #{pillName}, #{itemSeq}, #{detailContent}, #{pillHowto}, #{intakePrecautions}, #{atpnQesitm}, #{intrcQesitm}, #{seQesitm}, #{pillDeposit}, #{openDate}, #{updateDate}, #{pillColor}, #{pillShape}, #{pillImage})
+        INSERT INTO TBL_PILL(PILL_ID, COMPANY_NAME, PILL_NAME, ITEM_SEQ, DETAIL_CONTENT, PILL_HOWTO, INTAKE_PRECAUTIONS, ATPNQESITM, INTRCQESITM, SEQESITM, PILL_DEPOSIT, OPEN_DATE, UPDATE_DATE, PILL_IMAGE)
+        VALUES (#{pillId}, #{companyName}, #{pillName}, #{itemSeq}, #{detailContent}, #{pillHowto}, #{intakePrecautions}, #{atpnQesitm}, #{intrcQesitm}, #{seQesitm}, #{pillDeposit}, #{openDate}, #{updateDate}, #{pillImage})
     </insert>
 </mapper>

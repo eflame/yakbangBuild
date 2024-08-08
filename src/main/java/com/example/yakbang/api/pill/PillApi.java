@@ -25,6 +25,12 @@ public class PillApi {
         JobParameters jobParameters = new JobParametersBuilder()
                 .addLong("time", System.currentTimeMillis())
                 .toJobParameters();
+        try {
+            jobLauncher.run(pillRegisterJobConfig.apiJob(), jobParameters);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
 

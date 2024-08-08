@@ -40,6 +40,8 @@ public class PillApiService {
 
         List<PillItemDTO> items = pillApiDTO.getBody().getItems();
 
+        System.out.println("items = " + items);
+
         return items;
     }
 
