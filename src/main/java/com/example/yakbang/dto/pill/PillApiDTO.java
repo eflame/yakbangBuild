@@ -9,15 +9,18 @@ import lombok.ToString;
 import java.util.List;
 
 @Getter @Setter @ToString
-@NoArgsConstructor
 public class PillApiDTO<T> {
     private Body<T> body;
+
     @Getter @Setter @ToString
-    @NoArgsConstructor
     public static class Body<T> {
         private int PageNo;
         private int totalCount;
         private int numberOfRows;
         private List<T> items;
+    }
+
+    public Body<T> getBody() {
+        return body;
     }
 }

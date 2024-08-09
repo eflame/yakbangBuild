@@ -34,16 +34,16 @@ public class PillApi {
     }
 
 
-//    @GetMapping("/test")
-//    public String test(){
-//        try {
-//            pillApiService.findPillData();
-////            p/illApiService.findPillInfo();
-//        } catch (UnsupportedEncodingException e) {
-//            throw new RuntimeException(e);
-//        } catch (URISyntaxException e) {
-//            throw new RuntimeException(e);
-//        }
-//        return "test";
-//    }
+    @GetMapping("/test")
+    public String test(){
+        try {
+            pillApiService.findPillData();
+//            p/illApiService.findPillInfo();
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+        return "test";
+    }
 }
