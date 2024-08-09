@@ -37,6 +37,8 @@ public class PillItemDTO {
     private String pillImage;
 
     public String getOpenDate(){
+        if(openDate == null){ return null; }
+
         String[] strArr = this.openDate.split(" ");
 
         return strArr[0];

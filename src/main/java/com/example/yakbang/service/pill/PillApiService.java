@@ -13,6 +13,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -21,64 +22,46 @@ import java.util.List;
 public class PillApiService {
     @Value("${api.pill.key}")
     private String apiKey;
-
     String baseUrl = "http://apis.data.go.kr";
-    String path = "/1471000/DrbEasyDrugInfoService/getDrbEasyDrugList";
-
-    public PillApiDTO.Body firstDate() throws URISyntaxException, UnsupportedEncodingException {
-        String encodeKey = URLEncoder.encode(apiKey, "UTF-8");
-        URI uri = new URI(baseUrl + path + "?serviceKey=" + encodeKey + "&type=json");
-        WebClient wc = WebClient.builder().build();
-        PillApiDTO<PillItemDTO> pillApiDTO = wc.get() // 요청방식을 설정
-                .uri(uri)
-                .retrieve() // 응답을 어떻게 받을지 설정 (응답 본문만 간단히 받겠다는 의미)
-                .bodyToMono(new ParameterizedTypeReference<PillApiDTO<PillItemDTO>>() {
-                }) // 응답 본문을 Mono<String>으로 변환한다.
-                .block();// 블로킹 방식으로 통신을 하겠다.
-
-        return pillApiDTO.getBody();
-    }
 
     public List<PillItemDTO> findPillData() throws UnsupportedEncodingException, URISyntaxException {
         String encodeKey = URLEncoder.encode(apiKey, "UTF-8");
-        PillApiDTO.Body body = firstDate();
+        String path = "/1471000/DrbEasyDrugInfoService/getDrbEasyDrugList";
+        int pageNo = 1;
 
-        if (body != null) {
-            int totalCount = body.getTotalCount(); // api 통신후 tocalCount 가져옴
-            int numOfRows = 100; // 한번에 가져오는 라인 갯수
-            int totalPage = (int) Math.ceil((double) totalCount / numOfRows);
-            List<PillItemDTO> items = body.getItems();
-            for (int pageNo = 1; pageNo <= totalPage; pageNo++) {
-                URI uri = new URI(baseUrl + path + "?serviceKey=" + encodeKey +
-                        "&type=json" + "&numOfRows=" + numOfRows +"&pageNo=" + pageNo );
+        List<PillItemDTO> resultList = new ArrayList<>();
 
-                WebClient wc = WebClient.builder().build();
+        while (true) {
+            URI uri = new URI(baseUrl + path + "?serviceKey=" + encodeKey +
+                    "&type=json" + "&numOfRows=" + 80 + "&pageNo=" + pageNo);
 
-                PillApiDTO<PillItemDTO> pillApiDTO = wc.get() // 요청방식을 설정
-                        .uri(uri)
-                        .retrieve() // 응답을 어떻게 받을지 설정 (응답 본문만 간단히 받겠다는 의미)
-                        .bodyToMono(new ParameterizedTypeReference<PillApiDTO<PillItemDTO>>() {
-                        }) // 응답 본문을 Mono<String>으로 변환한다.
-                        .block();// 블로킹 방식으로 통신을 하겠다.
+            WebClient wc = WebClient.builder().build();
 
+            PillApiDTO<PillItemDTO> pillApiDTO = wc.get() // 요청방식을 설정
+                    .uri(uri)
+                    .retrieve() // 응답을 어떻게 받을지 설정 (응답 본문만 간단히 받겠다는 의미)
+                    .bodyToMono(new ParameterizedTypeReference<PillApiDTO<PillItemDTO>>() {
+                    }) // 응답 본문을 Mono<String>으로 변환한다.
+                    .block();// 블로킹 방식으로 통신을 하겠다.
 
-
-                items = pillApiDTO.getBody().getItems();
-
+            List<PillItemDTO> items = pillApiDTO.getBody().getItems();
+            pageNo++;
+            if (items == null) {
+                break;
             }
-            return items;
-        } else {
-            throw new RuntimeException("초기 데이터를 가져올 수 없습니다.");
-        }
-    }
 
+            log.info("Pill Data: {}", items);
+            resultList.addAll(items);
+        }
+        return resultList;
+    }
 
 
     public List<PillOtcDTO> findPillInfo() throws UnsupportedEncodingException, URISyntaxException {
         String encodeKey = URLEncoder.encode(apiKey, "UTF-8");
         String baseUrl = "http://apis.data.go.kr";
         String path = "/1471000/MdcinGrnIdntfcInfoService01/getMdcinGrnIdntfcInfoList01";
-        URI uri = new URI(baseUrl + path + "?serviceKey=" + encodeKey +"&type=json");
+        URI uri = new URI(baseUrl + path + "?serviceKey=" + encodeKey + "&type=json");
 
         WebClient wc = WebClient.builder().build();
 
@@ -86,7 +69,8 @@ public class PillApiService {
                 .uri(uri)
                 .retrieve() // 응답을 어떻게 받을지 설정 (응답 본문만 간단히 받겠다는 의미)
                 //.bodyToMono(PillApiDTO.class) // 응답 본문을 Mono<String>으로 변환한다.
-                .bodyToMono(new ParameterizedTypeReference<PillApiDTO<PillOtcDTO>>(){})
+                .bodyToMono(new ParameterizedTypeReference<PillApiDTO<PillOtcDTO>>() {
+                })
                 .block();// 블로킹 방식으로 통신을 하겠다.
 
         List<PillOtcDTO> items = pillApiDTO.getBody().getItems();

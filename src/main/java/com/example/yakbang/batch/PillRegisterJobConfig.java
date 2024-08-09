@@ -48,7 +48,7 @@ public class PillRegisterJobConfig {
     @Bean
     public Step apiStep(){
         return new StepBuilder("apiStep", jobRepository)
-                .<PillItemDTO, PillItemDTO>chunk(100, transactionManager)
+                .<PillItemDTO, PillItemDTO>chunk(10, transactionManager)
                 .reader(apiItemReader())
                 .processor(apiItemProcessor())
                 .writer(apiItemWriter())
