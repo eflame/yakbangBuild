@@ -7,8 +7,8 @@ import java.time.LocalDate;
 @Getter @Setter @ToString
 @AllArgsConstructor @NoArgsConstructor @Builder
 public class BoardQnaDetailDTO {
-   private Long questionID;   // 질문번호
-   private Long memberID;     // 회원번호
+   private Long questionId;   // 질문번호
+   private Long memberId;     // 회원번호
    private Long pillId;       // 약번호
    private String title;      // 제목
    private String content;    // 내용

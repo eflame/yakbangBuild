@@ -4,18 +4,11 @@
 <!-- 질문  -->
     <insert id="insertBoardQuestion">
         <selectKey resultType="long" keyProperty="questionId" order="BEFORE">
-            SELECT SEQ_BOARD.nextval FROM DUAL
+            SELECT SEQ_QA.nextval FROM DUAL
         </selectKey>
-        insert into TBL_QA (QUESTION_ID, MEMBER_ID, PILL_ID, TITLE, CONTENT)
-        values (#{questionId}, #{memberId}, #{pillId}, #{title}, #{content})
+        insert into TBL_QA (QUESTION_ID, MEMBER_ID, TITLE, CONTENT)
+        values (#{questionId}, #{memberId}, #{title}, #{content})
     </insert>
-
-<!-- 질문 찾기 -->
-    <select id="selectQuestion">
-        SELECT QUESTION_ID, TITLE, CONTENT, MEMBER_ID
-        FROM TBL_QA
-        WHERE QUESTION_ID = #{questionId}
-    </select>
 
 <!--  질문 게시판  -->
     <select id="selectQuestionList">
