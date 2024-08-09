@@ -15,4 +15,6 @@ public interface BoardMapper {
     List<BoardQnaListDTO> selectQuestionList();
 
     Optional<BoardQnaDetailDTO> selectQuestionDetail(Long questionId);
+
+
 }

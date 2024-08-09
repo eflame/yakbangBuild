@@ -13,19 +13,22 @@
 <!--  질문 게시판  -->
     <select id="selectQuestionList">
         SELECT Q.MEMBER_ID, Q.TITLE, Q.CONTENT, Q.PILL_ID,
+               M.NAME, M.GENDER,
                A.ANSWER_TITLE, A.ANSWER_NO
-        FROM TBL_QA Q JOIN TBL_ANSWER A
-            ON Q.QUESTION_ID = A.QUESTION_ID
-        WHERE Q.MEMBER_ID = #{memberId}
+        FROM TBL_QA Q, TBL_MEMBER M, TBL_ANSWER A
+        WHERE Q.MEMBER_ID = M.MEMBER_ID
+          AND Q.QUESTION_ID = A.QUESTION_ID
     </select>
 
 <!-- 질문 게시판 상세  -->
     <select id="selectQuestionDetail">
-        SELECT Q.QUESTION_ID, Q.MEMBER_ID, Q.PILL_ID, Q.TITLE, Q.CONTENT, Q.VIEW_COUNT, Q.WRITE_DATE,
+        SELECT Q.QUESTION_ID, Q.MEMBER_ID, Q.PILL_ID, Q.TITLE, Q.CONTENT, Q.VIEW_COUNT,
+               TO_CHAR(Q.WRITE_DATE, 'YYYY-MM-DD') AS WRITE_DATE,
+               M.NAME, M.GENDER,
                A.ANSWER_CONTENT, A.ANSWER_DATE, A.ANSWER_NO
-        FROM TBL_QA Q JOIN TBL_ANSWER A
-            ON Q.QUESTION_ID = A.QUESTION_ID
-        WHERE Q.MEMBER_ID = #{memberId}
+        FROM TBL_QA Q, TBL_MEMBER M, TBL_ANSWER A
+        WHERE Q.MEMBER_ID = M.MEMBER_ID
+          AND Q.QUESTION_ID = A.QUESTION_ID
     </select>
 
 </mapper>
