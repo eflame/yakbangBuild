@@ -1,6 +1,9 @@
 package com.example.yakbang.mapper.pill;
 
+import com.example.yakbang.dto.pill.PillApiDTO;
 import com.example.yakbang.dto.pill.PillDTO;
+import com.example.yakbang.dto.pill.PillItemDTO;
+import com.example.yakbang.dto.pill.PillOtcDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -33,12 +36,18 @@ class PillMapperTest {
                 .companyName("(유)한풍제약")
                 .build();
 
-        pillMapper.insertPill(pillDTO);
+//        pillMapper.insertPill(pillDTO);
 
         // when
 
 
         // then
+
+    }
+
+    @Test
+    void genericTest(){
+
 
     }
 }

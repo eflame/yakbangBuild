@@ -1,6 +1,7 @@
 package com.example.yakbang.service.member;
 
 import com.example.yakbang.dto.member.MemberJoinDTO;
+import com.example.yakbang.dto.member.MemberMypageDTO;
 import com.example.yakbang.mapper.member.MemberMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,7 @@ public class MemberService {
 
         memberMapper.insertMember(memberJoinDTO);
     }
-//    Optional 반환할 경우 예외발생(예외처리문구)
+//    로그인 서비스 Optional 반환할 경우 예외발생(예외처리문구)
     public Long findMemberId(String loginId, String password) {
         return memberMapper.selectMemberId(loginId, password)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원 정보"));
@@ -37,5 +38,49 @@ public class MemberService {
         return memberMapper.selectLoginIdCount(loginId) > 0;
     }
 
-//    마이페이지 조회하려고하지만 Oprional이 반환될 경우 예외처리
+//    마이페이지 조회하려고하지만 Optional 반환될 경우 예외처리
+    public MemberMypageDTO searchMember(Long memberId) {
+        return memberMapper.selectMemberInfo(memberId)
+                .orElseThrow(()->new IllegalArgumentException("회원의 정보를 확인할 수 없습니다."));
+    }
+
+    public void findMemberInfo(Long memberId) {
+        memberMapper.selectMemberInfo(memberId);
+    }
+
+    public void modifyMemberInfo(MemberMypageDTO memberMypageDTO) {
+        memberMapper.updateMemberInfo(memberMypageDTO);
+    }
+
+    public void removeMemberInfo(Long memberId) {
+        memberMapper.deleteMemberInfo(memberId);
+    }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
