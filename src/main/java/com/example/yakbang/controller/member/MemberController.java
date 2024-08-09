@@ -97,7 +97,7 @@ public class MemberController {
     }
 
     @GetMapping("/mypage")
-    public String mypage(HttpSession session,Model model) {
+    public String mypage(HttpSession session, Model model) {
         Long memberId = (Long) session.getAttribute("memberId");
         MemberMypageDTO memberDTO = memberService.searchMember(memberId);
         model.addAttribute("memberDTO", memberDTO);
@@ -105,7 +105,7 @@ public class MemberController {
     }
 
     @GetMapping("/mypage-modify")
-    public String mypageModify(Model model,HttpSession session) {
+    public String mypageModify(Model model, HttpSession session) {
         Long memberId = (Long) session.getAttribute("memberId");
         MemberMypageDTO memberDTO = memberService.searchMember(memberId);
         model.addAttribute("memberDTO", memberDTO);
@@ -128,15 +128,4 @@ public class MemberController {
         return "redirect:/member/login";
     }
 
-    @GetMapping("/leave")
-    public String leave(HttpSession session,Model model){
-        Long memberId = (Long) session.getAttribute("memberId");
-        MemberMypageDTO memberDTO = memberService.searchMember(memberId);
-        model.addAttribute("memberDTO", memberDTO);
-
-        memberService.removeMemberInfo(memberId);
-        session.invalidate();
-        return "member/join";
-    }
-
-    }
+}

@@ -16,7 +16,7 @@
         <menu th:replace="~{common/menu/side_menu::side-menu}" ></menu>
         <main class="contents">
             <!-- 작업영역 -->
-            <div class="inner">
+            <div class="inner" th:each="board : ${detail}">
                 <div class="qna-detail-wrap">
                     <div class="title">보건소 혈액검사 공복 영양제?영향을 주나요?</div>
                     <div class="title2">
