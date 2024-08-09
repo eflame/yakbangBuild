@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>비밀번호찾기</title>
+  <link rel="stylesheet" th:href="@{/css/common/common.css}">
+  <link rel="stylesheet" th:href="@{/css/member/find_password.css}">
+  <script defer th:src="@{/js/common/common.js}"></script>
+  <script defer th:src="@{/js/member/find_password.js}"></script>
+</head>
+<body cz-shortcut-listen="true">
+<div class="all-wrap">
+  <header class="main-header">
+    <div class="inner">
+      <button class="btn-menu" type="button" title="메인메뉴 열기"></button>
+      <h1 class="header-logo"><a href="/" title="yakbang 약방 : 홈"><img src="/images/common/logo.svg" alt=""></a></h1>
+      <div class="user-links">
+        <a href="/member/login">로그인</a>
+        <a href="/member/join">회원가입</a>
+      </div>
+    </div>
+  </header>
+  <aside class="main-menu">
+    <header class="top-area">
+      <h1 class="title"><a href="index.html"><img src="/images/common/logo_gray.svg" alt=""></a></h1>
+      <button class="btn-close" type="button"></button>
+    </header>
+    <nav class="menu-area">
+      <ul>
+        <li class="item"><a href="/board/pill_result">일반약 검색</a></li>
+        <li class="item"><a href="/">추천 리스트</a></li>
+        <li class="item"><a href="/board/qna-list">Q&amp;A 게시판</a></li>
+        <li class="item"><a href="/board/review-list">리뷰 게시판</a></li>
+      </ul>
+    </nav>
+
+  </aside>
+  <main class="contents">
+    <div class="main-container">
+      <div class="main-tilte-heder">
+        <a href="#" class="title-img"><img src="/images/common/logo.svg" alt=""></a>
+      </div>
+
+        <div class="main-frame-body">
+
+
+
+          <div id="id-box">회원님의 아이디</div>
+          <div class="input-box"></div>
+
+
+          <div class="magin-bottom"></div>
+        </div>
+
+    </div>
+  </main>
+  <footer class="main-footer">
+    <div class="inner">
+      <a href="#" class="logo"><img src="/images/common/logo_gray.svg" alt=""></a>
+      <div class="footer-info">
+        <p>주소: 06241 서울특별시 강남구 테헤란로0길 0, 000호 (역삼동) 대표번호: 0000-0000 (유선 상담 불가)</p>
+        <p>ⓒ 2024 yakbang. All rights reserved</p>
+        <p>본 사이트의 모든 콘텐츠 및 게시물에 대한 무단적인 수집, 전재, 복사, 배포를 엄격히 금합니다.</p>
+      </div>
+    </div>
+  </footer>
+</div>
+
+</body>
+</html>

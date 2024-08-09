@@ -89,6 +89,23 @@ class MemberMapperTest {
                 .orElse(null);
         assertThat(memberId).isNull();
     }
+
+    @Test
+    void selectLoginId() {
+//        given
+        memberMapper.insertMember(memberJoinDTO);
+//        when
+        String loginId = memberMapper.selectLoginId(memberJoinDTO.getName(), memberJoinDTO.getEmail()).get();
+//        then
+        assertThat(loginId).isEqualTo(memberJoinDTO.getLoginId());
+    }
+
+    @Test
+    void selectPassword() {
+        memberMapper.insertMember(memberJoinDTO);
+        String password = memberMapper.selectPassword(memberJoinDTO.getLoginId(), memberJoinDTO.getEmail()).get();
+        assertThat(password).isEqualTo(memberJoinDTO.getPassword());
+    }
 }
 
 

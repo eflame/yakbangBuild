@@ -18,51 +18,53 @@
       <div class="main-tilte-heder">
         <a href="#" class="title-img"><img th:src="@{/images/common/logo.svg}" alt=""></a>
       </div>
-      <div class="main-frame-body">
-        <div class="frame-body-text1">
-          <p class="body-text1">이메일 입력</p>
-        </div>
-        <div class="frame-body-text2">
-          <p class="body-text2">회원가입시 입력한 이름과 이메일</p>
-          <p class="body-text2">자동 입력 방지문자를 함께 입력해주세요.</p>
-        </div>
-        <form action="" id="login-form">
-          <div class="input-box">
-            <label class="form-control row">
-              <input type="text" id="user-name" name="user-name" placeholder="이름" maxlength="20" >
-            </label>
+      <form th:action="@{/member/find_id}" method="post">
+        <div class="main-frame-body">
+          <div class="frame-body-text1">
+            <p class="body-text1">이메일 입력</p>
           </div>
-          <div id="input-name" class="input-box">
-            <label class="form-control row">
-              <input type="text" id="user-email" name="user-email" placeholder="이메일" maxlength="20">
-            </label>
+          <div class="frame-body-text2">
+            <p class="body-text2">회원가입시 입력한 이름과 이메일</p>
+            <p class="body-text2">자동 입력 방지문자를 함께 입력해주세요.</p>
           </div>
-          <div class="auto-prevention">
-            <div class="input-img-test">
-              <img th:src="@{/images/member/autotest.png}" alt="">
+          <form action="" id="login-form">
+            <div class="input-box">
+              <label class="form-control row">
+                <input type="text" id="user-name" name="user-name" placeholder="이름" maxlength="20" >
+              </label>
             </div>
-            <div class="input-option">
-              <button class="btn-option"><img th:src="@{/images/member/reset.png}" alt=""></button>
-              <button class="btn-option"><img th:src="@{/images/member/listen.png}" alt=""></button>
+            <div id="input-name" class="input-box">
+              <label class="form-control row">
+                <input type="text" id="user-email" name="user-email" placeholder="이메일" maxlength="20">
+              </label>
             </div>
+            <div class="auto-prevention">
+              <div class="input-img-test">
+                <img th:src="@{/images/member/autotest.png}" alt="">
+              </div>
+              <div class="input-option">
+                <button class="btn-option"><img th:src="@{/images/member/reset.png}" alt=""></button>
+                <button class="btn-option"><img th:src="@{/images/member/listen.png}" alt=""></button>
+              </div>
+            </div>
+            <div class="input-box">
+              <label class="form-control row">
+                <input type="text" id="captchaInput" name="captcha" placeholder="문자입력" maxlength="4" data-th-valuetype="number">
+              </label>
+            </div>
+            <div>
+              <button type="submit" class="btn-login" disabled>
+                <span id="login-btn-text" class="btn-submit">확인</span>
+              </button>
+            </div>
+          </form>
+          <div class="bottom-text">
+            <p class="body-text2">비밀번호를 찾으시나요?</p>
+            <a th:href="@{/member/find_password}">비밀번호 찾기</a>
           </div>
-          <div class="input-box">
-            <label class="form-control row">
-              <input type="text" id="captchaInput" name="captcha" placeholder="문자입력" maxlength="4" data-th-valuetype="number">
-            </label>
-          </div>
-          <div>
-            <button type="submit" class="btn-login" disabled>
-              <span id="login-btn-text" class="btn-submit">확인</span>
-            </button>
-          </div>
-        </form>
-        <div class="bottom-text">
-          <p class="body-text2">비밀번호를 찾으시나요?</p>
-          <a th:href="@{/member/find_password}">비밀번호 찾기</a>
+          <div class="magin-bottom"></div>
         </div>
-        <div class="magin-bottom"></div>
-      </div>
+      </form>
     </div>
   </main>
   <footer th:replace="~{/common/footer/footer_common::main-fotter}"></footer>
