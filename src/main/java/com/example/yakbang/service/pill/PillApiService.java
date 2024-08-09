@@ -57,24 +57,34 @@ public class PillApiService {
     }
 
 
-    public List<PillOtcDTO> findPillInfo() throws UnsupportedEncodingException, URISyntaxException {
+    public List<PillOtcDTO> addPillOtc() throws UnsupportedEncodingException, URISyntaxException {
         String encodeKey = URLEncoder.encode(apiKey, "UTF-8");
-        String baseUrl = "http://apis.data.go.kr";
         String path = "/1471000/MdcinGrnIdntfcInfoService01/getMdcinGrnIdntfcInfoList01";
-        URI uri = new URI(baseUrl + path + "?serviceKey=" + encodeKey + "&type=json");
+        int pageNo = 1;
 
-        WebClient wc = WebClient.builder().build();
+        List<PillOtcDTO> resultList = new ArrayList<>();
 
-        PillApiDTO<PillOtcDTO> pillApiDTO = wc.get() // 요청방식을 설정
-                .uri(uri)
-                .retrieve() // 응답을 어떻게 받을지 설정 (응답 본문만 간단히 받겠다는 의미)
-                //.bodyToMono(PillApiDTO.class) // 응답 본문을 Mono<String>으로 변환한다.
-                .bodyToMono(new ParameterizedTypeReference<PillApiDTO<PillOtcDTO>>() {
-                })
-                .block();// 블로킹 방식으로 통신을 하겠다.
+        while (true) {
+            URI uri = new URI(baseUrl + path + "?serviceKey=" + encodeKey  +
+                    "&type=json" + "&numOfRows=" + 200 + "&pageNo=" + pageNo);
+            WebClient wc = WebClient.builder().build();
+            PillApiDTO<PillOtcDTO> pillApiDTO = wc.get() // 요청방식을 설정
+                    .uri(uri)
+                    .retrieve() // 응답을 어떻게 받을지 설정 (응답 본문만 간단히 받겠다는 의미)
+                    //.bodyToMono(PillApiDTO.class) // 응답 본문을 Mono<String>으로 변환한다.
+                    .bodyToMono(new ParameterizedTypeReference<PillApiDTO<PillOtcDTO>>() {
+                    })
+                    .block();// 블로킹 방식으로 통신을 하겠다.
 
-        List<PillOtcDTO> items = pillApiDTO.getBody().getItems();
+            List<PillOtcDTO> items = pillApiDTO.getBody().getItems();
+            pageNo++;
 
-        return items;
+            if(items == null){
+                break;
+            }
+
+            resultList.addAll(items);
+        }
+        return resultList;
     }
 }

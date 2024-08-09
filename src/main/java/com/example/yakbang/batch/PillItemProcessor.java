@@ -13,6 +13,7 @@ public class PillItemProcessor implements ItemProcessor<PillItemDTO, PillItemDTO
     @Override
     public PillItemDTO process(PillItemDTO item) throws Exception {
         int count = duplicateMapper.duplicatePill(item.getItemSeq());
+
         if (count > 0) {
             return null;
         }
