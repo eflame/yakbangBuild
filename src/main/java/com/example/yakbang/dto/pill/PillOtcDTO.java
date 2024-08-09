@@ -1,19 +1,17 @@
 package com.example.yakbang.dto.pill;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter @Setter @ToString
-@NoArgsConstructor
+@NoArgsConstructor @AllArgsConstructor @Builder
 public class PillOtcDTO {
     // 의약품 낱알식별 정보
+    @JsonProperty("ITEM_SEQ")
     private String itemSeq; // 상품시퀀스
     @JsonProperty("COLOR_CLASS1")
     private String pillColor; // 색상
-    @JsonProperty("SHAPE")
+    @JsonProperty("DRUG_SHAPE")
     private String pillShape; // 형태
     @JsonProperty("itemImage")
     private String pillImage ; // 약 이미지

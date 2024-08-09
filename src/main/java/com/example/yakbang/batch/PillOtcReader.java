@@ -1,6 +1,6 @@
 package com.example.yakbang.batch;
 
-import com.example.yakbang.dto.pill.PillItemDTO;
+import com.example.yakbang.dto.pill.PillOtcDTO;
 import com.example.yakbang.service.pill.PillApiService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.item.ItemReader;
@@ -8,21 +8,21 @@ import org.springframework.batch.item.ItemReader;
 import java.util.List;
 
 @RequiredArgsConstructor
-public class PillItemReader implements ItemReader<PillItemDTO> {
+public class PillOtcReader implements ItemReader<PillOtcDTO> {
     private final PillApiService pillApiService;
 
     private int nextIdx = 0;
-    private List<PillItemDTO> items;
+    private List<PillOtcDTO> items;
 
     @Override
-    public PillItemDTO read() throws  Exception {
+    public PillOtcDTO read() throws Exception {
 
         if (items == null) {
-            List<PillItemDTO> pillItemData = pillApiService.findPillData();
-            items = pillItemData;
+            List<PillOtcDTO> pillOtc = pillApiService.addPillOtc();
+            items = pillOtc;
         }
 
-        PillItemDTO nextItemDTO = null;
+        PillOtcDTO nextItemDTO = null;
 
         if (nextIdx < items.size()) {
             nextItemDTO = items.get(nextIdx);

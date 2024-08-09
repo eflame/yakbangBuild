@@ -1,5 +1,6 @@
 package com.example.yakbang.api.pill;
 
+import com.example.yakbang.batch.PillOtcRegisterJobConfig;
 import com.example.yakbang.batch.PillRegisterJobConfig;
 import com.example.yakbang.service.pill.PillApiService;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,7 @@ public class PillApi {
 
     private final JobLauncher jobLauncher;
     private final PillRegisterJobConfig pillRegisterJobConfig;
+    private final PillOtcRegisterJobConfig pillOtcRegisterJobConfig;
 
     @GetMapping("/batch")
     public void batch() throws URISyntaxException, UnsupportedEncodingException {
@@ -30,15 +32,25 @@ public class PillApi {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
+    @GetMapping("/add-batch")
+    public void addBatch() throws URISyntaxException, UnsupportedEncodingException {
+        JobParameters jobParameters = new JobParametersBuilder()
+                .addLong("time", System.currentTimeMillis())
+                .toJobParameters();
+        try {
+            jobLauncher.run(pillOtcRegisterJobConfig.addJob(), jobParameters);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @GetMapping("/test")
     public String test(){
         try {
             pillApiService.findPillData();
-//            p/illApiService.findPillInfo();
+//            pillApiService.addPillOtc();
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         } catch (URISyntaxException e) {
