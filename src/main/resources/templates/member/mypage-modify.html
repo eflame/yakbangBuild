@@ -17,44 +17,46 @@
         <!-- 작업영역 -->
         <div class="inner">
             <h1 class="mypage-title">마이페이지</h1>
-            <div class="mypage-header">
+            <form th:action="@{/member/mypage-modify}" method="post">
+                <div class="mypage-header">
                 <h3 class="title">회원 정보</h3>
                 <a th:href="@{/member/mypage}" class="btn-normal btn-over-primary">수정 완료</a>
-            </div>
-            <div class="mypage-body">
-                <ul class="info-list">
-                    <li class="item">
-                        <div class="info-key">아이디</div>
-                        <div class="info-value"><input class="input-text" type="text" value="test1" readonly></div>
-                    </li>
-                    <li class="item">
-                        <div class="info-key">이름</div>
-                        <div class="info-value"><input class="input-text" type="text" value="홍길동" ></div>
-                    </li>
-                    <li class="item">
-                        <div class="info-key">생년월일</div>
-                        <div class="info-value"><input type="date" value="2018-07-22" ></div>
-                    </li>
-                    <li class="item">
-                        <div class="info-key">전화번호</div>
-                        <div class="info-value"><input class="input-text" type="text" value="000-0000-0000"></div>
-                    </li>
-                    <li class="item">
-                        <div class="info-key">이메일</div>
-                        <div class="info-value"><input class="input-text" type="text" value="test@test.com"></div>
-                    </li>
-                </ul>
-                <div class="info-btns">
-                    <!-- <p class="info-txt">
-                        문의가 필요하다면
-                        <a class="link" href="">고객센터</a>
-                    </p> -->
-                    <p class="info-txt">
-                        이용을 중단하려면
-                        <a class="btn-open-modal" href="">회원탈퇴</a>
-                    </p>
                 </div>
-            </div>
+                <div class="mypage-body">
+                    <ul class="info-list">
+                        <li class="item">
+                            <div class="info-key">아이디</div>
+                            <div class="info-value"><input class="input-text" type="text" th:value="${memberDTO.loginId}" readonly></div>
+                        </li>
+                        <li class="item">
+                            <div class="info-key">이름</div>
+                            <div class="info-value"><input class="input-text" type="text" th:value="${memberDTO.name}" ></div>
+                        </li>
+                        <li class="item">
+                            <div class="info-key">생년월일</div>
+                            <div class="info-value" ><input type="date" th:value="${memberDTO.birth}"></div>
+                        </li>
+                        <li class="item">
+                            <div class="info-key">전화번호</div>
+                            <div class="info-value"><input class="input-text" type="text" th:value="${memberDTO.phoneNumber}"></div>
+                        </li>
+                        <li class="item">
+                            <div class="info-key">이메일</div>
+                            <div class="info-value"><input class="input-text" type="text" th:value="${memberDTO.email}"></div>
+                        </li>
+                    </ul>
+                    <div class="info-btns">
+                        <!-- <p class="info-txt">
+                            문의가 필요하다면
+                            <a class="link" href="">고객센터</a>
+                        </p> -->
+                        <p class="info-txt">
+                            이용을 중단하려면
+                            <a class="btn-open-modal" >회원탈퇴</a>
+                        </p>
+                    </div>
+                </div>
+            </form>
         </div>
         <div id="myModal" class="mw">
             <div class="mb">
@@ -75,7 +77,7 @@
                     </dl>
                 </div>
                 <div class="ba">
-                    <button id="btn-modify" class="btn btn-light" type="button" onclick="completeWithdrawal()">탈퇴하기</button>
+                    <button id="btn-modify" class="btn btn-light" type="button" onclick="completeWithdrawal()"><a th:href="@{/member/leave}">탈퇴하기</a></button>
                     <button id="btn-check" onclick="closeModal()" class="btn btn-primary" type="button">돌아가기</button>
                 </div>
             </div>

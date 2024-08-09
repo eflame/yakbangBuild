@@ -33,7 +33,7 @@
 <!--    마이페이지 정보 수정-->
     <update id="updateMemberInfo">
         update TBL_MEMBER
-        set  BIRTH=#{birth} , PHONE_NUMBER=#{phoneNumber} , EMAIL=#{email}
+        set  BIRTH=#{birth} , PHONE_NUMBER=#{phoneNumber} , EMAIL=#{email} ,NAME=#{name}
         where MEMBER_ID=#{memberId}
     </update>
 
@@ -42,4 +42,18 @@
         DELETE FROM TBL_MEMBER
         WHERE MEMBER_ID=#{memberId}
     </delete>
+
+<!--    ID 찾기 : 이름과 이메일을 받아올것임-->
+    <select id="selectLoginId">
+        SELECT LOGIN_ID
+        FROM TBL_MEMBER
+        WHERE NAME=#{name} AND EMAIL=#{email}
+    </select>
+
+<!--    PASSWORD 찾기 : id와 이메일을 받아올것임-->
+    <select id="selectPassword">
+        SELECT PASSWORD
+        FROM TBL_MEMBER
+        WHERE LOGIN_ID=#{loginId} AND EMAIL=#{email}
+    </select>
 </mapper>

@@ -44,9 +44,7 @@ public class MemberService {
                 .orElseThrow(()->new IllegalArgumentException("회원의 정보를 확인할 수 없습니다."));
     }
 
-    public void findMemberInfo(Long memberId) {
-        memberMapper.selectMemberInfo(memberId);
-    }
+
 
     public void modifyMemberInfo(MemberMypageDTO memberMypageDTO) {
         memberMapper.updateMemberInfo(memberMypageDTO);
@@ -56,6 +54,15 @@ public class MemberService {
         memberMapper.deleteMemberInfo(memberId);
     }
 
+    public String findLoginId(String name, String email) {
+        return memberMapper.selectLoginId(name, email)
+                .orElseThrow(() -> new IllegalArgumentException("일치하는 회원의 ID가 없습니다"));
+    }
+
+    public String findPassword(String loginId, String email) {
+        return memberMapper.selectPassword(loginId, email)
+                .orElseThrow(()->new IllegalArgumentException("일치하는 회원의 비밀번호가 없습니다."));
+    }
 
 }
 
