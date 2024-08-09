@@ -26,4 +26,10 @@ public interface MemberMapper {
 
 //    회원 정보 삭제
     void deleteMemberInfo(Long memberId);
+
+//    ID 찾기
+    Optional<String> selectLoginId(String name, String email);
+
+//    PASSWORD 찾기
+    Optional<String> selectPassword(String loginId, String email);
 }
