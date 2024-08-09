@@ -15,7 +15,7 @@
     <menu th:replace="~{common/menu/side_menu::side-menu}" ></menu>
     <main class="contents">
         <!-- 작업영역 -->
-        <div class="inner" th:each="board : ${list}">
+        <div class="inner">
             <div class="sub-header">
                 <h2 class="title">Q&A</h2>
                 <span class="sub-txt">전문가가 직접 답해드려요!</span>
@@ -28,12 +28,12 @@
             <div class="qna-container-wrap">
                 <div class="qna-card">
                     <a tabindex="0" class="qna-main" title="이 Q&amp;A의 상세정보 보기" th:href="@{/board/qna-detail}" >
-                        <span class="txt1" th:text="${board.title}"><span class="qmark">Q.&nbsp;</span></span>
-                        <span class="txt2" th:text="${board.content}"></span>
+                        <span class="txt1" ><span class="qmark">Q.&nbsp;</span></span>
+                        <span class="txt2" ></span>
                     </a>
                     <a tabindex="0" class="qna-user-wrap" title="이 Q&amp;A의 상세정보 보기" th:href="@{/board/qna-detail}">
                         
-                        <div class="qna-user-txt" th:text="${board.answerTitle}"><span class="qna-user-icon-1"></span></div>
+                        <div class="qna-user-txt" ><span class="qna-user-icon-1"></span></div>
                         <div class="user-info-row">
                             <span class="user-name">효**</span>
                             <span class="user-agesex">30대 / 여</span>
@@ -42,21 +42,21 @@
                     </a>
                 </div>
 
-                <div class="qna-card">
-                    <a tabindex="0" class="qna-main" title="이 Q&amp;A의 상세정보 보기" th:href="@{/board/qna-detail}" >
-                        <span class="txt1" th:text="${board.title}"><span class="qmark">Q.&nbsp;</span></span>
-                        <span class="txt2" th:text="${board.content}"></span>
-                    </a>
-                    <a tabindex="0" class="qna-user-wrap" title="이 Q&amp;A의 상세정보 보기" th:href="@{/board/qna-detail}">
-                        
-                        <div class="qna-user-txt" th:text="${board.answerTitle}"><span class="qna-user-icon-2"></span></div>
-                        <div class="user-info-row">
-                            <span class="user-name">효**</span>
-                            <span class="user-agesex">30대 / 여</span>
-                                <span class="img-icon">사진 있음</span>
-                        </div>
-                    </a>
-                </div>
+<!--                <div class="qna-card">-->
+<!--                    <a tabindex="0" class="qna-main" title="이 Q&amp;A의 상세정보 보기" th:href="@{/board/qna-detail}" >-->
+<!--                        <span class="txt1" th:text="${board.title}"><span class="qmark">Q.&nbsp;</span></span>-->
+<!--                        <span class="txt2" th:text="${board.content}"></span>-->
+<!--                    </a>-->
+<!--                    <a tabindex="0" class="qna-user-wrap" title="이 Q&amp;A의 상세정보 보기" th:href="@{/board/qna-detail}">-->
+<!--                        -->
+<!--                        <div class="qna-user-txt" th:text="${board.answerTitle}"><span class="qna-user-icon-2"></span></div>-->
+<!--                        <div class="user-info-row">-->
+<!--                            <span class="user-name">효**</span>-->
+<!--                            <span class="user-agesex">30대 / 여</span>-->
+<!--                                <span class="img-icon">사진 있음</span>-->
+<!--                        </div>-->
+<!--                    </a>-->
+<!--                </div>-->
 
                 <div class="qna-card">
                     <a tabindex="0" class="qna-main" title="이 Q&amp;A의 상세정보 보기" th:href="@{/board/qna-detail}" >

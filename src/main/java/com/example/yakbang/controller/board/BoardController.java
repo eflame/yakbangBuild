@@ -28,7 +28,7 @@ public class BoardController {
     @GetMapping("/qna-list")
     public String qna_list(Model model) {
         List<BoardQnaListDTO> list = boardService.findList(); // 게시물 목록 호출
-        model.addAttribute("list", list);
+//        model.addAttribute("list", list);
 
         return "board/qna_list";
     }

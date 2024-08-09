@@ -22,6 +22,7 @@ class BoardMapperTest {
 
     @Autowired BoardMapper boardMapper;
     BoardQnaWriteDTO boardQnaWriteDTO;
+    BoardQnaListDTO boardQnaListDTO;
 
     @Test
     @DisplayName("게시물 생성")
@@ -37,4 +38,17 @@ class BoardMapperTest {
         System.out.println("boardMapper = " + boardMapper);
     }
 
+    @Test
+    void selectQuestionList() {
+        //g
+        boardMapper.insertBoardQuestion(boardQnaWriteDTO);
+        //w
+        List<BoardQnaListDTO> list = boardMapper.selectQuestionList();
+        //t
+        assertThat(list).hasSize(1);
+    }
+
+    @Test
+    void selectQuestionDetail() {
+    }
 }
