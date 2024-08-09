@@ -27,6 +27,7 @@ public class AdminController {
 
     @GetMapping("/qna")
     public String qnaBoard() {
+
         return "admin/qna_board";
     }
 
