@@ -5,7 +5,19 @@
         <selectKey resultType="long" keyProperty="pillId" order="BEFORE">
             SELECT SEQ_PILL.nextval FROM DUAL
         </selectKey>
-        INSERT INTO TBL_PILL(PILL_ID, COMPANY_NAME, PILL_NAME, ITEM_SEQ, DETAIL_CONTENT, PILL_HOWTO, INTAKE_PRECAUTIONS, ATPNQESITM, INTRCQESITM, SEQESITM, PILL_DEPOSIT, OPEN_DATE, UPDATE_DATE, PILL_IMAGE)
-        VALUES (#{pillId}, #{companyName}, #{pillName}, #{itemSeq}, #{detailContent}, #{pillHowto}, #{intakePrecautions}, #{atpnQesitm}, #{intrcQesitm}, #{seQesitm}, #{pillDeposit}, #{openDate}, #{updateDate}, #{pillImage})
+        INSERT INTO TBL_PILL(PILL_ID, COMPANY_NAME, PILL_NAME, ITEM_SEQ, DETAIL_CONTENT, PILL_HOWTO, INTAKE_PRECAUTIONS,
+        ATPNQESITM, INTRCQESITM, SEQESITM, PILL_DEPOSIT, OPEN_DATE, UPDATE_DATE, PILL_IMAGE)
+        VALUES (#{pillId}, #{companyName}, #{pillName}, #{itemSeq}, #{detailContent}, #{pillHowto}, #{intakePrecautions},
+            #{atpnQesitm}, #{intrcQesitm}, #{seQesitm}, #{pillDeposit}, #{openDate}, #{updateDate}, #{pillImage})
     </insert>
+    
+    <update id="updatePill">
+        UPDATE TBL_PILL
+        SET  PILL_COLOR = #{pillColor}, PILL_SHAPE = #{pillShape}
+        <if test="pillImage != null">
+            , PILL_IMAGE = #{pillImage}
+        </if>
+        WHERE ITEM_SEQ = #{itemSeq}
+    </update>
+
 </mapper>

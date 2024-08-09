@@ -36,12 +36,12 @@
           <form class="form-area" th:action="@{/member/login}" method="post">
             <div class="input-box">
               <label class="form-control row">
-                <input type="text" placeholder="아이디" id="username" required/>
+                <input type="text" placeholder="아이디" name="loginId" id="username" required/>
               </label>
             </div>
             <div class="input-box">
               <label class="form-control row">
-                <input type="password" placeholder="비밀번호" id="password" required/>
+                <input type="password" placeholder="비밀번호" name="password" id="password" required/>
               </label>
             </div>
             <div class="check-box-main">

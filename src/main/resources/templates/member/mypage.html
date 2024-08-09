@@ -25,23 +25,23 @@
                 <ul class="info-list">
                     <li class="item">
                         <div class="info-key">아이디</div>
-                        <div class="info-value">test01</div>
+                        <div class="info-value" th:text="${memberDTO.loginId}"></div>
                     </li>
                     <li class="item">
                         <div class="info-key">이름</div>
-                        <div class="info-value">홍길동</div>
+                        <div class="info-value" th:text="${memberDTO.name}"></div>
                     </li>
                     <li class="item">
                         <div class="info-key">생년월일</div>
-                        <div class="info-value">0000년 00월 00일</div>
+                        <div class="info-value" th:text="${memberDTO.birth}"></div>
                     </li>
                     <li class="item">
                         <div class="info-key">전화번호</div>
-                        <div class="info-value">000-0000-0000</div>
+                        <div class="info-value" th:text="${memberDTO.phoneNumber}"></div>
                     </li>
                     <li class="item">
                         <div class="info-key">이메일</div>
-                        <div class="info-value">test@test.com</div>
+                        <div class="info-value" th:text="${memberDTO.email}"></div>
                     </li>
                 </ul>
                 <div class="info-btns">
@@ -75,7 +75,7 @@
                     </dl>
                 </div>
                 <div class="ba">
-                    <button id="btn-modify" class="btn btn-light" type="button" onclick="completeWithdrawal()">탈퇴하기</button>
+                    <button id="btn-modify" class="btn btn-light" type="button" onclick="completeWithdrawal()"><a th:href="@{/member/leave}">탈퇴하기</a></button>
                     <button id="btn-check" onclick="closeModal()" class="btn btn-primary" type="button">돌아가기</button>
                 </div>
             </div>

@@ -1,49 +1,44 @@
 package com.example.yakbang.mapper.pill;
 
-import com.example.yakbang.dto.pill.PillApiDTO;
-import com.example.yakbang.dto.pill.PillDTO;
-import com.example.yakbang.dto.pill.PillItemDTO;
+
 import com.example.yakbang.dto.pill.PillOtcDTO;
+import com.example.yakbang.mapper.member.MemberMapper;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
 class PillMapperTest {
+    private static final Logger log = LoggerFactory.getLogger(PillMapperTest.class);
     @Autowired PillMapper pillMapper;
 
-    PillDTO pillDTO;
+    PillOtcDTO pillOtcDTO;
+
+    @Autowired
+    private MemberMapper memberMapper;
 
     @Test
-    void insertPill() {
+    void updatePill() {
         // given
-        pillDTO = PillDTO.builder()
-//                .itemSeq("201109900")
-//                .categoryId(1)
-                .pillName("비맥스골드정")
-                .updateDate("2021-01-29")
-                .detailContent("효능")
-                .pillHowto("섭취방법")
-//                .sideCaution("섭취시 주의사항1")
-                .pillColor("주황")
-                .pillShape("타원형")
-                .pillDeposit("보관방법")
-                .pillImage("이미지 경로")
-                .companyName("(유)한풍제약")
+        pillOtcDTO = PillOtcDTO.builder()
+                .itemSeq(String.valueOf(1))
+                .pillShape("모양넣기")
+                .pillColor("컬러넣기")
+                .pillImage("asdf")
                 .build();
-
-//        pillMapper.insertPill(pillDTO);
-
         // when
-
-
+        pillMapper.updatePill(pillOtcDTO);
         // then
+        String pillImage = pillOtcDTO.getPillImage();
 
     }
+
+
 
     @Test
     void genericTest(){

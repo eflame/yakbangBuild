@@ -1,6 +1,7 @@
 package com.example.yakbang.controller.member;
 
 import com.example.yakbang.dto.member.MemberJoinDTO;
+import com.example.yakbang.dto.member.MemberMypageDTO;
 import com.example.yakbang.service.member.MemberService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +27,7 @@ public class MemberController {
 
     @PostMapping("/login")
     public String login(String loginId, String password,
-                        HttpSession session){
+                        HttpSession session) {
         Long memberId = null;
 
         try {
@@ -42,7 +43,8 @@ public class MemberController {
         session.setAttribute("memberId", memberId);
 // 로그인 되면 memberId를 세션으로 설정해 두었기에 mypage에서 정보수정시 해당 데이터를 가져다가 쓸것임.
 
-        return "redirect:/main";
+
+        return "/main";
     }
 
     @GetMapping("/find_id")
@@ -50,9 +52,23 @@ public class MemberController {
         return "member/find_id";
     }
 
+    @PostMapping("/find_id")
+    public String findId(String name,String email,
+                         HttpSession session) {
+        String loginId = memberService.findLoginId(name, email);
+        session.getAttribute("memberId");
+        return "member/find-result";
+    }
+
     @GetMapping("/find_password")
     public String findPassword() {
         return "member/find_password";
+    }
+
+    @PostMapping("/find_password")
+    public String findPassword(String email,String loginId,
+                               HttpSession session) {
+        return "member/find-result2";
     }
 
     @GetMapping("/find_id_email")
@@ -77,18 +93,39 @@ public class MemberController {
             return "member/join";
         }
 
-        return "redirect:/member/login";
+        return "/main";
     }
 
     @GetMapping("/mypage")
-    public String mypage(HttpSession session) {
+    public String mypage(HttpSession session, Model model) {
+        Long memberId = (Long) session.getAttribute("memberId");
+        MemberMypageDTO memberDTO = memberService.searchMember(memberId);
+        model.addAttribute("memberDTO", memberDTO);
         return "member/mypage";
     }
 
     @GetMapping("/mypage-modify")
-    public String mypageModify() {
+    public String mypageModify(Model model, HttpSession session) {
+        Long memberId = (Long) session.getAttribute("memberId");
+        MemberMypageDTO memberDTO = memberService.searchMember(memberId);
+        model.addAttribute("memberDTO", memberDTO);
+
         return "member/mypage-modify";
     }
 
+    @PostMapping("/mypage-modify")
+    public String mypageModify(MemberMypageDTO memberMypageDTO) {
+        memberService.modifyMemberInfo(memberMypageDTO);
+
+
+
+        return "redirect:/member/mypage";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session){
+        session.invalidate();
+        return "redirect:/member/login";
+    }
 
 }

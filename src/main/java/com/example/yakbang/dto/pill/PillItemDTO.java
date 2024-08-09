@@ -6,7 +6,7 @@ import lombok.*;
 import java.util.List;
 
 @Getter @Setter @ToString
-@NoArgsConstructor @AllArgsConstructor
+@NoArgsConstructor @AllArgsConstructor @Builder
 public class PillItemDTO {
     // e-약은요
     private Long pillId;
