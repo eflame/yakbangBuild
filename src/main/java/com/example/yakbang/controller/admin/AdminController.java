@@ -27,7 +27,13 @@ public class AdminController {
     private final AdminService adminService;
 
     @GetMapping("/index")
-    public String index() {
+    public String index(HttpSession session) {
+        Long memberId = (Long) session.getAttribute("memberId");
+
+        if (memberId == null) {
+            return "redirect:/admin";
+        }
+
         return "admin/index";
     }
 
@@ -126,18 +132,34 @@ public class AdminController {
     }
 
     @GetMapping("/pill")
-    public String pill() {
+    public String pill(HttpSession session, Model model) {
+        Long memberId = (Long) session.getAttribute("memberId");
+
+        if (memberId == null) {
+            return "redirect:/admin";
+        }
         return "admin/pill";
     }
 
     @GetMapping("/qna")
-    public String qnaBoard() {
+    public String qnaBoard(HttpSession session, Model model) {
+        Long memberId = (Long) session.getAttribute("memberId");
+
+        if (memberId == null) {
+            return "redirect:/admin";
+        }
 
         return "admin/qna_board";
     }
 
     @GetMapping("/review")
-    public String review() {
+    public String review(HttpSession session, Model model) {
+        Long memberId = (Long) session.getAttribute("memberId");
+
+        if (memberId == null) {
+            return "redirect:/admin";
+        }
+
         return "admin/review_board";
     }
 
