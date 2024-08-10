@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <nav class="top-header"  th:fragment="admin-header">
+        <a th:href="@{/admin}" class="logo"><img th:src="@{/images/common/logo_gray.svg}" alt="yakbang"/></a>
+        <div class="option">
+            <a th:href="@{/admin/logout}">로그아웃</a>
+        </div>
+    </nav>
+</body>
+</html>

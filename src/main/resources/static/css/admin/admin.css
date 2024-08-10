@@ -16,6 +16,23 @@
       width: 150px;
     }
   }
+  .option {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 36px;
+    top: 0;
+    height: 100%;
+    a {
+      display: flex;
+      align-items: center;
+      padding-left: 30px;
+      height: 20px;
+      color: #fff;
+      font-size: 14px;
+      background: url("/images/admin/ico_logout.png") left center/20px no-repeat;
+    }
+  }
 }
 .layout-sidenav {
   z-index: 101;

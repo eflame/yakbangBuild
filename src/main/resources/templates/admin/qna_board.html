@@ -9,11 +9,7 @@
         <script defer th:src="@{/js/admin/admin.js}"></script>
     </head>
     <body>
-        <nav class="top-header">
-            <a th:href="@{/admin}" class="logo"
-            ><img th:src="@{/images/common/logo_gray.svg}" alt=""
-            /></a>
-        </nav>
+    <header th:replace="~{common/header/header_admin::admin-header}"></header>
         <div class="layout-sidenav">
             <h1 class="title">관리자 페이지</h1>
             <nav class="menu-nav">
