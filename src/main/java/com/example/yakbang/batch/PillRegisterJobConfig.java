@@ -1,6 +1,5 @@
 package com.example.yakbang.batch;
 
-import com.example.yakbang.dto.pill.PillApiDTO;
 import com.example.yakbang.dto.pill.PillItemDTO;
 import com.example.yakbang.mapper.duplicate.DuplicateMapper;
 import com.example.yakbang.mapper.pill.PillMapper;

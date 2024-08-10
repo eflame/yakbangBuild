@@ -10,7 +10,7 @@
   </head>
   <body>
     <nav class="top-header">
-      <a href="#" class="logo"
+      <a th:href="@{/admin}" class="logo"
       ><img th:src="@{/images/common/logo_gray.svg}" alt=""
       /></a>
     </nav>
@@ -18,32 +18,40 @@
       <div class="login-wrap">
         <div class="login-area">
           <h1 class="title">관리자 페이지 로그인</h1>
-          <form class="form-area" action="">
+          <form class="form-area" th:action="@{/admin}" method="post">
             <label class="form-control row">
               <span class="label-text">관리자 ID</span>
-              <input type="text" />
+              <input type="text" name="loginId" th:value="${loginId}" />
             </label>
             <label class="form-control row">
               <span class="label-text">패스워드</span>
-              <input type="password" />
+              <input type="password" name="password" />
             </label>
             <label class="check-box">
-              <input type="checkbox" />
-              <span class="label-text">로그인 정보 저장</span>
+              <input type="checkbox" name="rememberLoginId" th:checked="${loginId != null}" />
+              <span class="label-text">로그인 ID 저장</span>
             </label>
-            <button class="btn-login">로그인</button>
+            <button class="btn-login" type="submit">로그인</button>
           </form>
         </div>
         <dl class="login-tips">
           <dt>관리자 로그인 정보를 잊으셨나요?</dt>
           <dd>
-            전체권한 관리자께서는 패스워드를 <a href="#">여기</a> 에서 변경해
-            주세요. <br />
             그룹 관리자 또는 직원인 경우, 회사 내 전체권한 관리자에게 문의해
             주세요.
           </dd>
         </dl>
       </div>
     </div>
+    <script th:inline="javascript">
+      document.addEventListener('DOMContentLoaded', function() {
+        let message = /*[[${msg}]]*/ '';
+        console.log('Message:', message);
+        if (message && message.trim() !== "" && message !== "null") {
+          alert(message);
+        }
+
+      });
+    </script>
   </body>
 </html>

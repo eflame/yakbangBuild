@@ -25,7 +25,7 @@ public class ApiBatchSchedule {
         try {
             jobLauncher.run(pillRegisterJobConfig.apiJob(), jobParameters);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("오류 발생:", e);
         }
     }
 
