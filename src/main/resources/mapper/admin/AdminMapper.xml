@@ -1,9 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.yakbang.mapper.admin.AdminMapper">
-    <select id="selectAdminMemberId">
+    <!-- 관리자 로그인   -->
+    <select id="selectAdminId">
         SELECT MEMBER_ID
         FROM TBL_MEMBER
         WHERE (LOGIN_ID = #{loginId} AND PASSWORD = #{password}) AND MEMBER_ID = 0
     </select>
+
+    <select id="selectGeneralMembers" resultType="AdminMemberDTO" >
+        SELECT MEMBER_ID, LOGIN_ID, PHONE_NUMBER, NAME, BIRTH, EMAIL, GENDER
+        FROM TBL_MEMBER
+        WHERE MEMBER_ID > 0
+        <if test="memberId != null">
+            AND MEMBER_ID = #{memberId}
+        </if>
+    </select>
+
+    <select id="selectExpertMembers" resultType="AdminExMemberDTO">
+        SELECT EXPERT_ID, LOGIN_ID, PASSWORD, PHONE_NUMBER, NAME, BIRTH, EMAIL, GENDER, JOB, PHARMACY_ADDRESS
+        FROM TBL_EXPERT_MEMBER
+        WHERE EXPERT_ID > 0
+        <if test="expertID != null">
+            AND EXPERT_ID = #{expertID}
+        </if>
+    </select>
+
+    <update id="updateGeneralMember">
+        UPDATE TBL_MEMBER
+        SET NAME = #{name}, EMAIL = #{email}, PHONE_NUMBER = #{phoneNumber}
+        WHERE MEMBER_ID = #{memberId}
+    </update>
+
+    <update id="updateExpertMember">
+        UPDATE TBL_EXPERT_MEMBER
+        SET NAME = #{name}, EMAIL = #{email}, PHONE_NUMBER = #{phoneNumber},  JOB = #{job}, PHARMACY_ADDRESS = #{pharmacyAddress}
+        WHERE EXPERT_ID = #{expertId}
+    </update>
+
 </mapper>
