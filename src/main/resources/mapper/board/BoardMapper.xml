@@ -6,8 +6,8 @@
         <selectKey resultType="long" keyProperty="questionId" order="BEFORE">
             SELECT SEQ_QA.nextval FROM DUAL
         </selectKey>
-        insert into TBL_QA (QUESTION_ID, MEMBER_ID, TITLE, CONTENT)
-        values (#{questionId}, #{memberId}, #{title}, #{content})
+        insert into TBL_QA (QUESTION_ID, MEMBER_ID, TITLE, CONTENT, WRITE_DATE)
+        values (#{questionId}, #{memberId}, #{title}, #{content}, SYSDATE)
     </insert>
 
 <!--  질문 게시판  -->
@@ -25,10 +25,13 @@
         SELECT Q.QUESTION_ID, Q.MEMBER_ID, Q.PILL_ID, Q.TITLE, Q.CONTENT, Q.VIEW_COUNT,
                TO_CHAR(Q.WRITE_DATE, 'YYYY-MM-DD') AS WRITE_DATE,
                M.NAME, M.GENDER,
-               A.ANSWER_CONTENT, A.ANSWER_DATE, A.ANSWER_NO
-        FROM TBL_QA Q, TBL_MEMBER M, TBL_ANSWER A
+               A.ANSWER_CONTENT, TO_CHAR(A.ANSWER_DATE, 'YYYY-MM-DD') AS ANSWER_DATE,
+               A.ANSWER_NO,
+               E.NAME expertName, E.JOB, E.PHARMACY_ADDRESS
+        FROM TBL_QA Q, TBL_MEMBER M, TBL_ANSWER A, TBL_EXPERT_MEMBER E
         WHERE Q.MEMBER_ID = M.MEMBER_ID
           AND Q.QUESTION_ID = A.QUESTION_ID
+          AND E.EXPERT_ID = A.EXPERT_ID
     </select>
 
 </mapper>

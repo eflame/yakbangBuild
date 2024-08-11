@@ -5,30 +5,25 @@ import com.example.yakbang.dto.board.BoardQnaListDTO;
 import com.example.yakbang.dto.board.BoardQnaWriteDTO;
 import com.example.yakbang.service.board.BoardService;
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Slf4j
 @Controller
 @RequestMapping("/board")
+@RequiredArgsConstructor
 public class BoardController {
     private final BoardService boardService;
-
-    public BoardController(BoardService boardService) {
-        this.boardService = boardService;
-    }
 
     @GetMapping("/qna-list")
     public String qna_list(Model model) {
         List<BoardQnaListDTO> list = boardService.findList(); // 게시물 목록 호출
-//        model.addAttribute("list", list);
+        model.addAttribute("list", list);
 
         return "board/qna_list";
     }
@@ -53,13 +48,12 @@ public class BoardController {
     }
 
     @PostMapping("/qna-write")
-    public String qna_write(BoardQnaWriteDTO boardQnaWriteDTO,
-                            @SessionAttribute("memberId") Long memberId){
-        boardQnaWriteDTO.setMemberId(memberId);
+    public String qna_write(BoardQnaWriteDTO boardQnaWriteDTO){
+        boardService.addBoard(boardQnaWriteDTO);
 
         log.info("boardQnaWriteDTO:{}", boardQnaWriteDTO); // 로그 기록
 
-        return "redirect:/board/qna_list";
+        return "redirect:/board/qna-list";
     }
 
 
