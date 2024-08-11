@@ -1,5 +1,8 @@
 package com.example.yakbang.controller.admin;
 
+import com.example.yakbang.dto.admin.AdminExMemberDTO;
+import com.example.yakbang.dto.admin.AdminMemberDTO;
+import com.example.yakbang.mapper.admin.AdminMapper;
 import com.example.yakbang.service.admin.AdminService;
 import com.example.yakbang.service.member.MemberService;
 import jakarta.servlet.http.Cookie;
@@ -10,12 +13,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Slf4j
@@ -26,10 +28,6 @@ public class AdminController {
 
     private final AdminService adminService;
 
-    @GetMapping("/index")
-    public String index() {
-        return "admin/index";
-    }
 
     @GetMapping("")
     public String login(HttpSession session,
@@ -39,7 +37,7 @@ public class AdminController {
 
         if (memberId != null) {
             // 로그인된 상태인 경우, 인덱스 페이지로 리디렉션
-            return "redirect:/admin/index";
+            return "redirect:/admin/general/index";
         }
 
         Cookie[] cookies = request.getCookies();
@@ -89,7 +87,7 @@ public class AdminController {
                 }
 
                 // 로그인 성공 후 인덱스 페이지로 리디렉션
-                return "redirect:/admin/index";
+                return "redirect:/admin/general/index";
             } else {
                 // 로그인 실패 시 메시지 설정
                 model.addAttribute("msg", "로그인 실패: 관리자 ID나 비밀번호가 올바르지 않습니다.");
@@ -125,19 +123,52 @@ public class AdminController {
         return "redirect:/admin";
     }
 
+    @GetMapping("/{memberType}/index")
+    public String index(@PathVariable("memberType") String memberType, Model model) {
+        if ("expert".equalsIgnoreCase(memberType)) {
+            // 전문가 회원 데이터를 가져오는 로직
+            List<AdminExMemberDTO> list = adminService.findExpertMembers(null);
+            model.addAttribute("list", list);
+            model.addAttribute("currentMemberType", "expert");
+        } else {
+            // 일반 회원 데이터를 가져오는 로직
+            List<AdminMemberDTO> list = adminService.findGeneralMembers(null);
+            model.addAttribute("list", list);
+            model.addAttribute("currentMemberType", "general");
+        }
+        return "admin/index";
+    }
+
+
     @GetMapping("/pill")
-    public String pill() {
+    public String pill(HttpSession session, Model model) {
+        Long memberId = (Long) session.getAttribute("memberId");
+
+        if (memberId == null) {
+            return "redirect:/admin";
+        }
         return "admin/pill";
     }
 
     @GetMapping("/qna")
-    public String qnaBoard() {
+    public String qnaBoard(HttpSession session, Model model) {
+        Long memberId = (Long) session.getAttribute("memberId");
+
+        if (memberId == null) {
+            return "redirect:/admin";
+        }
 
         return "admin/qna_board";
     }
 
     @GetMapping("/review")
-    public String review() {
+    public String review(HttpSession session, Model model) {
+        Long memberId = (Long) session.getAttribute("memberId");
+
+        if (memberId == null) {
+            return "redirect:/admin";
+        }
+
         return "admin/review_board";
     }
 
