@@ -20,20 +20,21 @@
           <div class="login-area">
             <a th:href="@{#}"><img th:src="@{/images/common/logo.svg}" alt=""></a>
           </div>
-          <input type="hidden" name="login_tab" value="p" id="login_tab">
+
           <ul class="tab_member_type" role="tablist">
             <li class="tab-genral">
-              <button type="button" class="btn-tab-general" role="tab" tabindex="0" aria-selected="true" data-value="p">
+              <button type="button" class="btn-tab-general" role="tab" tabindex="0" aria-selected="true" data-value="general">
                 개인회원
               </button>
             </li>
             <li class="tab-pro">
-              <button type="button" class="btn-tab-pro" role="tab" tabindex="-1" aria-selected="false" data-value="c">
+              <button type="button" class="btn-tab-pro" role="tab" tabindex="-1" aria-selected="false" data-value="expert">
                 전문가회원
               </button>
             </li>
           </ul>
           <form class="form-area" th:action="@{/member/login}" method="post">
+            <input type="hidden" name="memberType" value="general" id="login_tab">
             <div class="input-box">
               <label class="form-control row">
                 <input type="text" placeholder="아이디" name="loginId" id="username" required/>

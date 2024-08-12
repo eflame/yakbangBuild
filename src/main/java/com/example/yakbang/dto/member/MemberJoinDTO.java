@@ -8,6 +8,7 @@ import lombok.*;
 @AllArgsConstructor @Builder
 public class MemberJoinDTO {
     private Long memberId;
+    private Long expertId;
     private String loginId;
     private String password;
     private String phoneNumber;
@@ -15,4 +16,6 @@ public class MemberJoinDTO {
     private String birth;
     private String email;
     private String gender;
+    private String job;
+    private String pharmacyAddress;
 }

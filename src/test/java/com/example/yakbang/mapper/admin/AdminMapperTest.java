@@ -46,7 +46,7 @@ class AdminMapperTest {
                 .phoneNumber("010-0000-0000")
                 .build();
         // When
-        List<AdminMemberDTO> list = adminMapper.selectAdminList();
+        List<AdminMemberDTO> list = adminMapper.selectGeneralMembers(adminMemberDTO.getMemberId());
 
         // Then
         assertThat(list).hasSize(1);

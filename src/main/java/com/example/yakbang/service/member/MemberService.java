@@ -1,6 +1,7 @@
 package com.example.yakbang.service.member;
 
 import com.example.yakbang.dto.member.MemberJoinDTO;
+import com.example.yakbang.dto.member.MemberModifyDTO;
 import com.example.yakbang.dto.member.MemberMypageDTO;
 import com.example.yakbang.mapper.member.MemberMapper;
 import lombok.RequiredArgsConstructor;
@@ -46,8 +47,8 @@ public class MemberService {
 
 
 
-    public void modifyMemberInfo(MemberMypageDTO memberMypageDTO) {
-        memberMapper.updateMemberInfo(memberMypageDTO);
+    public void modifyMemberInfo(MemberModifyDTO memberModifyDTO) {
+        memberMapper.updateMemberInfo(memberModifyDTO);
     }
 
     public void removeMemberInfo(Long memberId) {

@@ -1,6 +1,7 @@
 package com.example.yakbang.mapper.member;
 
 import com.example.yakbang.dto.member.MemberJoinDTO;
+import com.example.yakbang.dto.member.MemberModifyDTO;
 import com.example.yakbang.dto.member.MemberMypageDTO;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -66,16 +67,16 @@ class MemberMapperTest {
     void updateMemberInfo() {
 //        given
         memberMapper.insertMember(memberJoinDTO);
-        MemberMypageDTO memberMypageDTO = MemberMypageDTO.builder()
+        MemberModifyDTO modifyDTO = MemberModifyDTO.builder()
                 .phoneNumber("010-1234-5678")
                 .email("update test@gmail.com")
                 .birth("2024/08/07")
                 .memberId(memberJoinDTO.getMemberId()).build();
 //        when
-        memberMapper.updateMemberInfo(memberMypageDTO);
+        memberMapper.updateMemberInfo(modifyDTO);
         Long memberId = memberMapper.selectMemberId(memberJoinDTO.getLoginId(), memberJoinDTO.getPassword()).get();
 //        then
-        assertThat(memberId).isEqualTo(memberMypageDTO.getMemberId());
+        assertThat(memberId).isEqualTo(modifyDTO.getMemberId());
     }
 
     @Test
