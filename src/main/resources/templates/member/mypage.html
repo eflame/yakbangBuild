@@ -43,6 +43,16 @@
                         <div class="info-key">이메일</div>
                         <div class="info-value" th:text="${memberDTO.email}"></div>
                     </li>
+                    <th:block th:if="${memberType == 'expert'}" >
+                        <li class="item">
+                            <div class="info-key">직업</div>
+                            <div class="info-value" th:text="${memberDTO.job}"></div>
+                        </li>
+                        <li class="item">
+                            <div class="info-key">직장주소</div>
+                            <div class="info-value" th:text="${memberDTO.pharmacyAddress}"></div>
+                        </li>
+                    </th:block>
                 </ul>
                 <div class="info-btns">
                     <!-- <p class="info-txt">

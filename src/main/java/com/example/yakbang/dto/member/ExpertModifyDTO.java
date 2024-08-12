@@ -6,13 +6,11 @@ import lombok.*;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor @Builder
-public class MemberMypageDTO {
+public class ExpertModifyDTO {
     //마이페이지
-    private Long memberId;
-    private String loginId;
+    private Long expertId;
     private String name;
     private String email;
     private String birth;
     private String phoneNumber;
-    private Long expertId;
 }

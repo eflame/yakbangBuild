@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.yakbang.mapper.member.MemberMapper">
+<mapper namespace="com.example.yakbang.mapper.member.ExpertMemberMapper">
 
     <!--    회원가입 처리-->
     <insert id="insertExpertMember">
-        <selectKey resultType="long" keyProperty="memberId" order="BEFORE">
+        <selectKey resultType="long" keyProperty="expertId" order="BEFORE">
             SELECT SEQ_EXPERT_MEMBER.nextval FROM DUAL
         </selectKey>
         INSERT INTO TBL_EXPERT_MEMBER (EXPERT_ID, LOGIN_ID, PASSWORD, PHONE_NUMBER, NAME, BIRTH, EMAIL, GENDER, JOB,
         PHARMACY_ADDRESS)
-        VALUES (#{memberId},#{loginId},#{password},#{phoneNumber},#{name},#{birth},#{email},#{gender},#{job},#{pharmacyAddress});
+        VALUES (#{expertId},#{loginId},#{password},#{phoneNumber},#{name},#{birth},#{email},#{gender},#{job},#{pharmacyAddress})
     </insert>
 
     <!--    아이디 비밀번호 찾기-->
@@ -24,4 +24,37 @@
         WHERE LOGIN_ID = #{loginId}
     </select>
 
+    <!--    마이페이지 정보 조회용-->
+    <select id="selectExpertInfo">
+        SELECT LOGIN_ID,NAME,TO_CHAR(BIRTH, 'YYYY-MM-DD') AS BIRTH,PHONE_NUMBER,EMAIL,JOB,PHARMACY_ADDRESS
+        FROM TBL_EXPERT_MEMBER
+        WHERE EXPERT_ID=#{expertId}
+    </select>
+
+    <!--    마이페이지 정보 수정-->
+    <update id="updateExpertInfo">
+        update TBL_EXPERT_MEMBER
+        set  BIRTH=#{birth} , PHONE_NUMBER=#{phoneNumber} , EMAIL=#{email} ,NAME=#{name}
+        where EXPERT_ID=#{expertId}
+    </update>
+
+    <!--    회원 탈퇴(회원 정보 삭제)-->
+    <delete id="deleteExpertInfo">
+        DELETE FROM TBL_EXPERT_MEMBER
+        WHERE EXPERT_ID=#{expertId}
+    </delete>
+
+    <!--    ID 찾기 : 이름과 이메일을 받아올것임-->
+    <select id="selectExpertLoginId">
+        SELECT LOGIN_ID
+        FROM TBL_EXPERT_MEMBER
+        WHERE NAME=#{name} AND EMAIL=#{email}
+    </select>
+
+    <!--    PASSWORD 찾기 : id와 이메일을 받아올것임-->
+    <select id="selectExpertPassword">
+        SELECT PASSWORD
+        FROM TBL_EXPERT_MEMBER
+        WHERE LOGIN_ID=#{loginId} AND EMAIL=#{email}
+    </select>
 </mapper>

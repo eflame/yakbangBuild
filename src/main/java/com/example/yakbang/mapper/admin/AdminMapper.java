@@ -19,12 +19,18 @@ public interface AdminMapper {
     List<AdminMemberDTO> selectGeneralMembers(Long memberId);
     List<AdminExMemberDTO> selectExpertMembers(Long expertId);
 
-    // 회원정보 수정
+    // 회원정보수정
     void updateGeneralMember(AdminMemberDTO adminMemberDTO);
 
     void updateExpertMember(AdminExMemberDTO adminExMemberDTO);
 
-    List<AdminMemberDTO> selectAdminList();
+    // 회원탈퇴
+
+    void deleteGeneralMember(Long memberId);
+
+    void deleteExpertIdMember(Long expertId);
+  
+  
 }
 
 
