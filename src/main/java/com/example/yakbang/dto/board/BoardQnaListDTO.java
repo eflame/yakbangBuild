@@ -2,6 +2,8 @@ package com.example.yakbang.dto.board;
 
 import lombok.*;
 
+import java.time.LocalDate;
+
 @Getter @Setter @ToString
 @AllArgsConstructor @NoArgsConstructor @Builder
 public class BoardQnaListDTO {
@@ -12,4 +14,5 @@ public class BoardQnaListDTO {
    private String content;    // 내용
    private String answerTitle; // 전문가 답변 제목
    private Long answerNo;     // 답변 번호
+   private String name;       // 회원 이름
 }

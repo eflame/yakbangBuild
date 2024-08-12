@@ -17,4 +17,10 @@ public class BoardQnaDetailDTO {
    private String answerContent; // 전문가 답변 내용
    private LocalDate answerDate; // 답변 날짜
    private Long answerNo;     // 답변 번호
+   private String name;       // 회원 이름
+   private String expertName; // 전문가 이름
+   private String job;        // 전문가 직업
+   private String pharmacyAddress;    // 전문가 주소
+
+
 }

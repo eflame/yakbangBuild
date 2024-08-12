@@ -5,18 +5,21 @@ import com.example.yakbang.dto.board.BoardQnaListDTO;
 import com.example.yakbang.dto.board.BoardQnaWriteDTO;
 import com.example.yakbang.mapper.board.BoardMapper;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
 @RequiredArgsConstructor
 public class BoardService {
 
-    private BoardMapper boardMapper;
+    private final BoardMapper boardMapper;
 
     public void addBoard(BoardQnaWriteDTO boardQnaWriteDTO){
         boardMapper.insertBoardQuestion(boardQnaWriteDTO);
