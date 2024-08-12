@@ -927,6 +927,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     .modal-header {
         position: relative;
         padding: 16px;
+        min-height: 52px;
         & > .title {
             color: #303030;
             font-size: 22px;
@@ -945,7 +946,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         }
     }
     .modal-body {
-        padding: 42px;
+        padding: 22px 42px 42px;
         & > .title {
             display: flex;
             align-items: center;
