@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.css" />
     <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
     <script defer th:src="@{/js/common/common.js}" ></script>
+    <script defer th:src="@{/js/board/toastui.js}" ></script>
     <script defer th:src="@{/js/board/ration.js}" ></script>
+
 </head>
 <body>
 <div class="all-wrap">
@@ -20,7 +22,6 @@
             <form class="form-write" action="">
                 <div class="write-wrap">
                     <p class="text_required">* 필수</p>
-
                     <dl class="write-row">
                         <dt class="title required">제목</dt>
                         <dd class="content">
@@ -31,30 +32,17 @@
                         <dt class="title required">내용</dt>
                         <dd class="content">
                             <div class="textarea-box">
-                                <textarea onkeyup="textCount(this,2000)" ></textarea>
+                                <div id="editor"></div>
                                 <p class="count">
                                     <span>0</span> / 2000
                                 </p>
                             </div>
                         </dd>
                     </dl>
-                    <dl class="write-row">
-                        <dt class="title">사진 첨부</dt>
-                        <dd class="content col">
-                            <label class="file-box">
-                                <input type="file" multiple >
-                                <span class="btn btn-gray">파일 선택</span>
-                            </label>
-                            <div class="tips">
-                                <p>* JPEG, PNG 형식의 5M 이하의 파일만 첨부 가능합니다. (최대 5개)</p>
-                                <p>* 개인정보가 포함된 이미지 등록은 자제하여 주시기 바랍니다.</p>
-                            </div>
-                        </dd>
-                    </dl>
                 </div>
                 <div class="btn-area">
                     <a class="btn btn-light" th:href="@{/board/qna-list}">뒤로가기</a>
-                    <button class="btn btn-primary" type="submit">작성 완료</button>
+                    <a class="btn btn-primary" type="submit" th:href="@{/board/qna-list}">작성 완료</a>
                 </div>
             </form>
         </div>

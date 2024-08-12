@@ -29,7 +29,8 @@ public interface AdminMapper {
     void deleteGeneralMember(Long memberId);
 
     void deleteExpertIdMember(Long expertId);
-
+  
+  
 }
 
 

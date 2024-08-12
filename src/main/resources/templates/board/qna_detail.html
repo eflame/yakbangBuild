@@ -16,8 +16,8 @@
         <menu th:replace="~{common/menu/side_menu::side-menu}" ></menu>
         <main class="contents">
             <!-- 작업영역 -->
-            <div class="inner" th:each="board : ${detail}">
-                <div class="qna-detail-wrap">
+            <div class="inner">
+                <div class="qna-detail-wrap" th:each="board : ${detail}">
                     <div class="title" th:text="${board.title}"></div>
                     <div class="title2" th:text="${board.content}"></div>
 
@@ -30,8 +30,8 @@
             </div>
             </div>
 
-            <div class="inner" th:each="board : ${detail}">
-                <div class="reply-qna-wrap">
+            <div class="inner">
+                <div class="reply-qna-wrap"  th:each="board : ${detail}">
                     <div class="row1">
                         <img th:src="@{/images/common/img_female.png}" class="ci-img1" alt="약사 캐릭터 그림">
                         <div class="txt-wrap" >

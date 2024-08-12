@@ -6,18 +6,29 @@
         <selectKey resultType="long" keyProperty="questionId" order="BEFORE">
             SELECT SEQ_QA.nextval FROM DUAL
         </selectKey>
-        insert into TBL_QA (QUESTION_ID, MEMBER_ID, TITLE, CONTENT, WRITE_DATE)
-        values (#{questionId}, #{memberId}, #{title}, #{content}, SYSDATE)
+        INSERT into TBL_QA (QUESTION_ID, PILL_ID, MEMBER_ID, TITLE, CONTENT, WRITE_DATE)
+        values (#{questionId}, #{pillId}, #{memberId}, #{title}, #{content}, SYSDATE)
     </insert>
 
 <!--  질문 게시판  -->
     <select id="selectQuestionList">
         SELECT Q.MEMBER_ID, Q.TITLE, Q.CONTENT, Q.PILL_ID,
                M.NAME, M.GENDER,
+               FLOOR(MONTHS_BETWEEN(SYSDATE, M.BIRTH) / 12) AS age,
+               CASE
+                   WHEN FLOOR(MONTHS_BETWEEN(SYSDATE, M.BIRTH) / 12) BETWEEN 10 AND 19 THEN '10대'
+                   WHEN FLOOR(MONTHS_BETWEEN(SYSDATE, M.BIRTH) / 12) BETWEEN 20 AND 29 THEN '20대'
+                   WHEN FLOOR(MONTHS_BETWEEN(SYSDATE, M.BIRTH) / 12) BETWEEN 30 AND 39 THEN '30대'
+                   WHEN FLOOR(MONTHS_BETWEEN(SYSDATE, M.BIRTH) / 12) BETWEEN 40 AND 49 THEN '40대'
+                   WHEN FLOOR(MONTHS_BETWEEN(SYSDATE, M.BIRTH) / 12) BETWEEN 50 AND 59 THEN '50대'
+                   WHEN FLOOR(MONTHS_BETWEEN(SYSDATE, M.BIRTH) / 12) >= 60 THEN '60대 이상'
+                   ELSE '미등록'
+                   END AS age_group,
                A.ANSWER_TITLE, A.ANSWER_NO
-        FROM TBL_QA Q, TBL_MEMBER M, TBL_ANSWER A
-        WHERE Q.MEMBER_ID = M.MEMBER_ID
-          AND Q.QUESTION_ID = A.QUESTION_ID
+        FROM TBL_QA Q JOIN TBL_MEMBER M
+               ON Q.MEMBER_ID = M.MEMBER_ID
+        LEFT JOIN TBL_ANSWER A
+               ON Q.QUESTION_ID = A.QUESTION_ID
     </select>
 
 <!-- 질문 게시판 상세  -->
@@ -25,13 +36,16 @@
         SELECT Q.QUESTION_ID, Q.MEMBER_ID, Q.PILL_ID, Q.TITLE, Q.CONTENT, Q.VIEW_COUNT,
                TO_CHAR(Q.WRITE_DATE, 'YYYY-MM-DD') AS WRITE_DATE,
                M.NAME, M.GENDER,
-               A.ANSWER_CONTENT, TO_CHAR(A.ANSWER_DATE, 'YYYY-MM-DD') AS ANSWER_DATE,
-               A.ANSWER_NO,
+               A.ANSWER_CONTENT,
+               TO_CHAR(A.ANSWER_DATE, 'YYYY-MM-DD') AS ANSWER_DATE, A.ANSWER_NO,
                E.NAME expertName, E.JOB, E.PHARMACY_ADDRESS
-        FROM TBL_QA Q, TBL_MEMBER M, TBL_ANSWER A, TBL_EXPERT_MEMBER E
-        WHERE Q.MEMBER_ID = M.MEMBER_ID
-          AND Q.QUESTION_ID = A.QUESTION_ID
-          AND E.EXPERT_ID = A.EXPERT_ID
+        FROM TBL_QA Q JOIN TBL_MEMBER M
+                ON Q.MEMBER_ID = M.MEMBER_ID
+        LEFT JOIN  TBL_ANSWER A
+                ON Q.QUESTION_ID = A.QUESTION_ID
+        LEFT JOIN TBL_EXPERT_MEMBER E
+                ON E.EXPERT_ID = A.EXPERT_ID
+        where Q.QUESTION_ID = #{questionId}
     </select>
 
 </mapper>
