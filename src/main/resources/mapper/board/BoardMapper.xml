@@ -45,7 +45,7 @@
                 ON Q.QUESTION_ID = A.QUESTION_ID
         LEFT JOIN TBL_EXPERT_MEMBER E
                 ON E.EXPERT_ID = A.EXPERT_ID
-        where Q.QUESTION_ID = 1
+        where Q.QUESTION_ID = #{questionId}
     </select>
 
 </mapper>

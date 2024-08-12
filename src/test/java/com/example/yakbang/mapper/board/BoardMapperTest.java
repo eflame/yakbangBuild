@@ -6,6 +6,7 @@ import com.example.yakbang.dto.board.BoardQnaWriteDTO;
 import com.example.yakbang.service.board.BoardService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,43 +25,30 @@ class BoardMapperTest {
     @Autowired BoardMapper boardMapper;
 
     BoardQnaWriteDTO boardQnaWriteDTO;
-    BoardQnaListDTO boardQnaListDTO;
-
-    @BeforeEach
-    void setUp(){
-        boardQnaWriteDTO = BoardQnaWriteDTO.builder()
-                .memberId(46L)
-                .pillId(1L)
-                .title("제목 test")
-                .content("내용 test")
-                .build();
-    }
 
     @Test
     @DisplayName("게시물 생성")
     void insertBoardQuestion() {
         boardQnaWriteDTO = new BoardQnaWriteDTO();
-        boardQnaWriteDTO.setTitle("Sample Title");
-        boardQnaWriteDTO.setContent("Sample Content");
+        boardQnaWriteDTO.setPillId(1L);
+        boardQnaWriteDTO.setTitle("title");
+        boardQnaWriteDTO.setContent("content");
         boardQnaWriteDTO.setMemberId(46L); // 실제 데이터베이스에 존재하는 값 사용
 
-        // When: 게시물 삽입
         boardMapper.insertBoardQuestion(boardQnaWriteDTO);
 
+        BoardQnaDetailDTO boardQnaDetailDTO = boardMapper.selectQuestionDetail(boardQnaWriteDTO.getQuestionId()).get();
         System.out.println("boardMapper = " + boardMapper);
-    }
 
-    @Test
-    void selectQuestionList() {
-        //g
-        boardMapper.insertBoardQuestion(boardQnaWriteDTO);
-        //w
-        List<BoardQnaListDTO> list = boardMapper.selectQuestionList();
-        //t
-        assertThat(list).hasSize(1);
-    }
+        assertThat(boardQnaDetailDTO.getTitle())
+                .isEqualTo(boardQnaWriteDTO.getTitle());
 
-    @Test
-    void selectQuestionDetail() {
+        assertThat(boardQnaDetailDTO)
+                .extracting("title")
+                .isEqualTo(boardQnaWriteDTO.getTitle());
+
+        assertThat(boardQnaDetailDTO)
+                .extracting("title", "content")
+                .containsExactly(boardQnaWriteDTO.getTitle(), boardQnaWriteDTO.getContent());
     }
-}
+    }

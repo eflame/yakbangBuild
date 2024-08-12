@@ -7,6 +7,7 @@ import com.example.yakbang.service.board.BoardService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +32,8 @@ public class BoardController {
     }
 
     @GetMapping("/qna-detail")
-    public String qna_detail(Long questionId, HttpSession session, Model model) {
+    public String qna_detail(@RequestParam("questionId") Long questionId,
+                             HttpSession session, Model model) {
         BoardQnaDetailDTO detail = boardService.findDetail(questionId);
         model.addAttribute("detail", detail);
 
