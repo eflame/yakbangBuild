@@ -1,6 +1,7 @@
 package com.example.yakbang.mapper.member;
 
 import com.example.yakbang.dto.member.MemberJoinDTO;
+import com.example.yakbang.dto.member.MemberModifyDTO;
 import com.example.yakbang.dto.member.MemberMypageDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -22,7 +23,7 @@ public interface MemberMapper {
     Optional<MemberMypageDTO> selectMemberInfo(Long memberId);
 
 //    마이페이지 정보수정
-    void updateMemberInfo(MemberMypageDTO memberMypageDTO);
+    void updateMemberInfo(MemberModifyDTO memberModifyDTO);
 
 //    회원 정보 삭제
     void deleteMemberInfo(Long memberId);

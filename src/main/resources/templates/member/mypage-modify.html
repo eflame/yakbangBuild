@@ -20,40 +20,50 @@
             <form th:action="@{/member/mypage-modify}" method="post">
                 <div class="mypage-header">
                 <h3 class="title">회원 정보</h3>
-                <a th:href="@{/member/mypage}" class="btn-normal btn-over-primary">수정 완료</a>
+                <button type="submit" class="btn-normal btn-over-primary">수정 완료</button>
                 </div>
                 <div class="mypage-body">
                     <ul class="info-list">
                         <li class="item">
                             <div class="info-key">아이디</div>
-                            <div class="info-value"><input class="input-text" type="text" th:value="${memberDTO.loginId}" readonly></div>
+                            <div class="info-value"><input class="input-text" type="text" name="loginId" th:value="${memberDTO.loginId}" readonly></div>
                         </li>
                         <li class="item">
                             <div class="info-key">이름</div>
-                            <div class="info-value"><input class="input-text" type="text" th:value="${memberDTO.name}" ></div>
+                            <div class="info-value"><input class="input-text" type="text" name="name" th:value="${memberDTO.name}" ></div>
                         </li>
                         <li class="item">
                             <div class="info-key">생년월일</div>
-                            <div class="info-value" ><input type="date" th:value="${memberDTO.birth}"></div>
+                            <div class="info-value" ><input type="date" name="birth" th:value="${memberDTO.birth}"></div>
                         </li>
                         <li class="item">
                             <div class="info-key">전화번호</div>
-                            <div class="info-value"><input class="input-text" type="text" th:value="${memberDTO.phoneNumber}"></div>
+                            <div class="info-value"><input class="input-text" type="text" name="phoneNumber" th:value="${memberDTO.phoneNumber}"></div>
                         </li>
                         <li class="item">
                             <div class="info-key">이메일</div>
-                            <div class="info-value"><input class="input-text" type="text" th:value="${memberDTO.email}"></div>
+                            <div class="info-value"><input class="input-text" type="text" name="email" th:value="${memberDTO.email}"></div>
                         </li>
+                        <th:block th:if="${memberType == 'expert'}" >
+                            <li class="item">
+                                <div class="info-key">직업</div>
+                                <div class="info-value"><input class="input-text" type="text" name="job" th:value="${memberDTO.job}"> </div>
+                            </li>
+                            <li class="item">
+                                <div class="info-key">직장주소</div>
+                                <div class="info-value"><input class="input-text" type="text" name="job" th:value="${memberDTO.pharmacyAddress}"></div>
+                            </li>
+                        </th:block>
                     </ul>
                     <div class="info-btns">
                         <!-- <p class="info-txt">
                             문의가 필요하다면
                             <a class="link" href="">고객센터</a>
                         </p> -->
-                        <p class="info-txt">
-                            이용을 중단하려면
-                            <a class="btn-open-modal" >회원탈퇴</a>
-                        </p>
+<!--                        <p class="info-txt">-->
+<!--                            이용을 중단하려면-->
+<!--                            <a class="btn-open-modal" >회원탈퇴</a>-->
+<!--                        </p>-->
                     </div>
                 </div>
             </form>

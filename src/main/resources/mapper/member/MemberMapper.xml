@@ -25,7 +25,7 @@
 
 <!--    마이페이지 정보 조회용-->
     <select id="selectMemberInfo">
-        SELECT LOGIN_ID,NAME,BIRTH,PHONE_NUMBER,EMAIL
+        SELECT LOGIN_ID,NAME,TO_CHAR(BIRTH, 'YYYY-MM-DD') AS BIRTH,PHONE_NUMBER,EMAIL
         FROM TBL_MEMBER
         WHERE MEMBER_ID=#{memberId}
     </select>

@@ -5,9 +5,9 @@ import lombok.Data;
 import java.time.LocalDate;
 
 @Data
-public class MemberDTO {
+public class ExpertMemberDTO {
 
-  private Long memberId;
+  private Long expertId;
   private String loginId;
   private String password;
   private String phoneNumber;
@@ -15,7 +15,6 @@ public class MemberDTO {
   private LocalDate birth;
   private String email;
   private String gender;
-  private Long expertId;
-  private String job;
-  private String pharmacyAddress;
+//  private String job;
+//  private String pharmacyAddress;
 }

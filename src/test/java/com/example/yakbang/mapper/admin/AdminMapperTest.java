@@ -35,6 +35,10 @@ class AdminMapperTest {
                 .phoneNumber("010-0000-0000")
                 .build();
 
+        // When
+        List<AdminMemberDTO> list = adminMapper.selectGeneralMembers(adminMemberDTO.getMemberId());
+
+
         adminExMemberDTO = AdminExMemberDTO.builder()
                 .expertId(1L)
                 .loginId("id1234")
