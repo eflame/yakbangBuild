@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -33,13 +32,23 @@ public class AdminService {
     }
 
     // 일반 회원 업데이트
-    public void updateGeneralMember(AdminMemberDTO adminMemberDTO) {
+    public void modifyGeneralMember(AdminMemberDTO adminMemberDTO) {
         adminMapper.updateGeneralMember(adminMemberDTO);
     }
 
     // 전문가 회원 업데이트
-    public void updateExpertMember(AdminExMemberDTO adminExMemberDTO) {
+    public void modifyExpertMember(AdminExMemberDTO adminExMemberDTO) {
         adminMapper.updateExpertMember(adminExMemberDTO);
+    }
+
+    // 일반 회원 삭제
+    public void deleteGeneralMember(Long memberId) {
+        adminMapper.deleteGeneralMember(memberId);
+    }
+    
+    // 전문가 회원 삭제
+    public void deleteExpertMember(Long memberId) {
+        adminMapper.deleteGeneralMember(memberId);
     }
 
 }
