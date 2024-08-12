@@ -47,11 +47,47 @@ document.addEventListener('DOMContentLoaded', () => {
                     console.log('This is a general member ID.');
                     openModal('general', userId);
                 }
-
-
             } else {
                 console.error('Member ID is missing.');
             }
+        }
+
+        if (target.classList.contains('btn-deleted')) {
+            event.preventDefault();
+            const userId = target.dataset.member;
+            const memberType = target.dataset.memberType;
+            if (userId) {
+                console.log('Member ID:', userId);
+                console.log('Member Type:', memberType);
+            }
+
+
+            // 서버로 데이터 전송
+            let deleteUrl = memberType === "expert" ? '/admin/members/deleteExpert/'+ userId : '/admin/members/deleteGeneral/'+ userId;
+            console.log(deleteUrl);
+            fetch(deleteUrl, {
+                method: 'DELETE'
+            })
+            .then(response => {
+                // 응답 상태를 먼저 확인
+                if (!response.ok) {
+                    throw new Error('네트워크 응답이 실패했습니다.');
+                }
+            })
+            // .then(data => {
+            //     console.log('Delete response:', data);
+            //     if (data.success) {
+            //         alert('회원 정보가 성공적으로 업데이트되었습니다.');
+            //         closeModal();
+            //         // 페이지 새로고침
+            //         window.location.reload();
+            //     } else {
+            //         alert('삭제 실패: ' + data.message);
+            //     }
+            // })
+            .catch(error => {
+                console.error('삭제 중 오류 발생:', error);
+            });
         }
     }
 

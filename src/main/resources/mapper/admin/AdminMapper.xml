@@ -40,7 +40,15 @@
         WHERE EXPERT_ID = #{expertId}
     </update>
 
+    <delete id="deleteGeneralMember">
+        DELETE TBL_MEMBER
+        WHERE MEMBER_ID = #{memberId}
+    </delete>
 
+    <delete id="deleteExpertMember">
+        DELETE TBL_EXPERT_MEMBER
+        WHERE EXPERT_ID = #{expertId}
+    </delete>
 
 
 </mapper>

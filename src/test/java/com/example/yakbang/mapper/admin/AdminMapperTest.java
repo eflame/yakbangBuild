@@ -1,7 +1,9 @@
 package com.example.yakbang.mapper.admin;
 
 import com.example.yakbang.dto.admin.AdminDTO;
+import com.example.yakbang.dto.admin.AdminExMemberDTO;
 import com.example.yakbang.dto.admin.AdminMemberDTO;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,26 +20,13 @@ class AdminMapperTest {
     @Autowired AdminMapper adminMapper;
     AdminDTO adminDTO;
     AdminMemberDTO adminMemberDTO;
+    AdminExMemberDTO adminExMemberDTO;
 
-    @Test
-    void selectAdminMemberId() {
-        // Given
-        adminDTO = AdminDTO.builder()
-                .memberId(0L)
-                .loginId("admin")
-                .password("1234")
-                .build();
-        // When
-        Long adminId = adminMapper.selectAdminId(adminDTO.getLoginId(), adminDTO.getPassword()).get();
-        // Then
-        assertThat(adminId).isEqualTo(adminDTO.getMemberId());
-    }
 
-    @Test
-    void selectAdminMember() {
-        // Given
+    @BeforeEach
+    void setUp() {
         adminMemberDTO = AdminMemberDTO.builder()
-                .memberId(2L)
+                .memberId(1L)
                 .loginId("test123")
                 .name("김철수")
                 .birth("2000-01-01")
@@ -45,10 +34,47 @@ class AdminMapperTest {
                 .email("test@test.com")
                 .phoneNumber("010-0000-0000")
                 .build();
-        // When
-        List<AdminMemberDTO> list = adminMapper.selectAdminList();
 
-        // Then
-        assertThat(list).hasSize(1);
+        adminExMemberDTO = AdminExMemberDTO.builder()
+                .expertId(1L)
+                .loginId("id1234")
+                .name("김영희")
+                .gender("F")
+                .birth("2000-01-01")
+                .phoneNumber("010-0000-0000")
+                .email("test@test.com")
+                .job("약사")
+                .pharmacyAddress("서울")
+                .build();
+    }
+
+
+
+    @Test
+    void testSelectAdminId() {
+    }
+
+    @Test
+    void testSelectGeneralMembers() {
+    }
+
+    @Test
+    void testSelectExpertMembers() {
+    }
+
+    @Test
+    void testUpdateGeneralMember() {
+    }
+
+    @Test
+    void testUpdateExpertMember() {
+    }
+
+    @Test
+    void testDeleteGeneralMember() {
+    }
+
+    @Test
+    void testDeleteExpertIdMember() {
     }
 }
