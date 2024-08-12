@@ -62,6 +62,7 @@ public class AdminMemberController {
         Map<String, Object> response = new HashMap<>();
         try {
             // 업데이트 로직
+            adminService.updateExpertMember(updatedData);
             response.put("success", true);
             return ResponseEntity.ok(response);
         } catch (Exception e) {

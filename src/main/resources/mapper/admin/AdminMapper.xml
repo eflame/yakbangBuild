@@ -15,6 +15,7 @@
         <if test="memberId != null">
             AND MEMBER_ID = #{memberId}
         </if>
+        ORDER BY MEMBER_ID DESC
     </select>
 
     <select id="selectExpertMembers" resultType="AdminExMemberDTO">
@@ -24,6 +25,7 @@
         <if test="expertID != null">
             AND EXPERT_ID = #{expertID}
         </if>
+        ORDER BY EXPERT_ID DESC
     </select>
 
     <update id="updateGeneralMember">
@@ -37,5 +39,8 @@
         SET NAME = #{name}, EMAIL = #{email}, PHONE_NUMBER = #{phoneNumber},  JOB = #{job}, PHARMACY_ADDRESS = #{pharmacyAddress}
         WHERE EXPERT_ID = #{expertId}
     </update>
+
+
+
 
 </mapper>
