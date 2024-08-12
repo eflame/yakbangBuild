@@ -23,6 +23,8 @@ public interface AdminMapper {
     void updateGeneralMember(AdminMemberDTO adminMemberDTO);
 
     void updateExpertMember(AdminExMemberDTO adminExMemberDTO);
+
+    List<AdminMemberDTO> selectAdminList();
 }
 
 

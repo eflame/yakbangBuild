@@ -4,6 +4,7 @@ import com.example.yakbang.dto.board.BoardQnaDetailDTO;
 import com.example.yakbang.dto.board.BoardQnaListDTO;
 import com.example.yakbang.dto.board.BoardQnaWriteDTO;
 import com.example.yakbang.service.board.BoardService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,19 @@ import static org.junit.jupiter.api.Assertions.*;
 class BoardMapperTest {
 
     @Autowired BoardMapper boardMapper;
+
     BoardQnaWriteDTO boardQnaWriteDTO;
     BoardQnaListDTO boardQnaListDTO;
+
+    @BeforeEach
+    void setUp(){
+        boardQnaWriteDTO = BoardQnaWriteDTO.builder()
+                .memberId(46L)
+                .pillId(1L)
+                .title("제목 test")
+                .content("내용 test")
+                .build();
+    }
 
     @Test
     @DisplayName("게시물 생성")

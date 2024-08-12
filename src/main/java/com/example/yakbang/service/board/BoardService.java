@@ -29,8 +29,8 @@ public class BoardService {
         return boardMapper.selectQuestionList();
     }
 
-    public List<BoardQnaDetailDTO> findDetail(Long questionId){
-        return List.of(boardMapper.selectQuestionDetail(questionId)
-                .orElseThrow(() -> new IllegalStateException("존재하지 않는 게시물 정보")));
+    public BoardQnaDetailDTO findDetail(Long questionId){
+        return boardMapper.selectQuestionDetail(questionId)
+                .orElseThrow(() -> new IllegalStateException("존재하지 않는 게시물 정보"));
     }
 }

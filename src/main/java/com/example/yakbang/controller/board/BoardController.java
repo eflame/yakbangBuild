@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @Slf4j
@@ -23,18 +24,18 @@ public class BoardController {
     @GetMapping("/qna-list")
     public String qna_list(Model model) {
         List<BoardQnaListDTO> list = boardService.findList(); // 게시물 목록 호출
+        log.info("list : {}", list);
         model.addAttribute("list", list);
 
         return "board/qna_list";
     }
 
     @GetMapping("/qna-detail")
-    public String qna_detail(Long questionId, Model model) {
-        List<BoardQnaDetailDTO> detail = boardService.findDetail(questionId);
+    public String qna_detail(Long questionId, HttpSession session, Model model) {
+        BoardQnaDetailDTO detail = boardService.findDetail(questionId);
         model.addAttribute("detail", detail);
 
         return "board/qna_detail";
-
     }
 
     @GetMapping("/qna-write")
@@ -48,10 +49,12 @@ public class BoardController {
     }
 
     @PostMapping("/qna-write")
-    public String qna_write(BoardQnaWriteDTO boardQnaWriteDTO){
-        boardService.addBoard(boardQnaWriteDTO);
-
+    public String qna_write(BoardQnaWriteDTO boardQnaWriteDTO,
+                            @SessionAttribute("memberId") Long memberId){
+        boardQnaWriteDTO.setMemberId(memberId);
         log.info("boardQnaWriteDTO:{}", boardQnaWriteDTO); // 로그 기록
+
+        boardService.addBoard(boardQnaWriteDTO);
 
         return "redirect:/board/qna-list";
     }
