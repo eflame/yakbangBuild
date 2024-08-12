@@ -103,7 +103,10 @@
                                                    th:data-member="${currentMemberType == 'expert' ? board.expertId : board.memberId}"
                                                    th:data-member-type="${currentMemberType == 'expert' ? 'expert' : 'general'}"
                                             >View</a></li>
-                                            <li><a href="#">Delete</a></li>
+                                            <li><a class="btn-deleted" href="#"
+                                                   th:data-member="${currentMemberType == 'expert' ? board.expertId : board.memberId}"
+                                                   th:data-member-type="${currentMemberType == 'expert' ? 'expert' : 'general'}"
+                                            >Delete</a></li>
                                         </ul>
                                     </div>
                                 </td>
@@ -174,6 +177,13 @@
                     <button id="btn-back" class="btn btn-light" type="button">취소</button>
                     <button id="btn-change-modify" class="btn btn-primary" type="button" >적용</button>
                 </div>
+            </div>
+        </div>
+        <div class="alert-wrap" style="display: none">
+            <p>정말 삭제 하시겠습니까?</p>
+            <div>
+                <button type="button">취소</button>
+                <button type="button">확인</button>
             </div>
         </div>
     </body>
