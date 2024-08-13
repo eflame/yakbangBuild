@@ -16,5 +16,7 @@ public interface BoardMapper {
 
     Optional<BoardQnaDetailDTO> selectQuestionDetail(Long questionId);
 
+    void updateViewCount(Long questionId); // 조회수 증가
+
 
 }

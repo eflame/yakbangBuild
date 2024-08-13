@@ -32,8 +32,8 @@ public class BoardController {
     }
 
     @GetMapping("/qna-detail")
-    public String qna_detail(@RequestParam("questionId") Long questionId,
-                             HttpSession session, Model model) {
+    public String qna_detail(@RequestParam("questionId") Long questionId, Model model) {
+        System.out.println("questionId = " + questionId);
         BoardQnaDetailDTO detail = boardService.findDetail(questionId);
         model.addAttribute("detail", detail);
 
@@ -56,7 +56,7 @@ public class BoardController {
         boardQnaWriteDTO.setMemberId(memberId);
         log.info("boardQnaWriteDTO:{}", boardQnaWriteDTO); // 로그 기록
 
-        boardService.addBoard(boardQnaWriteDTO);
+        boardService.addBoard(boardQnaWriteDTO); //
 
         return "redirect:/board/qna-list";
     }

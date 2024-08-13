@@ -36,6 +36,14 @@
   color: #2d3142;
   margin: 0px 0px 30px;
   text-align: left;
+
+  img {
+    width: 100%;
+
+    /*display: block;*/
+    /*margin-left: auto;*/          /* 이미지 중앙 정렬 */
+    /*margin-right: auto;*/
+  }
 }
 .line-210-1 {
   width: 100%;

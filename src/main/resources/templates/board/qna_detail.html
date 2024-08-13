@@ -19,7 +19,7 @@
             <div class="inner">
                 <div class="qna-detail-wrap" th:each="board : ${detail}">
                     <div class="title" th:text="${board.title}"></div>
-                    <div class="title2" th:text="${board.content}"></div>
+                    <div class="title2" th:utext="${board.content}"></div>
 
                     <div class="line-210-1"></div>
                     <div class="row">
