@@ -46,6 +46,10 @@
     line-height: 24px;
     color: #787e8b;
     margin: 8px 0px 0px;
+
+    img {
+      display: none;
+    }
   }
   .qna-user-wrap {
     margin: 20px 0px 0px;

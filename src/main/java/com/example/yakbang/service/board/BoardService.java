@@ -22,6 +22,7 @@ public class BoardService {
     private final BoardMapper boardMapper;
 
     public void addBoard(BoardQnaWriteDTO boardQnaWriteDTO){
+
         boardMapper.insertBoardQuestion(boardQnaWriteDTO);
     }
 
@@ -30,7 +31,9 @@ public class BoardService {
     }
 
     public BoardQnaDetailDTO findDetail(Long questionId){
+        boardMapper.updateViewCount(questionId); // 조회수 증가
         return boardMapper.selectQuestionDetail(questionId)
                 .orElseThrow(() -> new IllegalStateException("존재하지 않는 게시물 정보"));
     }
+
 }
