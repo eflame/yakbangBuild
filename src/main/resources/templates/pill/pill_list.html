@@ -8,6 +8,7 @@
 <link rel="stylesheet" th:href="@{/css/admin/admin.css}" />
 <link rel="stylesheet" th:href="@{/css/pill/pill.css}" />
 <script defer th:src="@{/js/common/common.js}"></script>
+<script defer th:src="@{/js/pill/list.js}"><</script>
 </head>
 <body>
 <div class="all-wrap">
@@ -63,24 +64,27 @@
             <!-- 약 리스트 -->
             <div class="search-list-wrap">
                 <div class="pill-list">
-                    <a th:each="pill : ${pills}"
-                       th:href="@{/pill/detail(id=${pill.itemSeq})}"
-                       class="pill-item">
-                        <!-- 약 이미지 -->
-                        <img th:src="@{${pill.pillImage}}"
-                             alt="Pill Image"
-                             class="pill-img" />
-                        <div class="info">
-                            <!-- 브랜드 (제조사) -->
-                            <span class="brand" th:text="${pill.companyName}">브랜드</span>
-                            <!-- 약 이름 -->
-                            <span class="pill-name" th:text="${pill.pillName}">약 이름</span>
-                            <!-- 리뷰 점수 (예시로 고정된 값 사용) -->
-                            <span class="review-score">4.68</span>
-                        </div>
-                    </a>
+
+<!--                    <a href="@{/pill/detail(id=${pill.itemSeq})}"-->
+<!--                       class="pill-item">-->
+<!--                        &lt;!&ndash; 약 이미지 &ndash;&gt;-->
+<!--                        <img src=""-->
+<!--                             alt="Pill Image"-->
+<!--                             class="pill-img" />-->
+<!--                        <div class="info">-->
+<!--                            &lt;!&ndash; 브랜드 (제조사) &ndash;&gt;-->
+<!--                            <span class="brand" >브랜드</span>-->
+<!--                            &lt;!&ndash; 약 이름 &ndash;&gt;-->
+<!--                            <span class="pill-name" >약 이름</span>-->
+<!--                            &lt;!&ndash; 리뷰 점수 (예시로 고정된 값 사용) &ndash;&gt;-->
+<!--                            <span class="review-score">4.68</span>-->
+<!--                        </div>-->
+<!--                    </a>-->
 
                 </div>
+            </div>
+            <div class="moreBtn">
+                <button class="load-more" id="load-more" data-page="1">30개 더 보기</button>
             </div>
         </div>
         <!-- 작업영역 -->
