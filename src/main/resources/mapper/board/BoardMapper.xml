@@ -12,7 +12,7 @@
 
 <!--  질문 게시판  -->
     <select id="selectQuestionList">
-        SELECT Q.MEMBER_ID, Q.TITLE, Q.CONTENT, Q.PILL_ID,
+        SELECT Q.QUESTION_ID, Q.MEMBER_ID, Q.TITLE, Q.CONTENT, Q.PILL_ID,
                M.NAME, M.GENDER,
                FLOOR(MONTHS_BETWEEN(SYSDATE, M.BIRTH) / 12) AS age,
                A.ANSWER_TITLE, A.ANSWER_NO
