@@ -3,6 +3,7 @@ package com.example.yakbang.controller.admin;
 import com.example.yakbang.dto.admin.AdminExMemberDTO;
 import com.example.yakbang.dto.admin.AdminMemberDTO;
 import com.example.yakbang.dto.admin.AdminPillDTO;
+import com.example.yakbang.dto.page.PageRequestDTO;
 import com.example.yakbang.service.admin.AdminMemberService;
 import com.example.yakbang.service.admin.AdminPillService;
 import jakarta.servlet.http.Cookie;
@@ -122,7 +123,10 @@ public class AdminController {
     }
 
     @GetMapping("/{memberType}/index")
-    public String index(@PathVariable("memberType") String memberType, Model model) {
+    public String index(@PathVariable("memberType") String memberType,
+                        PageRequestDTO pageRequestDTO,
+                        Model model) {
+
         if ("expert".equalsIgnoreCase(memberType)) {
             // 전문가 회원 데이터를 가져오는 로직
             List<AdminExMemberDTO> list = adminMemberService.findExpertMembers(null);
@@ -130,7 +134,7 @@ public class AdminController {
             model.addAttribute("currentMemberType", "expert");
         } else {
             // 일반 회원 데이터를 가져오는 로직
-            List<AdminMemberDTO> list = adminMemberService.findGeneralMembers(null);
+            List<AdminMemberDTO> list = adminMemberService.findMemberPageNation(pageRequestDTO);
             model.addAttribute("list", list);
             model.addAttribute("currentMemberType", "general");
         }
