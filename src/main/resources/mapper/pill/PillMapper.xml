@@ -1,27 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.yakbang.mapper.pill.PillMapper">
+
     <insert id="insertPill">
         <selectKey resultType="long" keyProperty="pillId" order="BEFORE">
             SELECT SEQ_PILL.nextval FROM DUAL
         </selectKey>
-        INSERT INTO TBL_PILL(PILL_ID, COMPANY_NAME, PILL_NAME, ITEM_SEQ, DETAIL_CONTENT, PILL_HOWTO, INTAKE_PRECAUTIONS,
-        ATPNQESITM, INTRCQESITM, SEQESITM, PILL_DEPOSIT, OPEN_DATE, UPDATE_DATE, PILL_IMAGE)
-        VALUES (#{pillId}, #{companyName}, #{pillName}, #{itemSeq}, #{detailContent}, #{pillHowto}, #{intakePrecautions},
-            #{atpnQesitm}, #{intrcQesitm}, #{seQesitm}, #{pillDeposit}, #{openDate}, #{updateDate}, #{pillImage})
+        INSERT INTO TBL_PILL(
+        PILL_ID, COMPANY_NAME, PILL_NAME, ITEM_SEQ, DETAIL_CONTENT,
+        PILL_HOWTO, INTAKE_PRECAUTIONS, ATPNQESITM, INTRCQESITM,
+        SEQESITM, PILL_DEPOSIT, OPEN_DATE, UPDATE_DATE, PILL_COLOR,
+        PILL_SHAPE, PILL_IMAGE)
+        VALUES (
+        #{pillId}, #{companyName}, #{pillName}, #{itemSeq}, #{detailContent},
+        #{pillHowto}, #{intakePrecautions}, #{atpnQesitm}, #{intrcQesitm},
+        #{seQesitm}, #{pillDeposit}, #{openDate}, #{updateDate}, #{pillColor},
+        #{pillShape}, #{pillImage})
     </insert>
-    
+
     <update id="updatePill">
         UPDATE TBL_PILL
-        SET  PILL_COLOR = #{pillColor}, PILL_SHAPE = #{pillShape}
+        SET
+        PILL_COLOR = #{pillColor},
+        PILL_SHAPE = #{pillShape}
         <if test="pillImage != null">
             , PILL_IMAGE = #{pillImage}
         </if>
         WHERE ITEM_SEQ = #{itemSeq}
     </update>
 
-    <select id="findAll" resultType="PillDTO">
-        SELECT * FROM TBL_PILL
+    <resultMap id="PillResultMap" type="com.example.yakbang.dto.pill.PillDTO">
+        <id property="itemSeq" column="ITEM_SEQ"/>
+        <result property="companyName" column="COMPANY_NAME"/>
+        <result property="pillName" column="PILL_NAME"/>
+        <result property="detailContent" column="DETAIL_CONTENT"/>
+        <result property="pillHowto" column="PILL_HOWTO"/>
+        <result property="intakePrecautions" column="INTAKE_PRECAUTIONS"/>
+        <result property="atpnQesitm" column="ATPNQESITM"/>
+        <result property="intrcQesitm" column="INTRCQESITM"/>
+        <result property="seQesitm" column="SEQESITM"/>
+        <result property="pillDeposit" column="PILL_DEPOSIT"/>
+        <result property="openDate" column="OPEN_DATE"/>
+        <result property="updateDate" column="UPDATE_DATE"/>
+        <result property="pillColor" column="PILL_COLOR"/>
+        <result property="pillShape" column="PILL_SHAPE"/>
+        <result property="pillImage" column="PILL_IMAGE"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="PillResultMap">
+        SELECT
+            COMPANY_NAME,
+            PILL_NAME,
+            ITEM_SEQ,
+            DETAIL_CONTENT,
+            PILL_HOWTO,
+            INTAKE_PRECAUTIONS,
+            ATPNQESITM,
+            INTRCQESITM,
+            SEQESITM,
+            PILL_DEPOSIT,
+            OPEN_DATE,
+            UPDATE_DATE,
+            PILL_COLOR,
+            PILL_SHAPE,
+            PILL_IMAGE
+        FROM TBL_PILL
     </select>
 
 </mapper>

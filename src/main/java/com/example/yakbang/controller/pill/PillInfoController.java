@@ -27,14 +27,9 @@ public class PillInfoController {
     }
 
     @GetMapping("/list")
-    public String pillList (){
-        return "pill/pill_list";
-    }
-
-    @GetMapping
     public String getPills(Model model) {
-        List<PillDTO> pills = pillService.getPillsInfo();
-        model.addAttribute("pills", pills);
+//        List<PillDTO> pills = pillService.getPillsInfo();
+//        model.addAttribute("pills", pills);
         return "pill/pill_list";
     }
 
