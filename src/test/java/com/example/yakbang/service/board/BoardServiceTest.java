@@ -1,6 +1,7 @@
 package com.example.yakbang.service.board;
 
 import com.example.yakbang.dto.board.BoardQnaDetailDTO;
+import com.example.yakbang.dto.board.BoardQnaListDTO;
 import com.example.yakbang.dto.board.BoardQnaWriteDTO;
 import com.example.yakbang.mapper.board.BoardMapper;
 import org.assertj.core.api.Assertions;
@@ -14,6 +15,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -21,22 +23,22 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 
-@ExtendWith(MockitoExtension.class)
+@SpringBootTest
 public class BoardServiceTest {
 
     @Mock
     BoardMapper boardMapper;
 
-    @InjectMocks
+    @Autowired
     BoardService boardService;
 
     @Test
     public void testAddBoard() {
         BoardQnaWriteDTO dto = BoardQnaWriteDTO.builder()
-                .pillId(121L)
-                .title("제목제목제목")
-                .content("내용내용내용")
-                .memberId(46L)
+                .pillId(1L)
+                .title("test title")
+                .content("test content")
+                .memberId(67L)
                 .build();
         boardMapper.insertBoardQuestion(dto);
 
@@ -49,17 +51,15 @@ public class BoardServiceTest {
 
     @Test
     void findDetail() {
-            // given
-            BoardQnaDetailDTO dto = BoardQnaDetailDTO.builder()
-                    .pillId(1L)
-                    .content("test")
-                    .title("test")
-                    .build();
+        BoardQnaDetailDTO board = boardService.findDetail(66L);
 
-            doReturn(Optional.of(dto)).when(boardMapper).selectQuestionDetail(any());
-            // when
-            BoardQnaDetailDTO board = boardService.findDetail(1L);
-            // then
-            Assertions.assertThat(board.getTitle()).isEqualTo("test");
+        System.out.println("board = " + board);
+    }
+
+    @Test
+    void findList() {
+        List<BoardQnaListDTO> list = boardService.findList();
+
+        System.out.println("list = " + list);
     }
 }

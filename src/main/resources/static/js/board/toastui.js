@@ -51,5 +51,46 @@
 
     });
 
+    let $writeBtn = document.querySelector('#write-btn');
+
+    $writeBtn.addEventListener('click', function () {
+        let contentHtml = editor.getHTML();
+        let title = document.querySelector('#title').value;
+
+        let form = document.createElement("form");
+        form.setAttribute("charset", "UTF-8");
+        form.setAttribute("method", "Post");  //Post 방식
+        form.setAttribute("action", "/board/qna-write"); //요청 보낼 주소
+
+        let titleField = document.createElement("input");
+        titleField.setAttribute("type", "hidden");
+        titleField.setAttribute("name", "title");
+        titleField.setAttribute("value", title);
+        form.appendChild(titleField);
+
+        let contentField = document.createElement("textarea");
+        contentField.setAttribute("name", "content");
+        contentField.innerText = contentHtml;
+        form.appendChild(contentField);
+
+
+
+        document.body.appendChild(form);
+
+        form.submit();
+    });
+
+}
+
+{
+    // let $editor = document.querySelector('#editor');
+    // let $writeBtn = document.querySelector('#write-btn');
+    //
+    // $writeBtn.addEventListener('click', function () {
+    //    let $contents = $editor.querySelector('.toastui-editor-contents');
+    //
+    //     console.dir($contents)
+    //     console.log($contents.innerHTML)
+    // });
 
 }

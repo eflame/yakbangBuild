@@ -19,13 +19,13 @@
     <main class="contents">
         <!-- 작업영역 -->
         <div class="inner">
-            <form class="form-write" action="">
+            <form class="form-write" th:action="@{/board/qna-write}" method="post">
                 <div class="write-wrap">
                     <p class="text_required">* 필수</p>
                     <dl class="write-row">
                         <dt class="title required">제목</dt>
                         <dd class="content">
-                            <input class="input-box full" type="text" />
+                            <input class="input-box full" type="text" name="" id="title"/>
                         </dd>
                     </dl>
                     <dl class="write-row">
@@ -42,7 +42,7 @@
                 </div>
                 <div class="btn-area">
                     <a class="btn btn-light" th:href="@{/board/qna-list}">뒤로가기</a>
-                    <a class="btn btn-primary" type="submit" th:href="@{/board/qna-list}">작성 완료</a>
+                    <button class="btn btn-primary" type="button" id="write-btn">작성 완료</button>
                 </div>
             </form>
         </div>

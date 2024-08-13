@@ -33,12 +33,12 @@ class BoardMapperTest {
         boardQnaWriteDTO.setPillId(1L);
         boardQnaWriteDTO.setTitle("title");
         boardQnaWriteDTO.setContent("content");
-        boardQnaWriteDTO.setMemberId(46L); // 실제 데이터베이스에 존재하는 값 사용
+        boardQnaWriteDTO.setMemberId(1L); // 실제 데이터베이스에 존재하는 값 사용
 
         boardMapper.insertBoardQuestion(boardQnaWriteDTO);
 
         BoardQnaDetailDTO boardQnaDetailDTO = boardMapper.selectQuestionDetail(boardQnaWriteDTO.getQuestionId()).get();
-        System.out.println("boardMapper = " + boardMapper);
+        System.out.println("boardQnaDetailDTO = " + boardQnaDetailDTO);
 
         assertThat(boardQnaDetailDTO.getTitle())
                 .isEqualTo(boardQnaWriteDTO.getTitle());
@@ -51,4 +51,20 @@ class BoardMapperTest {
                 .extracting("title", "content")
                 .containsExactly(boardQnaWriteDTO.getTitle(), boardQnaWriteDTO.getContent());
     }
+
+    @Test
+    void selectQuestionList() {
+        List<BoardQnaListDTO> boardQnaListDTO = boardMapper.selectQuestionList();
+
+        System.out.println("boardQnaListDTO = " + boardQnaListDTO);
     }
+
+    @Test
+    void selectQuestionDetail() {
+        BoardQnaDetailDTO boardQnaDetailDTO = boardMapper.selectQuestionDetail(boardQnaWriteDTO.getQuestionId()).get();
+
+        System.out.println("boardQnaDetailDTO = " + boardQnaDetailDTO);
+    }
+}
+
+

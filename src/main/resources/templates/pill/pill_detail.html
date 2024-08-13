@@ -41,21 +41,23 @@
                 <div class="section-box">
                     <div class="pill-detail-info">
                         <div class="pill-img">
-                            <img th:src="@{/images/tmp/A11A1270A000801.jpg}" alt="#"/>
+                            <!-- 약품 이미지 표시 -->
+                            <img th:src="@{${pill.pillImage}}" alt="Pill Image"/>
                         </div>
                         <div class="info">
-                            <div class="company-name">켄뷰</div>
-                            <h1 class="product-name">타이레놀</h1>
+                            <div class="company-name" th:text="${pill.companyName}">브랜드</div>
+                            <h1 class="product-name" th:text="${pill.pillName}">약 이름</h1>
                             <dl class="shape-color">
                                 <dt>형태 및 색</dt>
-                                <dd>원형 / 하양</dd>
+                                <dd th:text="${pill.pillShape} + ' / ' + ${pill.pillColor}">형태 / 색상</dd>
                             </dl>
                             <dl class="register-date">
                                 <dt>등록일</dt>
-                                <dd>2000. 01. 01</dd>
+                                <dd th:text="${pill.openDate}">등록일</dd>
                             </dl>
                         </div>
                     </div>
+
                     <div class="total-grade-area">
                         <div class="item">
                             <span class="rating">4.61</span>
