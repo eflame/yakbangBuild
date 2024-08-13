@@ -63,78 +63,94 @@
             <!-- 약 리스트 -->
             <div class="search-list-wrap">
                 <div class="pill-list">
-                    <a th:href="@{/pill/detail}" class="pill-item">
-                        <img th:src="@{/images/common/img_pill_01.png}" alt="#" class="pill-img type1" />
+                    <a th:each="pill : ${pills}"
+                       th:href="@{/pill/detail(id=${pill.itemSeq})}"
+                       class="pill-item">
+                        <!-- 약 이미지 -->
+                        <img th:src="@{${pill.pillImage}}"
+                             alt="Pill Image"
+                             class="pill-img" />
                         <div class="info">
-                            <span class="brand">브랜드</span>
-                            <span class="pill-name">약 이름약 이름약 이름약 이름약 이름약 이름약 이름</span>
+                            <!-- 브랜드 (제조사) -->
+                            <span class="brand" th:text="${pill.companyName}">브랜드</span>
+                            <!-- 약 이름 -->
+                            <span class="pill-name" th:text="${pill.pillName}">약 이름</span>
+                            <!-- 리뷰 점수 (예시로 고정된 값 사용) -->
                             <span class="review-score">4.68</span>
                         </div>
                     </a>
-                    <a th:href="@{/pill/detail}" class="pill-item">
-                        <img th:src="@{/images/common/img_pill_02.png}" alt="#" class="pill-img type2" />
-                        <div class="info">
-                            <span class="brand">브랜드</span>
-                            <span class="pill-name">약 이름</span>
-                            <span class="review-score">4.68</span>
-                        </div>
-                    </a>
-                    <a th:href="@{/pill/detail}" class="pill-item">
-                        <img th:src="@{/images/common/img_pill_03.png}" alt="#" class="pill-img type3" />
-                        <div class="info">
-                            <span class="brand">브랜드</span>
-                            <span class="pill-name">약 이름</span>
-                            <span class="review-score">4.68</span>
-                        </div>
-                    </a>
-                    <a th:href="@{/pill/detail}" class="pill-item">
-                        <img th:src="@{/images/common/img_pill.png}" alt="#" class="pill-img" />
-                        <div class="info">
-                            <span class="brand">브랜드</span>
-                            <span class="pill-name">약 이름</span>
-                            <span class="review-score">4.68</span>
-                        </div>
-                    </a>
-                    <a th:href="@{/pill/detail}" class="pill-item">
-                        <img th:src="@{/images/common/img_pill.png}" alt="#" class="pill-img" />
-                        <div class="info">
-                            <span class="brand">브랜드</span>
-                            <span class="pill-name">약 이름</span>
-                            <span class="review-score">4.68</span>
-                        </div>
-                    </a>
-                    <a th:href="@{/pill/detail}" class="pill-item">
-                        <img th:src="@{/images/common/img_pill.png}" alt="#" class="pill-img" />
-                        <div class="info">
-                            <span class="brand">브랜드</span>
-                            <span class="pill-name">약 이름</span>
-                            <span class="review-score">4.68</span>
-                        </div>
-                    </a>
-                    <a th:href="@{/pill/detail}" class="pill-item">
-                        <img th:src="@{/images/common/img_pill.png}" alt="#" class="pill-img" />
-                        <div class="info">
-                            <span class="brand">브랜드</span>
-                            <span class="pill-name">약 이름</span>
-                            <span class="review-score">4.68</span>
-                        </div>
-                    </a>
-                    <a th:href="@{/pill/detail}" class="pill-item">
-                        <img th:src="@{/images/common/img_pill.png}" alt="#" class="pill-img" />
-                        <div class="info">
-                            <span class="brand">브랜드</span>
-                            <span class="pill-name">약 이름</span>
-                            <span class="review-score">4.68</span>
-                        </div>
-                    </a>
-                    <a th:href="@{/pill/detail}" class="pill-item">
-                        <img th:src="@{/images/common/img_pill.png}" alt="#" class="pill-img" />
-                        <div class="info">
-                            <span class="brand">브랜드</span>
-                            <span class="pill-name">약 이름</span>
-                            <span class="review-score">4.68</span>
-                        </div>
-                    </a>
+                    <!--                    <a th:href="@{/pill/detail}" class="pill-item">-->
+                    <!--                        <img th:src="@{/images/common/img_pill_01.png}" alt="#" class="pill-img type1" />-->
+                    <!--                        <div class="info">-->
+                    <!--                            <span class="brand">브랜드</span>-->
+                    <!--                            <span class="pill-name">약 이름약 이름약 이름약 이름약 이름약 이름약 이름</span>-->
+                    <!--                            <span class="review-score">4.68</span>-->
+                    <!--                        </div>-->
+                    <!--                    </a>-->
+                    <!--                    <a th:href="@{/pill/detail}" class="pill-item">-->
+                    <!--                        <img th:src="@{/images/common/img_pill_02.png}" alt="#" class="pill-img type2" />-->
+                    <!--                        <div class="info">-->
+                    <!--                            <span class="brand">브랜드</span>-->
+                    <!--                            <span class="pill-name">약 이름</span>-->
+                    <!--                            <span class="review-score">4.68</span>-->
+                    <!--                        </div>-->
+                    <!--                    </a>-->
+                    <!--                    <a th:href="@{/pill/detail}" class="pill-item">-->
+                    <!--                        <img th:src="@{/images/common/img_pill_03.png}" alt="#" class="pill-img type3" />-->
+                    <!--                        <div class="info">-->
+                    <!--                            <span class="brand">브랜드</span>-->
+                    <!--                            <span class="pill-name">약 이름</span>-->
+                    <!--                            <span class="review-score">4.68</span>-->
+                    <!--                        </div>-->
+                    <!--                    </a>-->
+                    <!--                    <a th:href="@{/pill/detail}" class="pill-item">-->
+                    <!--                        <img th:src="@{/images/common/img_pill.png}" alt="#" class="pill-img" />-->
+                    <!--                        <div class="info">-->
+                    <!--                            <span class="brand">브랜드</span>-->
+                    <!--                            <span class="pill-name">약 이름</span>-->
+                    <!--                            <span class="review-score">4.68</span>-->
+                    <!--                        </div>-->
+                    <!--                    </a>-->
+                    <!--                    <a th:href="@{/pill/detail}" class="pill-item">-->
+                    <!--                        <img th:src="@{/images/common/img_pill.png}" alt="#" class="pill-img" />-->
+                    <!--                        <div class="info">-->
+                    <!--                            <span class="brand">브랜드</span>-->
+                    <!--                            <span class="pill-name">약 이름</span>-->
+                    <!--                            <span class="review-score">4.68</span>-->
+                    <!--                        </div>-->
+                    <!--                    </a>-->
+                    <!--                    <a th:href="@{/pill/detail}" class="pill-item">-->
+                    <!--                        <img th:src="@{/images/common/img_pill.png}" alt="#" class="pill-img" />-->
+                    <!--                        <div class="info">-->
+                    <!--                            <span class="brand">브랜드</span>-->
+                    <!--                            <span class="pill-name">약 이름</span>-->
+                    <!--                            <span class="review-score">4.68</span>-->
+                    <!--                        </div>-->
+                    <!--                    </a>-->
+                    <!--                    <a th:href="@{/pill/detail}" class="pill-item">-->
+                    <!--                        <img th:src="@{/images/common/img_pill.png}" alt="#" class="pill-img" />-->
+                    <!--                        <div class="info">-->
+                    <!--                            <span class="brand">브랜드</span>-->
+                    <!--                            <span class="pill-name">약 이름</span>-->
+                    <!--                            <span class="review-score">4.68</span>-->
+                    <!--                        </div>-->
+                    <!--                    </a>-->
+                    <!--                    <a th:href="@{/pill/detail}" class="pill-item">-->
+                    <!--                        <img th:src="@{/images/common/img_pill.png}" alt="#" class="pill-img" />-->
+                    <!--                        <div class="info">-->
+                    <!--                            <span class="brand">브랜드</span>-->
+                    <!--                            <span class="pill-name">약 이름</span>-->
+                    <!--                            <span class="review-score">4.68</span>-->
+                    <!--                        </div>-->
+                    <!--                    </a>-->
+                    <!--                    <a th:href="@{/pill/detail}" class="pill-item">-->
+                    <!--                        <img th:src="@{/images/common/img_pill.png}" alt="#" class="pill-img" />-->
+                    <!--                        <div class="info">-->
+                    <!--                            <span class="brand">브랜드</span>-->
+                    <!--                            <span class="pill-name">약 이름</span>-->
+                    <!--                            <span class="review-score">4.68</span>-->
+                    <!--                        </div>-->
+                    <!--                    </a>-->
                 </div>
             </div>
         </div>

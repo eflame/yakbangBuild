@@ -20,4 +20,8 @@
         WHERE ITEM_SEQ = #{itemSeq}
     </update>
 
+    <select id="findAll" resultType="PillDTO">
+        SELECT * FROM TBL_PILL
+    </select>
+
 </mapper>
