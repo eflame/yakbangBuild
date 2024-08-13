@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.yakbang.mapper.admin.AdminPillMapper">
+
+    <select id="selectPillInfo">
+        SELECT ITEM_SEQ, CATEGORY_ID, COMPANY_NAME, PILL_NAME,  DETAIL_CONTENT, PILL_HOWTO, INTAKE_PRECAUTIONS, ATPNQESITM, INTRCQESITM, SEQESITM, PILL_DEPOSIT, OPEN_DATE, UPDATE_DATE, PILL_COLOR, PILL_SHAPE, PILL_IMAGE
+        FROM TBL_PILL
+        <if test="itemSeq != null">
+            WHERE ITEM_SEQ = #{itemSeq}
+        </if>
+    </select>
+
+</mapper>

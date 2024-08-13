@@ -2,7 +2,6 @@ package com.example.yakbang.mapper.admin;
 
 import com.example.yakbang.dto.admin.AdminExMemberDTO;
 import com.example.yakbang.dto.admin.AdminMemberDTO;
-import com.example.yakbang.dto.member.MemberMypageDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -10,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Mapper
-public interface AdminMapper {
+public interface AdminMemberMapper {
     // 로그인
     Optional<Long> selectAdminId(@Param("loginId") String loginId,
                                        @Param("password") String password);
@@ -28,7 +27,7 @@ public interface AdminMapper {
 
     void deleteGeneralMember(Long memberId);
 
-    void deleteExpertIdMember(Long expertId);
+    void deleteExpertMember(Long expertId);
   
   
 }

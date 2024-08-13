@@ -12,12 +12,12 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
-class AdminMapperTest {
-    @Autowired AdminMapper adminMapper;
+class AdminMemberMapperTest {
+    @Autowired
+    AdminMemberMapper adminMemberMapper;
     AdminDTO adminDTO;
     AdminMemberDTO adminMemberDTO;
     AdminExMemberDTO adminExMemberDTO;
@@ -36,7 +36,7 @@ class AdminMapperTest {
                 .build();
 
         // When
-        List<AdminMemberDTO> list = adminMapper.selectGeneralMembers(adminMemberDTO.getMemberId());
+        List<AdminMemberDTO> list = adminMemberMapper.selectGeneralMembers(adminMemberDTO.getMemberId());
 
 
         adminExMemberDTO = AdminExMemberDTO.builder()
