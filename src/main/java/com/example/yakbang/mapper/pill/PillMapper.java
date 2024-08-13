@@ -1,8 +1,6 @@
 package com.example.yakbang.mapper.pill;
 
-import com.example.yakbang.dto.pill.PillDTO;
-import com.example.yakbang.dto.pill.PillItemDTO;
-import com.example.yakbang.dto.pill.PillOtcDTO;
+import com.example.yakbang.dto.pill.*;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -13,10 +11,10 @@ public interface PillMapper {
 
     void updatePill(PillOtcDTO pillOtcDTO);
 
-    List<PillDTO> findAll();
-
     @Select("SELECT * FROM TBL_PILL WHERE ITEM_SEQ = #{id}")
     PillDTO findById(@Param("id") Long id);
+
+    List<PillListDTO> selectListWithPage(PageRequest pageRequest);
 
 }
 
