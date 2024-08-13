@@ -1,4 +1,6 @@
 import * as comm from '../modules/modal.js';
+import * as comm from '../modules/pagination.js';
+import * as comm from '../modules/search.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     // DOM 요소 선택

@@ -32,8 +32,30 @@ class MemberMapperTest {
 
 
     }
+
+
+//    @Test
+//    void makeDummy(){
+//        MemberJoinDTO joinDTO = null;
+//
+//        for (int i = 0; i < 100; i++) {
+//            joinDTO = MemberJoinDTO.builder()
+//                    .loginId("test" + i)
+//                    .password("1234")
+//                    .phoneNumber("010-1234-5678")
+//                    .name("test" + i)
+//                    .birth("2024/08/07")
+//                    .email("test@gmail.com")
+//                    .gender("F").build();
+//
+//            memberMapper.insertMember(joinDTO);
+//
+//        }
+//    }
+
     @Test
     void insertMember() {
+
         // given
         memberMapper.insertMember(memberJoinDTO);
         // when

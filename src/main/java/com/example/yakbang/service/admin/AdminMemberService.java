@@ -2,6 +2,7 @@ package com.example.yakbang.service.admin;
 
 import com.example.yakbang.dto.admin.AdminExMemberDTO;
 import com.example.yakbang.dto.admin.AdminMemberDTO;
+import com.example.yakbang.dto.page.PageRequestDTO;
 import com.example.yakbang.mapper.admin.AdminMemberMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,10 @@ public class AdminMemberService {
     }
     
     // 일반 회원 조회
+    public List<AdminMemberDTO> findMemberPageNation(PageRequestDTO pageRequestDTO) {
+        return adminMemberMapper.memberPageList(pageRequestDTO);
+    }
+
     public List<AdminMemberDTO> findGeneralMembers(Long memberId) {
         return adminMemberMapper.selectGeneralMembers(memberId);
     }

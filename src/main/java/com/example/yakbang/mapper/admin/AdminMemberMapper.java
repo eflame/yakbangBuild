@@ -2,6 +2,7 @@ package com.example.yakbang.mapper.admin;
 
 import com.example.yakbang.dto.admin.AdminExMemberDTO;
 import com.example.yakbang.dto.admin.AdminMemberDTO;
+import com.example.yakbang.dto.page.PageRequestDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -15,6 +16,8 @@ public interface AdminMemberMapper {
                                        @Param("password") String password);
 
     // 회원관리
+    List<AdminMemberDTO> memberPageList(PageRequestDTO pageRequestDTO);
+    
     List<AdminMemberDTO> selectGeneralMembers(Long memberId);
     List<AdminExMemberDTO> selectExpertMembers(Long expertId);
 

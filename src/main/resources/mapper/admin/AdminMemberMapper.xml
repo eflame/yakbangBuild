@@ -28,6 +28,23 @@
         ORDER BY EXPERT_ID DESC
     </select>
 
+    <select id="memberPageList">
+        SELECT MEMBER_ID, LOGIN_ID, PHONE_NUMBER, NAME, BIRTH, EMAIL, GENDER
+        FROM (
+            SELECT ROWNUM AS RNUM, MEMBER_ID, LOGIN_ID, PHONE_NUMBER, NAME, BIRTH, EMAIL, GENDER
+            FROM (SELECT MEMBER_ID, LOGIN_ID, PHONE_NUMBER, NAME, BIRTH, EMAIL, GENDER
+                  FROM TBL_MEMBER
+                  WHERE MEMBER_ID > 0
+                  ORDER BY MEMBER_ID DESC
+            )
+             <![CDATA[
+                WHERE ROWNUM <= #{page} * #{amount}
+            ]]>
+        )
+        WHERE RNUM > (#{page} - 1) * #{amount}
+    </select>
+
+
     <update id="updateGeneralMember">
         UPDATE TBL_MEMBER
         SET NAME = #{name}, EMAIL = #{email}, PHONE_NUMBER = #{phoneNumber}
