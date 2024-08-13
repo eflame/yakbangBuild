@@ -32,9 +32,14 @@ public class AdminMemberService {
     }
 
     // 전문가 회원 조회
+    public List<AdminExMemberDTO> findMemberExPageNation(PageRequestDTO pageRequestDTO) {
+        return adminMemberMapper.memberExPageList(pageRequestDTO);
+    }
     public List<AdminExMemberDTO> findExpertMembers(Long expertId) {
         return adminMemberMapper.selectExpertMembers(expertId);
     }
+
+
 
     // 일반 회원 업데이트
     public void modifyGeneralMember(AdminMemberDTO adminMemberDTO) {
@@ -57,4 +62,12 @@ public class AdminMemberService {
         adminMemberMapper.deleteExpertMember(expertId);
     }
 
+    //페이지
+    public int findGeneralTotal(){
+        return adminMemberMapper.generalMemberTotal();
+    }
+
+    public int findExpertTotal(){
+        return adminMemberMapper.expertMemberTotal();
+    }
 }

@@ -1,6 +1,8 @@
-import * as comm from '../modules/modal.js';
-import * as comm from '../modules/pagination.js';
-import * as comm from '../modules/search.js';
+import { DatasetManager } from '../modules/datasetManager.js';
+import * as modal  from '../modules/modal.js';
+import * as pageNation from '../modules/pagination.js';
+import * as search from  '../modules/search.js';
+
 
 document.addEventListener('DOMContentLoaded', () => {
     // DOM 요소 선택
@@ -37,27 +39,38 @@ document.addEventListener('DOMContentLoaded', () => {
         // 'btn-open-modal' 클래스가 있는 버튼 클릭 처리
         if (target.classList.contains('btn-open-modal')) {
             event.preventDefault();
-            const userId = target.dataset.member;
-            const memberType = target.dataset.memberType;
-            if (userId) {
-                console.log('Member ID:', userId);
-                console.log('Member Type:', memberType);
+            const manager = new DatasetManager(event.target)
 
-                if (memberType === 'expert') {
+            if (manager.dataset.hasOwnProperty('memberId')) {
+                console.log('Member ID:', manager.dataset.memberId);
+                console.log('Member Type:', manager.dataset.memberType);
+
+                if (manager.dataset.memberType === 'expert') {
                     console.log('This is an expert ID.');
-                    openModal('expert', userId);
-                } else if (memberType === 'general') {
+                    modal.openModal(manager).then(result => {
+                        console.log('Modal opened successfully:', result);
+                    }).catch(error => {
+                        console.error('Error opening modal:', error);
+                    });
+                } else if (manager.dataset.memberType === 'general') {
                     console.log('This is a general member ID.');
-                    openModal('general', userId);
+                    modal.openModal(manager).then(result => {
+                        console.log('Modal opened successfully:', result);
+                    }).catch(error => {
+                        console.error('Error opening modal:', error);
+                    });
                 }
             } else {
                 console.error('Member ID is missing.');
             }
         }
 
+
         if (target.classList.contains('btn-deleted')) {
             event.preventDefault();
-            const userId = target.dataset.member;
+            const manager = new DatasetManager(event.target)
+
+            const userId = manager.dataset.memberId;
             const memberType = target.dataset.memberType;
             if (userId) {
                 console.log('Member ID:', userId);
@@ -102,47 +115,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 모달 팝업 열기
-    function openModal(memberType, userId){
-        document.getElementById('modal-member-type').value = memberType;
-        document.getElementById('modal-member-id').value = userId;
-        fetch('/admin/members/' + memberType + '/' + userId, {
-            method: 'GET'
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Fetched data:', data); // 데이터를 콘솔에 출력하여 확인
 
-            if (data.length > 0) {
-                const member = data[0];
-                // 데이터가 포함된 객체에서 속성들을 가져와서 모달에 설정
-                document.getElementById('loginId').innerText = member.loginId || 'N/A';
-                document.getElementById('memberName').value = member.name || 'N/A';
-                document.getElementById('memberGender').innerText = member.gender || 'N/A';
-                document.getElementById('memberBirth').innerText = member.birth || 'N/A';
-                document.getElementById('memberEmail').value = member.email || 'N/A';
-                document.getElementById('memberPhoneNumber').value = member.phoneNumber || 'N/A';
-                if (memberType === 'expert') {
-                    document.getElementById('memberJob').value = member.job || 'N/A';
-                    document.getElementById('pharmacyAddress').value = member.pharmacyAddress || 'N/A';
-                }
-                document.querySelector(".modal-wrap").classList.add("open");
-                document.querySelector("body").appendChild(dim);
-            } else {
-                console.error("회원정보를 찾을수 없습니다..")
-            }
-        })
-        .catch(error => {
-            console.error('회원정보를 가져오는 중 오류 발생:', error)
-        })
-    }
-    // 모달 팝업 닫기
-    function closeModal(){
-        $modalWrap.classList.remove("open");
-        dim.remove();
-    }
     // 모달 닫기 버튼 이벤트 리스너 추가 (모달 내에서 닫기 버튼이 있는 경우)
-    document.querySelector('.modal-close')?.addEventListener('click', closeModal);
+    document.querySelector('.modal-close')?.addEventListener('click', modal.closeModal);
 
 
     {  // 탭
@@ -166,14 +141,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const $qnaBody = document.querySelector(".qna-body");
     const $btnArea = document.querySelector(".btn-area");
     const $btnModify = document.querySelector("#btn-modify");
+    const $btnCheck = document.querySelector("#btn-check");
     const $btnChangeModify = document.querySelector("#btn-change-modify");
     const $btnBack = document.querySelector("#btn-back");
     let oldContents = [];
     let contentOld = "";
-    let memberId = "";
 
 
-    // 수정 버튼 클릭 이벤트 핸들러
+    // 수정 버튼
     $btnModify?.addEventListener("click", (e) => {
         $btnArea.classList.add("modify");
         memberModify(e);
@@ -185,7 +160,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 수정 완료 버튼 클릭 이벤트 핸들러
+    // 확인 버튼
+    $btnCheck?.addEventListener('click', modal.closeModal);
+
+    // 수정완료 버튼
     $btnChangeModify?.addEventListener("click", (e) => {
         $btnArea.classList.remove("modify");
         memberModify(e);
@@ -195,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 취소 버튼 클릭 이벤트 핸들러
+    // 취소 버튼
     $btnBack?.addEventListener("click", (e) => {
         $btnArea.classList.remove("modify");
         memberModify(e);

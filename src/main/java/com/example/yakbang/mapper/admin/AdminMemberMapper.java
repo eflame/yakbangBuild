@@ -17,7 +17,8 @@ public interface AdminMemberMapper {
 
     // 회원관리
     List<AdminMemberDTO> memberPageList(PageRequestDTO pageRequestDTO);
-    
+    List<AdminExMemberDTO> memberExPageList(PageRequestDTO pageRequestDTO);
+
     List<AdminMemberDTO> selectGeneralMembers(Long memberId);
     List<AdminExMemberDTO> selectExpertMembers(Long expertId);
 
@@ -31,8 +32,12 @@ public interface AdminMemberMapper {
     void deleteGeneralMember(Long memberId);
 
     void deleteExpertMember(Long expertId);
-  
-  
+
+    // 페이지 총 갯수
+    int generalMemberTotal();
+
+    int expertMemberTotal();
+
 }
 
 

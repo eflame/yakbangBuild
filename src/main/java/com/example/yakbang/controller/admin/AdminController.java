@@ -4,6 +4,7 @@ import com.example.yakbang.dto.admin.AdminExMemberDTO;
 import com.example.yakbang.dto.admin.AdminMemberDTO;
 import com.example.yakbang.dto.admin.AdminPillDTO;
 import com.example.yakbang.dto.page.PageRequestDTO;
+import com.example.yakbang.dto.page.PageSetDTO;
 import com.example.yakbang.service.admin.AdminMemberService;
 import com.example.yakbang.service.admin.AdminPillService;
 import jakarta.servlet.http.Cookie;
@@ -128,15 +129,21 @@ public class AdminController {
                         Model model) {
 
         if ("expert".equalsIgnoreCase(memberType)) {
+            int total = adminMemberService.findExpertTotal();
+            PageSetDTO pageSetDTO = new PageSetDTO(pageRequestDTO, total);
             // 전문가 회원 데이터를 가져오는 로직
-            List<AdminExMemberDTO> list = adminMemberService.findExpertMembers(null);
+            List<AdminExMemberDTO> list = adminMemberService.findMemberExPageNation(pageRequestDTO);
             model.addAttribute("list", list);
-            model.addAttribute("currentMemberType", "expert");
+            model.addAttribute("pageSetDTO", pageSetDTO);
+            model.addAttribute("memberType", "expert");
         } else {
+            int total = adminMemberService.findGeneralTotal();
+            PageSetDTO pageSetDTO = new PageSetDTO(pageRequestDTO, total);
             // 일반 회원 데이터를 가져오는 로직
             List<AdminMemberDTO> list = adminMemberService.findMemberPageNation(pageRequestDTO);
             model.addAttribute("list", list);
-            model.addAttribute("currentMemberType", "general");
+            model.addAttribute("pageSetDTO", pageSetDTO);
+            model.addAttribute("memberType", "general");
         }
         return "admin/index";
     }
