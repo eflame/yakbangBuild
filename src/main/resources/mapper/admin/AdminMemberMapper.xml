@@ -74,12 +74,12 @@
     </update>
 
     <delete id="deleteGeneralMember">
-        DELETE TBL_MEMBER
+        DELETE FROM TBL_MEMBER
         WHERE MEMBER_ID = #{memberId}
     </delete>
 
     <delete id="deleteExpertMember">
-        DELETE TBL_EXPERT_MEMBER
+        DELETE FROM TBL_EXPERT_MEMBER
         WHERE EXPERT_ID = #{expertId}
     </delete>
 

@@ -52,14 +52,13 @@ public class AdminMemberService {
     }
 
     // 일반 회원 삭제
-    public boolean deleteGeneralMember(Long memberId) {
-        adminMemberMapper.deleteGeneralMember(memberId);
-        return false;
+    public int deleteGeneral(Long memberId) {
+        return adminMemberMapper.deleteGeneralMember(memberId);
     }
     
     // 전문가 회원 삭제
-    public void deleteExpertMember(Long expertId) {
-        adminMemberMapper.deleteExpertMember(expertId);
+    public int deleteExpert(Long expertId) {
+        return adminMemberMapper.deleteExpertMember(expertId);
     }
 
     //페이지

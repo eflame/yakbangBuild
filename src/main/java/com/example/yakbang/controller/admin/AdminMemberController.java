@@ -72,9 +72,10 @@ public class AdminMemberController {
     }
 
     @DeleteMapping("/deleteGeneral/{userId}")
-    public ResponseEntity<Map<String, Object>> deleteGeneral(@PathVariable("userId") Long userId) {
-        boolean success = adminMemberService.deleteGeneralMember(userId);
+    public ResponseEntity<Map<String, Object>> deleteGeneral(@PathVariable("userId") Long memberId) {
         Map<String, Object> response = new HashMap<>();
+        boolean success = adminMemberService.deleteGeneral(memberId) > 0;
+
         response.put("success", success);
 
         if (success) {
@@ -85,17 +86,19 @@ public class AdminMemberController {
         }
     }
 
+
     @DeleteMapping("/deleteExpert/{userId}")
-    public ResponseEntity<Map<String, Object>> deleteExpert(@PathVariable("userId") Long userId) {
+    public ResponseEntity<Map<String, Object>> deleteExpert(@PathVariable("userId") Long expertId) {
         Map<String, Object> response = new HashMap<>();
-        try {
-            adminMemberService.deleteExpertMember(userId);
-            response.put("success", true);
+        boolean success = adminMemberService.deleteExpert(expertId) > 0;
+
+        response.put("success", success);
+
+        if (success) {
             return ResponseEntity.ok(response);
-        } catch (Exception e) {
-            response.put("success", false);
-            response.put("message", "전문 회원 삭제 중 오류 발생: " + e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        } else {
+            response.put("message", "전문 회원 실패");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
     }
 }

@@ -29,9 +29,9 @@ public interface AdminMemberMapper {
 
     // 회원탈퇴
 
-    void deleteGeneralMember(Long memberId);
+    int deleteGeneralMember(Long memberId);
 
-    void deleteExpertMember(Long expertId);
+    int deleteExpertMember(Long expertId);
 
     // 페이지 총 갯수
     int generalMemberTotal();

@@ -71,7 +71,15 @@ class AdminMemberMapperTest {
     }
 
     @Test
-    void testDeleteGeneralMember() {
+    void testDeleteGeneral() {
+        // Given
+        assertThat(adminMemberMapper.selectGeneralMembers(adminMemberDTO.getMemberId())).isNotEmpty(); // Ensure data exists
+
+        // When
+        adminMemberMapper.deleteGeneralMember(adminMemberDTO.getMemberId());
+
+        // Then
+        assertThat(adminMemberMapper.selectGeneralMembers(adminMemberDTO.getMemberId())).isEmpty();
     }
 
     @Test

@@ -17,6 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class MemberMapperTest {
 
     @Autowired MemberMapper memberMapper;
+    @Autowired ExpertMemberMapper expertMemberMapper;
     MemberJoinDTO memberJoinDTO;
 
     @BeforeEach
@@ -46,9 +47,11 @@ class MemberMapperTest {
 //                    .name("test" + i)
 //                    .birth("2024/08/07")
 //                    .email("test@gmail.com")
+//                    .job("약사")
+//                    .pharmacyAddress("서울")
 //                    .gender("F").build();
 //
-//            memberMapper.insertMember(joinDTO);
+//            expertMemberMapper.insertExpertMember(joinDTO);
 //
 //        }
 //    }
