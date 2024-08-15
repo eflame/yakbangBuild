@@ -34,9 +34,9 @@ public interface AdminMemberMapper {
     int deleteExpertMember(Long expertId);
 
     // 페이지 총 갯수
-    int generalMemberTotal();
+    int generalMemberTotal(PageRequestDTO pageRequestDTO);
 
-    int expertMemberTotal();
+    int expertMemberTotal(PageRequestDTO pageRequestDTO);
 
 }
 

@@ -3,11 +3,38 @@
 <mapper namespace="com.example.yakbang.mapper.admin.AdminPillMapper">
 
     <select id="selectPillInfo">
-        SELECT ITEM_SEQ, CATEGORY_ID, COMPANY_NAME, PILL_NAME,  DETAIL_CONTENT, PILL_HOWTO, INTAKE_PRECAUTIONS, ATPNQESITM, INTRCQESITM, SEQESITM, PILL_DEPOSIT, OPEN_DATE, UPDATE_DATE, PILL_COLOR, PILL_SHAPE, PILL_IMAGE
+        SELECT ITEM_SEQ, CATEGORY_ID, COMPANY_NAME, PILL_NAME, DETAIL_CONTENT, PILL_HOWTO, INTAKE_PRECAUTIONS,
+               ATPNQESITM, INTRCQESITM, SEQESITM, PILL_DEPOSIT, TO_CHAR(OPEN_DATE, 'YYYY-MM-DD') AS OPEN_DATE, TO_CHAR(UPDATE_DATE, 'YYYY-MM-DD') AS UPDATE_DATE, PILL_COLOR, PILL_SHAPE, PILL_IMAGE
         FROM TBL_PILL
-        <if test="itemSeq != null">
-            WHERE ITEM_SEQ = #{itemSeq}
-        </if>
+        WHERE ITEM_SEQ = #{itemSeq}
     </select>
 
+    <select id="selectPillPageList">
+        SELECT ITEM_SEQ, CATEGORY_ID, COMPANY_NAME, PILL_NAME, DETAIL_CONTENT, PILL_HOWTO, INTAKE_PRECAUTIONS, ATPNQESITM, INTRCQESITM, SEQESITM, PILL_DEPOSIT, TO_CHAR(OPEN_DATE, 'YYYY-MM-DD') AS OPEN_DATE, TO_CHAR(UPDATE_DATE, 'YYYY-MM-DD') AS UPDATE_DATE, PILL_COLOR, PILL_SHAPE, PILL_IMAGE
+        FROM (
+            SELECT ROWNUM AS RNUM, ITEM_SEQ, CATEGORY_ID, COMPANY_NAME, PILL_NAME, DETAIL_CONTENT, PILL_HOWTO, INTAKE_PRECAUTIONS, ATPNQESITM, INTRCQESITM, SEQESITM, PILL_DEPOSIT, OPEN_DATE, UPDATE_DATE, PILL_COLOR, PILL_SHAPE, PILL_IMAGE
+            FROM (
+                SELECT ITEM_SEQ, CATEGORY_ID, COMPANY_NAME, PILL_NAME, DETAIL_CONTENT, PILL_HOWTO, INTAKE_PRECAUTIONS, ATPNQESITM, INTRCQESITM, SEQESITM, PILL_DEPOSIT, OPEN_DATE, UPDATE_DATE, PILL_COLOR, PILL_SHAPE, PILL_IMAGE
+                FROM TBL_PILL
+                <if test="keyword != null and keyword != ''">
+                    WHERE ${keywordType} LIKE '%' || #{keyword} || '%'
+                </if>
+                ORDER BY ITEM_SEQ DESC
+                )
+            <![CDATA[
+            WHERE ROWNUM <= #{page} * #{amount}
+            ]]>
+            )
+        <![CDATA[
+        WHERE RNUM > (#{page} - 1) * #{amount}
+        ]]>
+    </select>
+
+    <select id="PillTotal">
+        SELECT COUNT(ITEM_SEQ)
+        FROM TBL_PILL
+        <if test="keywordType != null and keywordType != ''">
+            WHERE ${keywordType} LIKE '%' || #{keyword} || '%'
+        </if>
+    </select>
 </mapper>

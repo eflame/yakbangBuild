@@ -9,7 +9,7 @@
     </select>
 
     <select id="selectGeneralMembers" resultType="AdminMemberDTO" >
-        SELECT MEMBER_ID, LOGIN_ID, PHONE_NUMBER, NAME, BIRTH, EMAIL, GENDER
+        SELECT MEMBER_ID, LOGIN_ID, PHONE_NUMBER, NAME, TO_CHAR(BIRTH, 'YYYY-MM-DD') AS BIRTH, EMAIL, GENDER
         FROM TBL_MEMBER
         WHERE MEMBER_ID > 0
         <if test="memberId != null">
@@ -19,7 +19,7 @@
     </select>
 
     <select id="selectExpertMembers" resultType="AdminExMemberDTO">
-        SELECT EXPERT_ID, LOGIN_ID, PASSWORD, PHONE_NUMBER, NAME, BIRTH, EMAIL, GENDER, JOB, PHARMACY_ADDRESS
+        SELECT EXPERT_ID, LOGIN_ID, PASSWORD, PHONE_NUMBER, NAME, TO_CHAR(BIRTH, 'YYYY-MM-DD') AS BIRTH, EMAIL, GENDER, JOB, PHARMACY_ADDRESS
         FROM TBL_EXPERT_MEMBER
         WHERE EXPERT_ID > 0
         <if test="expertID != null">
@@ -29,12 +29,15 @@
     </select>
 
     <select id="memberPageList">
-        SELECT MEMBER_ID, LOGIN_ID, PHONE_NUMBER, NAME, BIRTH, EMAIL, GENDER
+        SELECT MEMBER_ID, LOGIN_ID, PHONE_NUMBER, NAME, TO_CHAR(BIRTH, 'YYYY-MM-DD') AS BIRTH, EMAIL, GENDER
         FROM (
             SELECT ROWNUM AS RNUM, MEMBER_ID, LOGIN_ID, PHONE_NUMBER, NAME, BIRTH, EMAIL, GENDER
             FROM (SELECT MEMBER_ID, LOGIN_ID, PHONE_NUMBER, NAME, BIRTH, EMAIL, GENDER
                   FROM TBL_MEMBER
                   WHERE MEMBER_ID > 0
+                    <if test="keyword != null and keyword != ''">
+                        AND ${keywordType} LIKE '%' || #{keyword} || '%'
+                    </if>
                   ORDER BY MEMBER_ID DESC
             )
              <![CDATA[
@@ -45,14 +48,17 @@
     </select>
 
     <select id="memberExPageList">
-        SELECT EXPERT_ID, LOGIN_ID, PHONE_NUMBER, NAME, BIRTH, EMAIL, GENDER, JOB, PHARMACY_ADDRESS
+        SELECT EXPERT_ID, LOGIN_ID, PHONE_NUMBER, NAME, TO_CHAR(BIRTH, 'YYYY-MM-DD') AS BIRTH, EMAIL, GENDER, JOB, PHARMACY_ADDRESS
         FROM (
-                 SELECT ROWNUM AS RNUM, EXPERT_ID, LOGIN_ID, PHONE_NUMBER, NAME, BIRTH, EMAIL, GENDER, JOB, PHARMACY_ADDRESS
-                 FROM (SELECT EXPERT_ID, LOGIN_ID, PHONE_NUMBER, NAME, BIRTH, EMAIL, GENDER, JOB, PHARMACY_ADDRESS
-                       FROM TBL_EXPERT_MEMBER
-                       WHERE EXPERT_ID > 0
-                       ORDER BY EXPERT_ID DESC
-                      )
+             SELECT ROWNUM AS RNUM, EXPERT_ID, LOGIN_ID, PHONE_NUMBER, NAME, BIRTH, EMAIL, GENDER, JOB, PHARMACY_ADDRESS
+             FROM (SELECT EXPERT_ID, LOGIN_ID, PHONE_NUMBER, NAME, BIRTH, EMAIL, GENDER, JOB, PHARMACY_ADDRESS
+                   FROM TBL_EXPERT_MEMBER
+                   WHERE EXPERT_ID > 0
+                    <if test="keyword != null and keyword != ''">
+                        AND ${keywordType} LIKE '%' || #{keyword} || '%'
+                    </if>
+                   ORDER BY EXPERT_ID DESC
+                  )
              <![CDATA[
                  WHERE ROWNUM <= #{page} * #{amount}
             ]]>
@@ -87,12 +93,18 @@
         SELECT COUNT(MEMBER_ID)
         FROM TBL_MEMBER
         WHERE MEMBER_ID > 0
+        <if test="keywordType != null and keywordType != ''">
+            AND ${keywordType} LIKE '%' || #{keyword} || '%'
+        </if>
     </select>
 
     <select id="expertMemberTotal">
         SELECT COUNT(EXPERT_ID)
         FROM TBL_EXPERT_MEMBER
         WHERE EXPERT_ID > 0
+        <if test="keywordType != null and keywordType != ''">
+            AND ${keywordType} LIKE '%' || #{keyword} || '%'
+        </if>
     </select>
 
 

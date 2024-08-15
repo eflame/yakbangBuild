@@ -1,6 +1,7 @@
 package com.example.yakbang.service.admin;
 
 import com.example.yakbang.dto.admin.AdminPillDTO;
+import com.example.yakbang.dto.page.PageRequestDTO;
 import com.example.yakbang.mapper.admin.AdminPillMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,14 @@ public class AdminPillService {
 
     public List<AdminPillDTO> findPillInfo(Long itemSeq){
         return adminPillMapper.selectPillInfo(itemSeq);
+    }
+
+    public List<AdminPillDTO> findPillPageList(PageRequestDTO pageRequestDTO) {
+        return adminPillMapper.selectPillPageList(pageRequestDTO);
+    }
+
+    public int PillTotal(PageRequestDTO pageRequestDTO) {
+        return adminPillMapper.PillTotal(pageRequestDTO);
     }
 
 }

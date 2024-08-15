@@ -22,72 +22,87 @@
         </div>
         <div class="layout-content">
             <div class="member-list-wrap">
-                <form class="search-area" action="" method="get">
-                    <select name="" id="">
-                        <option value="">약품명</option>
-                        <option value="">회사명</option>
-                    </select>
-                    <label class="form-control">
-                        <input type="text" placeholder="Search Member">
+                <form class="search-area" th:action="@{/amdin/pill}" method="get">
+                    <label>
+                        <select name="keywordType">
+                            <option value="PILL_NAME">약품명</option>
+                            <option value="COMPANY_NAME">회사명</option>
+                        </select>
                     </label>
-                    <button class="btn-normal btn-primary" type="button">찾기</button>
+                    <label class="form-control">
+                        <input type="text" placeholder="Search Member" name="keyword" >
+                    </label>
+                    <button class="btn-normal btn-primary" type="submit">찾기</button>
                 </form>
                 <div class="tbl-row">
                     <table style="table-layout: fixed;">
                         <colgroup>
                             <col style="width: 100px;">
                             <col style="width: 140px;">
-                            <col style="width: 100px;">
-                            <col style="width: auto;">
+                            <col style="width: 62px;">
+                            <col style="width: 88px;">
+                            <col style="width: 88px;">
                             <col style="width: auto;">
                             <col style="width: auto;">
                             <col style="width: 120px;">
                             <col style="width: auto;">
-                            <col style="width: 140px;" >
+                            <col style="width: auto;">
+                            <col style="width: 60px;" >
                             <col style="width: 100px;">
                         </colgroup>
                         <thead>
                             <tr>
                                 <th>제조사명</th>
                                 <th>약품명</th>
+                                <th>카테고리</th>
                                 <th>등록일</th>
+                                <th>수정일</th>
                                 <th>약효능</th>
                                 <th>복용/섭취방법</th>
                                 <th>섭취시 주의사항</th>
-                                <th>약형태 및 색상</th>
                                 <th>약보관방법</th>
+                                <th>약형태 및 색상</th>
                                 <th>약 사진</th>
                                 <th>옵션</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr th:each="board : ${list}">
                                 <td>
-                                    <span>일동제약(주)</span>
+                                    <span th:text="${board.companyName}"></span>
                                 </td>
                                 <td>
-                                    <span>활명수</span>
+                                    <span th:text="${board.pillName}"></span>
                                 </td>
                                 <td>
-                                    <span>2000/01/01</span>
+                                    <span th:text="${board.categoryId}"></span>
                                 </td>
                                 <td>
-                                    <span class="ellipsis">이 약은 식욕감퇴(식욕부진), 위부팽만감, 소화불량, 과식, 체함, 구역, 구토에 사용합니다</span>
+                                    <span th:text="${board.openDate}"></span>
                                 </td>
                                 <td>
-                                    <span class="ellipsis">만 15세 이상 및 성인은 1회 1병(75 mL), 만 11세이상~만 15세미만은 1회 2/3병(50 mL), 만 8세 이상~만 11세 미만은 1회 1/2병(37.5 mL), 만 5세 이상~만 8세 미만은 1회 1/3병(25 mL), 만 3세 이상~만 5세 미만은 1회 1/4병(18.75 mL), 만 1세 이상~만 3세 미만은 1회 1/5병(15 mL), 1일 3회 식후에 복용합니다. 복용간격은 4시간 이상으로 합니다.</span>
+                                    <span th:text="${board.updateDate}"></span>
                                 </td>
                                 <td>
-                                    <span class="ellipsis">만 3개월 미만의 젖먹이는 이 약을 복용하지 마십시오. 이 약을 복용하기 전에 만 1세 미만의 젖먹이, 임부 또는 임신하고 있을 가능성이 있는 여성, 카라멜에 과민증 환자 또는 경험자, 나트륨 제한 식이를 하는 사람은 의사 또는 약사와 상의하십시오. 정해진 용법과 용량을 잘 지키십시오. 어린이에게 투여할 경우 보호자의 지도 감독하에 투여하십시오. 1개월 정도 복용하여도 증상의 개선이 없을 경우 복용을 즉각 중지하고 의사 또는 약사와 상의하십시오.</span>
+                                    <span class="ellipsis" th:text="${board.detailContent}"></span>
                                 </td>
                                 <td>
-                                    <span>원형 / 하양</span>
+                                    <span class="ellipsis" th:text="${board.intakePrecautions}"></span>
                                 </td>
                                 <td>
-                                    <span class="ellipsis">습기와 빛을 피해 실온에서 보관하십시오.어린이의 손이 닿지 않는 곳에 보관하십시오.</span>
+                                    <span class="ellipsis" th:text="${board.seQesitm}"></span>
                                 </td>
                                 <td>
-                                    <span class="ellipsis">https://nedrug.mfds.go.kr/pbp/cmn/itemImageDownload/152035092098000085</span>
+                                    <span class="ellipsis" th:text="${board.pillDeposit}"></span>
+                                </td>
+                                <td>
+                                    <span th:text="
+                                    ${(board.pillShape != null ? board.pillShape : '') +
+                                    (board.pillShape != null ? ' / ' : '') +
+                                    (board.pillColor != null ? board.pillColor : '')}"></span>
+                                </td>
+                                <td>
+                                    <span th:text="${board.pillImage != null ? '있음' : '없음'}"></span>
                                 </td>
                                 <td>
                                     <div class="options">
@@ -104,13 +119,26 @@
                 </div>
                 <div class="tb-footer-control">
                     <ul class="pagination">
-                        <li class="page-item disabled"><a class="page-link previous" href="#"></a></li>
-                        <li class="page-item active"><a class="page-link " href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                        <li class="page-item"><a class="page-link" href="#">5</a></li>
-                        <li class="page-item"><a class="page-link next" href="#"></a></li>
+                        <li class="page-item" th:if="${pageSetDTO.prev}">
+                            <a class="page-link previous"
+                               th:href="${'/admin/pill?page=' + (pageSetDTO.startPage - 1)}">
+                            </a>
+                        </li>
+
+                        <li class="page-item"
+                            th:classappend="${pageSetDTO.pageRequestDTO.page == i ? 'active' : ''}"
+                            th:each="i : ${#numbers.sequence(pageSetDTO.startPage, pageSetDTO.endPage)}">
+                            <a class="page-link"
+                               th:href="${'/admin/pill?page=' + i }"
+                               th:text="${i}" >
+                            </a>
+                        </li>
+
+                        <li class="page-item" th:if="${pageSetDTO.next}">
+                            <a class="page-link next"
+                               th:href="${'/admin/pill?page=' + (pageSetDTO.endPage + 1)}">
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>

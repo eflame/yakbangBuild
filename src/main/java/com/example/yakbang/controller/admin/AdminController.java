@@ -129,7 +129,7 @@ public class AdminController {
                         Model model) {
 
         if ("expert".equalsIgnoreCase(memberType)) {
-            int total = adminMemberService.findExpertTotal();
+            int total = adminMemberService.findExpertTotal(pageRequestDTO);
             PageSetDTO pageSetDTO = new PageSetDTO(pageRequestDTO, total);
             // 전문가 회원 데이터를 가져오는 로직
             List<AdminExMemberDTO> list = adminMemberService.findMemberExPageNation(pageRequestDTO);
@@ -137,7 +137,7 @@ public class AdminController {
             model.addAttribute("pageSetDTO", pageSetDTO);
             model.addAttribute("memberType", "expert");
         } else {
-            int total = adminMemberService.findGeneralTotal();
+            int total = adminMemberService.findGeneralTotal(pageRequestDTO);
             PageSetDTO pageSetDTO = new PageSetDTO(pageRequestDTO, total);
             // 일반 회원 데이터를 가져오는 로직
             List<AdminMemberDTO> list = adminMemberService.findMemberPageNation(pageRequestDTO);
@@ -150,11 +150,16 @@ public class AdminController {
 
 
     @GetMapping("/pill")
-    public String pill(HttpSession session, Model model) {
+    public String pill(HttpSession session,
+                       PageRequestDTO pageRequestDTO,
+                       Model model) {
         Long memberId = (Long) session.getAttribute("memberId");
+        int total = adminPillService.PillTotal(pageRequestDTO);
+        PageSetDTO pageSetDTO = new PageSetDTO(pageRequestDTO, total);
 
-//        List<AdminPillDTO> list = adminPillService.findPillInfo(null);
-//        model.addAttribute("list", list);
+        List<AdminPillDTO> list = adminPillService.findPillPageList(pageRequestDTO);
+        model.addAttribute("list", list);
+        model.addAttribute("pageSetDTO", pageSetDTO);
         if (memberId == null) {
             return "redirect:/admin";
         }

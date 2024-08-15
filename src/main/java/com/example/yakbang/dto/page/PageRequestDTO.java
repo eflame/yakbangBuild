@@ -8,6 +8,8 @@ import lombok.ToString;
 public class PageRequestDTO {
     private int page; // 현재 페이지
     private int amount; // 한 페이지 당 게시물 수
+    private String keyword; // 검색어
+    private String keywordType; // 검색 필드 유형 (예: LOGIN_ID, NAME, EMAIL 등)
 
     //    Spring MVC를 사용하여 웹 개발을 진행하면 Controller, RestController 같은 편리한 기능을 활용할 수 있다.
     //    Controller의 매개변수로 선언한 DTO 객체들은 기본적으로 기본생성자를 활용하여 생성되고

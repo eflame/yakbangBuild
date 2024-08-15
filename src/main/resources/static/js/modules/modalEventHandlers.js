@@ -50,8 +50,5 @@ export function handleBackClick(e) {
 
     $btnArea.classList.remove("modify");
 
-    if ($qnaBody) {
-        const contentOld = $qnaBody.querySelector('.textarea').value;
-        $qnaBody.innerHTML = `<span class="cont">${contentOld}</span>`;
-    }
+
 }

@@ -62,11 +62,11 @@ public class AdminMemberService {
     }
 
     //페이지
-    public int findGeneralTotal(){
-        return adminMemberMapper.generalMemberTotal();
+    public int findGeneralTotal(PageRequestDTO pageRequestDTO){
+        return adminMemberMapper.generalMemberTotal(pageRequestDTO);
     }
 
-    public int findExpertTotal(){
-        return adminMemberMapper.expertMemberTotal();
+    public int findExpertTotal(PageRequestDTO pageRequestDTO){
+        return adminMemberMapper.expertMemberTotal(pageRequestDTO);
     }
 }

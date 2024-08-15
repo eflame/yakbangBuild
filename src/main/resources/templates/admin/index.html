@@ -27,15 +27,18 @@
             </div>
 
             <div class="member-list-wrap">
-                <form class="search-area" th:action="@{/admin/index}" method="get">
-                    <select name="" id="">
-                        <option value="">아이디</option>
-                        <option value="">이름</option>
-                    </select>
-                    <label class="form-control">
-                        <input type="text" placeholder="Search Member">
+                <form class="search-area" th:action="${'/admin/' + memberType + '/index'}" method="get">
+                    <label>
+                        <select name="keywordType">
+                            <option value="LOGIN_ID">아이디</option>
+                            <option value="NAME">이름</option>
+                            <option value="EMAIL">이메일</option>
+                        </select>
                     </label>
-                    <button class="btn-normal btn-primary" type="button">찾기</button>
+                    <label class="form-control">
+                        <input type="text" name="keyword" placeholder="Search Member">
+                    </label>
+                    <button class="btn-normal btn-primary" type="submit">찾기</button>
                 </form>
                 <div class="tbl-row">
                     <table>
