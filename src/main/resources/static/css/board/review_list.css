@@ -1,0 +1,8 @@
+.review-card{
+    .card-body{
+        white-space: none;
+        img{
+            display: none;
+        }
+    }
+}
