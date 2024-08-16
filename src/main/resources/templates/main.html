@@ -59,54 +59,24 @@
                     <span class="sub">전문가가 직접 답해드려요!</span>
                 </h2>
                 <ul class="qna-card-list">
-                    <li class="qna-card">
+                    <li class="qna-card" th:each="board : ${list}">
                         <span class="category-tag">기타</span>
-                        <a class="qna-header" href="#">
-                            <span class="title">불면증이 심해요</span>
-                            <span class="cont">잠을 잘 들지 못하고 아침에 일어날때 힘들어요 최소 한시간은 누워있어야 잠듭니다 어깨목근육 뭉침, 편두통이 심해 수면제도 복용했었습니다  편하게 잠들고 싶어요 영양제좀 추천해주세요</span>
+                        <a class="qna-header" th:href="@{/board/qna-detail(questionId=${board.questionId})}">
+                            <span class="title" th:text="${board.title}"></span>
+                            <span class="cont" th:utext="${board.content}"></span>
                         </a>
-                        <a class="qna-body" href="#">
+                        <a class="qna-body" th:href="@{/board/qna-detail(questionId=${board.questionId})}">
                             <span class="qna-user-icon-1"></span>
                             <span class="cont">근육이 자주 뭉쳐서 잠을 이루기 힘들다면 긴장 완화에 도움이 되는 마그네슘, 테아닌 등을 추천해요.</span>
                         </a>
                         <span class="user-info">
-                                <span class="user-name">김**</span>
-                                <span class="user-agegender">20대 / 여</span>
-                            </span>
-                    </li>
-                    <li class="qna-card">
-                        <span class="category-tag">기타</span>
-                        <a class="qna-header" href="#">
-                            <span class="title">불면증이 심해요</span>
-                            <span class="cont">잠을 잘 들지 못하고 아침에 일어날때 힘들어요 최소 한시간은 누워있어야 잠듭니다 어깨목근육 뭉침, 편두통이 심해 수면제도 복용했었습니다  편하게 잠들고 싶어요 영양제좀 추천해주세요</span>
-                        </a>
-                        <a class="qna-body" href="#">
-                            <span class="qna-user-icon-2"></span>
-                            <span class="cont">근육이 자주 뭉쳐서 잠을 이루기 힘들다면 긴장 완화에 도움이 되는 마그네슘, 테아닌 등을 추천해요.</span>
-                        </a>
-                        <span class="user-info">
-                                <span class="user-name">김**</span>
-                                <span class="user-agegender">20대 / 여</span>
-                            </span>
-                    </li>
-                    <li class="qna-card">
-                        <span class="category-tag">기타</span>
-                        <a class="qna-header" href="#">
-                            <span class="title">불면증이 심해요</span>
-                            <span class="cont">잠을 잘 들지 못하고 아침에 일어날때 힘들어요 최소 한시간은 누워있어야 잠듭니다 어깨목근육 뭉침, 편두통이 심해 수면제도 복용했었습니다  편하게 잠들고 싶어요 영양제좀 추천해주세요</span>
-                        </a>
-                        <a class="qna-body" href="#">
-                            <span class="qna-user-icon-1"></span>
-                            <span class="cont">근육이 자주 뭉쳐서 잠을 이루기 힘들다면 긴장 완화에 도움이 되는 마그네슘, 테아닌 등을 추천해요.</span>
-                        </a>
-                        <span class="user-info">
-                                <span class="user-name">김**</span>
-                                <span class="user-agegender">20대 / 여</span>
+                                <span class="user-name" th:text="${board.name}"></span>
+                                <span class="user-agegender" th:text="${board.age}+대+ ' / ' +${board.gender}"></span>
                             </span>
                     </li>
                 </ul>
                 <div class="btn-more">
-                    <a href="qna_list.html" class="more">Q&amp;A 더보기</a>
+                    <a th:href="@{/board/qna-list}" class="more">Q&amp;A 더보기</a>
                 </div>
             </section>
             <section class="review-section">
