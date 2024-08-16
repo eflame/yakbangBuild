@@ -3,6 +3,7 @@ package com.example.yakbang.service.board;
 import com.example.yakbang.dto.board.BoardQnaDetailDTO;
 import com.example.yakbang.dto.board.BoardQnaListDTO;
 import com.example.yakbang.dto.board.BoardQnaWriteDTO;
+import com.example.yakbang.dto.board.BoardSearchDTO;
 import com.example.yakbang.mapper.board.BoardMapper;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -36,4 +37,7 @@ public class BoardService {
                 .orElseThrow(() -> new IllegalStateException("존재하지 않는 게시물 정보"));
     }
 
+    public List<BoardQnaListDTO> findSearchList(BoardSearchDTO boardSearchDTO){
+        return boardMapper.selectBoardSearch(boardSearchDTO);
+    }
 }

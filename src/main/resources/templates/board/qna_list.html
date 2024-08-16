@@ -18,12 +18,14 @@
         <!-- 작업영역 -->
         <div class="inner">
             <div class="sub-header">
+                <form th:action="@{/board/qna-list}" method="get">
                 <h2 class="title">Q&A</h2>
                 <span class="sub-txt">전문가가 직접 답해드려요!</span>
                 <div class="search-area">
-                    <input class="input-search" type="text" title="Q&A 검색어 입력" placeholder="무엇이 궁금하신가요?" >
+                    <input class="input-search" type="text" name="keyword" title="Q&A 검색어 입력" placeholder="무엇이 궁금하신가요?" >
                     <button class="btn-search" title="검색 버튼"></button>
                 </div>
+                </form>
                 <a class="btn btn-primary" th:href="@{/board/qna-write}">질문 하기</a>
             </div>
             <div class="qna-container-wrap">
