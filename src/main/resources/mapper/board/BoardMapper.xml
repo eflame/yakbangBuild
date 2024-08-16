@@ -39,12 +39,42 @@
                 ON E.EXPERT_ID = A.EXPERT_ID
         where Q.QUESTION_ID = #{questionId}
     </select>
-    
+
 <!-- 조회수 증가 -->
     <update id="updateViewCount">
         update TBL_QA
         set VIEW_COUNT = VIEW_COUNT + 1
         where QUESTION_ID = #{questionId}
     </update>
+
+<!--   =====================================================================================  -->
+<!--  리뷰  -->
+    <insert id="insertBoardReview">
+        <selectKey resultType="long" keyProperty="reviewId" order="BEFORE">
+            SELECT SEQ_REVIEW.nextval FROM DUAL
+        </selectKey>
+        insert into TBL_REVIEW (REVIEW_ID, PILL_ID, CATEGORY_ID, MEMBER_ID, REVIEW_CONTENT, CREATE_DATE, MODIFIED_DATE)
+        value (#{reviewId}, #{pillId}, #{categoryId}, #{memberId}, #{reviewContent}, sysdate, sysdate)
+    </insert>
+
+<!--  리뷰 게시판  -->
+    <select id="selectBoardReview">
+        SELECT R.REVIEW_ID, R.PILL_ID, R.CATEGORY_ID, R.MEMBER_ID, R.POINT, R.REVIEW_PHOTO,
+               TO_CHAR(R.CREATE_DATE, 'YYYY-MM-DD') AS CREATE_DATE, TO_CHAR(R.MODIFIED_DATE, 'YYYY-MM-DD') AS MODIFIED_DATE,
+               R.VIEW_COUNT, R.REVIEW_CONTENT,
+               C.COMMENT_ID, C.EXPERT_ID, C.CONTENT, 
+               TO_CHAR(C.COMMENT_DATE, 'YYYY-MM-DD') AS COMMENT_DATE
+        FROM TBL_REVIEW R Join TBL_REVIEW_COMMENT C
+        on R.REVIEW_ID = C.REVIEW_ID
+    </select>
+
+
+<!-- 조회수 증가 -->
+<update id="updateReViewCount">
+    update TBL_REVIEW
+    set VIEW_COUNT = VIEW_COUNT + 1
+    where REVIEW_ID = #{reviewId}
+</update>
+
 
 </mapper>
