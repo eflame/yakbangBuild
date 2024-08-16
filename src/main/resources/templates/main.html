@@ -19,10 +19,12 @@
             <section class="search-section">
                 <h2 class="search-text"><span>어떤 일반의약품</span>을 찾으세요? </h2>
                 <div class="search-box">
-                    <input class="search-input" type="text" placeholder="제품명 검색해보세요!">
-                    <button class="btn-search" type="button">
-                        <img th:src="@{images/common/ico_search_white.svg}" alt="">
-                    </button>
+                    <form th:action="@{/pill/searchResult}" method="post">
+                        <input class="search-input" type="text" name="keyword" placeholder="제품명 검색해보세요!">
+                        <button class="btn-search" type="submit">
+                            <img th:src="@{images/common/ico_search_white.svg}" alt="">
+                        </button>
+                    </form>
                 </div>
                 <div class="search-etc">
                     <h3 class="title">인기 검색어</h3>
@@ -38,16 +40,16 @@
             <section class="advice-section">
                 <h2 class="title">추천 일반약</h2>
                 <div class="pill-list">
-                    <a href="#" class="item">추천일반약</a>
-                    <a href="#" class="item">추천일반약</a>
-                    <a href="#" class="item">추천일반약</a>
-                    <a href="#" class="item">추천일반약</a>
-                    <a href="#" class="item">추천일반약</a>
-                    <a href="#" class="item">추천일반약</a>
-                    <a href="#" class="item">추천일반약</a>
-                    <a href="#" class="item">추천일반약</a>
-                    <a href="#" class="item">추천일반약</a>
-                    <a href="#" class="item">추천일반약</a>
+                    <a href="#" class="item">영양제</a>
+                    <a href="#" class="item">소화제</a>
+                    <a href="#" class="item">해열진통제</a>
+                    <a href="#" class="item">항히스타민제</a>
+                    <a href="#" class="item">근육통이완제</a>
+                    <a href="#" class="item">소염제</a>
+                    <a href="#" class="item">불면증완화제 <br> (생약제제)</a>
+                    <a href="#" class="item">신경안정제</a>
+                    <a href="#" class="item">다이어트 보조제</a>
+                    <a href="#" class="item">...</a>
                 </div>
             </section>
             <section class="qna-section">

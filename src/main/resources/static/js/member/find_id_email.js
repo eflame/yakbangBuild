@@ -22,13 +22,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // 유효성 검사(한글영문 허용)
-    function validateUserName(event) {
-        const value = event.target.value;
-        const regex = /^[ㄱ-ㅎ가-힣a-zA-Z]*$/;
-        if (!regex.test(value)) {
-            event.target.value = value.replace(/[^가-힣]/g, "");
-        }
-    }
+    // function validateUserName(event) {
+    //     const value = event.target.value;
+    //     const regex = /^[ㄱ-ㅎ가-힣a-zA-Z]*$/;
+    //     if (!regex.test(value)) {
+    //         event.target.value = value.replace(/[^가-힣]/g, "");
+    //     }
+    // }
 
     // 유효성 검사(이메일 형식 허용)
     function validateUserEmail(event) {
