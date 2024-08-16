@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.yakbang.mapper.admin.AdminMemberMapper">
+    <!-- 관리자 로그인   -->
+    <select id="selectAdminId">
+        SELECT MEMBER_ID
+        FROM TBL_MEMBER
+        WHERE (LOGIN_ID = #{loginId} AND PASSWORD = #{password}) AND MEMBER_ID = 0
+    </select>
+
+    <select id="selectGeneralMembers" resultType="AdminMemberDTO" >
+        SELECT MEMBER_ID, LOGIN_ID, PHONE_NUMBER, NAME, TO_CHAR(BIRTH, 'YYYY-MM-DD') AS BIRTH, EMAIL, GENDER
+        FROM TBL_MEMBER
+        WHERE MEMBER_ID > 0
+        <if test="memberId != null">
+            AND MEMBER_ID = #{memberId}
+        </if>
+        ORDER BY MEMBER_ID DESC
+    </select>
+
+    <select id="selectExpertMembers" resultType="AdminExMemberDTO">
+        SELECT EXPERT_ID, LOGIN_ID, PASSWORD, PHONE_NUMBER, NAME, TO_CHAR(BIRTH, 'YYYY-MM-DD') AS BIRTH, EMAIL, GENDER, JOB, PHARMACY_ADDRESS
+        FROM TBL_EXPERT_MEMBER
+        WHERE EXPERT_ID > 0
+        <if test="expertID != null">
+            AND EXPERT_ID = #{expertID}
+        </if>
+        ORDER BY EXPERT_ID DESC
+    </select>
+
+    <select id="memberPageList">
+        SELECT MEMBER_ID, LOGIN_ID, PHONE_NUMBER, NAME, TO_CHAR(BIRTH, 'YYYY-MM-DD') AS BIRTH, EMAIL, GENDER
+        FROM (
+            SELECT ROWNUM AS RNUM, MEMBER_ID, LOGIN_ID, PHONE_NUMBER, NAME, BIRTH, EMAIL, GENDER
+            FROM (SELECT MEMBER_ID, LOGIN_ID, PHONE_NUMBER, NAME, BIRTH, EMAIL, GENDER
+                  FROM TBL_MEMBER
+                  WHERE MEMBER_ID > 0
+                    <if test="keyword != null and keyword != ''">
+                        AND ${keywordType} LIKE '%' || #{keyword} || '%'
+                    </if>
+                  ORDER BY MEMBER_ID DESC
+            )
+             <![CDATA[
+                WHERE ROWNUM <= #{page} * #{amount}
+            ]]>
+        )
+        WHERE RNUM > (#{page} - 1) * #{amount}
+    </select>
+
+    <select id="memberExPageList">
+        SELECT EXPERT_ID, LOGIN_ID, PHONE_NUMBER, NAME, TO_CHAR(BIRTH, 'YYYY-MM-DD') AS BIRTH, EMAIL, GENDER, JOB, PHARMACY_ADDRESS
+        FROM (
+             SELECT ROWNUM AS RNUM, EXPERT_ID, LOGIN_ID, PHONE_NUMBER, NAME, BIRTH, EMAIL, GENDER, JOB, PHARMACY_ADDRESS
+             FROM (SELECT EXPERT_ID, LOGIN_ID, PHONE_NUMBER, NAME, BIRTH, EMAIL, GENDER, JOB, PHARMACY_ADDRESS
+                   FROM TBL_EXPERT_MEMBER
+                   WHERE EXPERT_ID > 0
+                    <if test="keyword != null and keyword != ''">
+                        AND ${keywordType} LIKE '%' || #{keyword} || '%'
+                    </if>
+                   ORDER BY EXPERT_ID DESC
+                  )
+             <![CDATA[
+                 WHERE ROWNUM <= #{page} * #{amount}
+            ]]>
+        )
+        WHERE RNUM > (#{page} - 1) * #{amount}
+    </select>
+
+
+    <update id="updateGeneralMember">
+        UPDATE TBL_MEMBER
+        SET NAME = #{name}, EMAIL = #{email}, PHONE_NUMBER = #{phoneNumber}
+        WHERE MEMBER_ID = #{memberId}
+    </update>
+
+    <update id="updateExpertMember">
+        UPDATE TBL_EXPERT_MEMBER
+        SET NAME = #{name}, EMAIL = #{email}, PHONE_NUMBER = #{phoneNumber},  JOB = #{job}, PHARMACY_ADDRESS = #{pharmacyAddress}
+        WHERE EXPERT_ID = #{expertId}
+    </update>
+
+    <delete id="deleteGeneralMember">
+        DELETE FROM TBL_MEMBER
+        WHERE MEMBER_ID = #{memberId}
+    </delete>
+
+    <delete id="deleteExpertMember">
+        DELETE FROM TBL_EXPERT_MEMBER
+        WHERE EXPERT_ID = #{expertId}
+    </delete>
+
+    <select id="generalMemberTotal">
+        SELECT COUNT(MEMBER_ID)
+        FROM TBL_MEMBER
+        WHERE MEMBER_ID > 0
+        <if test="keywordType != null and keywordType != ''">
+            AND ${keywordType} LIKE '%' || #{keyword} || '%'
+        </if>
+    </select>
+
+    <select id="expertMemberTotal">
+        SELECT COUNT(EXPERT_ID)
+        FROM TBL_EXPERT_MEMBER
+        WHERE EXPERT_ID > 0
+        <if test="keywordType != null and keywordType != ''">
+            AND ${keywordType} LIKE '%' || #{keyword} || '%'
+        </if>
+    </select>
+
+
+</mapper>

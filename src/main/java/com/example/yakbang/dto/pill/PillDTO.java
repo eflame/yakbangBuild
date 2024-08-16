@@ -3,6 +3,9 @@ package com.example.yakbang.dto.pill;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 @Getter
 @Setter
 @ToString
@@ -41,6 +44,13 @@ public class PillDTO {
 
     @JsonProperty("openDate")
     private String openDate; // 공개 일자 (OPEN_DATE, DATE)
+    // 변환된 날짜를 반환하는 메소드
+    public String getFormattedOpenDate() {
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"); // API 제공 형식
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // 형식 변경
+        LocalDate date = LocalDate.parse(openDate, inputFormatter);
+        return date.format(outputFormatter);
+    }
 
     @JsonProperty("updateDate")
     private String updateDate; // 수정 날짜 (UPDATE_DATE, DATE)

@@ -12,12 +12,12 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
-class AdminMapperTest {
-    @Autowired AdminMapper adminMapper;
+class AdminMemberMapperTest {
+    @Autowired
+    AdminMemberMapper adminMemberMapper;
     AdminDTO adminDTO;
     AdminMemberDTO adminMemberDTO;
     AdminExMemberDTO adminExMemberDTO;
@@ -34,10 +34,6 @@ class AdminMapperTest {
                 .email("test@test.com")
                 .phoneNumber("010-0000-0000")
                 .build();
-
-        // When
-        List<AdminMemberDTO> list = adminMapper.selectGeneralMembers(adminMemberDTO.getMemberId());
-
 
         adminExMemberDTO = AdminExMemberDTO.builder()
                 .expertId(1L)
@@ -75,7 +71,15 @@ class AdminMapperTest {
     }
 
     @Test
-    void testDeleteGeneralMember() {
+    void testDeleteGeneral() {
+        // Given
+        assertThat(adminMemberMapper.selectGeneralMembers(adminMemberDTO.getMemberId())).isNotEmpty(); // Ensure data exists
+
+        // When
+        adminMemberMapper.deleteGeneralMember(adminMemberDTO.getMemberId());
+
+        // Then
+        assertThat(adminMemberMapper.selectGeneralMembers(adminMemberDTO.getMemberId())).isEmpty();
     }
 
     @Test

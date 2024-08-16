@@ -31,5 +31,7 @@ public class PillInfoController {
         return "pill/pill_list";
     }
 
+
+
 }
 
