@@ -32,9 +32,14 @@ function displayList(list) {
         <a href="/pill/detail?id=${pill.itemSeq}"
            class="pill-item">
             <!-- 약 이미지 -->
-            <img src="${pill.pillImage}"
+            <img src="${ pill.pillImage != null ? pill.pillImage : '/images/common/img_pill_03.png' }" 
+                 style=" ${ pill.pillImage != null ? pill.pillImage : 'width: 70px' }"
                  alt="Pill Image"
-                 class="pill-img" />
+                 class="pill-img" 
+                 />
+                 
+
+                 
             <div class="info">
                 <!-- 브랜드 (제조사) -->
                 <span class="brand">${pill.companyName}</span>
