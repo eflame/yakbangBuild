@@ -73,34 +73,34 @@
   tabLinks[0]?.classList.add('active');
 }
 
-{  // 약검색 select 박스
-  const $searchInput = document.querySelector("#searchInput");
-  const $searchSelectBox = document.querySelector(".search-select-box");
-  const $keywordList = document.querySelector(".keyword-list");
-  const items = [];
-  // 외부 데이터 배열로 받아서 넣기
-  items.push("타이젠정(쎄라티오펩티다제)","타이펜정160밀리그람(아세트아미노펜)","타이펜8시간이알서방정","타이몰8시간이알정(아세트아미노펜)","에피타이츄정")
-
-  $searchInput?.addEventListener("keyup", () => {
-    $keywordList.innerHTML = "";
-    keywordItem(items);
-    $searchSelectBox.querySelector(".keyword-list").classList.add("open");
-  })
-
-  $searchSelectBox?.addEventListener("click", (e) => {
-    if(e.target.classList.contains("item")){
-      // $keywordList = e.target.closest(".keyword-list");
-      $searchInput.value = e.target.innerText;
-      $keywordList.classList.remove("open");
-    }
-  })
-
-  function keywordItem() {
-    items.forEach((item) => {
-      $keywordList.insertAdjacentHTML('afterbegin' ,`<li class="item">${item}</li>`);
-    })
-  }
-}
+// {  // 약검색 select 박스
+//   const $searchInput = document.querySelector("#searchInput");
+//   const $searchSelectBox = document.querySelector(".search-select-box");
+//   const $keywordList = document.querySelector(".keyword-list");
+//   const items = [];
+//   // 외부 데이터 배열로 받아서 넣기
+//   items.push("타이젠정(쎄라티오펩티다제)","타이펜정160밀리그람(아세트아미노펜)","타이펜8시간이알서방정","타이몰8시간이알정(아세트아미노펜)","에피타이츄정")
+//
+//   $searchInput?.addEventListener("keyup", () => {
+//     $keywordList.innerHTML = "";
+//     keywordItem(items);
+//     $searchSelectBox.querySelector(".keyword-list").classList.add("open");
+//   })
+//
+//   $searchSelectBox?.addEventListener("click", (e) => {
+//     if(e.target.classList.contains("item")){
+//       // $keywordList = e.target.closest(".keyword-list");
+//       $searchInput.value = e.target.innerText;
+//       $keywordList.classList.remove("open");
+//     }
+//   })
+//
+//   function keywordItem() {
+//     items.forEach((item) => {
+//       $keywordList.insertAdjacentHTML('afterbegin' ,`<li class="item">${item}</li>`);
+//     })
+//   }
+// }
 {
   
   if(document.querySelector('#ckeditor')){

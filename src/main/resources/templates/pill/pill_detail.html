@@ -42,18 +42,22 @@
                     <div class="pill-detail-info">
                         <div class="pill-img">
                             <!-- 약품 이미지 표시 -->
-                            <img th:src="@{${pill.pillImage}}" alt="Pill Image"/>
+                            <img th:if="${pill.pillImage} != null" th:src="@{${pill.pillImage}}" alt="Pill Image"/>
+                            <img th:src="${pill.pillImage != null ? pill.pillImage : '/images/common/img_pill_03.png'}" alt="Image" style="width: 70px">
                         </div>
                         <div class="info">
                             <div class="company-name" th:text="${pill.companyName}">브랜드</div>
                             <h1 class="product-name" th:text="${pill.pillName}">약 이름</h1>
+
                             <dl class="shape-color">
                                 <dt>형태 및 색</dt>
                                 <dd th:text="${pill.pillShape} + ' / ' + ${pill.pillColor}">형태 / 색상</dd>
                             </dl>
-                            <dl class="register-date">
+
+
+                            <dl class="register-date" id="dateContainer">
                                 <dt>등록일</dt>
-                                <dd th:text="${pill.openDate}">등록일</dd>
+                                <dd th:text="${pill.formattedOpenDate}">등록일</dd>
                             </dl>
                         </div>
                     </div>
@@ -161,47 +165,47 @@
                     <div class="section-box">
                         <div class="img-when">
                             <img class="adult" th:src="@{/images/common/adult-img.png}" alt="adult"/>
-                            <span class="when">만 12세 이상 소아 및 성인은 1회 1~2정씩, 1일 3~4회(4~6시간마다) 필요 시 복용</span>
+                            <p class="when" th:text="${pill.pillHowto}"></p>
                         </div>
                     </div>
                     <h2 class="title-section">섭취 시 주의사항</h2>
                     <div class="section-box">
                         <div class="caution-method">
-                            <span class="text-info">
-                            (주의사항)
-                           투석요법을 받고 있는 환자, 수유부, 만 7세 이하의 어린이, 갈락토오스 불내성, Lapp 유당분해효소 결핍증 또는 포도당-갈락토오스 흡수장애 등의 유전적인 문제가 있는 환자는 이 약을 복용하지 마십시오.</span>
+                            <p class="text-info" th:text="${pill.atpnQesitm}"></p>
                         </div>
                     </div>
-                    <div class="section-box">
+
+<!--                    <div class="section-box" >-->
+<!--                        <div class="caution-method">-->
+<!--                            <p class="text-info" th:if="${pill.intakePrecautions != null}" th:text="${pill.intakePrecautions}"></p>-->
+<!--                            <p class="text-info" th:unless="${pill.intakePrecautions != null}">추가 주의사항이 없습니다.</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+                    <div class="section-box" th:if="${pill.intakePrecautions != null}">
                         <div class="caution-method">
-                            <span class="text-info">
-                            (주의사항)
-                            이 약을 복용하기 전에 이 약에 과민증 환자, 알레르기 체질, 알레르기 증상(발진, 충혈되어 붉어짐, 가려움 등) 경험자, 신장장애 환자, 임부 또는 임신하고 있을 가능성이 있는 여성, 나트륨 제한 식이를 하는 사람은 의사 또는 약사와 상의하십시오.정해진 용법과 용량을 잘 지키십시오.</span>
+                            <p class="text-info"  th:text="${pill.intakePrecautions}"></p>
                         </div>
                     </div>
 
                     <h2 class="title-section">복용 시 주의해야 할 약 · 음식</h2>
                     <div class="section-box">
-                        <div class="text-info">(상호작용)
-                            위장진통ㆍ진경제, 테트라사이클린계 항생제와 함께 복용하지 마십시오.
-                        </div>
+                        <p class="text-info" th:if="${pill.intrcQesitm != null}" th:text="${pill.intrcQesitm}"></p>
+                        <p class="text-info" th:unless="${pill.intrcQesitm != null}">등록된 정보가 없습니다.</p>
                     </div>
                     <h2 class="title-section">부작용</h2>
                     <div class="section-box">
                         <div class="caution">
-                            <span>
-                                ❌ 드물게 발진, 식욕부진, 구역, 구토, 위통 등이 나타나는 경우 복용을 즉각 중지하고 의사 또는 약사와 상의하십시오.
-                            </span>
+<!--                            <p class="text-info" th:text="${pill.seQesitm}"></p>-->
+                            <p class="text-info" th:if="${pill.seQesitm != null}" th:text="${pill.seQesitm}"></p>
+                            <p class="text-info" th:unless="${pill.seQesitm != null}">등록된 정보가 없습니다.</p>
                         </div>
                     </div>
 
                     <div class="detail-section">
                         <h2 class="title-section">보관 방법</h2>
                         <div class="section-box">
-                            <div class="text-info">
-                                <li class="info-li">실온에서 보관하십시오.</li>
-                                <li class="info-li">어린이의 손이 닿지 않는 곳에 보관하십시오.</li>
-                            </div>
+                            <p class="text-info" th:text="${pill.pillDeposit}"></p>
                         </div>
                     </div>
                 </div>

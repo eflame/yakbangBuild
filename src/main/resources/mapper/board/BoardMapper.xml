@@ -14,7 +14,7 @@
     <select id="selectQuestionList">
         SELECT Q.QUESTION_ID, Q.MEMBER_ID, Q.TITLE, Q.CONTENT, Q.PILL_ID,
                M.NAME, M.GENDER,
-               FLOOR(MONTHS_BETWEEN(SYSDATE, M.BIRTH) / 12) AS age,
+               FLOOR(MONTHS_BETWEEN(SYSDATE, M.BIRTH) / 120) * 10 AS age,
                A.ANSWER_TITLE, A.ANSWER_NO
         FROM TBL_QA Q JOIN TBL_MEMBER M
                ON Q.MEMBER_ID = M.MEMBER_ID
@@ -38,6 +38,26 @@
         LEFT JOIN TBL_EXPERT_MEMBER E
                 ON E.EXPERT_ID = A.EXPERT_ID
         where Q.QUESTION_ID = #{questionId}
+    </select>
+
+<!--  게시글 검색  -->
+    <select id="selectBoardSearch">
+        SELECT Q.QUESTION_ID, Q.MEMBER_ID, Q.TITLE, Q.CONTENT, Q.PILL_ID,
+        M.NAME, M.GENDER,
+        FLOOR(MONTHS_BETWEEN(SYSDATE, M.BIRTH) / 120) * 10 AS age,
+        A.ANSWER_TITLE, A.ANSWER_NO
+        FROM TBL_QA Q JOIN TBL_MEMBER M
+        ON Q.MEMBER_ID = M.MEMBER_ID
+        LEFT JOIN TBL_ANSWER A
+        ON Q.QUESTION_ID = A.QUESTION_ID
+        <where>
+             Q.TITLE LIKE '%' || #{keyword} || '%'
+             OR
+             Q.content LIKE '%' || #{keyword} || '%'
+             OR
+             M.NAME LIKE '%' || #{keyword} || '%'
+        </where>
+        ORDER BY Q.QUESTION_ID DESC
     </select>
     
 <!-- 조회수 증가 -->
