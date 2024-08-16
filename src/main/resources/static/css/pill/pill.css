@@ -6,6 +6,9 @@
     gap: 20px;
     margin: 0 auto;
     width: 920px;
+    .pill-img{
+
+    }
 }
 
 .moreBtn{
@@ -27,6 +30,8 @@
     border-radius: 10px;
     cursor: pointer;
 }
+
+
 
 .pill-item {
     display: flex;
