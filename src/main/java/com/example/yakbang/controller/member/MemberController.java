@@ -67,8 +67,25 @@ public class MemberController {
     @PostMapping("/find_id")
     public String findId(String name,String email,
                          HttpSession session,Model model) {
-        String loginId = memberService.findLoginId(name, email);
-        session.getAttribute("memberId");
+
+//        Long memberId = (Long) session.getAttribute("memberId");
+//        String memberType= (String) session.getAttribute("memberType");
+
+        String loginId = null;
+        try {
+            loginId = memberService.findLoginId(name, email);
+        } catch (Exception e) {
+            try {
+                loginId = expertService.findExpertLoginId(name, email);
+            } catch (Exception ex) {
+                loginId = "존재하지 않음";
+            }
+        }
+
+
+
+        model.addAttribute("loginId", loginId);
+
         return "member/find-result";
     }
 
