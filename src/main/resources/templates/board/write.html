@@ -8,8 +8,9 @@
     <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.css" />
     <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
     <script defer th:src="@{/js/common/common.js}" ></script>
-    <script defer th:src="@{/js/board/toastui.js}" ></script>
+<!--    <script defer th:src="@{/js/board/toastui.js}" ></script>-->
     <script defer th:src="@{/js/board/ration.js}" ></script>
+    <script defer type="module" th:src="@{/js/board/review/write.js}" ></script>
 </head>
 <body>
 <div class="all-wrap">
@@ -18,30 +19,30 @@
     <main class="contents">
         <!-- 작업영역 -->
         <div class="inner">
-            <form class="form-write" action="">
+            <form class="form-write" th:action="@{/review/write}" method="post">
                 <div class="write-wrap">
                     <p class="text_required">* 필수</p>
                     <dl class="write-row">
                         <dt class="title required">분류</dt>
                         <dd class="content">
                             <label class="radio-box">
-                                <input type="radio" name="fill" value="liquid" checked>
+                                <input type="radio" name="reviewShape" value="liquid" checked>
                                 <span class="radio-text">액상형</span>
                             </label>
                             <label class="radio-box">
-                                <input type="radio" name="fill" value="capsule" >
+                                <input type="radio" name="reviewShape" value="capsule" >
                                 <span class="radio-text">캡슐형</span>
                             </label>
                             <span class="dropdown-box">
-                                <select id="gender" name="gender" class="select-gender" >
-                                    <option value="none">성별 선택하세요</option>
+                                <select id="gender" name="reviewGender" class="select-gender" >
+                                    <option value="N">성별 선택하세요</option>
                                     <option value="F">여자</option>
                                     <option value="M">남자</option>
                                 </select>
                             </span>
                             <span class="dropdown-box">
-                                <select id="age" name="age" class="select-age"  >
-                                    <option value="none">나이 선택하세요</option>
+                                <select id="age" name="reviewAge" class="select-age"  >
+                                    <option value="0">나이 선택하세요</option>
                                     <option value="10">10대</option>
                                     <option value="20">20대</option>
                                     <option value="30">30대</option>
@@ -58,23 +59,23 @@
                         <dd class="content">
                             <div class="rating">
                                 <label class="rating-label rating__label--full" for="star1">
-                                    <input type="radio" id="star1" class="rating-input" name="rating" value="1">
+                                    <input type="radio" id="star1" class="rating-input" name="point" value="1">
                                     <span class="star-icon"></span>
                                 </label>
                                 <label class="rating-label rating__label--full" for="star2">
-                                    <input type="radio" id="star2" class="rating-input" name="rating" value="2">
+                                    <input type="radio" id="star2" class="rating-input" name="point" value="2">
                                     <span class="star-icon"></span>
                                 </label>
                                 <label class="rating-label rating__label--full" for="star3">
-                                    <input type="radio" id="star3" class="rating-input" name="rating" value="3">
+                                    <input type="radio" id="star3" class="rating-input" name="point" value="3">
                                     <span class="star-icon"></span>
                                 </label>
                                 <label class="rating-label rating__label--full" for="star4">
-                                    <input type="radio" id="star4" class="rating-input" name="rating" value="4">
+                                    <input type="radio" id="star4" class="rating-input" name="point" value="4">
                                     <span class="star-icon"></span>
                                 </label>
                                 <label class="rating-label rating__label--full" for="star5">
-                                    <input type="radio" id="star5" class="rating-input" name="rating" value="5">
+                                    <input type="radio" id="star5" class="rating-input" name="point" value="5">
                                     <span class="star-icon"></span>
                                 </label>
                             </div>
@@ -85,6 +86,7 @@
                         <dd class="content">
                             <div class="search-select-box">
                                 <input id="searchInput" class="input-search" type="text" placeholder="약이름을 입력해주세요." autocomplete="off" />
+                                <input type="hidden" id="pillId" name="pillId">
                                 <ul class="keyword-list">
                                     <!-- <li class="item">타이젠정(쎄라티오펩티다제)</li>
                                     <li class="item">타이펜정160밀리그람(아세트아미노펜)</li>
@@ -102,7 +104,7 @@
                     <dl class="write-row">
                         <dt class="title required">제목</dt>
                         <dd class="content">
-                            <input class="input-box full" type="text" />
+                            <input class="input-box full" type="text" name="reviewTitle"/>
                         </dd>
                     </dl>
                     <dl class="write-row">
@@ -119,7 +121,7 @@
                 </div>
                 <div class="btn-area">
                     <a class="btn btn-light" href="qna_detail.html">뒤로가기</a>
-                    <button class="btn btn-primary" type="submit">작성 완료</button>
+                    <button class="btn btn-primary" type="button" id="write-btn">작성 완료</button>
                 </div>
             </form>
         </div>
