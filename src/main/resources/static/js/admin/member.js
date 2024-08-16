@@ -33,11 +33,12 @@ export async function deleteMember(manager) {
     }
 }
 
+let oldContents = [];
 export async function modifyMember(e) {
         // 정보 수정 함수
-        let arrInput = document.querySelectorAll('.form-control input');
+        let arrInput = document.querySelectorAll('.modal-body .form-control input');
         let thisId = e.target.id;
-        let oldContents = [];
+
 
         const memberType = document.querySelector("#modal-member-type").value;
         let userId = document.querySelector("#modal-member-id").value;
@@ -48,11 +49,15 @@ export async function modifyMember(e) {
             arrInput.forEach((item, index) => {
                 arrInput[index].readOnly = false;
                 oldContents[index] = item.value;
+                console.log(arrInput);
+                console.log(oldContents);
             });
         } else if (thisId === "btn-back") {
             arrInput.forEach((item, index) => {
                 arrInput[index].readOnly = true;
                 arrInput[index].value = oldContents[index];
+                console.log(arrInput);
+                console.log(oldContents);
             });
         } else if (thisId === "btn-change-modify") {
             arrInput.forEach((item) => {

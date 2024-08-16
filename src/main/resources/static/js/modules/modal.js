@@ -32,6 +32,7 @@ async function loadDataIntoModal(manager) {
     const memberType = manager.dataset.memberType;
     const memberId = manager.dataset.memberId;
     const itemId = manager.dataset.itemId;
+    console.log(memberId);
 
     // 데이터 세트에 따라 모달의 값을 설정
     if (memberId) {
@@ -74,6 +75,37 @@ async function loadDataIntoModal(manager) {
     } else if (itemId) {
         const modalIdElement = document.getElementById('modal-item-id');
         modalIdElement.value = itemId;
+
+        const response = await fetch(`/admin/pill/${itemId}`);
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        // console.log('Fetched data:', data);
+
+        if (data.length > 0) {
+            const pill = data[0];
+            console.log(pill);
+            document.getElementById('companyName').innerText = pill.companyName ?? 'N/A';
+            document.getElementById('allDate').innerText = pill.openDate && pill.updateDate
+                ? `${pill.openDate}, ${pill.updateDate}`
+                : 'N/A';
+            document.getElementById('pillName').value = pill.pillName ?? 'N/A';
+            document.getElementById('pillShapeColor').innerText = pill.pillShape ?? 'N/A';
+            document.getElementById('detailContent').innerText = pill.detailContent ?? 'N/A';
+            document.getElementById('pillHowto').innerText = pill.pillHowto ?? 'N/A';
+            document.getElementById('intakePrecautions').innerText = [
+                pill.intakePrecautions || 'N/A',
+                pill.atpnQesitm || 'N/A',
+                pill.intrcQesitm || 'N/A',
+                pill.seQesitm || 'N/A'
+            ].join(' / ');
+            document.getElementById('pillDeposit').innerText = pill.pillDeposit ?? 'N/A';
+            document.getElementById('pillImage').value = pill.pillImage ?? 'N/A';
+
+        }
     }
 }
 

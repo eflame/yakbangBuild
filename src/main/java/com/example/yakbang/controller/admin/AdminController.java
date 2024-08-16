@@ -160,6 +160,7 @@ public class AdminController {
         List<AdminPillDTO> list = adminPillService.findPillPageList(pageRequestDTO);
         model.addAttribute("list", list);
         model.addAttribute("pageSetDTO", pageSetDTO);
+        model.addAttribute("pillType", "pill");
         if (memberId == null) {
             return "redirect:/admin";
         }

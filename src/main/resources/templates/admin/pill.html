@@ -22,7 +22,7 @@
         </div>
         <div class="layout-content">
             <div class="member-list-wrap">
-                <form class="search-area" th:action="@{/amdin/pill}" method="get">
+                <form class="search-area" th:action="@{/admin/pill}" method="get">
                     <label>
                         <select name="keywordType">
                             <option value="PILL_NAME">약품명</option>
@@ -30,7 +30,7 @@
                         </select>
                     </label>
                     <label class="form-control">
-                        <input type="text" placeholder="Search Member" name="keyword" >
+                        <input type="text" placeholder="Search Pill" name="keyword" >
                     </label>
                     <button class="btn-normal btn-primary" type="submit">찾기</button>
                 </form>
@@ -108,8 +108,8 @@
                                     <div class="options">
                                         <button class="btn-sm btn-light-primary" type="button">option</button>
                                         <ul class="option-box">
-                                            <li><a href="#" class="btn-open-modal">Edit</a></li> 
-                                            <li><a href="#">Delete</a></li> 
+                                            <li><a href="#" class="btn-open-modal" th:data-item-id="${board.itemSeq}">detail</a></li>
+                                            <li><a href="#" th:data-item-id="${board.itemSeq}" >Delete</a></li>
                                         </ul>
                                     </div>
                                 </td>
@@ -146,54 +146,55 @@
         <div class="modal-wrap type2" >
             <div class="modal-header">
                 <h3 class="title">약품 관리</h3>
-                <button class="btn-close" type="button" onclick="closeModal()" >닫기</button>
+                <button class="btn-close modal-close" type="button" >닫기</button>
             </div>
             <div class="modal-body">
                 <div class="pill-info">
                     <div class="input-dual">
                         <dl class="form-control">
                             <dt class="tit">제조사명</dt>
-                            <dd class="cont">일동제약(주)</dd>
+                            <dd class="cont" id="companyName" ></dd>
                         </dl>
                         <dl class="form-control">
-                            <dt class="tit">등록일</dt>
-                            <dd class="cont">2000년 1월 1일</dd>
+                            <dt class="tit">등록일 / 수정일</dt>
+                            <dd class="cont" id="allDate"></dd>
                         </dl>
                     </div>
                     <div class="input-dual">
                         <label class="form-control">
                             <span class="label-text">약품명</span>
-                            <input type="text" value="활명수" readonly>
+                            <input type="text" id="pillName" name="pillName" readonly>
                         </label>
                         <dla class="form-control">
                             <dt class="tit">약형태 및 색상</dt>
-                            <dd class="cont">원형 / 하양</dd>
+                            <dd class="cont" id="pillShapeColor"></dd>
                         </dla>
                     </div>
                     <dl class="form-control">
                         <dt class="tit">약효능</dt>
-                        <dd class="cont">이 약은 식욕감퇴(식욕부진), 위부팽만감, 소화불량, 과식, 체함, 구역, 구토에 사용합니다</dd>
+                        <dd class="cont scroll" id="detailContent"></dd>
                     </dl>
                     <dl class="form-control">
                         <dt class="tit">복용/섭취방법</dt>
-                        <dd class="cont">만 15세 이상 및 성인은 1회 1병(75 mL), 만 11세이상~만 15세미만은 1회 2/3병(50 mL), 만 8세 이상~만 11세 미만은 1회 1/2병(37.5 mL), 만 5세 이상~만 8세 미만은 1회 1/3병(25 mL), 만 3세 이상~만 5세 미만은 1회 1/4병(18.75 mL), 만 1세 이상~만 3세 미만은 1회 1/5병(15 mL), 1일 3회 식후에 복용합니다. 복용간격은 4시간 이상으로 합니다.</dd>
+                        <dd class="cont scroll" id="pillHowto"></dd>
                     </dl>
                     <dl class="form-control">
                         <dt class="tit">섭취시 주의사항</dt>
-                        <dd class="cont">만 3개월 미만의 젖먹이는 이 약을 복용하지 마십시오. 이 약을 복용하기 전에 만 1세 미만의 젖먹이, 임부 또는 임신하고 있을 가능성이 있는 여성, 카라멜에 과민증 환자 또는 경험자, 나트륨 제한 식이를 하는 사람은 의사 또는 약사와 상의하십시오. 정해진 용법과 용량을 잘 지키십시오. 어린이에게 투여할 경우 보호자의 지도 감독하에 투여하십시오. 1개월 정도 복용하여도 증상의 개선이 없을 경우 복용을 즉각 중지하고 의사 또는 약사와 상의하십시오.</dd>
+                        <dd class="cont scroll" id="intakePrecautions"></dd>
                     </dl>
                     <dl class="form-control">
                         <dt class="tit">약보관방법</dt>
-                        <dd class="cont">습기와 빛을 피해 실온에서 보관하십시오.어린이의 손이 닿지 않는 곳에 보관하십시오.</dd>
+                        <dd class="cont scroll" id="pillDeposit"></dd>
                     </dl>
                     <label class="form-control">
                         <span class="label-text">약 사진</span>
-                        <input type="text" value="https://nedrug.mfds.go.kr/pbp/cmn/itemImageDownload/152035092098000085" readonly>
+                        <input type="text" id="pillImage" name="pillImage" readonly>
                     </label>
                 </div>
                 <div class="btn-area">
+                    <input type="hidden" id="modal-item-id">
                     <button id="btn-modify" class="btn btn-light" type="button">수정</button>
-                    <button id="btn-check" onclick="closeModal()" class="btn btn-primary" type="button">확인</button>
+                    <button id="btn-check" class="btn btn-primary" type="button">확인</button>
                     <button id="btn-back" class="btn btn-light" type="button">취소</button>
                     <button id="btn-change-modify" class="btn btn-primary" type="button">적용</button>
                 </div>

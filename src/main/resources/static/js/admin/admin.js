@@ -7,8 +7,8 @@ import {
     handleBackClick
 } from '../modules/modalEventHandlers.js';
 import  * as member from './member.js';
-import * as pageNation from '../modules/pagination.js';
-import * as search from  '../modules/search.js';
+import  * as pill from './pill.js';
+import  * as board from './board.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     // DOM 요소 선택
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
             } else if (itemId) {
                 // 상품 삭제 처리
-                // pill.deleteItem(event, target);
+                pill.deleteItem(event, target);
             } else if (boardId) {
                 // 게시판 항목 삭제 처리
                 // board.deleteBoard(event, target);

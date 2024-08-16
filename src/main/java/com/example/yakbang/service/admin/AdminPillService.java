@@ -28,4 +28,8 @@ public class AdminPillService {
         return adminPillMapper.PillTotal(pageRequestDTO);
     }
 
+    public void modifyPill(AdminPillDTO adminPillDTO) {
+        adminPillMapper.updatePill(adminPillDTO);
+    }
+
 }

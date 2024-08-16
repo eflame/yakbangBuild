@@ -16,6 +16,7 @@ public interface AdminPillMapper {
 
     int PillTotal(PageRequestDTO pageRequestDTO);
 
+    void updatePill(AdminPillDTO adminPillDTO);
 
 }
 

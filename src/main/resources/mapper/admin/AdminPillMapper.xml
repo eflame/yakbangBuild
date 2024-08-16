@@ -37,4 +37,11 @@
             WHERE ${keywordType} LIKE '%' || #{keyword} || '%'
         </if>
     </select>
+
+    <update id="updatePill">
+        UPDATE TBL_PILL
+        SET PILL_NAME = #{pillName}, PILL_IMAGE = #{pillImage}
+        WHERE ITEM_SEQ = #{itemSeq}
+    </update>
+
 </mapper>
