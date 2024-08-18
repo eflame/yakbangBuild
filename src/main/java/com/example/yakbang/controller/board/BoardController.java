@@ -28,7 +28,7 @@ public class BoardController {
         System.out.println("boardSearchDTO = " + boardSearchDTO);
 //        List<BoardQnaListDTO> list = boardService.findList(); // 게시물 목록 호출
         List<BoardQnaListDTO> list = boardService.findSearchList(boardSearchDTO);
-        log.info("list : {}", list);
+
         model.addAttribute("list", list);
 
         return "board/qna_list";

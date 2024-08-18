@@ -40,7 +40,7 @@
                         <div class="user-info-row">
                             <span class="user-name" th:text="${board.name}"></span>
                             <span class="user-agesex" th:text="${board.age}+대+ ' / ' +${board.gender}"></span>
-                                <span class="img-icon" >사진 없음</span>
+                                <span class="img-icon" th:text="${board.hasImage == 1 ? '사진 있음' : '사진 없음'}"></span>
                         </div>
                     </a>
                 </div>

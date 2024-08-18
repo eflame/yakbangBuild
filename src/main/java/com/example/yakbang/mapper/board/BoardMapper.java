@@ -21,5 +21,6 @@ public interface BoardMapper {
 
     void updateViewCount(Long questionId); // 조회수 증가
 
+    List<BoardQnaListDTO> selectPhoto();
 
 }
