@@ -65,7 +65,7 @@ class ReviewMapperTest {
                 .pillId(20905L)
                 .memberId(memberJoinDTO.getMemberId())
                 .point(3)
-                .reviewPhoto("test")
+//                .reviewPhoto("test")
                 .reviewContent("test")
                 .build();
 

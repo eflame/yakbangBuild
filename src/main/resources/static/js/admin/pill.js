@@ -1,3 +1,35 @@
+export async function deleteItem(manager) {
+    const itemSeq = manager.dataset.itemId;
+
+    if (!itemSeq) {
+        console.error('User ID가 없습니다.');
+        throw new Error('User ID가 없습니다.');
+    }
+
+    const deleteUrl = `/admin/pill/delete/${itemSeq}`;
+
+    try {
+        const response = await fetch(deleteUrl, { method: 'DELETE' });
+
+        if (!response.ok) {
+            const errorText = await response.text();  // 오류 응답 본문 읽기
+            console.error(`삭제 중 오류 발생: HTTP ${response.status} - ${errorText}`);
+            throw new Error(`HTTP error! Status: ${response.status} - ${errorText}`);
+        }
+
+        const data = await response.json();
+        if (data.success) {
+            alert('회원 정보가 성공적으로 삭제되었습니다.');
+            window.location.reload();
+        } else {
+            alert('삭제 실패: ' + data.message);
+        }
+    } catch (error) {
+        console.error('삭제 중 오류 발생:', error.message);
+        alert('삭제 중 오류가 발생했습니다. 나중에 다시 시도해 주세요.');
+    }
+}
+
 
 let oldContents = [];
 export async function modifyMember(e) {

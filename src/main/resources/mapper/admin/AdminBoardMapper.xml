@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.yakbang.mapper.admin.AdminBoardMapper">
+    <select id="selectQnaInfo">
+        SELECT Q.QUESTION_ID, Q.MEMBER_ID, Q.TITLE, Q.CONTENT, Q.VIEW_COUNT, Q.WRITE_DATE, M.LOGIN_ID, M.NAME, M.GENDER,
+        FLOOR(MONTHS_BETWEEN(SYSDATE, M.BIRTH) / 120) * 10 AS AGE, A.ANSWER_NO, A.ANSWER_CONTENT
+        FROM TBL_QA Q
+        JOIN TBL_MEMBER M ON Q.MEMBER_ID = M.MEMBER_ID
+        LEFT JOIN TBL_ANSWER A ON Q.QUESTION_ID = A.QUESTION_ID
+        WHERE Q.QUESTION_ID = #{questionId}
+    </select>
+
+    <select id="selectQnaList">
+        SELECT  QUESTION_ID, MEMBER_ID, TITLE, VIEW_COUNT, WRITE_DATE, LOGIN_ID, NAME, GENDER, AGE, ANSWER_NO
+        FROM(
+            SELECT ROWNUM AS RNUM , QUESTION_ID, MEMBER_ID, TITLE, VIEW_COUNT, WRITE_DATE, LOGIN_ID,  NAME, GENDER, AGE, ANSWER_NO
+            FROM (
+                SELECT Q.QUESTION_ID, Q.MEMBER_ID, Q.TITLE, Q.VIEW_COUNT, Q.WRITE_DATE, M.LOGIN_ID, M.NAME, M.GENDER,
+                FLOOR(MONTHS_BETWEEN(SYSDATE, M.BIRTH) / 120) * 10 AS AGE, A.ANSWER_NO
+                FROM TBL_QA Q
+                    JOIN TBL_MEMBER M ON Q.MEMBER_ID = M.MEMBER_ID
+                    LEFT JOIN TBL_ANSWER A ON Q.QUESTION_ID = A.QUESTION_ID
+                <if test="keyword != null and keyword != ''">
+                WHERE ${keywordType} LIKE '%' || #{keyword} || '%'
+                </if>
+                ORDER BY Q.QUESTION_ID DESC
+            )
+            <![CDATA[
+            WHERE ROWNUM <= #{page} * #{amount}
+            ]]>
+        )
+        <![CDATA[
+        WHERE RNUM > (#{page} - 1) * #{amount}
+        ]]>
+    </select>
+
+    <select id="qnaTotal">
+        SELECT COUNT(QUESTION_ID)
+        FROM TBL_QA
+        <if test="keywordType != null and keywordType != ''">
+            WHERE ${keywordType} LIKE '%' || #{keyword} || '%'
+        </if>
+    </select>
+
+</mapper>

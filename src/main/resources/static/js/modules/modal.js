@@ -3,7 +3,6 @@ export async function openModal(manager) {
     try {
         // 데이터를 가져와서 모달에 로드
         await loadDataIntoModal(manager);
-
         // 모달 열기
         document.querySelector(".modal-wrap").classList.add("open");
         const dim = document.createElement('div');
@@ -32,7 +31,8 @@ async function loadDataIntoModal(manager) {
     const memberType = manager.dataset.memberType;
     const memberId = manager.dataset.memberId;
     const itemId = manager.dataset.itemId;
-    console.log(memberId);
+    const questionId = manager.dataset.questionId;
+    console.log(questionId);
 
     // 데이터 세트에 따라 모달의 값을 설정
     if (memberId) {
@@ -105,6 +105,31 @@ async function loadDataIntoModal(manager) {
             document.getElementById('pillDeposit').innerText = pill.pillDeposit ?? 'N/A';
             document.getElementById('pillImage').value = pill.pillImage ?? 'N/A';
 
+        }
+    } else if (questionId) {
+        const modalIdElement = document.getElementById('modal-question-id');
+        modalIdElement.value = questionId;
+
+        const response = await fetch(`/admin/board/${questionId}`);
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log('Fetched data:', data);
+
+        if (data.length > 0) {
+            const qna = data[0];
+            console.log(qna);
+
+            document.getElementById('qnaName').innerText = qna.name ?? 'N/A';
+            document.getElementById('qnaAgeGender').innerText = (qna.age && qna.gender)
+                ? `${qna.age}대 / ${qna.gender === 'M' ? '남' : '여'}`
+                : 'N/A';
+            document.getElementById('qnaTitle').innerText = qna.title ?? 'N/A';
+            document.getElementById('qnaContent').innerHTML = qna.content ?? 'N/A';
+            document.getElementById('ansContent').innerHTML = qna.answerContent ?? '';
         }
     }
 }

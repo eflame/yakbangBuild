@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const manager = new DatasetManager(event.target)
             const userId = manager.dataset.memberId;
             const itemId = manager.dataset.itemId;
-            const boardId = manager.dataset.boardId;
+            const questionId = manager.dataset.questionId;
 
             if (userId) {
                 // 회원 삭제 처리
@@ -74,11 +74,24 @@ document.addEventListener('DOMContentLoaded', () => {
                         console.error('삭제 작업 중 오류 발생:', error);
                     });
             } else if (itemId) {
+                console.log("아이템 클릭");
                 // 상품 삭제 처리
-                pill.deleteItem(event, target);
-            } else if (boardId) {
+                pill.deleteItem(manager)
+                    .then(() => {
+                    console.log('삭제 작업이 성공적으로 완료되었습니다.');
+                })
+                    .catch((error) => {
+                        console.error('삭제 작업 중 오류 발생:', error);
+                    });
+            } else if (questionId) {
                 // 게시판 항목 삭제 처리
-                // board.deleteBoard(event, target);
+                board.deleteBoard(event, target)
+                    .then(() => {
+                        console.log('삭제 작업이 성공적으로 완료되었습니다.');
+                    })
+                    .catch((error) => {
+                        console.error('삭제 작업 중 오류 발생:', error);
+                    });
             } else {
                 console.error('삭제할 항목이 지정되지 않았습니다.');
             }
