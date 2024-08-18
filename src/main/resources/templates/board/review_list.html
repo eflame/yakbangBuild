@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Review</title>
     <link rel="stylesheet" th:href="@{/css/common/common.css}" />
-    <link rel="stylesheet" href="../css/review.css" />
+    <link rel="stylesheet" th:href="@{/css/board/review_list.css}" />
     <script defer th:src="@{/js/common/common.js}" ></script>
     <script defer th:src="@{/js/board/ration.js}" ></script>
 </head>
@@ -24,36 +24,32 @@
                     <input class="input-search" type="text" title="review 검색어 입력" placeholder="무엇이 궁금하신가요?" >
                     <button class="btn-search" title="검색 버튼"></button>
                 </div>
-                <a class="btn btn-primary" th:href="@{/board/review-write}">후기 작성</a>
+                <a class="btn btn-primary" th:href="@{/review/write}">후기 작성</a>
             </div>
             <ul class="review-list type-oneline">
-                <li class="review-card" th:each="board : ${review}">
+                <li class="review-card" th:each="dto : ${list}">
                     <div class="card-header">
                         <div class="pill-info">
                             <div class="rating-box">
                                 <!-- 평균점수 계산식 = (점수 - 1)/4*100 : width 값안에 적용 -->
-                                <div class="rating-select" style="width:100%"></div>
+                                <div class="rating-select" th:style="'width:' + ${dto.point / 5.0 * 100} + '%'"></div>
                             </div>
                             <div class="card-title">
-                                <span class="company">회사이름</span>
-                                <span class="product">제품명</span>
+                                <span class="company" th:text="${dto.companyName}"></span>
+                                <span class="product" th:text="${dto.pillName}"></span>
                             </div>
                         </div>
                         <div class="user-info">
-                            <span class="user-name">김**</span>
-                            <span class="user-agegender">20대 / 여</span>
+                            <span class="user-name" th:text="${dto.name}"></span>
+                            <span class="user-agegender" th:text="${dto.reviewAge} + '대 / ' + ${dto.reviewGender} "></span>
                         </div>
                     </div>
                     <div class="card-body">
-                        <p class="review-txt ellipsis-line">
-                            타블렛이 싫은 분을 위한 비타민 투퍼데이는 첨부된 부가 성분을 최소화하고 비타민과 미네날을 충분히 함유하고그 성분도 활성화된 형태[비타민 B, D]나 특허받은 원료[아연, 셀레늄, 크롬]를 포함한 저렴한 가격의 좋은 품질을 지닌 비타민입니다.
-                            라이프익스텐션은 미국 내에서 미드 티어에서 조금 높은 순위를 가진보충제 회사로 평가 받고 있어 믿을 만한 회사이기도 합니다.
-                            저는 평소에 타블렛을 이용하나가끔씩 캡슐을 복용하기도 합니다.
-                            이론적으로는 캡슐이 타블렛 보다 흡수가 빠르다고 하는데[흡수율 자체에는 영향을 주지는 않음]
-                            개인적으로는 그리 큰 효과는 모르겠고타블릿을 삼키기 어려운 분들에는 대안이 될 수 있을 것입니다. 공복인 상태에서 먹게되면 간혹 어지럼증 속쓰림등의 증상이 있으니 주의하십시오
-                        </p>
+                        <div class="review-txt ellipsis-line" th:utext="${dto.reviewContent}">
+                        </div>
                     </div>
                 </li>
+
             </ul>
         </div>
         </main>

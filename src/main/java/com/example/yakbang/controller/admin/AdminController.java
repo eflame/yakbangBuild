@@ -2,9 +2,11 @@ package com.example.yakbang.controller.admin;
 
 import com.example.yakbang.dto.admin.AdminExMemberDTO;
 import com.example.yakbang.dto.admin.AdminMemberDTO;
-import com.example.yakbang.mapper.admin.AdminMapper;
-import com.example.yakbang.service.admin.AdminService;
-import com.example.yakbang.service.member.MemberService;
+import com.example.yakbang.dto.admin.AdminPillDTO;
+import com.example.yakbang.dto.page.PageRequestDTO;
+import com.example.yakbang.dto.page.PageSetDTO;
+import com.example.yakbang.service.admin.AdminMemberService;
+import com.example.yakbang.service.admin.AdminPillService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -14,11 +16,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @Slf4j
 @Controller
@@ -26,7 +25,8 @@ import java.util.NoSuchElementException;
 @RequiredArgsConstructor
 public class AdminController {
 
-    private final AdminService adminService;
+    private final AdminMemberService adminMemberService;
+    private final AdminPillService adminPillService;
 
 
     @GetMapping("")
@@ -66,7 +66,7 @@ public class AdminController {
 
         try {
             // 관리자 ID와 비밀번호로 로그인 시도
-            memberId = adminService.findAdminId(loginId, password);
+            memberId = adminMemberService.findAdminId(loginId, password);
             if (memberId != null) {
                 // 로그인 성공 시 세션에 로그인 ID 및 memberId 저장
                 session.setAttribute("loginId", loginId);
@@ -124,26 +124,43 @@ public class AdminController {
     }
 
     @GetMapping("/{memberType}/index")
-    public String index(@PathVariable("memberType") String memberType, Model model) {
+    public String index(@PathVariable("memberType") String memberType,
+                        PageRequestDTO pageRequestDTO,
+                        Model model) {
+
         if ("expert".equalsIgnoreCase(memberType)) {
+            int total = adminMemberService.findExpertTotal(pageRequestDTO);
+            PageSetDTO pageSetDTO = new PageSetDTO(pageRequestDTO, total);
             // 전문가 회원 데이터를 가져오는 로직
-            List<AdminExMemberDTO> list = adminService.findExpertMembers(null);
+            List<AdminExMemberDTO> list = adminMemberService.findMemberExPageNation(pageRequestDTO);
             model.addAttribute("list", list);
-            model.addAttribute("currentMemberType", "expert");
+            model.addAttribute("pageSetDTO", pageSetDTO);
+            model.addAttribute("memberType", "expert");
         } else {
+            int total = adminMemberService.findGeneralTotal(pageRequestDTO);
+            PageSetDTO pageSetDTO = new PageSetDTO(pageRequestDTO, total);
             // 일반 회원 데이터를 가져오는 로직
-            List<AdminMemberDTO> list = adminService.findGeneralMembers(null);
+            List<AdminMemberDTO> list = adminMemberService.findMemberPageNation(pageRequestDTO);
             model.addAttribute("list", list);
-            model.addAttribute("currentMemberType", "general");
+            model.addAttribute("pageSetDTO", pageSetDTO);
+            model.addAttribute("memberType", "general");
         }
         return "admin/index";
     }
 
 
     @GetMapping("/pill")
-    public String pill(HttpSession session, Model model) {
+    public String pill(HttpSession session,
+                       PageRequestDTO pageRequestDTO,
+                       Model model) {
         Long memberId = (Long) session.getAttribute("memberId");
+        int total = adminPillService.PillTotal(pageRequestDTO);
+        PageSetDTO pageSetDTO = new PageSetDTO(pageRequestDTO, total);
 
+        List<AdminPillDTO> list = adminPillService.findPillPageList(pageRequestDTO);
+        model.addAttribute("list", list);
+        model.addAttribute("pageSetDTO", pageSetDTO);
+        model.addAttribute("pillType", "pill");
         if (memberId == null) {
             return "redirect:/admin";
         }

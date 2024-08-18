@@ -6,7 +6,7 @@
         <title>관리자페이지</title>
         <link rel="stylesheet" th:href="@{/css/common/common.css}" />
         <link rel="stylesheet" th:href="@{/css/admin/admin.css}" />
-        <script defer th:src="@{/js/admin/admin.js}"></script>
+        <script defer type="module" th:src="@{/js/admin/admin.js}"></script>
     </head>
     <body>
         <header th:replace="~{common/header/header_admin::admin-header}"></header>
@@ -22,20 +22,23 @@
         </div>
         <div class="layout-content">
             <div class="tabs">
-                <a class="item" th:classappend="${currentMemberType == 'general'} ? 'active'" th:href="@{'/admin/general/index'}">일반회원</a>
-                <a class="item" th:classappend="${currentMemberType == 'expert'} ? 'active'" th:href="@{'/admin/expert/index'}">전문회원</a>
+                <a class="item" th:classappend="${memberType == 'general'} ? 'active'" th:href="@{'/admin/general/index'}">일반회원</a>
+                <a class="item" th:classappend="${memberType == 'expert'} ? 'active'" th:href="@{'/admin/expert/index'}">전문회원</a>
             </div>
 
             <div class="member-list-wrap">
-                <form class="search-area" th:action="@{/admin/index}" method="get">
-                    <select name="" id="">
-                        <option value="">아이디</option>
-                        <option value="">이름</option>
-                    </select>
-                    <label class="form-control">
-                        <input type="text" placeholder="Search Member">
+                <form class="search-area" th:action="${'/admin/' + memberType + '/index'}" method="get">
+                    <label>
+                        <select name="keywordType">
+                            <option value="LOGIN_ID">아이디</option>
+                            <option value="NAME">이름</option>
+                            <option value="EMAIL">이메일</option>
+                        </select>
                     </label>
-                    <button class="btn-normal btn-primary" type="button">찾기</button>
+                    <label class="form-control">
+                        <input type="text" name="keyword" placeholder="Search Member">
+                    </label>
+                    <button class="btn-normal btn-primary" type="submit">찾기</button>
                 </form>
                 <div class="tbl-row">
                     <table>
@@ -44,7 +47,7 @@
                             <col>
                             <col>
                             <col>
-                            <th:block th:if="${currentMemberType == 'expert'}">
+                            <th:block th:if="${memberType == 'expert'}">
                                 <col>
                                 <col>
                             </th:block>
@@ -58,7 +61,7 @@
                                 <th>이름</th>
                                 <th>생년월일</th>
                                 <th>성별</th>
-                                <th:block th:if="${currentMemberType == 'expert'}">
+                                <th:block th:if="${memberType == 'expert'}">
                                     <th>약국명</th>
                                     <th>약국 위치</th>
                                 </th:block>
@@ -70,42 +73,42 @@
                         <tbody>
                             <tr th:each="board : ${list}">
                                 <td>
-                                    <span th:text="${board.loginId}">Test01</span>
+                                    <span th:text="${board.loginId}"></span>
                                 </td>
                                 <td>
-                                    <span th:text="${board.name}">홍길동</span>
+                                    <span th:text="${board.name}"></span>
                                 </td>
                                 <td>
-                                    <span th:text="${board.birth}">2000년 00월 00일</span>
+                                    <span th:text="${board.birth}"></span>
                                 </td>
                                 <td>
-                                    <span th:text="${board.gender}">남성</span>
+                                    <span th:text="${board.gender == 'M' ? '남' : (board.gender == 'F' ? '여' : '')}"></span>
                                 </td>
-                                <th:block th:if="${currentMemberType == 'expert'}">
+                                <th:block th:if="${memberType == 'expert'}">
                                     <td>
-                                        <span th:text="${board.job}">모두약국</span>
+                                        <span th:text="${board.job}"></span>
                                     </td>
                                     <td>
-                                        <span th:text="${board.pharmacyAddress}">서울특별시 노원구 상계로1길 34</span>
+                                        <span th:text="${board.pharmacyAddress}"></span>
                                     </td>
                                 </th:block>
                                 <td>
-                                    <span th:text="${board.phoneNumber}">010-1234-5678</span>
+                                    <span th:text="${board.phoneNumber}"></span>
                                 </td>
                                 <td>
-                                    <span  th:text="${board.email}">text@test.com</span>
+                                    <span  th:text="${board.email}"></span>
                                 </td>
                                 <td>
                                     <div class="options">
                                         <button class="btn-sm btn-light-primary" type="button">option</button>
                                         <ul class="option-box">
                                             <li><a class="btn-open-modal" href="#"
-                                                   th:data-member="${currentMemberType == 'expert' ? board.expertId : board.memberId}"
-                                                   th:data-member-type="${currentMemberType == 'expert' ? 'expert' : 'general'}"
+                                                   th:data-member-id="${memberType == 'expert' ? board.expertId : board.memberId}"
+                                                   th:data-member-type="${memberType == 'expert' ? 'expert' : 'general'}"
                                             >View</a></li>
                                             <li><a class="btn-deleted" href="#"
-                                                   th:data-member="${currentMemberType == 'expert' ? board.expertId : board.memberId}"
-                                                   th:data-member-type="${currentMemberType == 'expert' ? 'expert' : 'general'}"
+                                                   th:data-member-id="${memberType == 'expert' ? board.expertId : board.memberId}"
+                                                   th:data-member-type="${memberType == 'expert' ? 'expert' : 'general'}"
                                             >Delete</a></li>
                                         </ul>
                                     </div>
@@ -116,13 +119,26 @@
                 </div>
                 <div class="tb-footer-control">
                     <ul class="pagination">
-                        <li class="page-item disabled"><a class="page-link previous" href="#"></a></li>
-                        <li class="page-item active"><a class="page-link " href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                        <li class="page-item"><a class="page-link" href="#">5</a></li>
-                        <li class="page-item"><a class="page-link next" href="#"></a></li>
+                        <li class="page-item" th:if="${pageSetDTO.prev}">
+                            <a class="page-link previous"
+                               th:href="${'/admin/' + memberType + '/index?page=' + (pageSetDTO.startPage - 1)}">
+                            </a>
+                        </li>
+
+                        <li class="page-item"
+                            th:classappend="${pageSetDTO.pageRequestDTO.page == i ? 'active' : ''}"
+                            th:each="i : ${#numbers.sequence(pageSetDTO.startPage, pageSetDTO.endPage)}">
+                            <a class="page-link"
+                               th:href="${'/admin/' + memberType + '/index?page=' + i }"
+                               th:text="${i}" >
+                            </a>
+                        </li>
+
+                        <li class="page-item" th:if="${pageSetDTO.next}">
+                            <a class="page-link next"
+                                th:href="${'/admin/' + memberType + '/index?page=' + (pageSetDTO.endPage + 1)}">
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -136,44 +152,44 @@
                 <div class="member-info">
                     <dl class="form-control">
                         <dt class="tit">아이디</dt>
-                        <dd class="cont" id="loginId">Test01</dd>
+                        <dd class="cont" id="loginId"></dd>
                     </dl>
                     <label class="form-control">
                         <span class="label-text">회원 이름</span>
-                        <input type="text" id="memberName" name="name" value="홍길동" readonly>
+                        <input type="text" id="memberName" name="name" value="" readonly>
                     </label>
                     <dl class="form-control">
                         <dt class="tit">생년월일</dt>
-                        <dd class="cont" id="memberBirth" >2000년 1월 1일</dd>
+                        <dd class="cont" id="memberBirth" ></dd>
                     </dl>
                     <dl class="form-control">
                         <dt class="tit">성별</dt>
-                        <dd class="cont" id="memberGender" >남</dd>
+                        <dd class="cont" id="memberGender" th:text="${memberGender == 'M' ? '남' : (memberGender == 'F' ? '여' : '')}"></dd>
                     </dl>
-                    <th:block th:if="${currentMemberType == 'expert'}">
+                    <th:block th:if="${memberType == 'expert'}">
                         <label class="form-control">
                             <span class="label-text">약국명</span>
-                            <input type="text" id="memberJob" value="모두약국" name="job" readonly>
+                            <input type="text" id="memberJob" value="" name="job" readonly>
                         </label>
                         <label class="form-control">
                             <span class="label-text">약국 위치</span>
-                            <input type="text" id="pharmacyAddress" value="서울특별시 노원구 상계로1길 34" name="pharmacyAddress" readonly>
+                            <input type="text" id="pharmacyAddress" value="" name="pharmacyAddress" readonly>
                         </label>
                     </th:block>
                     <label class="form-control">
                         <span class="label-text">전화번호</span>
-                        <input type="text" id="memberPhoneNumber" value="010-1234-5678" name="phoneNumber" readonly>
+                        <input type="text" id="memberPhoneNumber" value="" name="phoneNumber" readonly>
                     </label>
                     <label class="form-control">
                         <span class="label-text">이메일</span>
-                        <input type="text" id="memberEmail" value="test@test.com" name="email" readonly>
+                        <input type="text" id="memberEmail" value="" name="email" readonly>
                     </label>
                 </div>
                 <div class="btn-area">
                     <input type="hidden" id="modal-member-type">
                     <input type="hidden" id="modal-member-id">
                     <button id="btn-modify" class="btn btn-light" type="button">수정</button>
-                    <button id="btn-check" class="btn btn-primary modal-close" type="button">확인</button>
+                    <button id="btn-check" class="btn btn-primary" type="button">확인</button>
                     <button id="btn-back" class="btn btn-light" type="button">취소</button>
                     <button id="btn-change-modify" class="btn btn-primary" type="button" >적용</button>
                 </div>

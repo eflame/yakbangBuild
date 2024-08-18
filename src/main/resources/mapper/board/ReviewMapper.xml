@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.yakbang.mapper.board.ReviewMapper">
+    <insert id="insertReview" parameterType="reviewWriteDTO">
+        <selectKey resultType="long" order="BEFORE" keyProperty="reviewId">
+            SELECT SEQ_REVIEW.nextval FROM DUAL
+        </selectKey>
+        insert into TBL_REVIEW (REVIEW_ID, PILL_ID, MEMBER_ID, POINT, REVIEW_TITLE, REVIEW_CONTENT, REVIEW_GENDER, REVIEW_AGE, REVIEW_SHAPE)
+        values (#{reviewId}, #{pillId}, #{memberId}, #{point}, #{reviewTitle}, #{reviewContent}, #{reviewGender}, #{reviewAge}, #{reviewShape})
+    </insert>
+
+    <select id="selectList" resultType="reviewListDTO">
+        SELECT R.REVIEW_ID, R.PILL_ID, R.MEMBER_ID, R.POINT, R.MODIFIED_DATE, R.REVIEW_CONTENT,
+               R.REVIEW_SHAPE, R.REVIEW_AGE, R.REVIEW_GENDER, R.REVIEW_TITLE,
+               P.COMPANY_NAME, P.PILL_NAME,
+               M.NAME
+        FROM TBL_REVIEW R JOIN TBL_PILL P
+           ON R.PILL_ID = P.PILL_ID
+        JOIN TBL_MEMBER M
+            ON R.MEMBER_ID = M.MEMBER_ID
+        WHERE R.REVIEW_CONTENT LIKE '%' || #{keyword} || '%'
+    </select>
+
+    <select id="selectDetailList" parameterType="long" resultType="reviewDetailListDTO">
+        SELECT R.REVIEW_ID, R.PILL_ID, R.MEMBER_ID, R.POINT, R.MODIFIED_DATE, R.REVIEW_CONTENT,
+               R.REVIEW_SHAPE, R.REVIEW_AGE, R.REVIEW_GENDER, R.REVIEW_TITLE
+        FROM TBL_REVIEW R
+        WHERE R.PILL_ID = #{pillId}
+    </select>
+
+    <select id="selectPillListByName" resultType="ReviewPillSearchDTO" parameterType="string">
+        SELECT P.PILL_ID, P.PILL_NAME
+        FROM TBL_PILL P
+        WHERE P.PILL_NAME LIKE '%'|| #{pillName} ||'%'
+        ORDER BY P.PILL_ID
+    </select>
+</mapper>

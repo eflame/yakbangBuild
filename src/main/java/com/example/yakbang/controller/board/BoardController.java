@@ -3,6 +3,7 @@ package com.example.yakbang.controller.board;
 import com.example.yakbang.dto.board.BoardQnaDetailDTO;
 import com.example.yakbang.dto.board.BoardQnaListDTO;
 import com.example.yakbang.dto.board.BoardQnaWriteDTO;
+import com.example.yakbang.dto.board.BoardSearchDTO;
 import com.example.yakbang.service.board.BoardService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -23,8 +24,10 @@ public class BoardController {
     private final BoardService boardService;
 
     @GetMapping("/qna-list")
-    public String qna_list(Model model) {
-        List<BoardQnaListDTO> list = boardService.findList(); // 게시물 목록 호출
+    public String qna_list(BoardSearchDTO boardSearchDTO, Model model) {
+        System.out.println("boardSearchDTO = " + boardSearchDTO);
+//        List<BoardQnaListDTO> list = boardService.findList(); // 게시물 목록 호출
+        List<BoardQnaListDTO> list = boardService.findSearchList(boardSearchDTO);
         log.info("list : {}", list);
         model.addAttribute("list", list);
 
@@ -60,7 +63,6 @@ public class BoardController {
 
         return "redirect:/board/qna-list";
     }
-
 
     @GetMapping("/review-list")
     public String list() {
