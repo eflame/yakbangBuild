@@ -41,7 +41,7 @@
                         </div>
                         <div class="user-info">
                             <span class="user-name" th:text="${dto.name}"></span>
-                            <span class="user-agegender" th:text="${dto.reviewAge} + '대 / ' + ${dto.reviewGender} "></span>
+                            <span class="user-agegender" th:text="${dto.reviewAge} + '대 / ' + ${dto.reviewGender == 'M' ? '남자' : '여자'} "></span>
                         </div>
                     </div>
                     <div class="card-body">
