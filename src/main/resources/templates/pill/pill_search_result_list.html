@@ -8,7 +8,7 @@
 <link rel="stylesheet" th:href="@{/css/admin/admin.css}" />
 <link rel="stylesheet" th:href="@{/css/pill/pill.css}" />
 <script defer th:src="@{/js/common/common.js}"></script>
-<script defer th:src="@{/js/pill/search_list.js}"><</script>
+<!--<script defer th:src="@{/js/pill/search_list.js}"><</script>-->
 </head>
 <body>
 <div class="all-wrap">
@@ -41,14 +41,12 @@
         <!-- 작업영역 -->
         <div class="inner">
             <section class="search-section">
-                <h2 class="search-text">검색 결과 <span>22</span>건</h2>
+                <h2 class="search-text">검색 결과 <span th:text=""></span>건</h2>
                 <div class="search-box">
                     <form th:action="@{/pill/searchResult}" method="post">
-                        <input class="search-input" type="text" placeholder="제품명 검색해보세요!"
-
-                        >
+                        <input class="search-input" type="text" name="keyword" placeholder="제품명 검색해보세요!">
                         <button class="btn-search" type="submit">
-                            <img th:src="@{/images/common/ico_search_white.svg}" alt="">
+                            <img th:src="@{images/common/ico_search_white.svg}" alt="">
                         </button>
                     </form>
                 </div>
@@ -66,22 +64,25 @@
             <!-- 약 리스트 -->
             <div class="search-list-wrap">
                 <div class="pill-list">
+                    <a href="/pill/detail?id=${pill.itemSeq}"
+                       class="pill-item">
+                        <!-- 약 이미지 -->
 
-<!--                    <a href="@{/pill/detail(id=${pill.itemSeq})}"-->
-<!--                       class="pill-item">-->
-<!--                        &lt;!&ndash; 약 이미지 &ndash;&gt;-->
-<!--                        <img src=""-->
+<!--                        <img th:src="${ pill.pillImage != null ? pill.pillImage : '/images/common/img_pill_03.png' }"-->
+<!--                             th:style=" ${ pill.pillImage != null ? pill.pillImage : 'width: 70px' }"-->
 <!--                             alt="Pill Image"-->
-<!--                             class="pill-img" />-->
-<!--                        <div class="info">-->
-<!--                            &lt;!&ndash; 브랜드 (제조사) &ndash;&gt;-->
-<!--                            <span class="brand" >브랜드</span>-->
-<!--                            &lt;!&ndash; 약 이름 &ndash;&gt;-->
-<!--                            <span class="pill-name" >약 이름</span>-->
-<!--                            &lt;!&ndash; 리뷰 점수 (예시로 고정된 값 사용) &ndash;&gt;-->
-<!--                            <span class="review-score">4.68</span>-->
-<!--                        </div>-->
-<!--                    </a>-->
+<!--                             class="pill-img"-->
+<!--                        />-->
+                        <div class="info">
+                            <!-- 브랜드 (제조사) -->
+<!--                            <span class="brand" th:text="${pill.companyName}"></span>-->
+                            <!-- 약 이름 -->
+                            <span class="pill-name">${pill.pillName}</span>
+                            <!-- 리뷰 점수 (예시로 고정된 값 사용) -->
+                            <span class="review-score">4.68</span>
+                        </div>
+                    </a>
+
 
                 </div>
             </div>
