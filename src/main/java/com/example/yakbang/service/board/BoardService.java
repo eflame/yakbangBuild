@@ -40,4 +40,5 @@ public class BoardService {
     public List<BoardQnaListDTO> findSearchList(BoardSearchDTO boardSearchDTO){
         return boardMapper.selectBoardSearch(boardSearchDTO);
     }
+
 }
