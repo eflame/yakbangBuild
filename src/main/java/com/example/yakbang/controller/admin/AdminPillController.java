@@ -41,6 +41,22 @@ public class AdminPillController {
             response.put("message", "업데이트 실패: " + e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
-
     }
+
+    @DeleteMapping("/delete/{itemSeq}")
+    public ResponseEntity<Map<String, Object>> deletePill(@PathVariable("itemSeq") Long itemSeq) {
+        Map<String, Object> response = new HashMap<>();
+
+        boolean success = adminPillService.deletePill(itemSeq) > 0;
+
+        response.put("success", success);
+
+        if (success) {
+            return ResponseEntity.ok(response);
+        } else {
+            response.put("message", "전문 회원 실패");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+    }
+
 }
