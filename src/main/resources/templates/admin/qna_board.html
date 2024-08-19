@@ -27,12 +27,12 @@
             </div>
 
             <div class="member-list-wrap">
-                <form class="search-area" th:action="${'/admin/board'}" method="get">
+                <form class="search-area" th:action="${'/admin/qna'}" method="get">
                     <label>
                         <select name="keywordType">
                             <option value="LOGIN_ID">아이디</option>
                             <option value="NAME">이름</option>
-                            <option value="EMAIL">이메일</option>
+                            <option value="TITLE">질문</option>
                         </select>
                     </label>
                     <label class="form-control">
@@ -57,7 +57,7 @@
                                 <th>아이디</th>
                                 <th>이름</th>
                                 <th>성별</th>
-                                <th>질문 제목</th>
+                                <th>질문</th>
                                 <th>답변 확인</th>
                                 <th>조회수</th>
                                 <th>작성일</th>

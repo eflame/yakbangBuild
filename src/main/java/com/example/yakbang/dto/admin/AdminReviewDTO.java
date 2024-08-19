@@ -17,4 +17,7 @@ public class AdminReviewDTO {
     private String reviewGender;
     private String reviewShape;
     private int reviewAge;
+    private String companyName;
+    private String pillName;
+    private String name;
 }

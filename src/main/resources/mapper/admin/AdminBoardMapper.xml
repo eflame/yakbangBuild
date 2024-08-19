@@ -18,8 +18,8 @@
                 SELECT Q.QUESTION_ID, Q.MEMBER_ID, Q.TITLE, Q.VIEW_COUNT, Q.WRITE_DATE, M.LOGIN_ID, M.NAME, M.GENDER,
                 FLOOR(MONTHS_BETWEEN(SYSDATE, M.BIRTH) / 120) * 10 AS AGE, A.ANSWER_NO
                 FROM TBL_QA Q
-                    JOIN TBL_MEMBER M ON Q.MEMBER_ID = M.MEMBER_ID
-                    LEFT JOIN TBL_ANSWER A ON Q.QUESTION_ID = A.QUESTION_ID
+                JOIN TBL_MEMBER M ON Q.MEMBER_ID = M.MEMBER_ID
+                LEFT JOIN TBL_ANSWER A ON Q.QUESTION_ID = A.QUESTION_ID
                 <if test="keyword != null and keyword != ''">
                 WHERE ${keywordType} LIKE '%' || #{keyword} || '%'
                 </if>
@@ -35,8 +35,10 @@
     </select>
 
     <select id="qnaTotal">
-        SELECT COUNT(QUESTION_ID)
-        FROM TBL_QA
+        SELECT COUNT(Q.QUESTION_ID)
+        FROM TBL_QA Q
+        JOIN TBL_MEMBER M ON Q.MEMBER_ID = M.MEMBER_ID
+        LEFT JOIN TBL_ANSWER A ON Q.QUESTION_ID = A.QUESTION_ID
         <if test="keywordType != null and keywordType != ''">
             WHERE ${keywordType} LIKE '%' || #{keyword} || '%'
         </if>
@@ -47,7 +49,7 @@
         WHERE QUESTION_ID = #{questionId}
     </delete>
 
-    <select id="selectReviewInfo">
+    <select id="selectReviewList">
         SELECT R.REVIEW_ID, R.PILL_ID, R.MEMBER_ID, R.POINT, R.MODIFIED_DATE, R.REVIEW_CONTENT,
                R.REVIEW_SHAPE, R.REVIEW_AGE, R.REVIEW_GENDER, R.REVIEW_TITLE,
                P.COMPANY_NAME, P.PILL_NAME,
@@ -56,9 +58,39 @@
                                ON R.PILL_ID = P.PILL_ID
                           JOIN TBL_MEMBER M
                                ON R.MEMBER_ID = M.MEMBER_ID
-        WHERE R.REVIEW_CONTENT LIKE '%' || #{keyword} || '%'
+        <if test="keywordType != null and keywordType != ''">
+            WHERE ${keywordType} LIKE '%' || #{keyword} || '%'
+        </if>
     </select>
 
+<!--    <select id="selectReviewInfo">-->
+<!--        SELECT R.REVIEW_ID, R.PILL_ID, R.MEMBER_ID, R.POINT, R.MODIFIED_DATE, R.REVIEW_CONTENT,-->
+<!--               R.REVIEW_SHAPE, R.REVIEW_AGE, R.REVIEW_GENDER, R.REVIEW_TITLE,-->
+<!--               P.COMPANY_NAME, P.PILL_NAME,-->
+<!--               M.NAME-->
+<!--        FROM TBL_REVIEW R JOIN TBL_PILL P-->
+<!--                               ON R.PILL_ID = P.PILL_ID-->
+<!--                          JOIN TBL_MEMBER M-->
+<!--                               ON R.MEMBER_ID = M.MEMBER_ID-->
+<!--        <if test="keywordType != null and keywordType != ''">-->
+<!--            WHERE ${keywordType} LIKE '%' || #{keyword} || '%'-->
+<!--        </if>-->
+<!--    </select>-->
 
+    <select id="reviewTotal">
+        SELECT COUNT(R.REVIEW_ID)
+        FROM TBL_REVIEW R JOIN TBL_PILL P
+        ON R.PILL_ID = P.PILL_ID
+        JOIN TBL_MEMBER M
+        ON R.MEMBER_ID = M.MEMBER_ID
+        <if test="keywordType != null and keywordType != ''">
+            WHERE ${keywordType} LIKE '%' || #{keyword} || '%'
+        </if>
+    </select>
+
+    <delete id="deleteReview">
+        DELETE FROM TBL_REVIEW
+        WHERE REVIEW_ID = #{reviewId}
+    </delete>
 
 </mapper>
