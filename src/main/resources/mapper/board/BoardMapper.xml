@@ -14,8 +14,7 @@
     <select id="selectQuestionList">
         SELECT Q.QUESTION_ID, Q.MEMBER_ID, Q.TITLE, Q.CONTENT,
                M.NAME, M.GENDER,
-               FLOOR(MONTHS_BETWEEN(SYSDATE, M.BIRTH) / 120) * 10 AS age,
-               A.ANSWER_TITLE, A.ANSWER_NO
+               FLOOR(MONTHS_BETWEEN(SYSDATE, M.BIRTH) / 120) * 10 AS age, A.ANSWER_NO
         FROM TBL_QA Q JOIN TBL_MEMBER M
                ON Q.MEMBER_ID = M.MEMBER_ID
         LEFT JOIN TBL_ANSWER A
@@ -44,8 +43,7 @@
     <select id="selectBoardSearch">
         SELECT Q.QUESTION_ID, Q.MEMBER_ID, Q.TITLE, Q.CONTENT,
         M.NAME, M.GENDER,
-        FLOOR(MONTHS_BETWEEN(SYSDATE, M.BIRTH) / 120) * 10 AS age,
-        A.ANSWER_TITLE, A.ANSWER_NO
+        FLOOR(MONTHS_BETWEEN(SYSDATE, M.BIRTH) / 120) * 10 AS age, A.ANSWER_NO
         FROM TBL_QA Q JOIN TBL_MEMBER M
         ON Q.MEMBER_ID = M.MEMBER_ID
         LEFT JOIN TBL_ANSWER A
@@ -70,8 +68,7 @@
 <!-- 사진 유무 확인 -->
     <select id="selectPhoto">
         SELECT Q.QUESTION_ID, Q.MEMBER_ID, Q.TITLE, Q.CONTENT,
-        M.NAME, M.GENDER, FLOOR(MONTHS_BETWEEN(SYSDATE, M.BIRTH) / 120) * 10 AS age,
-        A.ANSWER_TITLE, A.ANSWER_NO,
+        M.NAME, M.GENDER, FLOOR(MONTHS_BETWEEN(SYSDATE, M.BIRTH) / 120) * 10 AS age, A.ANSWER_NO,
         NVL(J.HAS_IMAGE, 0) AS HAS_IMAGE
         FROM TBL_QA Q
         JOIN TBL_MEMBER M
