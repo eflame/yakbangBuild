@@ -195,11 +195,11 @@ public class AdminController {
 
         int total = adminBoardService.reviewTotal(pageRequestDTO);
         PageSetDTO pageSetDTO = new PageSetDTO(pageRequestDTO, total);
-//
+
         List<AdminReviewDTO> list = adminBoardService.findReviewList(pageRequestDTO);
-//        model.addAttribute("list", list);
-//        model.addAttribute("pageSetDTO", pageSetDTO);
-//        model.addAttribute("reviewType", "review");
+        model.addAttribute("list", list);
+        model.addAttribute("pageSetDTO", pageSetDTO);
+        model.addAttribute("reviewType", "review");
 
         return "admin/review_board";
     }

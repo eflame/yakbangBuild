@@ -20,7 +20,7 @@ import java.util.Map;
 public class AdminBoardController {
     private final AdminBoardService adminBoardService;
 
-    @GetMapping("/{questionId}")
+    @GetMapping("/qna/{questionId}")
     public ResponseEntity<List<AdminQnaDTO>> findQnaInfo(@PathVariable("questionId") Long questionId) {
         List<AdminQnaDTO> findQnaDetail = adminBoardService.findQnaInfo(questionId);
         return ResponseEntity.ok(findQnaDetail);
@@ -42,17 +42,18 @@ public class AdminBoardController {
         }
     }
 
-    @GetMapping("/{reviewId}")
+    @GetMapping("/review/{reviewId}")
     public ResponseEntity<List<AdminReviewDTO>> findReviewInfo(@PathVariable("reviewId") Long reviewId) {
-        List<AdminReviewDTO> findQnaDetail = adminBoardService.findReviewInfo(reviewId);
-        return ResponseEntity.ok(findQnaDetail);
+        System.out.println("reviewId = " + reviewId);
+        List<AdminReviewDTO> findReviewDetail = adminBoardService.findReviewInfo(reviewId);
+        return ResponseEntity.ok(findReviewDetail);
     }
 
     @DeleteMapping("/delete/{reviewId}")
     public ResponseEntity<Map<String, Object>> deleteReview(@PathVariable("reviewId") Long reviewId) {
         Map<String, Object> response = new HashMap<>();
 
-        boolean success = adminBoardService.deleteQna(reviewId) > 0;
+        boolean success = adminBoardService.deleteReview(reviewId) > 0;
 
         response.put("success", success);
 

@@ -63,6 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const userId = manager.dataset.memberId;
             const itemId = manager.dataset.itemId;
             const questionId = manager.dataset.questionId;
+            const reviewId = manager.dataset.reviewId;
 
             console.log(manager.dataset.questionId);
             if (userId) {
@@ -84,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     .catch((error) => {
                         console.error('삭제 작업 중 오류 발생:', error);
                     });
-            } else if (questionId) {
+            } else if (questionId || reviewId) {
                 // 게시판 항목 삭제 처리
                 board.deleteBoard(manager)
                     .then(() => {
