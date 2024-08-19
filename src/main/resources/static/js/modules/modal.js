@@ -129,7 +129,11 @@ async function loadDataIntoModal(manager) {
                 : 'N/A';
             document.getElementById('qnaTitle').innerText = qna.title ?? 'N/A';
             document.getElementById('qnaContent').innerHTML = qna.content ?? 'N/A';
-            document.getElementById('ansContent').innerHTML = qna.answerContent ?? '';
+            let ansContentElement = document.getElementById('ansContent');
+            ansContentElement.style.display = document.getElementById('btn-modify').style.display =qna.answerNo ? '' : 'none';
+            ansContentElement.innerHTML = qna.answerContent ? qna.answerContent : '';
+
+
         }
     }
 }

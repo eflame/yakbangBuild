@@ -1,5 +1,5 @@
 export async function deleteItem(manager) {
-    const itemSeq = manager.dataset.itemId;
+    const itemSeq = manager.dataset.questionId;
 
     if (!itemSeq) {
         console.error('User ID가 없습니다.');

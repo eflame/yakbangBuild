@@ -91,8 +91,8 @@
                                     <div class="options">
                                         <button class="btn-sm btn-light-primary" type="button">option</button>
                                         <ul class="option-box">
-                                            <li><a class="btn-open-modal" href="#" th:data-question-id="${board.questionId}" th:data-answer-no="${board.answerNo}">View</a></li>
-                                            <li><a class="btn-deleted" href="#" th:data-question-id="${board.questionId}">Delete</a></li>
+                                            <li><a class="btn-open-modal" href="#" th:data-board-type="${qnaType}" th:data-question-id="${board.questionId}" th:data-answer-no="${board.answerNo}">View</a></li>
+                                            <li><a class="btn-deleted" href="#" th:data-board-type="${qnaType}" th:data-question-id="${board.questionId}">Delete</a></li>
                                         </ul>
                                     </div>
                                 </td>
@@ -104,7 +104,7 @@
                     <ul class="pagination">
                         <li class="page-item" th:if="${pageSetDTO.prev}">
                             <a class="page-link previous"
-                               th:href="${'/admin/qna_board?page=' + (pageSetDTO.startPage - 1)}">
+                               th:href="${'/admin/qna?page=' + (pageSetDTO.startPage - 1)}">
                             </a>
                         </li>
 
@@ -112,14 +112,14 @@
                             th:classappend="${pageSetDTO.pageRequestDTO.page == i ? 'active' : ''}"
                             th:each="i : ${#numbers.sequence(pageSetDTO.startPage, pageSetDTO.endPage)}">
                             <a class="page-link"
-                               th:href="${'/admin/qna_board?page=' + i }"
+                               th:href="${'/admin/qna?page=' + i }"
                                th:text="${i}" >
                             </a>
                         </li>
 
                         <li class="page-item" th:if="${pageSetDTO.next}">
                             <a class="page-link next"
-                               th:href="${'/admin/qna_board?page=' + (pageSetDTO.endPage + 1)}">
+                               th:href="${'/admin/qna?page=' + (pageSetDTO.endPage + 1)}">
                             </a>
                         </li>
                     </ul>

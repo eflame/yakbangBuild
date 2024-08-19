@@ -64,6 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const itemId = manager.dataset.itemId;
             const questionId = manager.dataset.questionId;
 
+            console.log(manager.dataset.questionId);
             if (userId) {
                 // 회원 삭제 처리
                 member.deleteMember(manager)
@@ -85,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
             } else if (questionId) {
                 // 게시판 항목 삭제 처리
-                board.deleteBoard(event, target)
+                board.deleteBoard(manager)
                     .then(() => {
                         console.log('삭제 작업이 성공적으로 완료되었습니다.');
                     })

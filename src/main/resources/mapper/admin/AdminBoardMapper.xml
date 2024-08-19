@@ -42,4 +42,23 @@
         </if>
     </select>
 
+    <delete id="deleteQna">
+        DELETE FROM TBL_QA
+        WHERE QUESTION_ID = #{questionId}
+    </delete>
+
+    <select id="selectReviewInfo">
+        SELECT R.REVIEW_ID, R.PILL_ID, R.MEMBER_ID, R.POINT, R.MODIFIED_DATE, R.REVIEW_CONTENT,
+               R.REVIEW_SHAPE, R.REVIEW_AGE, R.REVIEW_GENDER, R.REVIEW_TITLE,
+               P.COMPANY_NAME, P.PILL_NAME,
+               M.NAME
+        FROM TBL_REVIEW R JOIN TBL_PILL P
+                               ON R.PILL_ID = P.PILL_ID
+                          JOIN TBL_MEMBER M
+                               ON R.MEMBER_ID = M.MEMBER_ID
+        WHERE R.REVIEW_CONTENT LIKE '%' || #{keyword} || '%'
+    </select>
+
+
+
 </mapper>
