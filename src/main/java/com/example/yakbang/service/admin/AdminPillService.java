@@ -25,11 +25,15 @@ public class AdminPillService {
     }
 
     public int PillTotal(PageRequestDTO pageRequestDTO) {
-        return adminPillMapper.PillTotal(pageRequestDTO);
+        return adminPillMapper.pillTotal(pageRequestDTO);
     }
 
     public void modifyPill(AdminPillDTO adminPillDTO) {
         adminPillMapper.updatePill(adminPillDTO);
+    }
+
+    public int deletePill(Long itemSeq) {
+        return adminPillMapper.deletePill(itemSeq);
     }
 
 }

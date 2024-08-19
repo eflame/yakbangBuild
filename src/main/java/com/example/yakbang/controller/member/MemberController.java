@@ -81,9 +81,6 @@ public class MemberController {
                 loginId = "존재하지 않음";
             }
         }
-
-
-
         model.addAttribute("loginId", loginId);
 
         return "member/find-result";
@@ -97,6 +94,18 @@ public class MemberController {
     @PostMapping("/find_password")
     public String findPassword(String email,String loginId,
                                HttpSession session,Model model) {
+        String password=null;
+        try {
+            password = memberService.findPassword(loginId, email);
+        } catch (Exception e) {
+            try {
+                password = expertService.findExpertPassword(loginId, email);
+            } catch (Exception ex) {
+                password = "존재하지 않음";
+            }
+        }
+        model.addAttribute("password", password);
+
         return "member/find-result2";
     }
 
