@@ -115,3 +115,11 @@
   font-size: 14px;
   color: #9ba1aa;
 }
+
+.btn-answer {
+  color: #fff;
+  border: none;
+  background-color: #52d7cf;
+  margin-left: 87%;
+  margin-top: 20px
+}

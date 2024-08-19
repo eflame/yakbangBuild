@@ -14,7 +14,8 @@
     <select id="selectQuestionList">
         SELECT Q.QUESTION_ID, Q.MEMBER_ID, Q.TITLE, Q.CONTENT,
                M.NAME, M.GENDER,
-               FLOOR(MONTHS_BETWEEN(SYSDATE, M.BIRTH) / 120) * 10 AS age, A.ANSWER_NO
+               FLOOR(MONTHS_BETWEEN(SYSDATE, M.BIRTH) / 120) * 10 AS age,
+               A.ANSWER_NO, A.ANSWER_CONTENT
         FROM TBL_QA Q JOIN TBL_MEMBER M
                ON Q.MEMBER_ID = M.MEMBER_ID
         LEFT JOIN TBL_ANSWER A
@@ -28,7 +29,7 @@
                TO_CHAR(Q.WRITE_DATE, 'YYYY-MM-DD') AS WRITE_DATE,
                M.NAME, M.GENDER,
                A.ANSWER_CONTENT,
-               TO_CHAR(A.ANSWER_DATE, 'YYYY-MM-DD') AS ANSWER_DATE, A.ANSWER_NO,
+               TO_CHAR(A.ANSWER_DATE, 'YYYY-MM-DD') AS ANSWER_DATE, A.ANSWER_NO, E.EXPERT_ID,
                E.NAME expertName, E.JOB, E.PHARMACY_ADDRESS
         FROM TBL_QA Q JOIN TBL_MEMBER M
                 ON Q.MEMBER_ID = M.MEMBER_ID
@@ -43,7 +44,7 @@
     <select id="selectBoardSearch">
         SELECT Q.QUESTION_ID, Q.MEMBER_ID, Q.TITLE, Q.CONTENT,
                M.NAME, M.GENDER, FLOOR(MONTHS_BETWEEN(SYSDATE, M.BIRTH) / 120) * 10 AS age,
-               A.ANSWER_TITLE, A.ANSWER_NO,
+               A.ANSWER_NO, A.ANSWER_CONTENT,
                NVL(J.HAS_IMAGE, 0) AS HAS_IMAGE
         FROM TBL_QA Q
             JOIN TBL_MEMBER M ON Q.MEMBER_ID = M.MEMBER_ID
@@ -64,5 +65,14 @@
         set VIEW_COUNT = VIEW_COUNT + 1
         where QUESTION_ID = #{questionId}
     </update>
+
+<!--  전문가 답변  -->
+    <insert id="insertAnswer">
+        <selectKey resultType="long" keyProperty="answerNo" order="BEFORE">
+            SELECT SEQ_ANSWER.nextval FROM DUAL
+        </selectKey>
+        insert into TBL_ANSWER (ANSWER_NO, QUESTION_ID, EXPERT_ID, ANSWER_CONTENT, ANSWER_DATE)
+        values (#{answerNo}, #{questionId}, #{expertId}, #{answerContent}, sysdate)
+    </insert>
 
 </mapper>
