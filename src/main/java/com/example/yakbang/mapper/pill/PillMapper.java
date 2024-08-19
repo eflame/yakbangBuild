@@ -4,6 +4,7 @@ import com.example.yakbang.dto.pill.*;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Mapper
 public interface PillMapper {
@@ -16,6 +17,11 @@ public interface PillMapper {
 
     List<PillListDTO> selectListWithPage(PageRequest pageRequest);
 
+    //    제품명 검색시 데이터 조회
+    List<PillListDTO> selectPillByName(String pillName);
+
+    //    증상 검색시 데이터 조회
+    List<PillListDTO> selectPillByContent(String detailContent);
 }
 
 

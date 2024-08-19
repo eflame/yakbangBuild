@@ -8,7 +8,7 @@
 <link rel="stylesheet" th:href="@{/css/admin/admin.css}" />
 <link rel="stylesheet" th:href="@{/css/pill/pill.css}" />
 <script defer th:src="@{/js/common/common.js}"></script>
-<script defer th:src="@{/js/pill/list.js}"><</script>
+<script defer th:src="@{/js/pill/search_list.js}"><</script>
 </head>
 <body>
 <div class="all-wrap">
@@ -43,12 +43,14 @@
             <section class="search-section">
                 <h2 class="search-text">검색 결과 <span>22</span>건</h2>
                 <div class="search-box">
-                    <input class="search-input" type="text" placeholder="제품명 검색해보세요!"
+                    <form th:action="@{/pill/searchResult}" method="post">
+                        <input class="search-input" type="text" placeholder="제품명 검색해보세요!"
 
-                    >
-                    <button class="btn-search" type="button">
-                        <img th:src="@{/images/common/ico_search_white.svg}" alt="">
-                    </button>
+                        >
+                        <button class="btn-search" type="submit">
+                            <img th:src="@{/images/common/ico_search_white.svg}" alt="">
+                        </button>
+                    </form>
                 </div>
                 <div class="search-etc">
                     <h3 class="title">인기 검색어</h3>
