@@ -41,23 +41,20 @@ public class PillInfoController {
     public String searchResult(String keyword, Model model) {
         List<PillListDTO> list;
         try {
-            if (pillService.findPillData("keyword") == null) {
-                list = pillService.findPillItemList(keyword);
-                model.addAttribute("list", list);
-            } else{
                 list = pillService.findPillData(keyword);
-                model.addAttribute("list", list);
-            }
+//            System.out.println("list = " + list);
+//            System.out.println("검색 결과 개수"+list.size());
+                model.addAttribute("pill", list);
+
         } catch (Exception e) {
-            log.error(e.toString());
-            System.out.println("오류발생!!");
+            log.error(e.getMessage());
+            return "pill/pill_list";
         }
-
-
-
-
         return "pill/pill_search_result_list";
+
     }
+
+
 
 }
 
