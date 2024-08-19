@@ -18,6 +18,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      text-align: center;
       width: calc(20% - 20px);
       height: 150px;
       color: #101219;
