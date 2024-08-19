@@ -34,15 +34,8 @@ public class PillInfoController {
         return "pill/pill_list";
     }
 
-<<<<<<< HEAD
 
-
-=======
-    @GetMapping("/searchResult")
-    public String searchResult() {
-
-        return "pill/pill_search_result_list";
-    }
+    
 
     @PostMapping("/searchResult")
     public String searchResult(String keyword, Model model) {
@@ -65,6 +58,6 @@ public class PillInfoController {
 
         return "pill/pill_search_result_list";
     }
->>>>>>> work7
+
 }
 
