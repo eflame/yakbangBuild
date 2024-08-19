@@ -15,5 +15,6 @@ public class BoardQnaListDTO {
    private Long answerNo;     // 답변 번호
    private String name;       // 회원 이름
    private String gender;     // 회원 성별
-   private String age;   // 회원 나이
+   private String age;        // 회원 나이
+   private Long hasImage;     // 이미지 여부
 }
