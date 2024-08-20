@@ -4,11 +4,10 @@ export async function deleteBoard(manager) {
     const boardType = manager.dataset.boardType;
     console.log(questionId);
 
-    const deleteUrl = boardType === "qna"
-        ? `/admin/board/delete/${questionId}`
-        : boardType === "review"
-            ? `/admin/board/delete/${reviewId}`
-            : null;
+    const deleteUrl =
+        boardType === "qna" ? `/admin/board/delete/${questionId}`
+        : boardType === "review" ? `/admin/board/delete/${reviewId}`
+        : null;
 
     try {
         const response = await fetch(deleteUrl, { method: 'DELETE' });
@@ -31,24 +30,4 @@ export async function deleteBoard(manager) {
         alert('삭제 중 오류가 발생했습니다. 나중에 다시 시도해 주세요.');
     }
 
-}
-
-export async function modifyBoard(e){
-    // 정보 수정 함수
-    let thisId = e.target.id;
-
-    const contentOld = $qnaBody.querySelector('.textarea').value;
-    $qnaBody.innerHTML = `<span class="cont" id="ansContent">${contentOld}</span>`;
-
-
-    if (thisId === "btn-modify") {
-        const content = $qnaBody.querySelector('.textarea').value;
-        $qnaBody.innerHTML = `<textarea class="textarea" id="ansContent">${content}</textarea>`;
-
-
-    } else if (thisId === "btn-back") {
-
-    } else if (thisId === "btn-change-modify") {
-
-    }
 }

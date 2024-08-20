@@ -190,6 +190,8 @@ public class AdminController {
     public String review(HttpSession session,
                          PageRequestDTO pageRequestDTO,
                          Model model) {
+
+        System.out.println("in!!!!!");
         Long memberId = (Long) session.getAttribute("memberId");
         if (memberId == null) { return "redirect:/admin"; }
 

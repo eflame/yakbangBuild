@@ -33,7 +33,7 @@ async function loadDataIntoModal(manager) {
     const itemId = manager.dataset.itemId;
     const questionId = manager.dataset.questionId;
     const reviewId = manager.dataset.reviewId;
-    console.log(reviewId);
+    console.log(questionId);
 
     // 데이터 세트에 따라 모달의 값을 설정
     if (memberId) {
@@ -131,14 +131,13 @@ async function loadDataIntoModal(manager) {
             document.getElementById('qnaTitle').innerText = qna.title ?? 'N/A';
             document.getElementById('qnaContent').innerHTML = qna.content ?? 'N/A';
             let ansContentElement = document.getElementById('ansContent');
-            ansContentElement.style.display = document.getElementById('btn-modify').style.display =qna.answerNo ? '' : 'none';
+            ansContentElement.style.display = qna.answerNo ? '': 'none';
             ansContentElement.innerHTML = qna.answerContent ? qna.answerContent : '';
+            document.getElementById('link-modify').href = `/board/qna-detail?questionId=${qna.questionId}`;
 
 
         }
     } else if (reviewId) {
-        const modalIdElement = document.getElementById('modal-review-id');
-        modalIdElement.value = reviewId;
 
         const response = await fetch(`/admin/board/review/${reviewId}`);
 
@@ -158,6 +157,7 @@ async function loadDataIntoModal(manager) {
             document.getElementById('companyName').innerText = review.companyName ?? 'N/A';
             document.getElementById('pillName').innerText = review.pillName ?? 'N/A';
             document.getElementById('name').innerText = review.name ?? 'N/A';
+            document.getElementById('reviewContent').innerHTML = review.reviewContent ?? 'N/A';
 
         }
     }

@@ -27,7 +27,7 @@
             </div>
 
             <div class="member-list-wrap">
-                <form class="search-area" th:action="${'/admin/reivew'}" method="get">
+                <form class="search-area" th:action="${'/admin/review'}" method="get">
                     <label>
                         <select name="keywordType">
                             <option value="COMPANY_NAME">회사명</option>
@@ -38,16 +38,16 @@
                         </select>
                     </label>
                     <label class="form-control">
-                        <input type="text" placeholder="Search Member">
+                        <input type="text" name="keyword" placeholder="Search Member">
                     </label>
-                    <button class="btn-normal btn-primary" type="button">찾기</button>
+                    <button class="btn-normal btn-primary" type="submit">찾기</button>
                 </form>
                 <div class="tbl-row">
                     <table>
                         <colgroup>
                             <col>
                             <col>
-                            <col>
+                            <col style="width: 80px;">
                             <col style="width: auto;">
                             <col>
                             <col style="width: 140px;">
@@ -59,7 +59,7 @@
                                 <th>회사명</th>
                                 <th>제품명</th>
                                 <th>별점</th>
-                                <th>리뷰 제목</th>
+                                <th>리뷰 내용</th>
                                 <th>아이디</th>
                                 <th>이름</th>
                                 <th>작성일</th>
@@ -78,7 +78,7 @@
                                     <span th:text="${board.point}"></span>
                                 </td>
                                 <td>
-                                    <span th:text="${board.reviewTitle}"></span>
+                                    <span class="content ellipsis" th:utext="${board.reviewContent}"></span>
                                 </td>
                                 <td>
                                     <span th:text="${board.loginId}"></span>
@@ -114,7 +114,9 @@
                             th:classappend="${pageSetDTO.pageRequestDTO.page == i ? 'active' : ''}"
                             th:each="i : ${#numbers.sequence(pageSetDTO.startPage, pageSetDTO.endPage)}">
                             <a class="page-link"
-                               th:href="${'/admin/review?page=' + i }"
+                               th:href="${'/admin/review?page=' + i
+                                   + (pageSetDTO.pageRequestDTO.keywordType != null && pageSetDTO.pageRequestDTO.keywordType != '' ? '&keywordType=' + pageSetDTO.pageRequestDTO.keywordType : '')
+                                   + (pageSetDTO.pageRequestDTO.keyword != null && pageSetDTO.pageRequestDTO.keyword != '' ? '&keyword=' + pageSetDTO.pageRequestDTO.keyword : '')}"
                                th:text="${i}" >
                             </a>
                         </li>
@@ -162,11 +164,7 @@
                     </div>
                 </div>
                 <div class="btn-area">
-                    <input type="hidden" id="modal-review-id">
-                    <button id="btn-modify" class="btn btn-light" type="button">수정</button>
                     <button id="btn-check" class="btn btn-primary" type="button">확인</button>
-                    <button id="btn-back" class="btn btn-light" type="button">취소</button>
-                    <button id="btn-change-modify" class="btn btn-primary" type="button">적용</button>
                 </div>
             </div>
         </div>
