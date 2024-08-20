@@ -262,11 +262,11 @@
   }
 }
 
-
 /* table */
 .tbl-row {
   table {
       width: 100%;
+      table-layout: fixed;
       th,td {
           padding: 0 8px;
           height: 54px;
@@ -276,6 +276,10 @@
           .text-end {
               text-align: right;
           }
+      }
+      .content {
+        p { display: inline; }
+        img, br {display: none;}
       }
   }
   tr { border-bottom: 1px solid #f1f1f4; }

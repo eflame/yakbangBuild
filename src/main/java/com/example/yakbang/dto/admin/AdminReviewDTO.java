@@ -11,10 +11,16 @@ public class AdminReviewDTO {
     private Long pillId;
     private Long memberId;
     private int point;
+    private int avgPoint;
+    private LocalDate createDate;
     private LocalDate modifiedDate;
     private String reviewTitle;
     private String reviewContent;
     private String reviewGender;
     private String reviewShape;
     private int reviewAge;
+    private String companyName;
+    private String pillName;
+    private String loginId;
+    private String name;
 }

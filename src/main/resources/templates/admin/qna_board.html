@@ -27,12 +27,12 @@
             </div>
 
             <div class="member-list-wrap">
-                <form class="search-area" th:action="${'/admin/board'}" method="get">
+                <form class="search-area" th:action="${'/admin/qna'}" method="get">
                     <label>
                         <select name="keywordType">
                             <option value="LOGIN_ID">아이디</option>
                             <option value="NAME">이름</option>
-                            <option value="EMAIL">이메일</option>
+                            <option value="TITLE">질문</option>
                         </select>
                     </label>
                     <label class="form-control">
@@ -57,7 +57,7 @@
                                 <th>아이디</th>
                                 <th>이름</th>
                                 <th>성별</th>
-                                <th>질문 제목</th>
+                                <th>질문</th>
                                 <th>답변 확인</th>
                                 <th>조회수</th>
                                 <th>작성일</th>
@@ -112,7 +112,9 @@
                             th:classappend="${pageSetDTO.pageRequestDTO.page == i ? 'active' : ''}"
                             th:each="i : ${#numbers.sequence(pageSetDTO.startPage, pageSetDTO.endPage)}">
                             <a class="page-link"
-                               th:href="${'/admin/qna?page=' + i }"
+                               th:href="${'/admin/qna?page=' + i
+                                   + (pageSetDTO.pageRequestDTO.keywordType != null && pageSetDTO.pageRequestDTO.keywordType != '' ? '&keywordType=' + pageSetDTO.pageRequestDTO.keywordType : '')
+                                   + (pageSetDTO.pageRequestDTO.keyword != null && pageSetDTO.pageRequestDTO.keyword != '' ? '&keyword=' + pageSetDTO.pageRequestDTO.keyword : '')}"
                                th:text="${i}" >
                             </a>
                         </li>
@@ -149,11 +151,8 @@
                 </div>
                 <div class="btn-area">
                     <input type="hidden" id="modal-question-id">
-                    <input type="hidden" id="modal-answer-no">
-                    <button id="btn-modify" class="btn btn-light" type="button">수정</button>
+                    <a id="link-modify" class="btn btn-light" href="#" target="_blank">상세 보기</a>
                     <button id="btn-check" class="btn btn-primary" type="button">확인</button>
-                    <button id="btn-back" class="btn btn-light" type="button">취소</button>
-                    <button id="btn-change-modify" class="btn btn-primary" type="button">적용</button>
                 </div>
             </div>
         </div>

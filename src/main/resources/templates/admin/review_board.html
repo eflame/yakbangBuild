@@ -27,22 +27,27 @@
             </div>
 
             <div class="member-list-wrap">
-                <form class="search-area" action="" method="get">
-                    <select name="" id="">
-                        <option value="">아이디</option>
-                        <option value="">이름</option>
-                    </select>
-                    <label class="form-control">
-                        <input type="text" placeholder="Search Member">
+                <form class="search-area" th:action="${'/admin/review'}" method="get">
+                    <label>
+                        <select name="keywordType">
+                            <option value="COMPANY_NAME">회사명</option>
+                            <option value="PILL_NAME">제품명</option>
+                            <option value="POINT">별점</option>
+                            <option value="LOGIN_ID">아이디</option>
+                            <option value="NAME">이름</option>
+                        </select>
                     </label>
-                    <button class="btn-normal btn-primary" type="button">찾기</button>
+                    <label class="form-control">
+                        <input type="text" name="keyword" placeholder="Search Member">
+                    </label>
+                    <button class="btn-normal btn-primary" type="submit">찾기</button>
                 </form>
                 <div class="tbl-row">
                     <table>
                         <colgroup>
                             <col>
                             <col>
-                            <col>
+                            <col style="width: 80px;">
                             <col style="width: auto;">
                             <col>
                             <col style="width: 140px;">
@@ -62,34 +67,34 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr th:each="board : ${list}">
                                 <td>
-                                    <span>회사이름</span>
+                                    <span th:text="${board.companyName}"></span>
                                 </td>
                                 <td>
-                                    <span>제품이름</span>
+                                    <span th:text="${board.pillName}"></span>
                                 </td>
                                 <td>
-                                    <span>4점</span>
+                                    <span th:text="${board.point}"></span>
                                 </td>
                                 <td>
-                                    <span>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</span>
+                                    <span class="content ellipsis" th:utext="${board.reviewContent}"></span>
                                 </td>
                                 <td>
-                                    <span>test01</span>
+                                    <span th:text="${board.loginId}"></span>
                                 </td>
                                 <td>
-                                    <span>홍길동</span>
+                                    <span th:text="${board.name}"></span>
                                 </td>
                                 <td>
-                                    <span>2024/ 01/ 01</span>
+                                    <span th:text="${board.createDate}"></span>
                                 </td>
                                 <td>
                                     <div class="options">
                                         <button class="btn-sm btn-light-primary" type="button">option</button>
                                         <ul class="option-box">
-                                            <li><a class="btn-open-modal" href="#">View</a></li> 
-                                            <li><a href="#">Delete</a></li> 
+                                            <li><a class="btn-open-modal" href="#" th:data-board-type="${reviewType}" th:data-review-id="${board.reviewId}" >View</a></li>
+                                            <li><a class="btn-deleted" href="#" th:data-board-type="${reviewType}" th:data-review-id="${board.reviewId}">Delete</a></li>
                                         </ul>
                                     </div>
                                 </td>
@@ -98,22 +103,37 @@
                     </table>
                 </div>
                 <div class="tb-footer-control">
-                <ul class="pagination">
-                    <li class="page-item disabled"><a class="page-link previous" href="#"></a></li>
-                    <li class="page-item active"><a class="page-link " href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                    <li class="page-item"><a class="page-link next" href="#"></a></li>
-                </ul>
+                    <ul class="pagination">
+                        <li class="page-item" th:if="${pageSetDTO.prev}">
+                            <a class="page-link previous"
+                               th:href="${'/admin/review?page=' + (pageSetDTO.startPage - 1)}">
+                            </a>
+                        </li>
+
+                        <li class="page-item"
+                            th:classappend="${pageSetDTO.pageRequestDTO.page == i ? 'active' : ''}"
+                            th:each="i : ${#numbers.sequence(pageSetDTO.startPage, pageSetDTO.endPage)}">
+                            <a class="page-link"
+                               th:href="${'/admin/review?page=' + i
+                                   + (pageSetDTO.pageRequestDTO.keywordType != null && pageSetDTO.pageRequestDTO.keywordType != '' ? '&keywordType=' + pageSetDTO.pageRequestDTO.keywordType : '')
+                                   + (pageSetDTO.pageRequestDTO.keyword != null && pageSetDTO.pageRequestDTO.keyword != '' ? '&keyword=' + pageSetDTO.pageRequestDTO.keyword : '')}"
+                               th:text="${i}" >
+                            </a>
+                        </li>
+
+                        <li class="page-item" th:if="${pageSetDTO.next}">
+                            <a class="page-link next"
+                               th:href="${'/admin/review?page=' + (pageSetDTO.endPage + 1)}">
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
         <div class="modal-wrap">
             <div class="modal-header">
                 <h3 class="title">Review</h3>
-                <button onclick="closeModal();" class="btn-close" type="button">닫기</button>
+                <button class="btn-close modal-close" type="button">닫기</button>
             </div>
             <div class="modal-body">
                 <div class="review-card">
@@ -121,20 +141,20 @@
                         <div class="pill-info">
                             <div class="rating-box">
                                 <!-- 평균점수 계산식 = (점수 - 1)/4*100 : width 값안에 적용 -->
-                                <div class="rating-select" style="width:100%"></div>
+                                <div class="rating-select" id="point"></div>
                             </div>
                             <div class="card-title">
-                                <span class="company">회사이름</span>
-                                <span class="product">제품명</span>
+                                <span class="company" id="companyName">회사이름</span>
+                                <span class="product" id="pillName">제품명</span>
                             </div>
                         </div>
                         <div class="user-info">
-                            <span class="user-name">김**</span>
-                            <span class="user-agegender">20대 / 여</span>
+                            <span class="user-name" id="name">김**</span>
+                            <span class="user-agegender" id="ageGender">20대 / 여</span>
                         </div>
                     </div>
                     <div class="card-body">
-                        <p class="review-txt">
+                        <p class="review-txt" id="reviewContent">
                             타블렛이 싫은 분을 위한 비타민 투퍼데이는 첨부된 부가 성분을 최소화하고 비타민과 미네날을 충분히 함유하고그 성분도 활성화된 형태[비타민 B, D]나 특허받은 원료[아연, 셀레늄, 크롬]를 포함한 저렴한 가격의 좋은 품질을 지닌 비타민입니다. 
                             라이프익스텐션은 미국 내에서 미드 티어에서 조금 높은 순위를 가진보충제 회사로 평가 받고 있어 믿을 만한 회사이기도 합니다.
                             저는 평소에 타블렛을 이용하나가끔씩 캡슐을 복용하기도 합니다.
@@ -144,7 +164,7 @@
                     </div>
                 </div>
                 <div class="btn-area">
-                    <button onclick="closeModal();" class="btn btn-primary" type="button">확인</button>
+                    <button id="btn-check" class="btn btn-primary" type="button">확인</button>
                 </div>
             </div>
         </div>
