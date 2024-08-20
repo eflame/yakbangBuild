@@ -28,18 +28,21 @@
                         <span class="views">조회수 : <span th:text="${board.viewCount}"></span></span>
                     </div>
                 </div>
-                <a class="btn btn-answer" th:href="@{/board/answer(questionId=${param.questionId})}">답변하기</a>
+                <div th:each="board : ${detail}">
+                    <a class="btn btn-answer" th:if="${board.answerContent == null and session.memberType == 'expert'}"
+                       th:href="@{/board/answer(questionId=${param.questionId})}">답변하기</a>
+                </div>
             </div>
 
 
             <div class="inner">
-                <div class="reply-qna-wrap"  th:each="board : ${detail}">
+                <div class="reply-qna-wrap"  th:each="board : ${detail}" th:if="${board.answerContent}">
                     <div class="row1">
                         <img th:src="@{/images/common/img_female.png}" class="ci-img1" alt="약사 캐릭터 그림">
                         <div class="txt-wrap" >
-                            <div class="t-txt1" th:text="${board.expertName} + ' ' + ${board.job} + 님"></div>
+                            <div class="t-txt1" th:text="'ㅤ' + ${board.expertName} + ' ' + ${board.job} + 님"></div>
                                 <div class="t-txt2" style="float: left;width:unset;margin: unset"
-                                     th:text="${board.pharmacyAddress} + '&' + ${board.job}"></div>
+                                     th:text="'ㅤ ' + ${board.pharmacyAddress} + '&' + ${board.job}"></div>
                                 <button id="btnArrow" class="p-arrow-down"></button>
                         </div>
                 </div>
@@ -55,6 +58,10 @@
                     </div>
             </div>
             </div>
+                <div th:each="board : ${detail}">
+                    <a class="btn btn-answer" th:if="${board.answerContent != null and session.memberType == 'expert'}"
+                       th:href="@{/board/answer(questionId=${param.questionId})}">수정하기</a>
+                </div>
             </div>
             <!-- 작업영역 -->
         </main>
