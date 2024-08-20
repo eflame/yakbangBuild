@@ -2,6 +2,7 @@ package com.example.yakbang.controller.board;
 
 import com.example.yakbang.dto.board.ReviewListDTO;
 import com.example.yakbang.dto.board.ReviewWriteDTO;
+import com.example.yakbang.dto.pill.PageRequest;
 import com.example.yakbang.service.board.ReviewService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -42,8 +43,8 @@ public class ReviewController {
     }
 
     @GetMapping("/list")
-    public String reviewList(String keyword, Model model){
-        List<ReviewListDTO> list = reviewService.findList(keyword);
+    public String reviewList(String keyword, PageRequest pageRequest, Model model){
+        List<ReviewListDTO> list = reviewService.findListWithPage(keyword, pageRequest);
         model.addAttribute("list", list);
 
         return "board/review_list";

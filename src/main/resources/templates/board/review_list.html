@@ -1,30 +1,32 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Review</title>
-    <link rel="stylesheet" th:href="@{/css/common/common.css}" />
-    <link rel="stylesheet" th:href="@{/css/board/review_list.css}" />
-    <script defer th:src="@{/js/common/common.js}" ></script>
-    <script defer th:src="@{/js/board/ration.js}" ></script>
+    <link rel="stylesheet" th:href="@{/css/common/common.css}"/>
+    <link rel="stylesheet" th:href="@{/css/board/review_list.css}"/>
+    <script defer th:src="@{/js/common/common.js}"></script>
+    <script defer th:src="@{/js/board/ration.js}"></script>
+    <script defer th:src="@{/js/board/review/list.js}"></script>
 </head>
 <body>
-    <div class="all-wrap">
-        <header th:replace="~{common/header/header_common::main-header}"></header>
-        <menu th:replace="~{common/menu/side_menu::side-menu}" ></menu>
+<div class="all-wrap">
+    <header th:replace="~{common/header/header_common::main-header}"></header>
+    <menu th:replace="~{common/menu/side_menu::side-menu}"></menu>
 
-        <main class="contents">
+    <main class="contents">
         <!-- 작업영역 -->
         <div class="inner">
             <div class="sub-header">
                 <h2 class="title">Review</h2>
                 <span class="sub-txt">직접 먹어본 분들의 리뷰</span>
                 <form th:action="@{/review/list}" method="get">
-                <div class="search-area">
-                    <input class="input-search" type="text" name="keyword" title="review 검색어 입력" placeholder="무엇이 궁금하신가요?" >
-                    <button class="btn-search" title="검색 버튼"></button>
-                </div>
+                    <div class="search-area">
+                        <input class="input-search" type="text" name="keyword" title="review 검색어 입력"
+                               placeholder="무엇이 궁금하신가요?">
+                        <button class="btn-search" title="검색 버튼"></button>
+                    </div>
                 </form>
                 <a class="btn btn-primary" th:href="@{/review/write}">후기 작성</a>
             </div>
@@ -43,7 +45,8 @@
                         </div>
                         <div class="user-info">
                             <span class="user-name" th:text="${dto.name}"></span>
-                            <span class="user-agegender" th:text="${dto.reviewAge} + '대 / ' + ${dto.reviewGender == 'M' ? '남자' : '여자'} "></span>
+                            <span class="user-agegender"
+                                  th:text="${dto.reviewAge} + '대 / ' + ${dto.reviewGender == 'M' ? '남자' : '여자'} "></span>
                         </div>
                     </div>
                     <div class="card-body">
@@ -51,11 +54,13 @@
                         </div>
                     </div>
                 </li>
-
             </ul>
+            <div class="more-btn-box">
+                <button class="load-more" id="load-more" data-page="1">30개 더 보기</button>
+            </div>
         </div>
-        </main>
-        <footer th:replace="~{common/footer/footer_common::main-fotter}"></footer>
-    </div>
+    </main>
+    <footer th:replace="~{common/footer/footer_common::main-fotter}"></footer>
+</div>
 </body>
 </html>

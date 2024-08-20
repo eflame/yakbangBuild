@@ -1,0 +1,74 @@
+{   // 30개 더 보기 처리
+    document.querySelector('#load-more').addEventListener('click', function () {
+        let page = ++this.dataset.page;
+
+        // 쿼리 스트링 가져오기
+        const queryString = window.location.search;
+        // URLSearchParams 객체 생성 : URLSearchParams는 URL를 파싱하여 특정 파라미터를 가져올 수 있음
+        const urlParams = new URLSearchParams(queryString);
+        // keyword 파라미터만 뽑아오기
+        const keyword = urlParams.get("keyword") ?? '' // falsy면 빈문자열
+        console.log(keyword)
+
+        getPostListWithPage(keyword, page, displayPostList);
+    });
+}
+
+/**
+ * 서버 통신을 통해 포스트 목록을 30개씩 더 가져오는 함수.
+ *
+ * @param {string} keyword - 검색어
+ * @param {number} page - 페이지 번호
+ * @param {function} callback - 불러온 리스트를 처리할 콜백함수(매개변수로 list를 받아옴)
+ */
+function getPostListWithPage(keyword, page, callback) {
+    fetch(`/v1/reviews?keyword=${keyword}&page=${page}`, {
+        method: 'GET'
+    }).then(resp => {
+        if (resp.ok) {
+            return resp.json();
+        }
+
+        throw new Error('리스트 목록 통신 오류');
+    }).then(list => {
+        if (callback) {
+            callback(list);
+        }
+    }).catch(err => console.error(err));
+}
+
+function displayPostList(list) {
+    let html = ``;
+
+    list.forEach(dto => {
+        html += `
+       <li class="review-card">
+            <div class="card-header">
+                <div class="pill-info">
+                    <div class="rating-box">
+                        <div class="rating-select" style="width: ${dto.point / 5.0 * 100}%; "></div>
+                    </div>
+                    <div class="card-title">
+                        <span class="company">${dto.companyName}</span>
+                        <span class="product">${dto.pillName}</span>
+                    </div>
+                </div>
+                <div class="user-info">
+                    <span class="user-name">${dto.name}</span>
+                    <span class="user-agegender">
+                        ${dto.reviewAge}대 / ${dto.reviewGender === 'M' ? '남자' : '여자'}
+                    </span>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="review-txt ellipsis-line">
+                    ${dto.reviewContent}
+                </div>
+            </div>
+        </li>
+       `;
+    });
+
+    document.querySelector('.review-list').insertAdjacentHTML('beforeend', html);
+}
+
