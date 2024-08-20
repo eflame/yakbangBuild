@@ -26,6 +26,38 @@
         ORDER BY R.REVIEW_ID DESC
     </select>
 
+    <select id="selectListWithPage" resultType="reviewListDTO">
+        SELECT REVIEW_ID, PILL_ID, MEMBER_ID, POINT, MODIFIED_DATE, REVIEW_CONTENT,
+               REVIEW_SHAPE, REVIEW_AGE, REVIEW_GENDER, REVIEW_TITLE,
+               COMPANY_NAME, PILL_NAME,
+               NAME
+        FROM (
+                 SELECT ROWNUM AS RNUM, REVIEW_ID, PILL_ID, MEMBER_ID, POINT, MODIFIED_DATE, REVIEW_CONTENT,
+                        REVIEW_SHAPE, REVIEW_AGE, REVIEW_GENDER, REVIEW_TITLE,
+                        COMPANY_NAME, PILL_NAME,
+                        NAME
+                 FROM (
+                          SELECT R.REVIEW_ID, R.PILL_ID, R.MEMBER_ID, R.POINT, R.MODIFIED_DATE, R.REVIEW_CONTENT,
+                                 R.REVIEW_SHAPE, R.REVIEW_AGE, R.REVIEW_GENDER, R.REVIEW_TITLE,
+                                 P.COMPANY_NAME, P.PILL_NAME,
+                                 M.NAME
+                          FROM TBL_REVIEW R JOIN TBL_PILL P
+                                                 ON R.PILL_ID = P.PILL_ID
+                                            JOIN TBL_MEMBER M
+                                                 ON R.MEMBER_ID = M.MEMBER_ID
+                          WHERE R.REVIEW_CONTENT LIKE '%' || #{keyword} || '%' OR
+                              P.PILL_NAME LIKE '%' || #{keyword} || '%' OR
+                              P.COMPANY_NAME LIKE '%' || #{keyword} || '%' OR
+                              M.NAME LIKE '%' || #{keyword} || '%'
+                          ORDER BY R.REVIEW_ID DESC
+                      )
+            <![CDATA[
+                 WHERE ROWNUM <= #{pageRequest.page} * #{pageRequest.amount}
+            ]]>
+        )
+        WHERE RNUM > (#{pageRequest.page} - 1) * #{pageRequest.amount}
+    </select>
+
     <select id="selectDetailList" parameterType="long" resultType="reviewDetailListDTO">
         SELECT R.REVIEW_ID, R.PILL_ID, R.MEMBER_ID, R.POINT, R.MODIFIED_DATE, R.REVIEW_CONTENT,
                R.REVIEW_SHAPE, R.REVIEW_AGE, R.REVIEW_GENDER, R.REVIEW_TITLE
