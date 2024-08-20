@@ -21,6 +21,7 @@ public class BoardQnaDetailDTO {
    private String expertName; // 전문가 이름
    private String job;        // 전문가 직업
    private String pharmacyAddress;    // 전문가 주소
+   private Long expertId;     // 전문가 번호
 
 
 }

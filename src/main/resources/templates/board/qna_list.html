@@ -35,12 +35,13 @@
                         <span class="txt2" th:utext="${board.content}"></span>
                     </a>
                     <a tabindex="0" class="qna-user-wrap" title="이 Q&amp;A의 상세정보 보기" th:href="@{/board/qna-detail(questionId=${board.questionId})}">
-                        
-                        <div class="qna-user-txt" th:utext="'<span class=\'qna-user-icon-1\'></span>' + ${board.answerContent}"></div>
+                        <div class="qna-user-icon-1" th:if="${board.answerContent}"></div>
+                        <div class="qna-user-txt" th:utext="${board.answerContent == null ? '' : board.answerContent}"></div>
                         <div class="user-info-row">
                             <span class="user-name" th:text="${board.name}"></span>
                             <span class="user-agesex" th:text="${board.age}+ '대 / ' +${board.gender == 'M' ? '남자' : '여자'}"></span>
                                 <span class="img-icon" th:text="${board.hasImage == 1 ? ' / 사진 있음' : ''}"></span>
+                                <span th:utext="${board.answerContent == null ? '' : ' / 답변완료'}"></span>
                         </div>
                     </a>
                 </div>

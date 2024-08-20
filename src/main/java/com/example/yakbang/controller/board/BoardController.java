@@ -32,7 +32,8 @@ public class BoardController {
     }
 
     @GetMapping("/qna-detail")
-    public String qna_detail(@RequestParam("questionId") Long questionId, Model model) {
+    public String qna_detail(@RequestParam("questionId") Long questionId, Model model,
+                             HttpSession session) {
         System.out.println("questionId = " + questionId);
         BoardQnaDetailDTO detail = boardService.findDetail(questionId);
         model.addAttribute("detail", detail);
@@ -63,10 +64,10 @@ public class BoardController {
 
     @GetMapping("/answer")
     public String answer(@ModelAttribute("questionId") Long questionId, HttpSession session) {
-        session.getAttribute("memberType");
+        Object memberType = session.getAttribute("memberType");
         Long expertId = (Long) session.getAttribute("memberId");
 
-        if (expertId == null) {   // 전문가가 아니면 로그인으로
+        if (!"expert".equals(memberType)) {   // 전문가가 아니면 로그인으로
             return "redirect:/member/login";
         }
 
