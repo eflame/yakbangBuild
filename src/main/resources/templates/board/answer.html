@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>작성 페이지</title>
+<link rel="stylesheet" th:href="@{/css/common/common.css}">
+<link rel="stylesheet" th:href="@{/css/board/write.css}">
+<link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.css" />
+<script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+<script defer th:src="@{/js/common/common.js}" ></script>
+<!--    <script defer th:src="@{/js/board/toastui.js}" ></script>-->
+<script defer th:src="@{/js/board/ration.js}" ></script>
+<script defer th:src="@{/js/board/answer.js}" ></script>
+
+
+</head>
+<body>
+<div class="all-wrap">
+    <header th:replace="~{common/header/header_common::main-header}"></header>
+    <menu th:replace="~{common/menu/side_menu::side-menu}" ></menu>
+    <main class="contents">
+        <!-- 작업영역 -->
+        <div class="inner">
+            <form class="form-write" th:action="@{/board/answer}" method="post">
+                <div class="write-wrap">
+                    <p class="text_required">* 필수</p>
+                    <dl class="write-row">
+                        <dt class="title required">내용</dt>
+                        <dd class="content">
+                            <div class="textarea-box">
+                                <div id="editor"></div>
+                                <p class="count">
+                                    <span>0</span> / 2000
+                                </p>
+                            </div>
+                        </dd>
+                    </dl>
+                </div>
+                <div class="btn-area">
+                    <a class="btn btn-light" th:href="@{/board/qna-list}">뒤로가기</a>
+                    <button class="btn btn-primary" type="button" id="write-btn" th:data-id="${questionId}">작성 완료</button>
+                </div>
+            </form>
+        </div>
+        <!-- 작업영역 -->
+    </main>
+    <footer th:replace="~{common/footer/footer_common::main-fotter}"></footer>
+</div>
+</body>
+</html>

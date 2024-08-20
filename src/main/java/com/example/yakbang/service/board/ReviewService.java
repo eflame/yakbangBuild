@@ -20,6 +20,7 @@ public class ReviewService {
     public void addReview(ReviewWriteDTO reviewWriteDTO){
         reviewMapper.insertReview(reviewWriteDTO);
     }
+
     public List<ReviewListDTO> findList(String keyword){
         return reviewMapper.selectList(keyword);
     }

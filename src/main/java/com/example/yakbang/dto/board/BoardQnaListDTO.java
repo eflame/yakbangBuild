@@ -11,7 +11,7 @@ public class BoardQnaListDTO {
    private Long memberId;     // 회원 번호
    private String title;      // 제목
    private String content;    // 내용
-   private String answerTitle; // 전문가 답변 제목
+   private String answerContent; // 전문가 답변
    private Long answerNo;     // 답변 번호
    private String name;       // 회원 이름
    private String gender;     // 회원 성별

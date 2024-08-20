@@ -77,7 +77,12 @@
         WHERE DETAIL_CONTENT LIKE '%' ||  #{detailContent} || '%'
     </select>
 
-<!--    -->
+<!-- 별점 조회   -->
+    <select id="selectPillPoint">
+        SELECT r.POINT
+        FROM TBL_PILL p JOIN TBL_REVIEW r
+                           on p.PILL_ID=#{pillId}
+    </select>
 
 
 </mapper>

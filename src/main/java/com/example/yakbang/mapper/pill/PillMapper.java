@@ -22,6 +22,9 @@ public interface PillMapper {
 
     //    증상 검색시 데이터 조회
     List<PillListDTO> selectPillByContent(String detailContent);
+
+    //    별점 조회
+    void selectPillPoint(Long pillId);
 }
 
 

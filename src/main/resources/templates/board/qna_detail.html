@@ -27,8 +27,10 @@
                         <span class="t1">작성자 : <span th:text="${board.name}"></span></span>
                         <span class="views">조회수 : <span th:text="${board.viewCount}"></span></span>
                     </div>
+                </div>
+                <a class="btn btn-answer" th:href="@{/board/answer(questionId=${param.questionId})}">답변하기</a>
             </div>
-            </div>
+
 
             <div class="inner">
                 <div class="reply-qna-wrap"  th:each="board : ${detail}">
@@ -44,7 +46,7 @@
 
                 <div class="qna-detail-wrap2">
                     <div class="title2 detail-read" >
-                        <p th:text="${board.answerContent}"></p>
+                        <p th:utext="${board.answerContent}"></p>
                     </div>
 
                     <div class="line-210-1"></div>

@@ -41,14 +41,16 @@
         <!-- 작업영역 -->
         <div class="inner">
             <section class="search-section">
-                <h2 class="search-text">검색 결과 <span>22</span>건</h2>
+                <h2 class="search-text">검색 결과 </h2>
                 <div class="search-box">
-                    <input class="search-input" type="text" placeholder="제품명 검색해보세요!"
+                    <form th:action="@{/pill/searchResult}" method="post">
+                        <input class="search-input" type="text" placeholder="일치하는 제품명을 찾을 수 없습니다. 다른 제품명 검색해보세요!"
 
-                    >
-                    <button class="btn-search" type="button">
-                        <img th:src="@{/images/common/ico_search_white.svg}" alt="">
-                    </button>
+                        >
+                        <button class="btn-search" type="submit">
+                            <img th:src="@{/images/common/ico_search_white.svg}" alt="">
+                        </button>
+                    </form>
                 </div>
                 <div class="search-etc">
                     <h3 class="title">인기 검색어</h3>
