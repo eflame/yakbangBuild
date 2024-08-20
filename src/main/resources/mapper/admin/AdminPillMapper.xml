@@ -30,7 +30,7 @@
         ]]>
     </select>
 
-    <select id="PillTotal">
+    <select id="pillTotal">
         SELECT COUNT(ITEM_SEQ)
         FROM TBL_PILL
         <if test="keywordType != null and keywordType != ''">
@@ -43,5 +43,10 @@
         SET PILL_NAME = #{pillName}, PILL_IMAGE = #{pillImage}
         WHERE ITEM_SEQ = #{itemSeq}
     </update>
+
+    <delete id="deletePill">
+        DELETE FROM TBL_PILL
+        WHERE ITEM_SEQ = #{itemSeq}
+    </delete>
 
 </mapper>

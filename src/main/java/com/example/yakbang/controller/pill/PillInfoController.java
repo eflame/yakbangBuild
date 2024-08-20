@@ -1,6 +1,8 @@
 package com.example.yakbang.controller.pill;
 
+import com.example.yakbang.dto.pill.PillListDTO;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.ui.Model;
 import com.example.yakbang.dto.pill.PillDTO;
 import com.example.yakbang.service.pill.PillService;
@@ -11,6 +13,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/pill")
+@Slf4j
 @RequiredArgsConstructor
 public class PillInfoController {
 
@@ -29,6 +32,26 @@ public class PillInfoController {
     @GetMapping("/list")
     public String getPills() {
         return "pill/pill_list";
+    }
+
+
+    
+
+    @PostMapping("/searchResult")
+    public String searchResult(String keyword, Model model) {
+        List<PillListDTO> list;
+        try {
+                list = pillService.findPillData(keyword);
+//            System.out.println("list = " + list);
+//            System.out.println("검색 결과 개수"+list.size());
+                model.addAttribute("pill", list);
+
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return "pill/pill_list";
+        }
+        return "pill/pill_search_result_list";
+
     }
 
 

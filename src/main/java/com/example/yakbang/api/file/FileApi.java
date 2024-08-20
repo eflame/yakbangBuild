@@ -61,6 +61,8 @@ public class FileApi {
         // 업로드된 파일의 전체 경로
         String fileFullPath = Paths.get(uploadDir, filename).toString();
 
+        System.out.println("fileFullPath = " + fileFullPath);
+
         // 파일이 없는 경우 예외 throw
         File uploadedFile = new File(fileFullPath);
         if (uploadedFile.exists() == false) {

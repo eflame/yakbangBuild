@@ -3,8 +3,10 @@ package com.example.yakbang.controller.admin;
 import com.example.yakbang.dto.admin.AdminExMemberDTO;
 import com.example.yakbang.dto.admin.AdminMemberDTO;
 import com.example.yakbang.dto.admin.AdminPillDTO;
+import com.example.yakbang.dto.admin.AdminQnaDTO;
 import com.example.yakbang.dto.page.PageRequestDTO;
 import com.example.yakbang.dto.page.PageSetDTO;
+import com.example.yakbang.service.admin.AdminBoardService;
 import com.example.yakbang.service.admin.AdminMemberService;
 import com.example.yakbang.service.admin.AdminPillService;
 import jakarta.servlet.http.Cookie;
@@ -27,7 +29,7 @@ public class AdminController {
 
     private final AdminMemberService adminMemberService;
     private final AdminPillService adminPillService;
-
+    private final AdminBoardService adminBoardService;
 
     @GetMapping("")
     public String login(HttpSession session,
@@ -154,6 +156,10 @@ public class AdminController {
                        PageRequestDTO pageRequestDTO,
                        Model model) {
         Long memberId = (Long) session.getAttribute("memberId");
+        if (memberId == null) {
+            return "redirect:/admin";
+        }
+
         int total = adminPillService.PillTotal(pageRequestDTO);
         PageSetDTO pageSetDTO = new PageSetDTO(pageRequestDTO, total);
 
@@ -161,19 +167,26 @@ public class AdminController {
         model.addAttribute("list", list);
         model.addAttribute("pageSetDTO", pageSetDTO);
         model.addAttribute("pillType", "pill");
-        if (memberId == null) {
-            return "redirect:/admin";
-        }
+
         return "admin/pill";
     }
 
     @GetMapping("/qna")
-    public String qnaBoard(HttpSession session, Model model) {
+    public String qnaBoard(HttpSession session,
+                            PageRequestDTO pageRequestDTO,
+                            Model model) {
         Long memberId = (Long) session.getAttribute("memberId");
-
         if (memberId == null) {
             return "redirect:/admin";
         }
+
+        int total = adminBoardService.qnaTotal(pageRequestDTO);
+        PageSetDTO pageSetDTO = new PageSetDTO(pageRequestDTO, total);
+
+        List<AdminQnaDTO> list = adminBoardService.findQnaList(pageRequestDTO);
+        model.addAttribute("list", list);
+        model.addAttribute("pageSetDTO", pageSetDTO);
+        model.addAttribute("qnaType", "qna");
 
         return "admin/qna_board";
     }

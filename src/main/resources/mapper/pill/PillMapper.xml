@@ -62,6 +62,29 @@
         )
         WHERE RNUM > (#{page} - 1) * #{amount}
     </select>
+
+<!--    제품명 검색시 pk 데이터 조회 : pill/list상에 필요한 데이터만 조회-->
+    <select id="selectPillByName">
+        SELECT PILL_ID,PILL_NAME,COMPANY_NAME,PILL_IMAGE
+        FROM TBL_PILL
+        WHERE PILL_NAME LIKE '%' ||  #{pillName} || '%'
+    </select>
+
+<!--    증상 검색시 데이터 조회-->
+    <select id="selectPillByContent">
+        SELECT PILL_ID,PILL_NAME,COMPANY_NAME,PILL_IMAGE
+        FROM TBL_PILL
+        WHERE DETAIL_CONTENT LIKE '%' ||  #{detailContent} || '%'
+    </select>
+
+<!-- 별점 조회   -->
+    <select id="selectPillPoint">
+        SELECT r.POINT
+        FROM TBL_PILL p JOIN TBL_REVIEW r
+                           on p.PILL_ID=#{pillId}
+    </select>
+
+
 </mapper>
 
 

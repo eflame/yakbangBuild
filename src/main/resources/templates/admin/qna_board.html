@@ -27,15 +27,18 @@
             </div>
 
             <div class="member-list-wrap">
-                <form class="search-area" action="" method="get">
-                    <select name="" id="">
-                        <option value="">아이디</option>
-                        <option value="">이름</option>
-                    </select>
-                    <label class="form-control">
-                        <input type="text" placeholder="Search Member">
+                <form class="search-area" th:action="${'/admin/board'}" method="get">
+                    <label>
+                        <select name="keywordType">
+                            <option value="LOGIN_ID">아이디</option>
+                            <option value="NAME">이름</option>
+                            <option value="EMAIL">이메일</option>
+                        </select>
                     </label>
-                    <button class="btn-normal btn-primary" type="button">찾기</button>
+                    <label class="form-control">
+                        <input type="text" name="keyword" placeholder="Search Member">
+                    </label>
+                    <button class="btn-normal btn-primary" type="submit">찾기</button>
                 </form>
                 <div class="tbl-row">
                     <table>
@@ -54,7 +57,7 @@
                                 <th>아이디</th>
                                 <th>이름</th>
                                 <th>성별</th>
-                                <th>질문 내용</th>
+                                <th>질문 제목</th>
                                 <th>답변 확인</th>
                                 <th>조회수</th>
                                 <th>작성일</th>
@@ -62,67 +65,34 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr th:each="board : ${list}">
                                 <td>
-                                    <span>Test01</span>
+                                    <span th:text="${board.loginId}"></span>
                                 </td>
                                 <td>
-                                    <span>홍길동</span>
+                                    <span th:text="${board.name}"></span>
                                 </td>
                                 <td>
-                                    <span>남성</span>
+                                    <span  th:text="${board.gender == 'M' ? '남' : (board.gender == 'F' ? '여' : '')}"></span>
                                 </td>
                                 <td>
-                                    <span>불면증이 심해요</span>
+                                    <span th:text="${board.title}"></span>
                                 </td>
                                 <td>
-                                    <span class="color-danger">미답변</span>
+                                    <span th:classappend="${board.answerNo} ? 'color-primary' : 'color-danger'" th:text="${board.answerNo} ? '답변' : '미답변'"></span>
                                 </td>
                                 <td>
-                                    <span>1</span>
+                                    <span th:text="${board.viewCount}">1</span>
                                 </td>
                                 <td>
-                                    <span>2024/ 01/ 01</span>
-                                </td>
-                                <td>
-                                    <div class="options">
-                                        <button class="btn-sm btn-light-primary" type="button">option</button>
-                                        <ul class="option-box">
-                                            <li><a class="btn-open-modal" href="#">View</a></li> 
-                                            <li><a href="#">Delete</a></li> 
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <span>Test01</span>
-                                </td>
-                                <td>
-                                    <span>홍길동</span>
-                                </td>
-                                <td>
-                                    <span>남성</span>
-                                </td>
-                                <td>
-                                    <span>불면증이 심해요</span>
-                                </td>
-                                <td>
-                                    <span class="color-primary">답변</span>
-                                </td>
-                                <td>
-                                    <span>1</span>
-                                </td>
-                                <td>
-                                    <span>2024/ 01/ 01</span>
+                                    <span th:text="${board.writeDate}">2024/ 01/ 01</span>
                                 </td>
                                 <td>
                                     <div class="options">
                                         <button class="btn-sm btn-light-primary" type="button">option</button>
                                         <ul class="option-box">
-                                            <li><a class="btn-open-modal" href="#">View</a></li> 
-                                            <li><a href="#">Delete</a></li> 
+                                            <li><a class="btn-open-modal" href="#" th:data-board-type="${qnaType}" th:data-question-id="${board.questionId}" th:data-answer-no="${board.answerNo}">View</a></li>
+                                            <li><a class="btn-deleted" href="#" th:data-board-type="${qnaType}" th:data-question-id="${board.questionId}">Delete</a></li>
                                         </ul>
                                     </div>
                                 </td>
@@ -131,43 +101,57 @@
                     </table>
                 </div>
                 <div class="tb-footer-control">
-                <ul class="pagination">
-                    <li class="page-item disabled"><a class="page-link previous" href="#"></a></li>
-                    <li class="page-item active"><a class="page-link " href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                    <li class="page-item"><a class="page-link next" href="#"></a></li>
-                </ul>
+                    <ul class="pagination">
+                        <li class="page-item" th:if="${pageSetDTO.prev}">
+                            <a class="page-link previous"
+                               th:href="${'/admin/qna?page=' + (pageSetDTO.startPage - 1)}">
+                            </a>
+                        </li>
+
+                        <li class="page-item"
+                            th:classappend="${pageSetDTO.pageRequestDTO.page == i ? 'active' : ''}"
+                            th:each="i : ${#numbers.sequence(pageSetDTO.startPage, pageSetDTO.endPage)}">
+                            <a class="page-link"
+                               th:href="${'/admin/qna?page=' + i }"
+                               th:text="${i}" >
+                            </a>
+                        </li>
+
+                        <li class="page-item" th:if="${pageSetDTO.next}">
+                            <a class="page-link next"
+                               th:href="${'/admin/qna?page=' + (pageSetDTO.endPage + 1)}">
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
         <div class="modal-wrap">
             <div class="modal-header">
                 <h3 class="title">Q&A</h3>
-                <button onclick="closeModal();" class="btn-close" type="button">닫기</button>
+                <button class="btn-close modal-close" type="button">닫기</button>
             </div>
             <div class="modal-body">
                 <div class="qna-info">
                     <div class="qna-card">
-                        <span class="category-tag">기타</span>
                         <span class="user-info">
-                            <span class="user-name">김영희</span>
-                            <span class="user-agegender">20대 / 여</span>
+                            <span class="user-name" id="qnaName"></span>
+                            <span class="user-agegender" id="qnaAgeGender"></span>
                         </span>
                         <div class="qna-header">
-                            <span class="title">불면증이 심해요</span>
-                            <span class="cont">잠을 잘 들지 못하고 아침에 일어날때 힘들어요 최소 한시간은 누워있어야 잠듭니다 어깨목근육 뭉침, 편두통이 심해 수면제도 복용했었습니다  편하게 잠들고 싶어요 영양제좀 추천해주세요</span>
+                            <span class="title" id="qnaTitle"></span>
+                            <span class="cont" id="qnaContent"></span>
                         </div>
                         <div class="qna-body">
-                            <span class="cont">근육이 자주 뭉쳐서 잠을 이루기 힘들다면 긴장 완화에 도움이 되는 마그네슘, 테아닌 등을 추천해요.</span>
+                            <span class="cont" id="ansContent"></span>
                         </div>
                     </div>
                 </div>
                 <div class="btn-area">
+                    <input type="hidden" id="modal-question-id">
+                    <input type="hidden" id="modal-answer-no">
                     <button id="btn-modify" class="btn btn-light" type="button">수정</button>
-                    <button id="btn-check" onclick="closeModal();" class="btn btn-primary" type="button">확인</button>
+                    <button id="btn-check" class="btn btn-primary" type="button">확인</button>
                     <button id="btn-back" class="btn btn-light" type="button">취소</button>
                     <button id="btn-change-modify" class="btn btn-primary" type="button">적용</button>
                 </div>

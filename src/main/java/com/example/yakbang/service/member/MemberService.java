@@ -20,6 +20,7 @@ public class MemberService {
      * @param memberJoinDTO 회원 정보
      */
     public void addMember(MemberJoinDTO memberJoinDTO) {
+
         int cnt = memberMapper.selectLoginIdCount(memberJoinDTO.getLoginId());
 
         if(cnt != 0) {
