@@ -129,9 +129,13 @@
                             th:classappend="${pageSetDTO.pageRequestDTO.page == i ? 'active' : ''}"
                             th:each="i : ${#numbers.sequence(pageSetDTO.startPage, pageSetDTO.endPage)}">
                             <a class="page-link"
-                               th:href="${'/admin/' + memberType + '/index?page=' + i }"
+                               th:href="${'/admin/' + memberType + '/index?page=' + i
+                                + (pageSetDTO.pageRequestDTO.keywordType != null && pageSetDTO.pageRequestDTO.keywordType != '' ? '&keywordType=' + pageSetDTO.pageRequestDTO.keywordType : '')
+                                + (pageSetDTO.pageRequestDTO.keyword != null && pageSetDTO.pageRequestDTO.keyword != '' ? '&keyword=' + pageSetDTO.pageRequestDTO.keyword : '')}"
                                th:text="${i}" >
                             </a>
+
+
                         </li>
 
                         <li class="page-item" th:if="${pageSetDTO.next}">

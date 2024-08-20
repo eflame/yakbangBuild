@@ -1,9 +1,6 @@
 package com.example.yakbang.controller.admin;
 
-import com.example.yakbang.dto.admin.AdminExMemberDTO;
-import com.example.yakbang.dto.admin.AdminMemberDTO;
-import com.example.yakbang.dto.admin.AdminPillDTO;
-import com.example.yakbang.dto.admin.AdminQnaDTO;
+import com.example.yakbang.dto.admin.*;
 import com.example.yakbang.dto.page.PageRequestDTO;
 import com.example.yakbang.dto.page.PageSetDTO;
 import com.example.yakbang.service.admin.AdminBoardService;
@@ -176,9 +173,7 @@ public class AdminController {
                             PageRequestDTO pageRequestDTO,
                             Model model) {
         Long memberId = (Long) session.getAttribute("memberId");
-        if (memberId == null) {
-            return "redirect:/admin";
-        }
+        if (memberId == null) { return "redirect:/admin"; }
 
         int total = adminBoardService.qnaTotal(pageRequestDTO);
         PageSetDTO pageSetDTO = new PageSetDTO(pageRequestDTO, total);
@@ -192,12 +187,21 @@ public class AdminController {
     }
 
     @GetMapping("/review")
-    public String review(HttpSession session, Model model) {
-        Long memberId = (Long) session.getAttribute("memberId");
+    public String review(HttpSession session,
+                         PageRequestDTO pageRequestDTO,
+                         Model model) {
 
-        if (memberId == null) {
-            return "redirect:/admin";
-        }
+        System.out.println("in!!!!!");
+        Long memberId = (Long) session.getAttribute("memberId");
+        if (memberId == null) { return "redirect:/admin"; }
+
+        int total = adminBoardService.reviewTotal(pageRequestDTO);
+        PageSetDTO pageSetDTO = new PageSetDTO(pageRequestDTO, total);
+
+        List<AdminReviewDTO> list = adminBoardService.findReviewList(pageRequestDTO);
+        model.addAttribute("list", list);
+        model.addAttribute("pageSetDTO", pageSetDTO);
+        model.addAttribute("reviewType", "review");
 
         return "admin/review_board";
     }

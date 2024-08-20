@@ -32,6 +32,7 @@ async function loadDataIntoModal(manager) {
     const memberId = manager.dataset.memberId;
     const itemId = manager.dataset.itemId;
     const questionId = manager.dataset.questionId;
+    const reviewId = manager.dataset.reviewId;
     console.log(questionId);
 
     // 데이터 세트에 따라 모달의 값을 설정
@@ -110,7 +111,7 @@ async function loadDataIntoModal(manager) {
         const modalIdElement = document.getElementById('modal-question-id');
         modalIdElement.value = questionId;
 
-        const response = await fetch(`/admin/board/${questionId}`);
+        const response = await fetch(`/admin/board/qna/${questionId}`);
 
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
@@ -130,9 +131,33 @@ async function loadDataIntoModal(manager) {
             document.getElementById('qnaTitle').innerText = qna.title ?? 'N/A';
             document.getElementById('qnaContent').innerHTML = qna.content ?? 'N/A';
             let ansContentElement = document.getElementById('ansContent');
-            ansContentElement.style.display = document.getElementById('btn-modify').style.display =qna.answerNo ? '' : 'none';
+            ansContentElement.style.display = qna.answerNo ? '': 'none';
             ansContentElement.innerHTML = qna.answerContent ? qna.answerContent : '';
+            document.getElementById('link-modify').href = `/board/qna-detail?questionId=${qna.questionId}`;
 
+
+        }
+    } else if (reviewId) {
+
+        const response = await fetch(`/admin/board/review/${reviewId}`);
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log('Fetched data:', data);
+
+        if (data.length > 0) {
+            const review = data[0];
+            console.log(review);
+            let point = review.point;
+            let widthPercentage = point * 20;
+            document.getElementById('point').style.width = `${widthPercentage}%`;
+            document.getElementById('companyName').innerText = review.companyName ?? 'N/A';
+            document.getElementById('pillName').innerText = review.pillName ?? 'N/A';
+            document.getElementById('name').innerText = review.name ?? 'N/A';
+            document.getElementById('reviewContent').innerHTML = review.reviewContent ?? 'N/A';
 
         }
     }

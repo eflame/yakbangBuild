@@ -18,8 +18,8 @@
                 SELECT Q.QUESTION_ID, Q.MEMBER_ID, Q.TITLE, Q.VIEW_COUNT, Q.WRITE_DATE, M.LOGIN_ID, M.NAME, M.GENDER,
                 FLOOR(MONTHS_BETWEEN(SYSDATE, M.BIRTH) / 120) * 10 AS AGE, A.ANSWER_NO
                 FROM TBL_QA Q
-                    JOIN TBL_MEMBER M ON Q.MEMBER_ID = M.MEMBER_ID
-                    LEFT JOIN TBL_ANSWER A ON Q.QUESTION_ID = A.QUESTION_ID
+                JOIN TBL_MEMBER M ON Q.MEMBER_ID = M.MEMBER_ID
+                LEFT JOIN TBL_ANSWER A ON Q.QUESTION_ID = A.QUESTION_ID
                 <if test="keyword != null and keyword != ''">
                 WHERE ${keywordType} LIKE '%' || #{keyword} || '%'
                 </if>
@@ -35,8 +35,10 @@
     </select>
 
     <select id="qnaTotal">
-        SELECT COUNT(QUESTION_ID)
-        FROM TBL_QA
+        SELECT COUNT(Q.QUESTION_ID)
+        FROM TBL_QA Q
+        JOIN TBL_MEMBER M ON Q.MEMBER_ID = M.MEMBER_ID
+        LEFT JOIN TBL_ANSWER A ON Q.QUESTION_ID = A.QUESTION_ID
         <if test="keywordType != null and keywordType != ''">
             WHERE ${keywordType} LIKE '%' || #{keyword} || '%'
         </if>
@@ -47,18 +49,64 @@
         WHERE QUESTION_ID = #{questionId}
     </delete>
 
-    <select id="selectReviewInfo">
-        SELECT R.REVIEW_ID, R.PILL_ID, R.MEMBER_ID, R.POINT, R.MODIFIED_DATE, R.REVIEW_CONTENT,
-               R.REVIEW_SHAPE, R.REVIEW_AGE, R.REVIEW_GENDER, R.REVIEW_TITLE,
-               P.COMPANY_NAME, P.PILL_NAME,
-               M.NAME
-        FROM TBL_REVIEW R JOIN TBL_PILL P
-                               ON R.PILL_ID = P.PILL_ID
-                          JOIN TBL_MEMBER M
-                               ON R.MEMBER_ID = M.MEMBER_ID
-        WHERE R.REVIEW_CONTENT LIKE '%' || #{keyword} || '%'
+    <select id="selectReviewList">
+        SELECT  REVIEW_ID, PILL_ID, MEMBER_ID, POINT, CREATE_DATE, MODIFIED_DATE, REVIEW_CONTENT,
+                COMPANY_NAME, PILL_NAME, LOGIN_ID ,NAME
+        FROM(
+            SELECT ROWNUM AS RNUM, REVIEW_ID, PILL_ID, MEMBER_ID, POINT, CREATE_DATE, MODIFIED_DATE, REVIEW_CONTENT,
+                                COMPANY_NAME, PILL_NAME,
+                                LOGIN_ID ,NAME
+            FROM (
+                SELECT R.REVIEW_ID, R.PILL_ID, R.MEMBER_ID, R.POINT, R.CREATE_DATE, R.MODIFIED_DATE, R.REVIEW_CONTENT,
+                       P.COMPANY_NAME, P.PILL_NAME,
+                       M.LOGIN_ID ,M.NAME
+                FROM TBL_REVIEW R
+                JOIN TBL_PILL P ON R.PILL_ID = P.PILL_ID
+                JOIN TBL_MEMBER M ON R.MEMBER_ID = M.MEMBER_ID
+                <if test="keywordType != null and keywordType != ''">
+                WHERE ${keywordType} LIKE '%' || #{keyword} || '%'
+                </if>
+                ORDER BY R.REVIEW_ID DESC
+            )
+            <![CDATA[
+            WHERE ROWNUM <= #{page} * #{amount}
+            ]]>
+        )
+        <![CDATA[
+        WHERE RNUM > (#{page} - 1) * #{amount}
+        ]]>
     </select>
 
+    <select id="selectReviewInfo">
+        SELECT R.REVIEW_ID, R.PILL_ID, R.MEMBER_ID, R.POINT, AVG_POINT_BY_PILL.AVG_POINT, R.CREATE_DATE, R.MODIFIED_DATE, R.REVIEW_CONTENT,
+        P.COMPANY_NAME, P.PILL_NAME,
+        M.LOGIN_ID ,M.NAME
+        FROM TBL_REVIEW R
+        JOIN TBL_PILL P ON R.PILL_ID = P.PILL_ID
+        JOIN TBL_MEMBER M ON R.MEMBER_ID = M.MEMBER_ID
+        LEFT JOIN (
+            SELECT PILL_ID, AVG(POINT) AS AVG_POINT
+            FROM TBL_REVIEW
+            GROUP BY PILL_ID
+        ) AVG_POINT_BY_PILL ON R.PILL_ID = AVG_POINT_BY_PILL.PILL_ID
+        WHERE R.REVIEW_ID = #{reviewId}
+        ORDER BY R.REVIEW_ID DESC
+    </select>
 
+    <select id="reviewTotal">
+        SELECT COUNT(R.REVIEW_ID)
+        FROM TBL_REVIEW R JOIN TBL_PILL P
+        ON R.PILL_ID = P.PILL_ID
+        JOIN TBL_MEMBER M
+        ON R.MEMBER_ID = M.MEMBER_ID
+        <if test="keywordType != null and keywordType != ''">
+            WHERE ${keywordType} LIKE '%' || #{keyword} || '%'
+        </if>
+    </select>
+
+    <delete id="deleteReview">
+        DELETE FROM TBL_REVIEW
+        WHERE REVIEW_ID = #{reviewId}
+    </delete>
 
 </mapper>
