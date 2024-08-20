@@ -1,9 +1,6 @@
 package com.example.yakbang.mapper.board;
 
-import com.example.yakbang.dto.board.BoardQnaDetailDTO;
-import com.example.yakbang.dto.board.BoardQnaListDTO;
-import com.example.yakbang.dto.board.BoardQnaWriteDTO;
-import com.example.yakbang.dto.board.BoardSearchDTO;
+import com.example.yakbang.dto.board.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -21,6 +18,6 @@ public interface BoardMapper {
 
     void updateViewCount(Long questionId); // 조회수 증가
 
-    List<BoardQnaListDTO> selectPhoto();
+    void insertAnswer(AnswerWriteDTO answerWriteDTO); // 답변 저장
 
 }

@@ -1,9 +1,6 @@
 package com.example.yakbang.controller.board;
 
-import com.example.yakbang.dto.board.BoardQnaDetailDTO;
-import com.example.yakbang.dto.board.BoardQnaListDTO;
-import com.example.yakbang.dto.board.BoardQnaWriteDTO;
-import com.example.yakbang.dto.board.BoardSearchDTO;
+import com.example.yakbang.dto.board.*;
 import com.example.yakbang.service.board.BoardService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -47,7 +44,7 @@ public class BoardController {
     public String qna_write(HttpSession session) {
         Long memberId = (Long) session.getAttribute("memberId");
 
-        if(memberId == null){   // 회원이 아니면 로그인으로
+        if (memberId == null) {   // 회원이 아니면 로그인으로
             return "redirect:/member/login";
         }
         return "board/qna_write"; // 회원이라면 작성페이지로
@@ -55,23 +52,43 @@ public class BoardController {
 
     @PostMapping("/qna-write")
     public String qna_write(BoardQnaWriteDTO boardQnaWriteDTO,
-                            @SessionAttribute("memberId") Long memberId){
+                            @SessionAttribute("memberId") Long memberId) {
         boardQnaWriteDTO.setMemberId(memberId);
         log.info("boardQnaWriteDTO:{}", boardQnaWriteDTO); // 로그 기록
 
-        boardService.addBoard(boardQnaWriteDTO); //
+        boardService.addBoard(boardQnaWriteDTO);
 
         return "redirect:/board/qna-list";
     }
 
-    @GetMapping("/review-list")
-    public String list() {
-        return "board/review_list";
+    @GetMapping("/answer")
+    public String answer(@ModelAttribute("questionId") Long questionId, HttpSession session) {
+        session.getAttribute("memberType");
+        Long expertId = (Long) session.getAttribute("memberId");
+
+        if (expertId == null) {   // 전문가가 아니면 로그인으로
+            return "redirect:/member/login";
+        }
+
+        return "board/answer"; // 전문가라면 답변페이지로
     }
 
-    @GetMapping("/review-write")
-    public String write() {
-        return "board/write";
+    @PostMapping("/answer")
+    public String answer(AnswerWriteDTO answerWriteDTO,
+                         @SessionAttribute("memberId") Long memberId,
+                         @SessionAttribute("memberType") String memberType) {
+
+        log.info("answerWriteDTO = {} ", answerWriteDTO);
+        log.info("memberId = {} ", memberId);
+        log.info("memberType = {} ", memberType);
+
+        if ("expert".equals(memberType)) {
+            answerWriteDTO.setExpertId(memberId);
+            boardService.addAnswer(answerWriteDTO);
+        }
+
+
+        return "redirect:/board/qna-list";
     }
 
 }

@@ -20,10 +20,12 @@
             <div class="sub-header">
                 <h2 class="title">Review</h2>
                 <span class="sub-txt">직접 먹어본 분들의 리뷰</span>
+                <form th:action="@{/review/list}" method="get">
                 <div class="search-area">
-                    <input class="input-search" type="text" title="review 검색어 입력" placeholder="무엇이 궁금하신가요?" >
+                    <input class="input-search" type="text" name="keyword" title="review 검색어 입력" placeholder="무엇이 궁금하신가요?" >
                     <button class="btn-search" title="검색 버튼"></button>
                 </div>
+                </form>
                 <a class="btn btn-primary" th:href="@{/review/write}">후기 작성</a>
             </div>
             <ul class="review-list type-oneline">
