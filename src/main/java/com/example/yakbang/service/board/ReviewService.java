@@ -4,6 +4,7 @@ import com.example.yakbang.dto.board.ReviewDetailListDTO;
 import com.example.yakbang.dto.board.ReviewListDTO;
 import com.example.yakbang.dto.board.ReviewPillSearchDTO;
 import com.example.yakbang.dto.board.ReviewWriteDTO;
+import com.example.yakbang.dto.pill.PageRequest;
 import com.example.yakbang.mapper.board.ReviewMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,12 @@ public class ReviewService {
     public List<ReviewListDTO> findList(String keyword){
         return reviewMapper.selectList(keyword);
     }
+
+    public List<ReviewListDTO> findListWithPage(String keyword, PageRequest pageRequest){
+        pageRequest.setAmount(30);
+        return reviewMapper.selectListWithPage(keyword, pageRequest);
+    }
+
     public List<ReviewDetailListDTO> findDetailList(Long pillId){
         return reviewMapper.selectDetailList(pillId);
     }
