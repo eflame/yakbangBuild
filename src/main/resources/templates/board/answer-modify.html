@@ -10,7 +10,7 @@
 <script defer th:src="@{/js/common/common.js}" ></script>
 <!--    <script defer th:src="@{/js/board/toastui.js}" ></script>-->
 <script defer th:src="@{/js/board/ration.js}" ></script>
-<script defer th:src="@{/js/board/answer.js}" ></script>
+<script defer th:src="@{/js/board/answer-modify.js}" ></script>
 
 
 </head>
@@ -21,14 +21,14 @@
     <main class="contents">
         <!-- 작업영역 -->
         <div class="inner">
-            <form class="form-write" th:action="@{/board/answer}" method="post">
+            <form class="form-write" th:action="@{/board/answer-modify}" method="post">
                 <div class="write-wrap">
                     <p class="text_required">* 필수</p>
                     <dl class="write-row">
                         <dt class="title required">내용</dt>
                         <dd class="content">
                             <div class="textarea-box">
-                                <div id="editor"></div>
+                                <div id="editor" th:utext="${board.answerContent}"></div>
                                 <p class="count">
                                     <span>0</span> / 2000
                                 </p>
@@ -38,7 +38,7 @@
                 </div>
                 <div class="btn-area">
                     <a class="btn btn-light" th:href="@{/board/qna-detail(questionId=${param.questionId})}">뒤로가기</a>
-                    <button class="btn btn-primary" type="button" id="write-btn" th:data-id="${questionId}">작성 완료</button>
+                    <button class="btn btn-primary" type="button" id="write-btn" th:data-id="${questionId}">수정 완료</button>
                 </div>
             </form>
         </div>

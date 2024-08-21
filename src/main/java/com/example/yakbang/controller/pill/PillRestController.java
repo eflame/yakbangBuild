@@ -16,6 +16,7 @@ public class PillRestController {
 
     @GetMapping("/v1/pills")
     public List<PillListDTO> getPills(PageRequest pageRequest){
+
         return pillService.findListWithPage(pageRequest);
     }
 }

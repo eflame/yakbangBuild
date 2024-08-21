@@ -1,6 +1,7 @@
 package com.example.yakbang.service.board;
 
 import com.example.yakbang.dto.board.*;
+import com.example.yakbang.dto.pill.PageRequest;
 import com.example.yakbang.mapper.board.BoardMapper;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -44,4 +45,13 @@ public class BoardService {
         boardMapper.insertAnswer(answerWriteDTO);
     }
 
+    public List<BoardQnaListDTO> findListWithPage(String keyword, PageRequest pageRequest){
+        pageRequest.setAmount(10);
+        return boardMapper.selectListWithPage(keyword, pageRequest);
+    }
+
+    public void modifyAnswer(AnswerModifyDTO answerModifyDTO) {
+
+        boardMapper.updateAnswer(answerModifyDTO);
+    }
 }
