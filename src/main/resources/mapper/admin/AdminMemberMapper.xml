@@ -69,13 +69,39 @@
 
     <update id="updateGeneralMember">
         UPDATE TBL_MEMBER
-        SET NAME = #{name}, EMAIL = #{email}, PHONE_NUMBER = #{phoneNumber}
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="email != null">
+                email = #{email},
+            </if>
+            <if test="phoneNumber != null">
+                phone_number = #{phoneNumber},
+            </if>
+        </set>
         WHERE MEMBER_ID = #{memberId}
     </update>
 
     <update id="updateExpertMember">
         UPDATE TBL_EXPERT_MEMBER
-        SET NAME = #{name}, EMAIL = #{email}, PHONE_NUMBER = #{phoneNumber},  JOB = #{job}, PHARMACY_ADDRESS = #{pharmacyAddress}
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="email != null">
+                email = #{email},
+            </if>
+            <if test="phoneNumber != null">
+                phone_number = #{phoneNumber},
+            </if>
+            <if test="job != null">
+                JOB = #{job},
+            </if>
+            <if test="pharmacyAddress != null">
+                PHARMACY_ADDRESS = #{pharmacyAddress}
+            </if>
+        </set>
         WHERE EXPERT_ID = #{expertId}
     </update>
 

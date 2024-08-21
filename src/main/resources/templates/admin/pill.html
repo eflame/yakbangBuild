@@ -39,7 +39,6 @@
                         <colgroup>
                             <col style="width: 100px;">
                             <col style="width: 140px;">
-                            <col style="width: 62px;">
                             <col style="width: 88px;">
                             <col style="width: 88px;">
                             <col style="width: auto;">
@@ -48,22 +47,21 @@
                             <col style="width: auto;">
                             <col style="width: auto;">
                             <col style="width: 60px;" >
-                            <col style="width: 100px;">
+                            <col style="width: 80px;">
                         </colgroup>
                         <thead>
                             <tr>
                                 <th>제조사명</th>
                                 <th>약품명</th>
-                                <th>카테고리</th>
                                 <th>등록일</th>
                                 <th>수정일</th>
                                 <th>약효능</th>
                                 <th>복용/섭취방법</th>
                                 <th>섭취시 주의사항</th>
                                 <th>약보관방법</th>
-                                <th>약형태 및 색상</th>
-                                <th>약 사진</th>
-                                <th>옵션</th>
+                                <th class="center">약형태 및 색상</th>
+                                <th class="center">약 사진</th>
+                                <th class="center">옵션</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -73,9 +71,6 @@
                                 </td>
                                 <td>
                                     <span th:text="${board.pillName}"></span>
-                                </td>
-                                <td>
-                                    <span th:text="${board.categoryId}"></span>
                                 </td>
                                 <td>
                                     <span th:text="${board.openDate}"></span>
@@ -95,16 +90,16 @@
                                 <td>
                                     <span class="ellipsis" th:text="${board.pillDeposit}"></span>
                                 </td>
-                                <td>
+                                <td class="center">
                                     <span th:text="
                                     ${(board.pillShape != null ? board.pillShape : '') +
                                     (board.pillShape != null ? ' / ' : '') +
                                     (board.pillColor != null ? board.pillColor : '')}"></span>
                                 </td>
-                                <td>
+                                <td class="center">
                                     <span th:text="${board.pillImage != null ? '있음' : '없음'}"></span>
                                 </td>
-                                <td>
+                                <td class="center">
                                     <div class="options">
                                         <button class="btn-sm btn-light-primary" type="button">option</button>
                                         <ul class="option-box">

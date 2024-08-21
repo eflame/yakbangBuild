@@ -277,6 +277,9 @@
               text-align: right;
           }
       }
+      .center {
+        text-align: center !important;
+      }
       .content {
         p { display: inline; }
         img, br {display: none;}
