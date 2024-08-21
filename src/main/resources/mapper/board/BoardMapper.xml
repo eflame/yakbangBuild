@@ -56,7 +56,7 @@
             WHERE (Q.TITLE LIKE '%' || #{keyword} || '%' OR
                    Q.CONTENT LIKE '%' || #{keyword} || '%' OR
                    M.NAME LIKE '%' || #{keyword} || '%')
-        ORDER BY Q.QUESTION_ID DESC
+            ORDER BY Q.QUESTION_ID DESC
     </select>
 
 <!-- 조회수 증가 -->
@@ -74,5 +74,43 @@
         insert into TBL_ANSWER (ANSWER_NO, QUESTION_ID, EXPERT_ID, ANSWER_CONTENT, ANSWER_DATE)
         values (#{answerNo}, #{questionId}, #{expertId}, #{answerContent}, sysdate)
     </insert>
+
+<!--  페이지  -->
+    <select id="selectListWithPage" resultType="boardQnaListDTO">
+        SELECT QUESTION_ID, MEMBER_ID, TITLE, CONTENT,
+               NAME, GENDER, age, ANSWER_NO, ANSWER_CONTENT, HAS_IMAGE
+        FROM (
+                SELECT ROWNUM AS RNUM, QUESTION_ID, MEMBER_ID, TITLE, CONTENT,
+                       NAME, GENDER, age, ANSWER_NO, ANSWER_CONTENT, HAS_IMAGE
+                FROM (
+                        SELECT Q.QUESTION_ID, Q.MEMBER_ID, Q.TITLE, Q.CONTENT,
+                               M.NAME, M.GENDER, FLOOR(MONTHS_BETWEEN(SYSDATE, M.BIRTH) / 120) * 10 AS age,
+                               A.ANSWER_NO, A.ANSWER_CONTENT,
+                               NVL(J.HAS_IMAGE, 0) AS HAS_IMAGE
+                        FROM TBL_QA Q
+                                 JOIN TBL_MEMBER M ON Q.MEMBER_ID = M.MEMBER_ID
+                                 LEFT JOIN TBL_ANSWER A ON Q.QUESTION_ID = A.QUESTION_ID
+                                 LEFT JOIN ( SELECT Q.QUESTION_ID, COUNT(Q.QUESTION_ID) AS HAS_IMAGE
+                                             FROM TBL_QA Q
+                                             WHERE CONTENT LIKE '%img%'
+                                             GROUP BY Q.QUESTION_ID) J ON J.QUESTION_ID = Q.QUESTION_ID
+                        WHERE (Q.TITLE LIKE '%' || #{keyword} || '%' OR
+                               Q.CONTENT LIKE '%' || #{keyword} || '%' OR
+                               M.NAME LIKE '%' || #{keyword} || '%')
+                        ORDER BY Q.QUESTION_ID DESC
+                     )
+            <![CDATA[
+                WHERE ROWNUM <= #{pageRequest.page} * #{pageRequest.amount}
+            ]]>
+        )
+        WHERE RNUM > (#{pageRequest.page} - 1) * #{pageRequest.amount}
+    </select>
+
+<!--  답변 수정  -->
+    <update id="updateAnswer">
+        update TBL_ANSWER
+        SET ANSWER_CONTENT = #{answerContent}, ANSWER_DATE = sysdate
+        WHERE QUESTION_ID = #{questionId}
+    </update>
 
 </mapper>

@@ -8,6 +8,7 @@
     <link rel="stylesheet" th:href="@{/css/board/qna.css}">
     <script defer th:src="@{/js/common/common.js}" ></script>
     <script defer th:src="@{/js/board/ration.js}" ></script>
+    <script defer th:src="@{/js/board/list.js}" ></script>
 
 </head>
 <body>
@@ -32,7 +33,7 @@
                 <div class="qna-card" th:each="board : ${list}">
                     <a tabindex="0" class="qna-main" title="이 Q&amp;A의 상세정보 보기" th:href="@{/board/qna-detail(questionId=${board.questionId})}" >
                         <span class="txt1" th:utext="'<span class=\'qmark\'>Q.&nbsp; </span>' + ${board.title}"></span>
-                        <span class="txt2" th:utext="${board.content}"></span>
+                        <span class="txt2" name="" th:utext="${board.content}"></span>
                     </a>
                     <a tabindex="0" class="qna-user-wrap" title="이 Q&amp;A의 상세정보 보기" th:href="@{/board/qna-detail(questionId=${board.questionId})}">
                         <div class="qna-user-icon-1" th:if="${board.answerContent}"></div>
@@ -45,6 +46,9 @@
                         </div>
                     </a>
                 </div>
+            </div>
+            <div class="more-btn-box">
+                <button class="load-more" id="load-more" data-page="1">10개 더 보기</button>
             </div>
         </div>
         <!-- 작업영역 -->

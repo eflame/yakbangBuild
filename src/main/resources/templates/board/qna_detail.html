@@ -60,7 +60,7 @@
             </div>
                 <div th:each="board : ${detail}">
                     <a class="btn btn-answer" th:if="${board.answerContent != null and session.memberType == 'expert'}"
-                       th:href="@{/board/answer(questionId=${param.questionId})}">수정하기</a>
+                       th:href="@{/board/answer-modify(questionId=${param.questionId})}">수정하기</a>
                 </div>
             </div>
             <!-- 작업영역 -->

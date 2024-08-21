@@ -1,6 +1,7 @@
 package com.example.yakbang.controller.board;
 
 import com.example.yakbang.dto.board.*;
+import com.example.yakbang.dto.pill.PageRequest;
 import com.example.yakbang.service.board.BoardService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.util.List;
@@ -21,10 +23,12 @@ public class BoardController {
     private final BoardService boardService;
 
     @GetMapping("/qna-list")
-    public String qna_list(BoardSearchDTO boardSearchDTO, Model model) {
+    public String qna_list(BoardSearchDTO boardSearchDTO, Model model, String keyword, PageRequest pageRequest){
         System.out.println("boardSearchDTO = " + boardSearchDTO);
 //        List<BoardQnaListDTO> list = boardService.findList(); // 게시물 목록 호출
-        List<BoardQnaListDTO> list = boardService.findSearchList(boardSearchDTO);
+//        List<BoardQnaListDTO> list = boardService.findSearchList(boardSearchDTO);
+        List<BoardQnaListDTO> list = boardService.findListWithPage(keyword, pageRequest);
+        System.out.println("list = " + list);
 
         model.addAttribute("list", list);
 
@@ -77,7 +81,8 @@ public class BoardController {
     @PostMapping("/answer")
     public String answer(AnswerWriteDTO answerWriteDTO,
                          @SessionAttribute("memberId") Long memberId,
-                         @SessionAttribute("memberType") String memberType) {
+                         @SessionAttribute("memberType") String memberType,
+                         RedirectAttributes redirectAttributes) {
 
         log.info("answerWriteDTO = {} ", answerWriteDTO);
         log.info("memberId = {} ", memberId);
@@ -88,8 +93,26 @@ public class BoardController {
             boardService.addAnswer(answerWriteDTO);
         }
 
+        redirectAttributes.addAttribute("questionId", answerWriteDTO.getQuestionId());
 
-        return "redirect:/board/qna-list";
+        return "redirect:/board/qna-detail";
+    }
+
+    @GetMapping("/answer-modify")
+    public String answerModify(@ModelAttribute("questionId") Long questionId, Model model) {
+        BoardQnaDetailDTO board = boardService.findDetail(questionId);
+        model.addAttribute("board", board);
+
+        return "board/answer-modify";
+    }
+
+    @PostMapping("/answer-modify")
+    public String answerModify(AnswerModifyDTO answerModifyDTO, RedirectAttributes redirectAttributes){
+        boardService.modifyAnswer(answerModifyDTO);
+        redirectAttributes.addAttribute("questionId", answerModifyDTO.getQuestionId());
+
+
+        return "redirect:/board/qna-detail";
     }
 
 }
