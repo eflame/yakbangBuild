@@ -43,25 +43,25 @@
                 <div class="tbl-row">
                     <table>
                         <colgroup>
-                            <col>
-                            <col>
-                            <col>
+                            <col style="width: 140px;">
+                            <col style="width: 140px;">
+                            <col style="width: 80px;">
                             <col style="width: auto;">
-                            <col>
+                            <col style="width: 140px;">
                             <col style="width: 140px;">
                             <col style="width: 140px;" >
-                            <col style="width: 100px;">
+                            <col style="width: 80px;">
                         </colgroup>
                         <thead>
                             <tr>
                                 <th>아이디</th>
                                 <th>이름</th>
-                                <th>성별</th>
+                                <th class="center">성별</th>
                                 <th>질문</th>
-                                <th>답변 확인</th>
-                                <th>조회수</th>
+                                <th class="center">답변 확인</th>
+                                <th class="center">조회수</th>
                                 <th>작성일</th>
-                                <th>옵션</th>
+                                <th class="center">옵션</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -72,22 +72,22 @@
                                 <td>
                                     <span th:text="${board.name}"></span>
                                 </td>
-                                <td>
+                                <td class="center">
                                     <span  th:text="${board.gender == 'M' ? '남' : (board.gender == 'F' ? '여' : '')}"></span>
                                 </td>
                                 <td>
                                     <span th:text="${board.title}"></span>
                                 </td>
-                                <td>
+                                <td class="center">
                                     <span th:classappend="${board.answerNo} ? 'color-primary' : 'color-danger'" th:text="${board.answerNo} ? '답변' : '미답변'"></span>
                                 </td>
-                                <td>
-                                    <span th:text="${board.viewCount}">1</span>
+                                <td class="center">
+                                    <span th:text="${board.viewCount}"></span>
                                 </td>
                                 <td>
-                                    <span th:text="${board.writeDate}">2024/ 01/ 01</span>
+                                    <span th:text="${board.writeDate}"></span>
                                 </td>
-                                <td>
+                                <td class="center">
                                     <div class="options">
                                         <button class="btn-sm btn-light-primary" type="button">option</button>
                                         <ul class="option-box">

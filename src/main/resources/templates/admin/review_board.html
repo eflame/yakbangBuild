@@ -49,21 +49,21 @@
                             <col>
                             <col style="width: 80px;">
                             <col style="width: auto;">
-                            <col>
+                            <col style="width: 140px;">
                             <col style="width: 140px;">
                             <col style="width: 140px;" >
-                            <col style="width: 100px;">
+                            <col style="width: 80px;">
                         </colgroup>
                         <thead>
                             <tr>
                                 <th>회사명</th>
                                 <th>제품명</th>
-                                <th>별점</th>
+                                <th class="center">별점</th>
                                 <th>리뷰 내용</th>
                                 <th>아이디</th>
                                 <th>이름</th>
                                 <th>작성일</th>
-                                <th>옵션</th>
+                                <th class="center">옵션</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -74,7 +74,7 @@
                                 <td>
                                     <span th:text="${board.pillName}"></span>
                                 </td>
-                                <td>
+                                <td class="center">
                                     <span th:text="${board.point}"></span>
                                 </td>
                                 <td>
@@ -89,7 +89,7 @@
                                 <td>
                                     <span th:text="${board.createDate}"></span>
                                 </td>
-                                <td>
+                                <td class="center">
                                     <div class="options">
                                         <button class="btn-sm btn-light-primary" type="button">option</button>
                                         <ul class="option-box">

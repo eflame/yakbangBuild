@@ -43,31 +43,31 @@
                 <div class="tbl-row">
                     <table>
                         <colgroup>
-                            <col>
-                            <col>
-                            <col>
-                            <col>
+                            <col style="width: 140px;">
+                            <col style="width: 140px;">
+                            <col style="width: 120px;">
+                            <col style="width: 80px;">
                             <th:block th:if="${memberType == 'expert'}">
-                                <col>
-                                <col>
+                                <col style="width: 100px;">
+                                <col style="width: auto">
                             </th:block>
                             <col style="width: 140px;">
-                            <col style="width: 140px;" >
-                            <col style="width: 100px;">
+                            <col style="width: auto" >
+                            <col style="width: 80px;">
                         </colgroup>
                         <thead>
                             <tr>
                                 <th>아이디</th>
                                 <th>이름</th>
                                 <th>생년월일</th>
-                                <th>성별</th>
+                                <th class="center">성별</th>
                                 <th:block th:if="${memberType == 'expert'}">
-                                    <th>약국명</th>
+                                    <th>직업</th>
                                     <th>약국 위치</th>
                                 </th:block>
                                 <th>전화번호</th>
                                 <th>이메일</th>
-                                <th>옵션</th>
+                                <th class="center">옵션</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -81,7 +81,7 @@
                                 <td>
                                     <span th:text="${board.birth}"></span>
                                 </td>
-                                <td>
+                                <td class="center">
                                     <span th:text="${board.gender == 'M' ? '남' : (board.gender == 'F' ? '여' : '')}"></span>
                                 </td>
                                 <th:block th:if="${memberType == 'expert'}">
@@ -98,7 +98,7 @@
                                 <td>
                                     <span  th:text="${board.email}"></span>
                                 </td>
-                                <td>
+                                <td class="center">
                                     <div class="options">
                                         <button class="btn-sm btn-light-primary" type="button">option</button>
                                         <ul class="option-box">

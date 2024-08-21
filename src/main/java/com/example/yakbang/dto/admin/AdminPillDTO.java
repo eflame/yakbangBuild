@@ -6,7 +6,6 @@ import lombok.*;
 @NoArgsConstructor @AllArgsConstructor @Builder
 public class AdminPillDTO {
     private Long itemSeq; // 상품시퀀스
-    private int categoryId;
     private String companyName; // 제조사
     private String pillName; // 제품명
     private String detailContent; // 효능
