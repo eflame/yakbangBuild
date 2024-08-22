@@ -51,9 +51,11 @@
                             <div class="company-name" th:text="${pill.companyName}">브랜드</div>
                             <h1 class="product-name" th:text="${pill.pillName}">약 이름</h1>
 
-                            <dl class="shape-color">
+                            <dl class="shape-color" th:if="${pill.pillShape != null or pill.pillColor != null}">
                                 <dt>형태 및 색</dt>
-                                <dd th:text="${pill.pillShape} + ' / ' + ${pill.pillColor}">형태 / 색상</dd>
+                                <dd th:text="${pill.pillShape != null ? pill.pillShape : ''} + (${pill.pillShape != null and pill.pillColor != null ? ' / ' : ''}) + ${pill.pillColor != null ? pill.pillColor : ''}">
+                                    형태 / 색상
+                                </dd>
                             </dl>
 
 
@@ -145,7 +147,7 @@
 
             <div class="tabs">
                 <div class="tab-link">상세 정보</div>
-                <div class="tab-link">리뷰<span>1,873개</span></div>
+                <div class="tab-link"><span class="review-cnt"></span></div>
             </div>
 
             <!-- 상세 정보 -->
@@ -232,13 +234,10 @@
                             </div>
                         </div>
                         <div class="total-reviews">
-                            <span>
-                                <h2 class="text-rv">리뷰 <span class="review-cnt">1,873</span>개</h2>
-                            </span>
+                                <h2 class="text-rv">리뷰</h2>
                             <div class="sort-bar">
                                 <button class="sort-btn">별점 높은 순</button>
                                 <div class="sort-content">
-                                    <a href="#">베스트 리뷰 순</a>
                                     <a href="#">별점 높은 순</a>
                                     <a href="#">별점 낮은 순</a>
                                     <a href="#">최신 순</a>
@@ -265,21 +264,10 @@
 <!--                                    다시시작됨 혹시나 싶어 이거 끊었더니 증상이 더 발전안되고 서서히 줄어드는중이라서 이거 때문임을 확신함</p>-->
 <!--                            </li>-->
 
-<!--                            <li class="review-content">-->
-<!--                                <span class="user-agesex">40대 / 남</span>-->
-<!--                                <div class="review-info-row1">-->
-<!--                                    <div class="rating-box">-->
-<!--                                        &lt;!&ndash; 평균점수 계산식 = (점수 - 1)/4*100 : width 값안에 적용 &ndash;&gt;-->
-<!--                                        <div class="rating-select" style="width:100%"></div>-->
-<!--                                    </div>-->
-<!--                                    <span class="date">2023/03/12</span>-->
-<!--                                </div>-->
-<!--                                <p class="review-full-txt">코큐텐이 좋다고 해서 구매 후 복용했는데 먹기편하게 되어 있는건 좋았음</p>-->
-<!--                                <p class="review-full-txt">먹은지 한달정도 후에 피부에 두드러기같은게 생김 처음엔 이것 때문인지 몰라 이것저것 병원도 가고 약도 먹고-->
-<!--                                    해도 원인인 몰랐음 그래서 모든것을 다 끊고 기본으로 돌아가니 증상이 없어졌고 하나씩 조심히먹으며 원인을 찾던 도중 이거 먹고 20일쯤 지나니 증상이-->
-<!--                                    다시시작됨 혹시나 싶어 이거 끊었더니 증상이 더 발전안되고 서서히 줄어드는중이라서 이거 때문임을 확신함</p>-->
-<!--                            </li>-->
                         </ul>
+                        <div class="moreBtn">
+                            <button class="load-more" id="load-more" data-page="1">10개 더 보기</button>
+                        </div>
                     </div>
                 </div>
             </div>
