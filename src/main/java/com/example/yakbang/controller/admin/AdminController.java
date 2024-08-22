@@ -53,8 +53,7 @@ public class AdminController {
     }
 
     @PostMapping("")
-    public String login(@RequestParam String loginId,
-                        @RequestParam String password,
+    public String login(String loginId, String password,
                         @RequestParam(required = false) String rememberLoginId,
                         HttpSession session,
                         HttpServletResponse response,
