@@ -6,6 +6,8 @@
 <link rel="stylesheet" th:href="@{/css/common/common.css}" />
 <link rel="stylesheet" th:href="@{/css/pill/pill.css}" />
 <script defer th:src="@{/js/common/common.js}"></script>
+<script defer th:src="@{/js/pill/detail.js}"></script>
+
 </head>
 <body>
 <div class="all-wrap">
@@ -217,7 +219,7 @@
                 <div class="detail-section">
                     <div class="section-box">
                         <div class="detail-info-area">
-                            <button class="title"><span style="color: #16a87b;">트리플 스트렝스 오메가3 피쉬오일 (오메가3 1040mg)</span>에
+                            <button class="title"><span style="color: #16a87b;" th:text="${pill.pillName}"></span>에
                                 대해 실제 섭취한 유저들은 이렇게 평가해요
                             </button>
                             <div class="acodian-box">
@@ -243,51 +245,40 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="review-content-wrap">
+
+                        </div>
                         <ul id="data-container" class="review-content-wrap">
-                            <li class="review-content">
-                                <span class="user-agesex">40대 / 남</span>
-                                <div class="review-info-row1">
-                                    <div class="rating-box">
-                                        <!-- 평균점수 계산식 = (점수 - 1)/4*100 : width 값안에 적용 -->
-                                        <div class="rating-select" style="width:100%"></div>
-                                    </div>
-                                    <span class="date">2023/03/12</span>
-                                </div>
-                                <p class="review-full-txt">코큐텐이 좋다고 해서 구매 후 복용했는데 먹기편하게 되어 있는건 좋았음</p>
-                                <p class="review-full-txt">먹은지 한달정도 후에 피부에 두드러기같은게 생김 처음엔 이것 때문인지 몰라 이것저것 병원도 가고 약도 먹고
-                                    해도 원인인 몰랐음 그래서 모든것을 다 끊고 기본으로 돌아가니 증상이 없어졌고 하나씩 조심히먹으며 원인을 찾던 도중 이거 먹고 20일쯤 지나니 증상이
-                                    다시시작됨 혹시나 싶어 이거 끊었더니 증상이 더 발전안되고 서서히 줄어드는중이라서 이거 때문임을 확신함</p>
-                            </li>
 
-                            <li class="review-content">
-                                <span class="user-agesex">40대 / 남</span>
-                                <div class="review-info-row1">
-                                    <div class="rating-box">
-                                        <!-- 평균점수 계산식 = (점수 - 1)/4*100 : width 값안에 적용 -->
-                                        <div class="rating-select" style="width:100%"></div>
-                                    </div>
-                                    <span class="date">2023/03/12</span>
-                                </div>
-                                <p class="review-full-txt">코큐텐이 좋다고 해서 구매 후 복용했는데 먹기편하게 되어 있는건 좋았음</p>
-                                <p class="review-full-txt">먹은지 한달정도 후에 피부에 두드러기같은게 생김 처음엔 이것 때문인지 몰라 이것저것 병원도 가고 약도 먹고
-                                    해도 원인인 몰랐음 그래서 모든것을 다 끊고 기본으로 돌아가니 증상이 없어졌고 하나씩 조심히먹으며 원인을 찾던 도중 이거 먹고 20일쯤 지나니 증상이
-                                    다시시작됨 혹시나 싶어 이거 끊었더니 증상이 더 발전안되고 서서히 줄어드는중이라서 이거 때문임을 확신함</p>
-                            </li>
+<!--                            <li class="review-content">-->
+<!--                                <span class="user-agesex">40대 / 남</span>-->
+<!--                                <div class="review-info-row1">-->
+<!--                                    <div class="rating-box">-->
+<!--                                        &lt;!&ndash; 평균점수 계산식 = (점수 - 1)/4*100 : width 값안에 적용 &ndash;&gt;-->
+<!--                                        <div class="rating-select" style="width:100%"></div>-->
+<!--                                    </div>-->
+<!--                                    <span class="date">2023/03/12</span>-->
+<!--                                </div>-->
+<!--                                <p class="review-full-txt">코큐텐이 좋다고 해서 구매 후 복용했는데 먹기편하게 되어 있는건 좋았음</p>-->
+<!--                                <p class="review-full-txt">먹은지 한달정도 후에 피부에 두드러기같은게 생김 처음엔 이것 때문인지 몰라 이것저것 병원도 가고 약도 먹고-->
+<!--                                    해도 원인인 몰랐음 그래서 모든것을 다 끊고 기본으로 돌아가니 증상이 없어졌고 하나씩 조심히먹으며 원인을 찾던 도중 이거 먹고 20일쯤 지나니 증상이-->
+<!--                                    다시시작됨 혹시나 싶어 이거 끊었더니 증상이 더 발전안되고 서서히 줄어드는중이라서 이거 때문임을 확신함</p>-->
+<!--                            </li>-->
 
-                            <li class="review-content">
-                                <span class="user-agesex">40대 / 남</span>
-                                <div class="review-info-row1">
-                                    <div class="rating-box">
-                                        <!-- 평균점수 계산식 = (점수 - 1)/4*100 : width 값안에 적용 -->
-                                        <div class="rating-select" style="width:100%"></div>
-                                    </div>
-                                    <span class="date">2023/03/12</span>
-                                </div>
-                                <p class="review-full-txt">코큐텐이 좋다고 해서 구매 후 복용했는데 먹기편하게 되어 있는건 좋았음</p>
-                                <p class="review-full-txt">먹은지 한달정도 후에 피부에 두드러기같은게 생김 처음엔 이것 때문인지 몰라 이것저것 병원도 가고 약도 먹고
-                                    해도 원인인 몰랐음 그래서 모든것을 다 끊고 기본으로 돌아가니 증상이 없어졌고 하나씩 조심히먹으며 원인을 찾던 도중 이거 먹고 20일쯤 지나니 증상이
-                                    다시시작됨 혹시나 싶어 이거 끊었더니 증상이 더 발전안되고 서서히 줄어드는중이라서 이거 때문임을 확신함</p>
-                            </li>
+<!--                            <li class="review-content">-->
+<!--                                <span class="user-agesex">40대 / 남</span>-->
+<!--                                <div class="review-info-row1">-->
+<!--                                    <div class="rating-box">-->
+<!--                                        &lt;!&ndash; 평균점수 계산식 = (점수 - 1)/4*100 : width 값안에 적용 &ndash;&gt;-->
+<!--                                        <div class="rating-select" style="width:100%"></div>-->
+<!--                                    </div>-->
+<!--                                    <span class="date">2023/03/12</span>-->
+<!--                                </div>-->
+<!--                                <p class="review-full-txt">코큐텐이 좋다고 해서 구매 후 복용했는데 먹기편하게 되어 있는건 좋았음</p>-->
+<!--                                <p class="review-full-txt">먹은지 한달정도 후에 피부에 두드러기같은게 생김 처음엔 이것 때문인지 몰라 이것저것 병원도 가고 약도 먹고-->
+<!--                                    해도 원인인 몰랐음 그래서 모든것을 다 끊고 기본으로 돌아가니 증상이 없어졌고 하나씩 조심히먹으며 원인을 찾던 도중 이거 먹고 20일쯤 지나니 증상이-->
+<!--                                    다시시작됨 혹시나 싶어 이거 끊었더니 증상이 더 발전안되고 서서히 줄어드는중이라서 이거 때문임을 확신함</p>-->
+<!--                            </li>-->
                         </ul>
                     </div>
                 </div>

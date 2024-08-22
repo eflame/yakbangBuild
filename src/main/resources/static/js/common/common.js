@@ -45,33 +45,33 @@
   });
 }
 
-{  // 탭
-  const tabLinks = document.querySelectorAll('.tab-link');
-  const tabContents = document.querySelectorAll('.tab-content');
-
-  tabLinks.forEach((tabLink, index) => {
-    tabLink.addEventListener('click', () => {
-      tabContents.forEach((tabContent, i) => {
-        if (i === index) {
-          tabContent.style.display = 'block';
-        } else {
-          tabContent.style.display = 'none';
-        }
-      });
-
-      tabLinks.forEach(link => {
-        link.classList.remove('active');
-      });
-      tabLink.classList.add('active');
-    });
-  });
-
-  // Default tab
-  if(tabContents && tabContents[0]) {
-    tabContents[0].style.display = 'block';
-  }
-  tabLinks[0]?.classList.add('active');
-}
+// {  // 탭
+//   const tabLinks = document.querySelectorAll('.tab-link');
+//   const tabContents = document.querySelectorAll('.tab-content');
+//
+//   tabLinks.forEach((tabLink, index) => {
+//     tabLink.addEventListener('click', () => {
+//       tabContents.forEach((tabContent, i) => {
+//         if (i === index) {
+//           tabContent.style.display = 'block';
+//         } else {
+//           tabContent.style.display = 'none';
+//         }
+//       });
+//
+//       tabLinks.forEach(link => {
+//         link.classList.remove('active');
+//       });
+//       tabLink.classList.add('active');
+//     });
+//   });
+//
+//   // Default tab
+//   if(tabContents && tabContents[0]) {
+//     tabContents[0].style.display = 'block';
+//   }
+//   tabLinks[0]?.classList.add('active');
+// }
 
 // {  // 약검색 select 박스
 //   const $searchInput = document.querySelector("#searchInput");

@@ -1,5 +1,6 @@
 package com.example.yakbang.service.pill;
 
+import com.example.yakbang.dto.board.ReviewListDTO;
 import com.example.yakbang.dto.pill.PageRequest;
 import com.example.yakbang.dto.pill.PillDTO;
 import com.example.yakbang.dto.pill.PillListDTO;
@@ -48,6 +49,11 @@ public class PillService {
             throw new IllegalArgumentException("해당 키워드에 관한 데이터를 읽어올 수 없습니다.");
         }
         return list;
+    }
+
+//    리뷰
+    public List<ReviewListDTO> findList(String keyword) {
+        return pillMapper.findReviewsByKeyword(keyword);
     }
 
 

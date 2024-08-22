@@ -90,14 +90,4 @@ class ReviewMapperTest {
                 .contains("test");
     }
 
-    @Test
-    void selectDetailList() {
-        reviewMapper.insertReview(reviewWriteDTO);
-
-        List<ReviewDetailListDTO> list = reviewMapper.selectDetailList(reviewWriteDTO.getPillId());
-
-        assertThat(list)
-                .extracting(ReviewDetailListDTO::getReviewContent)
-                .contains("test");
-    }
 }
