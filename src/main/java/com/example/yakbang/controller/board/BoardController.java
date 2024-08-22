@@ -73,7 +73,7 @@ public class BoardController {
         Object memberType = session.getAttribute("memberType");
         Long expertId = (Long) session.getAttribute("memberId");
 
-        if (!"expert".equals(memberType) && expertId != 0) {   // 전문가가 아니면 로그인으로
+        if (!"expert".equals(memberType)) {   // 전문가가 아니면 로그인으로
             return "redirect:/member/login";
         }
 
@@ -90,7 +90,7 @@ public class BoardController {
         log.info("memberId = {} ", memberId);
         log.info("memberType = {} ", memberType);
 
-        if ("expert".equals(memberType) || memberId == 0) {
+        if ("expert".equals(memberType)) {
             answerWriteDTO.setExpertId(memberId);
             boardService.addAnswer(answerWriteDTO);
         }
