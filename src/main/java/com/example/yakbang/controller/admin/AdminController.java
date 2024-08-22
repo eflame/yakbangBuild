@@ -53,8 +53,7 @@ public class AdminController {
     }
 
     @PostMapping("")
-    public String login(@RequestParam String loginId,
-                        @RequestParam String password,
+    public String login(String loginId, String password,
                         @RequestParam(required = false) String rememberLoginId,
                         HttpSession session,
                         HttpServletResponse response,
@@ -70,6 +69,7 @@ public class AdminController {
                 // 로그인 성공 시 세션에 로그인 ID 및 memberId 저장
                 session.setAttribute("loginId", loginId);
                 session.setAttribute("memberId", memberId);
+                session.setAttribute("memberType", "expert");
 
                 // "로그인 ID 저장" 체크 여부에 따라 쿠키 설정
                 if ("on".equals(rememberLoginId)) {

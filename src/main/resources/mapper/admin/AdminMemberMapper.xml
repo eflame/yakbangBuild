@@ -3,9 +3,9 @@
 <mapper namespace="com.example.yakbang.mapper.admin.AdminMemberMapper">
     <!-- 관리자 로그인   -->
     <select id="selectAdminId">
-        SELECT MEMBER_ID
-        FROM TBL_MEMBER
-        WHERE (LOGIN_ID = #{loginId} AND PASSWORD = #{password}) AND MEMBER_ID = 0
+        SELECT EXPERT_ID
+        FROM TBL_EXPERT_MEMBER
+        WHERE (LOGIN_ID = #{loginId} AND PASSWORD = #{password}) AND EXPERT_ID = 0
     </select>
 
     <select id="selectGeneralMembers" resultType="AdminMemberDTO" >

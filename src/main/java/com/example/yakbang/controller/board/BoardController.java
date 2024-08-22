@@ -23,7 +23,9 @@ public class BoardController {
     private final BoardService boardService;
 
     @GetMapping("/qna-list")
-    public String qna_list(BoardSearchDTO boardSearchDTO, Model model, String keyword, PageRequest pageRequest){
+    public String qna_list(BoardSearchDTO boardSearchDTO,
+                           Model model, String keyword,
+                           PageRequest pageRequest){
         System.out.println("boardSearchDTO = " + boardSearchDTO);
 //        List<BoardQnaListDTO> list = boardService.findList(); // 게시물 목록 호출
 //        List<BoardQnaListDTO> list = boardService.findSearchList(boardSearchDTO);
@@ -71,7 +73,7 @@ public class BoardController {
         Object memberType = session.getAttribute("memberType");
         Long expertId = (Long) session.getAttribute("memberId");
 
-        if (!"expert".equals(memberType)) {   // 전문가가 아니면 로그인으로
+        if (!"expert".equals(memberType) && expertId != 0) {   // 전문가가 아니면 로그인으로
             return "redirect:/member/login";
         }
 
@@ -88,7 +90,7 @@ public class BoardController {
         log.info("memberId = {} ", memberId);
         log.info("memberType = {} ", memberType);
 
-        if ("expert".equals(memberType)) {
+        if ("expert".equals(memberType) || memberId == 0) {
             answerWriteDTO.setExpertId(memberId);
             boardService.addAnswer(answerWriteDTO);
         }

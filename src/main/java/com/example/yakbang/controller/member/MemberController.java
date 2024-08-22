@@ -24,11 +24,9 @@ import org.springframework.web.bind.annotation.*;
 public class MemberController {
     private final MemberService memberService;
     private final ExpertService expertService;
-    private final HttpServletResponse httpServletResponse;
 
     @GetMapping("/login")
-    public String login(HttpSession session,
-                        HttpServletRequest request,
+    public String login(HttpServletRequest request,
                         Model model) {
 
         Cookie[] cookies = request.getCookies();
@@ -77,7 +75,7 @@ public class MemberController {
                     response.addCookie(loginIdCookie);
                 }
 
-                return "/main";
+                return "redirect:/";
             } else {
                 log.info("로그인 실패: ID나 비밀번호가 올바르지 않습니다.");
                 return "member/login";
@@ -91,12 +89,6 @@ public class MemberController {
             log.error(e.toString());
             return "member/login";
         }
-
-
-// 로그인 되면 memberId를 세션으로 설정해 두었기에 mypage에서 정보수정시 해당 데이터를 가져다가 쓸것임.
-
-
-//        return "/main";
     }
 
     @GetMapping("/find_id")
