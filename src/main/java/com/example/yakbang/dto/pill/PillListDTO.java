@@ -10,4 +10,5 @@ public class PillListDTO {
     private String pillImage;
     private String companyName;
     private String pillName;
+
 }

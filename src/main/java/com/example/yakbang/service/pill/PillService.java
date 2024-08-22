@@ -2,7 +2,6 @@ package com.example.yakbang.service.pill;
 
 import com.example.yakbang.dto.pill.PageRequest;
 import com.example.yakbang.dto.pill.PillDTO;
-import com.example.yakbang.dto.pill.PillItemDTO;
 import com.example.yakbang.dto.pill.PillListDTO;
 import com.example.yakbang.mapper.pill.PillMapper;
 import lombok.RequiredArgsConstructor;

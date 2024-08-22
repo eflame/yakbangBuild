@@ -41,7 +41,7 @@
         <!-- 작업영역 -->
         <div class="inner">
             <section class="search-section">
-                <h2 class="search-text">검색 결과 <span th:text=""></span>건</h2>
+                <h2 class="search-text">검색 결과 </h2>
                 <div class="search-box">
                     <form th:action="@{/pill/searchResult}" method="post">
                         <input class="search-input" type="text" name="keyword" placeholder="제품명 검색해보세요!">
@@ -53,31 +53,31 @@
                 <div class="search-etc">
                     <h3 class="title">인기 검색어</h3>
                     <div class="search-keywords">
-                        <a class="search-keyword" href="#">타이레놀</a>
-                        <a class="search-keyword" href="#">판피린</a>
-                        <a class="search-keyword" href="#">이지엔</a>
-                        <a class="search-keyword" href="#">부루펜</a>
-                        <a class="search-keyword" href="#">콜대원</a>
+                        <a class="search-keyword">타이레놀</a>
+                        <a class="search-keyword">판피린</a>
+                        <a class="search-keyword">이지엔</a>
+                        <a class="search-keyword">부루펜</a>
+                        <a class="search-keyword">콜대원</a>
                     </div>
                 </div>
             </section>
             <!-- 약 리스트 -->
             <div class="search-list-wrap">
                 <div class="pill-list">
-                    <a href="/pill/detail?id=${pill.itemSeq}"
+                    <a th:each="pill : ${list}" th:href="'/pill/detail?id=' + ${pill.pillId}"
                        class="pill-item">
                         <!-- 약 이미지 -->
 
-<!--                        <img th:src="${ pill.pillImage != null ? pill.pillImage : '/images/common/img_pill_03.png' }"-->
-<!--                             th:style=" ${ pill.pillImage != null ? pill.pillImage : 'width: 70px' }"-->
-<!--                             alt="Pill Image"-->
-<!--                             class="pill-img"-->
-<!--                        />-->
+                        <img th:src="${ pill.pillImage != null ? pill.pillImage : '/images/common/img_pill_03.png' }"
+                             th:style=" ${ pill.pillImage != null ? pill.pillImage : 'width: 70px' }"
+                             alt="Pill Image"
+                             class="pill-img"
+                        />
                         <div class="info">
                             <!-- 브랜드 (제조사) -->
-<!--                            <span class="brand" th:text="${pill.companyName}"></span>-->
+                            <span class="brand" th:text="${pill.companyName}" ></span>
                             <!-- 약 이름 -->
-                            <span class="pill-name">${pill.pillName}</span>
+                            <span class="pill-name" th:text="${pill.pillName}">ddd</span>
                             <!-- 리뷰 점수 (예시로 고정된 값 사용) -->
                             <span class="review-score">4.68</span>
                         </div>

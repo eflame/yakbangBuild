@@ -34,22 +34,26 @@ public class PillInfoController {
         return "pill/pill_list";
     }
 
-
-    
+    @GetMapping("/searchResult")
+    public String searchResult(){
+        return "pill/pill_list";
+    }
 
     @PostMapping("/searchResult")
     public String searchResult(String keyword, Model model) {
         List<PillListDTO> list;
         try {
                 list = pillService.findPillData(keyword);
-//            System.out.println("list = " + list);
 //            System.out.println("검색 결과 개수"+list.size());
-                model.addAttribute("pill", list);
 
         } catch (Exception e) {
             log.error(e.getMessage());
             return "pill/pill_list";
         }
+
+        System.out.println("list = " + list);
+
+        model.addAttribute("list", list);
         return "pill/pill_search_result_list";
 
     }
