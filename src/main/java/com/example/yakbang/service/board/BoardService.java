@@ -45,13 +45,20 @@ public class BoardService {
         boardMapper.insertAnswer(answerWriteDTO);
     }
 
+    // 답변 수정
+    public void modifyAnswer(AnswerModifyDTO answerModifyDTO) {
+        boardMapper.updateAnswer(answerModifyDTO);
+    }
+
+    // 답변 삭제
+    public void removeAnswer(Long answerNo) {
+        boardMapper.deleteAnswer(answerNo);
+    }
+
+
     public List<BoardQnaListDTO> findListWithPage(String keyword, PageRequest pageRequest){
         pageRequest.setAmount(10);
         return boardMapper.selectListWithPage(keyword, pageRequest);
     }
 
-    public void modifyAnswer(AnswerModifyDTO answerModifyDTO) {
-
-        boardMapper.updateAnswer(answerModifyDTO);
-    }
 }

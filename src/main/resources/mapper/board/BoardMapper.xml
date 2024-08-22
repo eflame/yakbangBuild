@@ -113,4 +113,10 @@
         WHERE QUESTION_ID = #{questionId}
     </update>
 
+<!--  답변 삭제  -->
+    <delete id="deleteAnswer">
+        delete TBL_ANSWER
+        where ANSWER_NO = #{answerNo}
+    </delete>
+
 </mapper>
