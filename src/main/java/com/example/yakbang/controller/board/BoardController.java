@@ -38,8 +38,7 @@ public class BoardController {
     }
 
     @GetMapping("/qna-detail")
-    public String qna_detail(@RequestParam("questionId") Long questionId, Model model,
-                             HttpSession session) {
+    public String qna_detail(@RequestParam("questionId") Long questionId, Model model) {
         System.out.println("questionId = " + questionId);
         BoardQnaDetailDTO detail = boardService.findDetail(questionId);
         model.addAttribute("detail", detail);
@@ -113,6 +112,16 @@ public class BoardController {
         boardService.modifyAnswer(answerModifyDTO);
         redirectAttributes.addAttribute("questionId", answerModifyDTO.getQuestionId());
 
+
+        return "redirect:/board/qna-detail";
+    }
+
+    @PostMapping("/answer-delete")
+    public String answerDelete(@RequestParam("answerNo") Long answerNo,
+                               @RequestParam("questionId") Long questionId,
+                               RedirectAttributes redirectAttributes) {
+        boardService.removeAnswer(answerNo);
+        redirectAttributes.addAttribute("questionId", questionId);
 
         return "redirect:/board/qna-detail";
     }

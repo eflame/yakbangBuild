@@ -28,7 +28,7 @@
                         <span class="views">조회수 : <span th:text="${board.viewCount}"></span></span>
                     </div>
                 </div>
-                <div th:each="board : ${detail}">
+                <div class="btn-box" th:each="board : ${detail}">
                     <a class="btn btn-answer" th:if="${board.answerContent == null and session.memberType == 'expert' or session.memberId == 0}"
                        th:href="@{/board/answer(questionId=${param.questionId})}">답변하기</a>
                 </div>
@@ -58,9 +58,14 @@
                     </div>
             </div>
             </div>
-                <div th:each="board : ${detail}">
+                <div class="btn-box" th:each="board : ${detail}">
                     <a class="btn btn-answer" th:if="${board.answerContent != null and session.memberType == 'expert'}"
                        th:href="@{/board/answer-modify(questionId=${param.questionId})}">수정하기</a>
+
+                    <form th:action="@{/board/answer-delete(questionId=${param.questionId})}" method="post">
+                        <input type="hidden" name="answerNo" th:value="${board.answerNo}">
+                        <button class="btn btn-answer" th:if="${board.answerContent != null and session.memberType == 'expert'}">삭제하기</button>
+                    </form>
                 </div>
             </div>
             <!-- 작업영역 -->

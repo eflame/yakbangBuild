@@ -116,10 +116,17 @@
   color: #9ba1aa;
 }
 
+.btn-box{
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-right: 10px;
+}
+
 .btn-answer {
   color: #fff;
   border: none;
   background-color: #52d7cf;
-  margin-left: 87%;
-  margin-top: 20px
+  margin-left: 1%;
+  margin-top: 20px;
 }

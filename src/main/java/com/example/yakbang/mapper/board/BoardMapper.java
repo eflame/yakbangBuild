@@ -26,4 +26,6 @@ public interface BoardMapper {
                                            @Param("pageRequest") PageRequest pageRequest);
 
     void updateAnswer(AnswerModifyDTO answerModifyDTO);
+
+    void deleteAnswer(Long answerNo);
 }
