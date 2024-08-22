@@ -7,6 +7,7 @@ import com.example.yakbang.dto.board.ReviewWriteDTO;
 import com.example.yakbang.dto.pill.PageRequest;
 import com.example.yakbang.mapper.board.ReviewMapper;
 import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,13 +32,16 @@ public class ReviewService {
         return reviewMapper.selectListWithPage(keyword, pageRequest);
     }
 
-    public List<ReviewDetailListDTO> findDetailList(Long pillId){
-        return reviewMapper.selectDetailList(pillId);
-    }
 
     public List<ReviewPillSearchDTO> findPillListByName(String pillName){
         return reviewMapper.selectPillListByName(pillName);
     }
+
+    public List<ReviewListDTO> findReviewInPillDetail(String itemSeq, PageRequest pageRequest){
+        return reviewMapper.selectReviewInPillDetail(itemSeq, pageRequest);
+    }
+
+
 }
 
 

@@ -58,11 +58,34 @@
         WHERE RNUM > (#{pageRequest.page} - 1) * #{pageRequest.amount}
     </select>
 
-    <select id="selectDetailList" parameterType="long" resultType="reviewDetailListDTO">
-        SELECT R.REVIEW_ID, R.PILL_ID, R.MEMBER_ID, R.POINT, R.MODIFIED_DATE, R.REVIEW_CONTENT,
-               R.REVIEW_SHAPE, R.REVIEW_AGE, R.REVIEW_GENDER, R.REVIEW_TITLE
-        FROM TBL_REVIEW R
-        WHERE R.PILL_ID = #{pillId}
+    <!-- 디테일 페이지 리뷰 조회 -->
+    <select id="selectReviewInPillDetail">
+        SELECT REVIEW_ID, PILL_ID, MEMBER_ID, POINT, MODIFIED_DATE, REVIEW_CONTENT,
+               REVIEW_SHAPE, REVIEW_AGE, REVIEW_GENDER, REVIEW_TITLE,
+               COMPANY_NAME, PILL_NAME,
+               NAME
+        FROM (
+                 SELECT ROWNUM AS RNUM, REVIEW_ID, PILL_ID, MEMBER_ID, POINT, MODIFIED_DATE, REVIEW_CONTENT,
+                        REVIEW_SHAPE, REVIEW_AGE, REVIEW_GENDER, REVIEW_TITLE,
+                        COMPANY_NAME, PILL_NAME,
+                        NAME
+                 FROM (
+                          SELECT R.REVIEW_ID, R.PILL_ID, R.MEMBER_ID, R.POINT, R.MODIFIED_DATE, R.REVIEW_CONTENT,
+                                 R.REVIEW_SHAPE, R.REVIEW_AGE, R.REVIEW_GENDER, R.REVIEW_TITLE,
+                                 P.COMPANY_NAME, P.PILL_NAME,
+                                 M.NAME
+                          FROM TBL_REVIEW R JOIN TBL_PILL P
+                                                 ON R.PILL_ID = P.PILL_ID
+                                            JOIN TBL_MEMBER M
+                                                 ON R.MEMBER_ID = M.MEMBER_ID
+                          WHERE p.ITEM_SEQ = #{itemSeq}
+                          ORDER BY R.REVIEW_ID DESC
+                      )
+            <![CDATA[
+                 WHERE ROWNUM <= #{pageRequest.page} * #{pageRequest.amount}
+            ]]>
+        )
+        WHERE RNUM > (#{pageRequest.page} - 1) * #{pageRequest.amount}
     </select>
 
 <!--  약 검색  -->
@@ -72,4 +95,8 @@
         WHERE P.PILL_NAME LIKE '%'|| #{pillName} ||'%'
         ORDER BY P.PILL_ID
     </select>
+
+
+
+
 </mapper>

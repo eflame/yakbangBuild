@@ -1,6 +1,8 @@
 package com.example.yakbang.controller.pill;
 
+import com.example.yakbang.dto.board.ReviewListDTO;
 import com.example.yakbang.dto.pill.PillListDTO;
+import com.example.yakbang.service.board.ReviewService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ui.Model;
@@ -18,6 +20,7 @@ import java.util.List;
 public class PillInfoController {
 
     private final PillService pillService;
+    private final ReviewService reviewService;
 
     @GetMapping("/detail")
     public String pillDetail(@RequestParam("id") Long id, Model model) {
@@ -57,6 +60,8 @@ public class PillInfoController {
         return "pill/pill_search_result_list";
 
     }
+
+
 
 
 
