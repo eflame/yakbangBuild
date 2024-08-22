@@ -24,7 +24,7 @@ function getList(page, callback) {
 
 function displayList(list) {
     let $listBox = document.querySelector('.pill-list');
-
+    console.log(list);
     let html = '';
 
     list.forEach(pill => {
