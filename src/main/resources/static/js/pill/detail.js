@@ -8,28 +8,10 @@ let itemSeq = urlSearchParams.get("id");
 getReviews(itemSeq, 1, displayReviews);
 
 
-
 {  // 탭
     const tabLinks = document.querySelectorAll('.tab-link');
     const tabContents = document.querySelectorAll('.tab-content');
     const reviewTab = document.querySelector('.tab-link.active');
-
-    // tabLinks.forEach((tabLink, index) => {
-    //     tabLink.addEventListener('click', () => {
-    //         tabContents.forEach((tabContent, i) => {
-    //             if (i === index) {
-    //                 tabContent.style.display = 'block';
-    //             } else {
-    //                 tabContent.style.display = 'none';
-    //             }
-    //         });
-    //
-    //         tabLinks.forEach(link => {
-    //             link.classList.remove('active');
-    //         });
-    //         tabLink.classList.add('active');
-    //     });
-    // });
 
 
     tabLinks.forEach((tabLink, index) => {
@@ -60,22 +42,6 @@ getReviews(itemSeq, 1, displayReviews);
     }
     tabLinks[0]?.classList.add('active');
 }
-//
-// {   // 30개 더 보기 처리
-//     document.querySelector('#load-more').addEventListener('click', function () {
-//         let page = ++this.dataset.page;
-//
-//         // 쿼리 스트링 가져오기
-//         const queryString = window.location.search;
-//         // URLSearchParams 객체 생성 : URLSearchParams는 URL를 파싱하여 특정 파라미터를 가져올 수 있음
-//         const urlParams = new URLSearchParams(queryString);
-//         // keyword 파라미터만 뽑아오기
-//         const keyword = urlParams.get("keyword") ?? '' // falsy면 빈문자열
-//         console.log(keyword)
-//
-//         getPostListWithPage(keyword, page, displayPostList);
-//     });
-// }
 
 function getReviews(itemSeq, page, callback) {
     fetch(`/reviews?itemSeq=${itemSeq}&page=${page}`)
@@ -85,6 +51,7 @@ function getReviews(itemSeq, page, callback) {
             if(callback) {
                 callback(list);
             }
+            displayReviewCount(list.length);
         })
         .catch(error => console.error('오류!', error));
 }
@@ -118,3 +85,10 @@ function displayReviews(list){
     let oldHtml = $dataContainer.innerHTML;
     $dataContainer.innerHTML = oldHtml + html;
 }
+
+function displayReviewCount(count) {
+    let reviewCountElement = document.querySelector('.review-cnt');
+    reviewCountElement.textContent = `리뷰 ${count}개`;
+}
+
+

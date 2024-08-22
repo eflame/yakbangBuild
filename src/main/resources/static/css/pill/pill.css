@@ -295,7 +295,7 @@
     /* 리뷰 영역 */
     .text-rv {
         font-weight: 700;
-        margin: 10px 0 30px 0;
+        margin: 30px 0 30px 30px;
         display: block;
         font-size: 20px;
         color: #101219;
@@ -593,7 +593,9 @@
 
     .review-content {
         position: relative;
-        padding: 0px 0px 60px;
+        width: 100%;
+        padding: 30px 30px;
+        background: #fff;
         &:not(:first-child) {
             border-top: 1px solid #e6e9ed;
         }
