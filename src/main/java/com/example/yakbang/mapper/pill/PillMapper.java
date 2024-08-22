@@ -1,5 +1,6 @@
 package com.example.yakbang.mapper.pill;
 
+import com.example.yakbang.dto.board.ReviewListDTO;
 import com.example.yakbang.dto.pill.*;
 import org.apache.ibatis.annotations.*;
 
@@ -24,6 +25,11 @@ public interface PillMapper {
 
     //    별점 조회
     void selectPillPoint(Long pillId);
+
+    // 리뷰
+    List<ReviewListDTO> findReviewsByKeyword(@Param("keyword") String keyword);
+
+
 }
 
 

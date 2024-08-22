@@ -19,7 +19,7 @@ public interface ReviewMapper {
     List<ReviewListDTO> selectListWithPage(@Param("keyword") String keyword,
                                            @Param("pageRequest") PageRequest pageRequest);
 
-    List<ReviewDetailListDTO> selectDetailList(Long pillId);
-
     List<ReviewPillSearchDTO> selectPillListByName(String pillName);
+
+    List<ReviewListDTO> selectReviewInPillDetail(@Param("itemSeq") String itemSeq, @Param("pageRequest") PageRequest pageRequest);
 }
