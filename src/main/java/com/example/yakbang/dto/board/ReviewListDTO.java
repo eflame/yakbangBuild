@@ -8,6 +8,7 @@ import java.time.LocalDate;
 @NoArgsConstructor @AllArgsConstructor @Builder
 public class ReviewListDTO {
     private Long reviewId;
+    private Long itemSeq;
     private Long pillId;
     private Long memberId;
     private String name;

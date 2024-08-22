@@ -88,7 +88,7 @@
                 </h2>
                 <ul class="review-list">
                     <li class="review-card" th:each="dto : ${list2}">
-                        <a th:href="@{/board/pill-detail(reviewId=${dto.reviewId})}">
+                        <a th:href="@{/pill/detail(id=${dto.itemSeq})}">
                             <div class="card-header">
                                 <div class="pill-info">
                                     <div class="rating-box">

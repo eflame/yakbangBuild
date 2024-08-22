@@ -44,8 +44,9 @@ public class PillDTO {
 
     @JsonProperty("openDate")
     private String openDate; // 공개 일자 (OPEN_DATE, DATE)
+
     // 변환된 날짜를 반환하는 메소드
-    public String getFormattedOpenDate() {
+    public String FormattedOpenDate() {
         DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"); // API 제공 형식
         DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // 형식 변경
         LocalDate date = LocalDate.parse(openDate, inputFormatter);
