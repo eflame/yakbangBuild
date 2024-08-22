@@ -37,7 +37,7 @@
             <input type="hidden" name="memberType" value="general" id="login_tab">
             <div class="input-box">
               <label class="form-control row">
-                <input type="text" placeholder="아이디" name="loginId" id="username" required/>
+                <input type="text" placeholder="아이디" name="loginId" id="username" th:value="${loginId}" required/>
               </label>
             </div>
             <div class="input-box">
@@ -47,7 +47,7 @@
             </div>
             <div class="check-box-main">
               <label class="check-box">
-                <input type="checkbox"/>
+                <input type="checkbox" name="rememberLoginId" th:checked="${loginId != null}"/>
                 <span class="label-text">로그인 정보 저장</span>
               </label>
             </div>

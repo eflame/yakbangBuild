@@ -6,15 +6,16 @@ import com.example.yakbang.dto.member.MemberModifyDTO;
 import com.example.yakbang.dto.member.MemberMypageDTO;
 import com.example.yakbang.service.member.ExpertService;
 import com.example.yakbang.service.member.MemberService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @Controller
@@ -23,15 +24,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MemberController {
     private final MemberService memberService;
     private final ExpertService expertService;
+    private final HttpServletResponse httpServletResponse;
 
     @GetMapping("/login")
-    public String login() {
+    public String login(HttpSession session,
+                        HttpServletRequest request,
+                        Model model) {
+
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if ("loginId".equals(cookie.getName())) {
+                    String loginId = cookie.getValue();
+                    model.addAttribute("loginId", loginId);
+                    break;
+                }
+            }
+        }
         return "member/login";
     }
 
     @PostMapping("/login")
-    public String login(String loginId, String password,String memberType,
-                        HttpSession session) {
+    public String login(@RequestParam String loginId, String password, String memberType,
+                        @RequestParam(required = false) String rememberLoginId,
+                        HttpSession session, HttpServletResponse response) {
         Long memberId = null;
 
         System.out.println("loginId = " + loginId + ", password = " + password + ", memberType = " + memberType + ", session = " + session);
@@ -40,6 +56,31 @@ public class MemberController {
                 memberId = memberService.findMemberId(loginId, password);
             }else {
                 memberId = expertService.findExpertId(loginId, password);
+            }
+
+            if (memberId != null) {
+                // 로그인 성공 시 세션에 로그인 ID 및 memberId 저장
+                session.setAttribute("loginId", loginId);
+                session.setAttribute("memberId", memberId);
+
+                // "로그인 ID 저장" 체크 여부에 따라 쿠키 설정
+                if ("on".equals(rememberLoginId)) {
+                    Cookie loginIdCookie = new Cookie("loginId", loginId);
+                    loginIdCookie.setMaxAge(30 * 24 * 60 * 60); // 30일간 유지
+                    loginIdCookie.setPath("/");
+                    response.addCookie(loginIdCookie);
+                } else {
+                    // 체크하지 않으면 쿠키 삭제
+                    Cookie loginIdCookie = new Cookie("loginId", null);
+                    loginIdCookie.setMaxAge(0); // 즉시 만료
+                    loginIdCookie.setPath("/");
+                    response.addCookie(loginIdCookie);
+                }
+
+                return "/main";
+            } else {
+                log.info("로그인 실패: ID나 비밀번호가 올바르지 않습니다.");
+                return "member/login";
             }
 
 //
@@ -51,12 +92,12 @@ public class MemberController {
             return "member/login";
         }
 
-        session.setAttribute("memberId", memberId);
-        session.setAttribute("memberType", memberType);
+//        session.setAttribute("memberId", memberId);
+//        session.setAttribute("memberType", memberType);
 // 로그인 되면 memberId를 세션으로 설정해 두었기에 mypage에서 정보수정시 해당 데이터를 가져다가 쓸것임.
 
 
-        return "/main";
+//        return "/main";
     }
 
     @GetMapping("/find_id")
@@ -191,8 +232,20 @@ public class MemberController {
     }
 
     @GetMapping("/logout")
-    public String logout(HttpSession session){
+    public String logout(HttpSession session, HttpServletRequest request, HttpServletResponse response){
         session.invalidate();
+        // 로그인 ID 쿠키는 유지하고, 다른 관련 쿠키는 삭제하거나 무효화
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (!"loginId".equals(cookie.getName())) { // loginId는 유지
+                    cookie.setValue(null);
+                    cookie.setMaxAge(0); // 즉시 만료
+                    cookie.setPath("/");
+                    response.addCookie(cookie);
+                }
+            }
+        }
         return "redirect:/member/login";
     }
 
