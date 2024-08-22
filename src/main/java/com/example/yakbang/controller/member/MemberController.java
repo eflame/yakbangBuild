@@ -45,7 +45,7 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam String loginId, String password, String memberType,
+    public String login(String loginId, String password, String memberType,
                         @RequestParam(required = false) String rememberLoginId,
                         HttpSession session, HttpServletResponse response) {
         Long memberId = null;
@@ -62,7 +62,7 @@ public class MemberController {
                 // 로그인 성공 시 세션에 로그인 ID 및 memberId 저장
                 session.setAttribute("loginId", loginId);
                 session.setAttribute("memberId", memberId);
-
+                session.setAttribute("memberType", memberType);
                 // "로그인 ID 저장" 체크 여부에 따라 쿠키 설정
                 if ("on".equals(rememberLoginId)) {
                     Cookie loginIdCookie = new Cookie("loginId", loginId);
@@ -92,8 +92,7 @@ public class MemberController {
             return "member/login";
         }
 
-//        session.setAttribute("memberId", memberId);
-//        session.setAttribute("memberType", memberType);
+
 // 로그인 되면 memberId를 세션으로 설정해 두었기에 mypage에서 정보수정시 해당 데이터를 가져다가 쓸것임.
 
 
@@ -186,11 +185,11 @@ public class MemberController {
         if ("general".equals(memberType)) {
             MemberMypageDTO memberDTO = memberService.searchMember(memberId);
             model.addAttribute("memberDTO", memberDTO);
-        }else{
-            ExpertMypageDTO expertMypageDTO = expertService.searchMember(memberId);
+        }else if ("expert".equals(memberType)) {
+            ExpertMypageDTO expertMemberDTO = expertService.searchMember(memberId);
             log.info("////////////////////////////");
             model.addAttribute("memberType", memberType);
-            model.addAttribute("memberDTO", expertMypageDTO);
+            model.addAttribute("memberDTO", expertMemberDTO);
         }
 
 
