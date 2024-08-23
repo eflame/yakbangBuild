@@ -67,8 +67,8 @@
                             <span class="title" th:text="${board.title}"></span>
                             <span class="cont" th:utext="${board.content}"></span>
                         </a>
-                        <a class="qna-body">
-                            <span class="qna-user-icon-1"></span>
+                        <a class="qna-body" th:href="@{/board/qna-detail(questionId=${board.questionId})}">
+                            <span class="qna-user-icon-1" th:if="${board.answerContent}"></span>
                             <span class="cont" th:utext="${board.answerContent}"></span>
                         </a>
                         <span class="user-info">
