@@ -220,35 +220,7 @@
         }
     }
 
-    .effect-tag {
-        display: inline-block;
-        float: left;
-        margin-right: 10px;
-        margin-bottom: 10px;
-        border: 1px solid #d6d9e0;
-        height: 30px;
-        line-height: 28px;
-        text-align: center;
-        padding: 0px 15px;
-        border-radius: 15px;
-        color: #535968;
-        font-weight: 500;
-    }
 
-    .show-more {
-        margin-top: 80px;
-        display: block;
-        text-align: center;
-        height: 52px;
-        border-radius: 10px;
-        background: #ececec;
-        color: #7c7c7c;
-        border: none;
-        height: 52px;
-        line-height: 52px;
-        box-shadow: none;
-        cursor: pointer;
-    }
 
     .text-info {
         color: #101219;
@@ -295,7 +267,7 @@
     /* 리뷰 영역 */
     .text-rv {
         font-weight: 700;
-        margin: 30px 0 30px 30px;
+        margin: 20px 0 20px 30px;
         display: block;
         font-size: 20px;
         color: #101219;
@@ -454,14 +426,16 @@
                 width: 42px;
                 height: 19px;
                 position: absolute;
-                left: 0px;
+                left: 50%;
                 top: -2px;
+                transform: translateX(-50%);
                 text-align: center;
                 span {
                     display: none;
                     height: 19px;
+                    margin-left: 12px;
                     line-height: 19px;
-                    padding: 0px 4px;
+                    padding: 0px 5px;
                     background: #16a87b;
                     font-weight: 500;
                     font-size: 12px;

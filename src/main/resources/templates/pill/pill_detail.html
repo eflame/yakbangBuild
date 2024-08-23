@@ -68,79 +68,83 @@
 
                     <div class="total-grade-area">
                         <div class="item">
-                            <span class="rating">4.61</span>
+                            <span class="rating">0.0</span>
                             <div class="rating-box">
                                 <div class="rating-select" style="width:calc((4.61 - 1) / 4 * 100%)"></div>
                             </div>
                         </div>
                         <div class="item">
                             <div class="male-gauge">
-                                <div class="gauge" style="height: 80%"></div>
-                                <span class="num">80%</span>
+                                <div class="gauge" style="height: 0%"></div>
+                                <span class="num">0%</span>
                             </div>
                             <div class="female-gauge">
-                                <div class="gauge" style="height: 50%"></div>
-                                <span class="num">50%</span>
+                                <div class="gauge" style="height: 0%"></div>
+                                <span class="num">0%</span>
                             </div>
                         </div>
+
+
                         <div class="item">
                             <div class="bar-graph">
-                                <div class="bar-graph-one">
-                                    <div class="bar-graph-mark"><span>1000</span></div>
+                                <div class="bar-graph-one" data-agegroup="10대">
+                                    <div class="bar-graph-mark"><span>0</span></div>
                                     <div class="clearfix">
                                         <div class="bar-graph-bg">
-                                            <div class="bar-graph-bar" style="width:66.974%"></div>
+                                            <div class="bar-graph-bar" style="width:0%"></div>
                                         </div>
                                     </div>
                                     <div class="bar-graph-txt">10대</div>
                                 </div>
-                                <div class="bar-graph-one">
-                                    <div class="bar-graph-mark"><span>543</span></div>
+                                <div class="bar-graph-one" data-agegroup="20대">
+                                    <div class="bar-graph-mark"><span>0</span></div>
                                     <div class="clearfix">
                                         <div class="bar-graph-bg">
-                                            <div class="bar-graph-bar" style="width:27.846%"></div>
+                                            <div class="bar-graph-bar" style="width:0%"></div>
                                         </div>
                                     </div>
                                     <div class="bar-graph-txt">20대</div>
                                 </div>
-                                <div class="bar-graph-one">
-                                    <div class="bar-graph-mark"><span>88</span></div>
+                                <div class="bar-graph-one" data-agegroup="30대">
+                                    <div class="bar-graph-mark"><span>0</span></div>
                                     <div class="clearfix">
                                         <div class="bar-graph-bg">
-                                            <div class="bar-graph-bar" style="width:4.513%"></div>
+                                            <div class="bar-graph-bar" style="width:0%"></div>
                                         </div>
                                     </div>
                                     <div class="bar-graph-txt">30대</div>
                                 </div>
-                                <div class="bar-graph-one">
-                                    <div class="bar-graph-mark"><span>13</span></div>
+                                <div class="bar-graph-one" data-agegroup="40대">
+                                    <div class="bar-graph-mark"><span>0</span></div>
                                     <div class="clearfix">
                                         <div class="bar-graph-bg">
-                                            <div class="bar-graph-bar" style="width:0.667%"></div>
+                                            <div class="bar-graph-bar" style="width:0%"></div>
                                         </div>
                                     </div>
                                     <div class="bar-graph-txt">40대</div>
                                 </div>
-                                <div class="bar-graph-one">
+                                <div class="bar-graph-one" data-agegroup="50대">
                                     <div class="bar-graph-mark"><span>0</span></div>
                                     <div class="clearfix">
                                         <div class="bar-graph-bg">
-                                            <div class="bar-graph-bar" style="width:10%"></div>
+                                            <div class="bar-graph-bar" style="width:0%"></div>
                                         </div>
                                     </div>
                                     <div class="bar-graph-txt">50대</div>
                                 </div>
-                                <div class="bar-graph-one">
-                                    <div class="bar-graph-mark"><span>110</span></div>
+                                <div class="bar-graph-one" data-agegroup="60대">
+                                    <div class="bar-graph-mark"><span>0</span></div>
                                     <div class="clearfix">
                                         <div class="bar-graph-bg">
-                                            <div class="bar-graph-bar" style="width:30%"></div>
+                                            <div class="bar-graph-bar" style="width:0%"></div>
                                         </div>
                                     </div>
                                     <div class="bar-graph-txt">60대</div>
                                 </div>
                             </div>
                         </div>
+
+
                     </div>
                 </div>
             </div>
@@ -154,15 +158,20 @@
             <div class="tab-content">
                 <div class="detail-section">
                     <h2 class="title-section">약 효능</h2>
-                    <div class="pill-effect">
-                        <h3 class="title">주요 기능</h3>
-                        <div class="effect-tag">두통</div>
-                        <div class="effect-tag">발열</div>
-                        <div class="effect-tag">근육통</div>
-                        <div class="show-more">
-                            <a href="#" class="show-more">더 보기</a>
+                    <div class="section-box">
+                        <div class="caution-method">
+                            <p class="text-info" th:text="${pill.detailContent}"></p>
                         </div>
                     </div>
+<!--                    <div class="pill-effect">-->
+<!--                        <h3 class="title">주요 기능</h3>-->
+<!--                        <div class="effect-tag">두통</div>-->
+<!--                        <div class="effect-tag">발열</div>-->
+<!--                        <div class="effect-tag">근육통</div>-->
+<!--                        <div class="show-more">-->
+<!--                            <a href="#" class="show-more">더 보기</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
                 </div>
                 <div class="detail-section">
                     <h2 class="title-section">복용 방법</h2>
@@ -219,20 +228,7 @@
             <div class="tab-content">
                 <h2 class="title-section">의약품 리뷰</h2>
                 <div class="detail-section">
-                    <div class="section-box">
-                        <div class="detail-info-area">
-                            <button class="title"><span style="color: #16a87b;" th:text="${pill.pillName}"></span>에
-                                대해 실제 섭취한 유저들은 이렇게 평가해요
-                            </button>
-                            <div class="acodian-box">
-                                '트리플 스트렝스 오메가3 피쉬오일 (오메가3 1040mg)'을 실제로 섭취한 유저들은 주로 피로 개선(34%), 콜레스테롤 수치 개선(24%), 수면질
-                                개선(18%)등의 효과를 경험했어요.
-                                섭취한 유저들의 리뷰에 따르면 '트리플 스트렝스 오메가3 피쉬오일 (오메가3 1040mg)'의 부작용으로는 속 안좋음(4%), 속쓰림(2%),
-                                소화불량(2%)등을 꼽을 수 있으니, 관련 기저질환이 있거나 섭취 중 비슷한 부작용 증상이 있을 경우 섭취량을 줄이거나 중단하시는 게 좋아요.
-                                섭취한 유저들은 섭취 편의성에 대해 먹는 방법이 간편함(65%), 무미/무취(79%), 알약크기 큼(53%)이라고 평가하고 있으니 꾸준히 복용할만큼 기호에
-                                맞는지 확인하세요.
-                            </div>
-                        </div>
+                    <div class="section-box" style="padding: 20px 40px;">
                         <div class="total-reviews">
                                 <h2 class="text-rv">리뷰</h2>
                             <div class="sort-bar">
