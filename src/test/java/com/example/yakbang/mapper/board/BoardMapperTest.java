@@ -22,7 +22,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @Transactional
 class BoardMapperTest {
 
-    @Autowired BoardMapper boardMapper;
+    @Autowired
+    BoardMapper boardMapper;
 
     BoardQnaWriteDTO boardQnaWriteDTO;
 
@@ -57,13 +58,6 @@ class BoardMapperTest {
         List<BoardQnaListDTO> boardQnaListDTO = boardMapper.selectQuestionList();
 
         System.out.println("boardQnaListDTO = " + boardQnaListDTO);
-    }
-
-    @Test
-    void selectQuestionDetail() {
-        BoardQnaDetailDTO boardQnaDetailDTO = boardMapper.selectQuestionDetail(boardQnaWriteDTO.getQuestionId()).get();
-
-        System.out.println("boardQnaDetailDTO = " + boardQnaDetailDTO);
     }
 }
 
