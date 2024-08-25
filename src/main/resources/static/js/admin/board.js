@@ -12,10 +12,12 @@ export async function deleteBoard(manager) {
     const reviewId = manager.dataset.reviewId;
     const boardType = manager.dataset.boardType;
     console.log(questionId);
+    console.log(reviewId);
+    console.log(boardType);
 
     const deleteUrl =
-        boardType === "qna" ? `/admin/board/delete/${questionId}`
-        : boardType === "review" ? `/admin/board/delete/${reviewId}`
+        boardType === "qna" ? `/admin/board/delete/${boardType}/${questionId}`
+        : boardType === "review" ? `/admin/board/delete/${boardType}/${reviewId}`
         : null;
 
     try {

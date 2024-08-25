@@ -49,7 +49,7 @@ public class AdminBoardController {
         return ResponseEntity.ok(findReviewDetail);
     }
 
-    @DeleteMapping("/delete/{reviewId}")
+    @DeleteMapping("/delete/review/{reviewId}")
     public ResponseEntity<Map<String, Object>> deleteReview(@PathVariable("reviewId") Long reviewId) {
         Map<String, Object> response = new HashMap<>();
 

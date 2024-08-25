@@ -26,62 +26,21 @@ public class MemberController {
     private final ExpertService expertService;
 
     @GetMapping("/login")
-    public String login(HttpServletRequest request,
-                        Model model) {
-
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if ("loginId".equals(cookie.getName())) {
-                    String loginId = cookie.getValue();
-                    model.addAttribute("loginId", loginId);
-                    break;
-                }
-            }
-        }
+    public String login() {
         return "member/login";
     }
 
     @PostMapping("/login")
     public String login(String loginId, String password, String memberType,
-                        @RequestParam(required = false) String rememberLoginId,
-                        HttpSession session, HttpServletResponse response) {
+                        HttpSession session) {
         Long memberId = null;
 
-        System.out.println("loginId = " + loginId + ", password = " + password + ", memberType = " + memberType + ", session = " + session);
         try {
-            if("general".equals(memberType)){
+            if ("general".equals(memberType)) {
                 memberId = memberService.findMemberId(loginId, password);
-            }else {
+            } else {
                 memberId = expertService.findExpertId(loginId, password);
             }
-
-            if (memberId != null) {
-                // 로그인 성공 시 세션에 로그인 ID 및 memberId 저장
-                session.setAttribute("loginId", loginId);
-                session.setAttribute("memberId", memberId);
-                session.setAttribute("memberType", memberType);
-                // "로그인 ID 저장" 체크 여부에 따라 쿠키 설정
-                if ("on".equals(rememberLoginId)) {
-                    Cookie loginIdCookie = new Cookie("loginId", loginId);
-                    loginIdCookie.setMaxAge(30 * 24 * 60 * 60); // 30일간 유지
-                    loginIdCookie.setPath("/");
-                    response.addCookie(loginIdCookie);
-                } else {
-                    // 체크하지 않으면 쿠키 삭제
-                    Cookie loginIdCookie = new Cookie("loginId", null);
-                    loginIdCookie.setMaxAge(0); // 즉시 만료
-                    loginIdCookie.setPath("/");
-                    response.addCookie(loginIdCookie);
-                }
-
-                return "redirect:/";
-            } else {
-                log.info("로그인 실패: ID나 비밀번호가 올바르지 않습니다.");
-                return "member/login";
-            }
-
-//
         } catch (IllegalArgumentException e) {
             log.error(e.toString());
             return "member/login";
@@ -89,6 +48,10 @@ public class MemberController {
             log.error(e.toString());
             return "member/login";
         }
+
+        // 로그인 성공 시 세션 처리
+        session.setAttribute("memberId", memberId);
+        return "redirect:/";
     }
 
     @GetMapping("/find_id")
@@ -97,25 +60,36 @@ public class MemberController {
     }
 
     @PostMapping("/find_id")
-    public String findId(String name,String email,
-                         HttpSession session,Model model) {
-
-//        Long memberId = (Long) session.getAttribute("memberId");
-//        String memberType= (String) session.getAttribute("memberType");
-
+    public String findId(String name, String email, HttpSession session, Model model) {
         String loginId = null;
-        try {
-            loginId = memberService.findLoginId(name, email);
-        } catch (Exception e) {
-            try {
-                loginId = expertService.findExpertLoginId(name, email);
-            } catch (Exception ex) {
-                loginId = "존재하지 않음";
-            }
-        }
-        model.addAttribute("loginId", loginId);
 
-        return "member/find-result";
+        try {
+            // MemberService와 ExpertService의 공통 로직을 처리하는 통합 서비스 호출
+            loginId = findLoginId(name, email);
+        } catch (Exception e) {
+            log.error("ID 찾기 실패: ", e);
+            model.addAttribute("errorMessage", "ID를 찾는 데 문제가 발생했습니다.");
+            return "member/find-id";  // 실패 페이지로 리턴
+        }
+
+        if (loginId == null) {
+            model.addAttribute("errorMessage", "해당 정보와 일치하는 ID가 없습니다.");
+            return "member/find-id";  // 실패 페이지로 리턴
+        }
+
+        model.addAttribute("loginId", loginId);
+        return "member/find-result";  // 성공 페이지로 리턴
+    }
+
+    /**
+     * ID를 찾는 공통 로직을 처리하는 메소드
+     */
+    private String findLoginId(String name, String email) throws Exception {
+        String loginId = memberService.findLoginId(name, email);
+        if (loginId == null) {
+            loginId = expertService.findExpertLoginId(name, email);
+        }
+        return loginId;
     }
 
     @GetMapping("/find_password")

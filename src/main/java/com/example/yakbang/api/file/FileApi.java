@@ -46,8 +46,7 @@ public class FileApi {
             return saveFilename;
 
         } catch (IOException e) {
-            // 예외 처리는 따로 해주는 게 좋습니다.
-            throw new RuntimeException(e);
+            throw new RuntimeException("파일 업로드 처리 중 오류 발생", e);
         }
     }
 

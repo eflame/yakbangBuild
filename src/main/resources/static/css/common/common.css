@@ -246,6 +246,35 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     }
 }
 
+.check-box {
+    position: relative;
+    input {
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+        &:checked + .label-text {
+            background-image: url("/images/admin/bg_checkbox_active.svg");
+            filter: invert(48%) sepia(95%) saturate(374%) hue-rotate(111deg) brightness(91%) contrast(91%);
+        }
+    }
+    .label-text {
+        z-index: 1;
+        position: relative;
+        padding-left: 28px;
+        color: #5c5c5c;
+        font-size: 16px;
+        background-image: url("/images/admin/bg_checkbox.svg");
+        background-position: left 50%;
+        background-repeat: no-repeat;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+}
+
 .file-box {
     height: 40px;
     border-radius: 4px;
