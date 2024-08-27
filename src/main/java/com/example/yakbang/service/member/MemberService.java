@@ -1,5 +1,6 @@
 package com.example.yakbang.service.member;
 
+import com.example.yakbang.dto.member.KakaoInfoDTO;
 import com.example.yakbang.dto.member.MemberJoinDTO;
 import com.example.yakbang.dto.member.MemberModifyDTO;
 import com.example.yakbang.dto.member.MemberMypageDTO;
@@ -29,6 +30,7 @@ public class MemberService {
 
         memberMapper.insertMember(memberJoinDTO);
     }
+
 //    로그인 서비스 Optional 반환할 경우 예외발생(예외처리문구)
     public Long findMemberId(String loginId, String password) {
         return memberMapper.selectMemberId(loginId, password)

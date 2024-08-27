@@ -18,4 +18,5 @@ public class MemberJoinDTO {
     private String gender;
     private String job;
     private String pharmacyAddress;
+    private String kakaoId;
 }

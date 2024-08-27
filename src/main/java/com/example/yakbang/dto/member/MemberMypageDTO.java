@@ -14,5 +14,4 @@ public class MemberMypageDTO {
     private String email;
     private String birth;
     private String phoneNumber;
-    private Long expertId;
 }

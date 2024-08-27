@@ -10,7 +10,11 @@ import java.util.Optional;
 public interface ExpertMemberMapper {
 //    회원가입
     void insertExpertMember(MemberJoinDTO memberJoinDTO);
-//    로그인
+
+    //  카카오아이디찾기
+    Optional<KakaoInfoDTO> selectExKakaoId(@Param("kakaoId") Long kakaoId );
+
+    //    로그인
     Optional<Long> selectExpertMemberId(@Param("loginId") String loginId,
                                                                         @Param("password") String password);
     // 아이디 중복 검사

@@ -7,9 +7,21 @@
         <selectKey resultType="long" keyProperty="memberId" order="BEFORE">
             SELECT SEQ_MEMBER.nextval FROM DUAL
         </selectKey>
-        INSERT INTO TBL_MEMBER(MEMBER_ID, LOGIN_ID, PASSWORD, PHONE_NUMBER, NAME, BIRTH, EMAIL, GENDER)
-        VALUES (#{memberId},#{loginId},#{password},#{phoneNumber},#{name},#{birth},#{email},#{gender})
+        INSERT INTO TBL_MEMBER(MEMBER_ID, LOGIN_ID, PASSWORD, PHONE_NUMBER, NAME, BIRTH, EMAIL, GENDER, KAKAO_ID)
+        VALUES (#{memberId},#{loginId},#{password},#{phoneNumber},#{name},#{birth},#{email},#{gender}, #{kakaoId})
     </insert>
+
+<!--    카카오회원 찾기 -->
+    <select id="selectKakaoId" >
+        SELECT MEMBER_ID FROM TBL_MEMBER
+        WHERE KAKAO_ID = #{kakaoId}
+    </select>
+
+<!--    카카오로그인-->
+    <select id="selectKakaoLogin">
+        SELECT MEMBER_ID FROM TBL_MEMBER
+        WHERE KAKAO_ID = #{kakaoId}
+    </select>
 
 <!--    로그인 처리-->
     <select id="selectMemberId">

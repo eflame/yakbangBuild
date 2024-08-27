@@ -8,9 +8,15 @@
             SELECT SEQ_EXPERT_MEMBER.nextval FROM DUAL
         </selectKey>
         INSERT INTO TBL_EXPERT_MEMBER (EXPERT_ID, LOGIN_ID, PASSWORD, PHONE_NUMBER, NAME, BIRTH, EMAIL, GENDER, JOB,
-        PHARMACY_ADDRESS)
-        VALUES (#{expertId},#{loginId},#{password},#{phoneNumber},#{name},#{birth},#{email},#{gender},#{job},#{pharmacyAddress})
+        PHARMACY_ADDRESS, KAKAO_ID)
+        VALUES (#{expertId},#{loginId},#{password},#{phoneNumber},#{name},#{birth},#{email},#{gender},#{job},#{pharmacyAddress}, #{kakaoId})
     </insert>
+
+    <!--    카카오회원 찾기 -->
+    <select id="selectExKakaoId">
+        SELECT EXPERT_ID FROM TBL_EXPERT_MEMBER
+        WHERE KAKAO_ID = #{kakaoId}
+    </select>
 
     <!--    아이디 비밀번호 찾기-->
     <select id="selectExpertMemberId">

@@ -1,5 +1,6 @@
 package com.example.yakbang.mapper.member;
 
+import com.example.yakbang.dto.member.KakaoInfoDTO;
 import com.example.yakbang.dto.member.MemberJoinDTO;
 import com.example.yakbang.dto.member.MemberModifyDTO;
 import com.example.yakbang.dto.member.MemberMypageDTO;
@@ -12,6 +13,9 @@ import java.util.Optional;
 public interface MemberMapper {
 //    회원가입
     void insertMember(MemberJoinDTO memberJoinDTO);
+
+//  카카오아이디찾기
+    Optional<KakaoInfoDTO> selectKakaoId(@Param("kakaoId") Long kakaoId);
 
 //    로그인
     Optional<Long> selectMemberId(@Param("loginId") String loginId,

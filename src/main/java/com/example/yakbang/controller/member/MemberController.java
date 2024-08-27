@@ -4,6 +4,7 @@ import com.example.yakbang.dto.member.ExpertMypageDTO;
 import com.example.yakbang.dto.member.MemberJoinDTO;
 import com.example.yakbang.dto.member.MemberModifyDTO;
 import com.example.yakbang.dto.member.MemberMypageDTO;
+import com.example.yakbang.service.member.AuthService;
 import com.example.yakbang.service.member.ExpertService;
 import com.example.yakbang.service.member.MemberService;
 import jakarta.servlet.http.Cookie;
@@ -12,7 +13,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -25,10 +25,14 @@ public class MemberController {
     private final MemberService memberService;
     private final ExpertService expertService;
 
+
     @GetMapping("/login")
     public String login() {
         return "member/login";
     }
+
+
+
 
     @PostMapping("/login")
     public String login(String loginId, String password, String memberType,
@@ -117,16 +121,24 @@ public class MemberController {
 
     @GetMapping("/find_id_email")
     public String findIdEmail() {
+
         return "member/find_id_email";
     }
 
     @GetMapping("/join")
-    public String join(@ModelAttribute("memberJoinDTO") MemberJoinDTO memberJoinDTO) {
+    public String join(@ModelAttribute("memberJoinDTO") MemberJoinDTO memberJoinDTO,Model model,HttpSession session) {
+        String kakaoId = session.getAttribute("kakaoId").toString();
+        System.out.println("kakaoId = " + kakaoId);
+        String nickname = session.getAttribute("nickName").toString();
+        System.out.println("nickname = " + nickname);
+        model.addAttribute("kakaoId", kakaoId);
+        model.addAttribute("nickname", nickname);
         return "member/join";
     }
 
     @PostMapping("/join")
     public String join(MemberJoinDTO memberJoinDTO, Model model,boolean check ) {
+
         try {
             if (check){
                 expertService.addExpert(memberJoinDTO);
@@ -137,17 +149,18 @@ public class MemberController {
             log.error(e.toString());
             model.addAttribute("memberJoinDTO", memberJoinDTO);
             model.addAttribute("duplicate", true);
+            
             return "member/join";
         }
 
-        return "/main";
+        return "redirect:/";
     }
 
     @GetMapping("/mypage")
     public String mypage(HttpSession session, Model model) {
         Long memberId = (Long) session.getAttribute("memberId");
         String memberType= (String) session.getAttribute("memberType");
-
+        System.out.println("memberType = " + memberType);
         if ("general".equals(memberType)) {
             MemberMypageDTO memberDTO = memberService.searchMember(memberId);
             model.addAttribute("memberDTO", memberDTO);

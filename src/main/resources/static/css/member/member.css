@@ -129,11 +129,19 @@
     }
 }
 
+.g-recaptcha {
+    margin-top: 8px;
+}
+
 /* 이메일 - 아이디 찾기 */
 .main-container {
     margin: 15vh auto 40vh auto;
     width: 420px;
     height: 480px;
+
+    .btn-primary {
+        margin-top: 10px;
+    }
 
     .title-img {
         display: flex;
