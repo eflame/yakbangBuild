@@ -7,6 +7,7 @@ import com.example.yakbang.dto.member.MemberMypageDTO;
 import com.example.yakbang.service.member.AuthService;
 import com.example.yakbang.service.member.ExpertService;
 import com.example.yakbang.service.member.MemberService;
+import com.example.yakbang.service.member.RecaptchaVerificationService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.*;
 public class MemberController {
     private final MemberService memberService;
     private final ExpertService expertService;
+    private final RecaptchaVerificationService recaptchaVerificationService;
 
 
     @GetMapping("/login")
@@ -124,6 +126,39 @@ public class MemberController {
 
         return "member/find_id_email";
     }
+
+    @PostMapping("/find_id_email")
+    public String findIdEmail(@RequestParam("name") String name,
+                              @RequestParam("email") String email,
+                              @RequestParam("g-recaptcha-response") String recaptchaToken, // reCAPTCHA 토큰
+                              Model model) {
+
+        // reCAPTCHA 검증
+        boolean isRecaptchaValid;
+        try {
+            isRecaptchaValid = recaptchaVerificationService.verifyRecaptcha(recaptchaToken, "find_id_action");
+        } catch (Exception e) {
+            model.addAttribute("error", "reCAPTCHA 검증 중 오류가 발생했습니다.");
+            return "find_id_form";
+        }
+
+        if (!isRecaptchaValid) {
+            model.addAttribute("error", "reCAPTCHA 검증에 실패했습니다.");
+            return "find_id_form";
+        }
+
+        // 이후 로직: 이름과 이메일로 회원 ID 찾기
+        String memberId = memberService.findLoginId(name, email);
+
+        if (memberId == null) {
+            model.addAttribute("error", "해당 정보를 가진 회원을 찾을 수 없습니다.");
+            return "find_id_form";
+        }
+
+        model.addAttribute("memberId", memberId);
+        return "find_id_success";
+    }
+
 
     @GetMapping("/join")
     public String join(@ModelAttribute("memberJoinDTO") MemberJoinDTO memberJoinDTO,Model model,HttpSession session) {
