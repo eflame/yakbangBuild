@@ -4,10 +4,8 @@ import com.example.yakbang.dto.member.ExpertMypageDTO;
 import com.example.yakbang.dto.member.MemberJoinDTO;
 import com.example.yakbang.dto.member.MemberModifyDTO;
 import com.example.yakbang.dto.member.MemberMypageDTO;
-import com.example.yakbang.service.member.AuthService;
 import com.example.yakbang.service.member.ExpertService;
 import com.example.yakbang.service.member.MemberService;
-import com.example.yakbang.service.member.RecaptchaVerificationService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -25,16 +23,11 @@ import org.springframework.web.bind.annotation.*;
 public class MemberController {
     private final MemberService memberService;
     private final ExpertService expertService;
-    private final RecaptchaVerificationService recaptchaVerificationService;
-
 
     @GetMapping("/login")
     public String login() {
         return "member/login";
     }
-
-
-
 
     @PostMapping("/login")
     public String login(String loginId, String password, String memberType,
@@ -133,20 +126,6 @@ public class MemberController {
                               @RequestParam("g-recaptcha-response") String recaptchaToken, // reCAPTCHA 토큰
                               Model model) {
 
-        // reCAPTCHA 검증
-        boolean isRecaptchaValid;
-        try {
-            isRecaptchaValid = recaptchaVerificationService.verifyRecaptcha(recaptchaToken, "find_id_email");
-        } catch (Exception e) {
-            model.addAttribute("error", "reCAPTCHA 검증 중 오류가 발생했습니다.");
-            return "member/find_id_email";
-        }
-
-        if (!isRecaptchaValid) {
-            model.addAttribute("error", "reCAPTCHA 검증에 실패했습니다.");
-            return "member/find_id_email";
-        }
-
         // 이후 로직: 이름과 이메일로 회원 ID 찾기
         String memberId = memberService.findLoginId(name, email);
 
@@ -162,32 +141,48 @@ public class MemberController {
 
     @GetMapping("/join")
     public String join(@ModelAttribute("memberJoinDTO") MemberJoinDTO memberJoinDTO,Model model,HttpSession session) {
-        String kakaoId = session.getAttribute("kakaoId").toString();
-        System.out.println("kakaoId = " + kakaoId);
-        String nickname = session.getAttribute("nickName").toString();
-        System.out.println("nickname = " + nickname);
-        model.addAttribute("kakaoId", kakaoId);
-        model.addAttribute("nickname", nickname);
+        try {
+            // 세션에서 kakaoId를 가져옴
+            String kakaoId = (session.getAttribute("kakaoId") != null) ? session.getAttribute("kakaoId").toString() : null;
+            System.out.println("kakaoId = " + kakaoId);
+            // 세션에서 nickname을 가져옴
+            String nickname = (session.getAttribute("nickName") != null) ? session.getAttribute("nickName").toString() : "";
+            System.out.println("nickname = " + nickname);
+            model.addAttribute("kakaoId", kakaoId);
+            model.addAttribute("nickname", nickname);
+        } catch (Exception e) {
+            System.out.println("Error retrieving session attributes: " + e.getMessage());
+        }
+
+
         return "member/join";
     }
 
     @PostMapping("/join")
-    public String join(MemberJoinDTO memberJoinDTO, Model model,boolean check ) {
+    public String join(MemberJoinDTO memberJoinDTO,
+                       Model model,
+                       boolean check,
+                       HttpSession session) {
 
         try {
             if (check){
                 expertService.addExpert(memberJoinDTO);
+                session.setAttribute("memberId", memberJoinDTO.getExpertId());
+                session.setAttribute("memberType", "expert");
             }else {
                 memberService.addMember(memberJoinDTO);
+                session.setAttribute("memberId", memberJoinDTO.getMemberId());
+                session.setAttribute("memberType", "general");
             }
         } catch (IllegalStateException e) {
             log.error(e.toString());
             model.addAttribute("memberJoinDTO", memberJoinDTO);
             model.addAttribute("duplicate", true);
-            
+
             return "member/join";
         }
 
+        System.out.println("memberJoinDTO = " + memberJoinDTO);
         return "redirect:/";
     }
 

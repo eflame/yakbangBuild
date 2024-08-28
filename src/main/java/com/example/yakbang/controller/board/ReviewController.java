@@ -4,7 +4,6 @@ import com.example.yakbang.dto.board.ReviewListDTO;
 import com.example.yakbang.dto.board.ReviewWriteDTO;
 import com.example.yakbang.dto.pill.PageRequest;
 import com.example.yakbang.service.board.ReviewService;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -36,7 +35,7 @@ public class ReviewController {
     public String reviewWrite(ReviewWriteDTO reviewWriteDTO,
                               @SessionAttribute("memberId") Long memberId){
         reviewWriteDTO.setMemberId(memberId);
-        log.info("reviewWriteDTO : {}", reviewWriteDTO);
+//        log.info("reviewWriteDTO : {}", reviewWriteDTO);
         reviewService.addReview(reviewWriteDTO);
 
         return "redirect:/review/list";

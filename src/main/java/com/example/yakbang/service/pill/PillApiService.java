@@ -50,7 +50,7 @@ public class PillApiService {
                 break;
             }
 
-            log.info("Pill Data: {}", items);
+//            log.info("Pill Data: {}", items);
             resultList.addAll(items);
         }
         return resultList;

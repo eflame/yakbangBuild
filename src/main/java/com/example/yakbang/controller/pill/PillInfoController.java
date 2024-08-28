@@ -1,6 +1,5 @@
 package com.example.yakbang.controller.pill;
 
-import com.example.yakbang.dto.board.ReviewListDTO;
 import com.example.yakbang.dto.pill.PillListDTO;
 import com.example.yakbang.service.board.ReviewService;
 import lombok.RequiredArgsConstructor;
@@ -13,9 +12,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @Controller
 @RequestMapping("/pill")
-@Slf4j
 @RequiredArgsConstructor
 public class PillInfoController {
 

@@ -1,7 +1,6 @@
 package com.example.yakbang.controller.member;
 
 import com.example.yakbang.dto.member.KakaoInfoDTO;
-import com.example.yakbang.mapper.member.MemberMapper;
 import com.example.yakbang.service.member.AuthService;
 import com.example.yakbang.service.member.MemberService;
 import jakarta.servlet.http.HttpSession;
@@ -9,8 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.Optional;
 
 
 @Controller

@@ -1,7 +1,6 @@
 package com.example.yakbang.controller;
 
 import com.example.yakbang.dto.board.BoardQnaListDTO;
-import com.example.yakbang.dto.board.BoardSearchDTO;
 import com.example.yakbang.dto.board.ReviewListDTO;
 import com.example.yakbang.service.board.BoardService;
 import com.example.yakbang.service.board.ReviewService;

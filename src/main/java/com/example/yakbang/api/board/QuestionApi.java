@@ -1,7 +1,6 @@
 package com.example.yakbang.api.board;
 
 import com.example.yakbang.dto.board.BoardQnaListDTO;
-import com.example.yakbang.dto.board.ReviewListDTO;
 import com.example.yakbang.dto.pill.PageRequest;
 import com.example.yakbang.service.board.BoardService;
 import lombok.RequiredArgsConstructor;
