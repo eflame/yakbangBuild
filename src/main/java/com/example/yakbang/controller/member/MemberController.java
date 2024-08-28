@@ -139,12 +139,12 @@ public class MemberController {
             isRecaptchaValid = recaptchaVerificationService.verifyRecaptcha(recaptchaToken, "find_id_action");
         } catch (Exception e) {
             model.addAttribute("error", "reCAPTCHA 검증 중 오류가 발생했습니다.");
-            return "find_id_form";
+            return "member/find_id_email";
         }
 
         if (!isRecaptchaValid) {
             model.addAttribute("error", "reCAPTCHA 검증에 실패했습니다.");
-            return "find_id_form";
+            return "member/find_id_email";
         }
 
         // 이후 로직: 이름과 이메일로 회원 ID 찾기
@@ -152,11 +152,11 @@ public class MemberController {
 
         if (memberId == null) {
             model.addAttribute("error", "해당 정보를 가진 회원을 찾을 수 없습니다.");
-            return "find_id_form";
+            return "member/find_id_email";
         }
 
         model.addAttribute("memberId", memberId);
-        return "find_id_success";
+        return "redirect:/member/find-result";
     }
 
 
