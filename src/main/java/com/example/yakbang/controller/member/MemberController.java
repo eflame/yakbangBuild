@@ -136,7 +136,7 @@ public class MemberController {
         // reCAPTCHA 검증
         boolean isRecaptchaValid;
         try {
-            isRecaptchaValid = recaptchaVerificationService.verifyRecaptcha(recaptchaToken, "find_id_action");
+            isRecaptchaValid = recaptchaVerificationService.verifyRecaptcha(recaptchaToken, "find_id_email");
         } catch (Exception e) {
             model.addAttribute("error", "reCAPTCHA 검증 중 오류가 발생했습니다.");
             return "member/find_id_email";

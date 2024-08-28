@@ -22,7 +22,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const isUserNameValid = validationRules["user-name"].test(userNameInput.value.trim());
         const isUserEmailValid = validationRules["user-email"].test(userEmailInput.value.trim());
 
-        // 모든 필드가 유효하면 버튼 활성화
+        console.log("User Name Valid:", isUserNameValid);
+        console.log("User Email Valid:", isUserEmailValid);
+        console.log("reCAPTCHA Token Present:", !!window.recaptchaToken);
+
+        // 모든 필드가 유효하고, reCAPTCHA 토큰이 존재할 경우 버튼 활성화
         submitButton.disabled = !(isUserNameValid && isUserEmailValid && window.recaptchaToken);
     }
 
@@ -38,6 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
     grecaptcha.ready(() => {
         grecaptcha.execute('6LflFS8qAAAAAKV_ANEzLehO8asihLHfcO41z1wO', {action: 'submit'}).then((token) => {
             window.recaptchaToken = token; // 전역 변수에 토큰 저장
+            console.log("reCAPTCHA Token:", token);
             checkInputs(); // 토큰이 준비되면 입력 확인
         });
     });
