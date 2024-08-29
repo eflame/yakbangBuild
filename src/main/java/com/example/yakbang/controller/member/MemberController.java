@@ -6,7 +6,6 @@ import com.example.yakbang.dto.member.MemberModifyDTO;
 import com.example.yakbang.dto.member.MemberMypageDTO;
 import com.example.yakbang.service.member.ExpertService;
 import com.example.yakbang.service.member.MemberService;
-import com.example.yakbang.service.member.RecaptchaService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -17,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+
 @Slf4j
 @Controller
 @RequestMapping("/member")
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.*;
 public class MemberController {
     private final MemberService memberService;
     private final ExpertService expertService;
-    private final RecaptchaService recaptchaService;
+
 
     @GetMapping("/login")
     public String login() {
@@ -72,18 +72,10 @@ public class MemberController {
                                @RequestParam("g-recaptcha-response") String recaptchaToken, // reCAPTCHA 토큰
                                Model model) {
 
-        // reCAPTCHA 검증 서비스 호출
-        boolean isRecaptchaValid = recaptchaService.verifyRecaptcha(recaptchaToken);
-        System.out.println("isRecaptchaValid = " + isRecaptchaValid);
-        if (!isRecaptchaValid) {
-            // reCAPTCHA 검증 실패 시 에러 메시지 처리
-            model.addAttribute("error", "자동 입력 방지문자 검증에 실패했습니다.");
-            return "member/find_password";
-        }
-        log.info(loginId);
-        log.info(email);
+
+
         String password = null;
-        log.info(password);
+
         try {
             password = memberService.findPassword(loginId, email);
             log.info(loginId);
@@ -102,7 +94,7 @@ public class MemberController {
         }
         model.addAttribute("password", password);
 
-        return "redirect:/member/find-result2";
+        return "redirect:/member/find_result2";
     }
 
     @GetMapping("/find_id_email")
@@ -116,25 +108,23 @@ public class MemberController {
                               @RequestParam("g-recaptcha-response") String recaptchaToken, // reCAPTCHA 토큰
                               Model model) {
 
-        // reCAPTCHA 검증 서비스 호출
-        boolean isRecaptchaValid = recaptchaService.verifyRecaptcha(recaptchaToken);
-        System.out.println("isRecaptchaValid = " + isRecaptchaValid);
-        if (!isRecaptchaValid) {
-            // reCAPTCHA 검증 실패 시 에러 메시지 처리
-            model.addAttribute("error", "자동 입력 방지문자 검증에 실패했습니다.");
+
+
+        String loginId = memberService.findLoginId(name, email);
+
+        if (loginId == null) {
+            model.addAttribute("msg", "일치하는 회원의 ID가 없습니다.");
             return "member/find_id_email";
         }
 
-        // 이후 로직: 이름과 이메일로 회원 ID 찾기
-        String memberId = memberService.findLoginId(name, email);
+        model.addAttribute("loginId", loginId);
+        return "redirect:/member/find_result";
 
-        if (memberId == null) {
-            model.addAttribute("error", "해당 정보를 가진 회원을 찾을 수 없습니다.");
-            return "redirect:/member/find-result";
-        }
 
-        model.addAttribute("memberId", memberId);
-        return "redirect:/member/find-result";
+
+
+
+
     }
 
 
