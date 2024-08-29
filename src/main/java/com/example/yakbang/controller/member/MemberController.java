@@ -6,6 +6,7 @@ import com.example.yakbang.dto.member.MemberModifyDTO;
 import com.example.yakbang.dto.member.MemberMypageDTO;
 import com.example.yakbang.service.member.ExpertService;
 import com.example.yakbang.service.member.MemberService;
+import com.example.yakbang.service.member.RecaptchaService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -24,7 +25,7 @@ import org.springframework.web.bind.annotation.*;
 public class MemberController {
     private final MemberService memberService;
     private final ExpertService expertService;
-
+    private final RecaptchaService recaptchaService;
 
     @GetMapping("/login")
     public String login() {
@@ -108,7 +109,15 @@ public class MemberController {
                               @RequestParam("g-recaptcha-response") String recaptchaToken, // reCAPTCHA 토큰
                               Model model) {
 
+        // reCAPTCHA 검증 서비스 호출
+        boolean isRecaptchaValid = recaptchaService.verifyRecaptcha(recaptchaToken);
+        System.out.println("isRecaptchaValid = " + isRecaptchaValid);
 
+        if (!isRecaptchaValid) {
+            // reCAPTCHA 검증 실패 시 에러 메시지 처리
+            model.addAttribute("error", "자동 입력 방지문자 검증에 실패했습니다.");
+            return "member/find_password";
+        }
 
         String loginId = memberService.findLoginId(name, email);
 
@@ -119,11 +128,6 @@ public class MemberController {
 
         model.addAttribute("loginId", loginId);
         return "redirect:/member/find_result";
-
-
-
-
-
 
     }
 
