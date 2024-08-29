@@ -1,14 +1,13 @@
 package com.example.yakbang.resp;
 
 import lombok.*;
-
-import java.util.List;
+import org.springframework.beans.factory.annotation.Value;
 
 @Getter @Setter @ToString
 @NoArgsConstructor @AllArgsConstructor
 public class RecaptchaResponse {
     private boolean success;
-    private String challengeTs;
+    @Value("challenge_ts")
+    private String  challengeTs;
     private String hostname;
-    private List<String> errorCodes;
 }

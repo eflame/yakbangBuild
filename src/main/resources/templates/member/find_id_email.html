@@ -38,12 +38,9 @@
                 <input type="text" id="user-email" name="email" placeholder="이메일" maxlength="20">
               </label>
             </div>
-            <div class="g-recaptcha"
-                 data-sitekey="6LflFS8qAAAAAKV_ANEzLehO8asihLHfcO41z1wO"
-                 data-callback="recaptchaCallback">
+            <div class="g-recaptcha" data-sitekey="6LflFS8qAAAAAKV_ANEzLehO8asihLHfcO41z1wO">
             </div>
-            <input type="hidden" id="recaptchaToken" name="g-recaptcha-response" />
-            <button type="submit" id="submitButton" class="btn-big btn-primary" disabled>확인</button>
+            <button type="submit" id="submitButton" class="btn-big btn-primary">확인</button>
           <div class="bottom-text">
             <p class="body-text2">비밀번호를 찾으시나요?</p>
             <a th:href="@{/member/find_password}">비밀번호 찾기</a>

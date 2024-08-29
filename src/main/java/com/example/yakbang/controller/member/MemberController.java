@@ -62,6 +62,7 @@ public class MemberController {
     }
 
 
+
     @GetMapping("/find_password")
     public String findPassword() {
         return "member/find_password";
@@ -95,7 +96,7 @@ public class MemberController {
         }
         model.addAttribute("password", password);
 
-        return "redirect:/member/find_result2";
+        return "member/find_result2";
     }
 
     @GetMapping("/find_id_email")
@@ -110,13 +111,12 @@ public class MemberController {
                               Model model) {
 
         // reCAPTCHA 검증 서비스 호출
-        boolean isRecaptchaValid = recaptchaService.verifyRecaptcha(recaptchaToken);
-        System.out.println("isRecaptchaValid = " + isRecaptchaValid);
+        boolean isVerified = recaptchaService.verifyRecaptcha(recaptchaToken);
 
-        if (!isRecaptchaValid) {
-            // reCAPTCHA 검증 실패 시 에러 메시지 처리
-            model.addAttribute("error", "자동 입력 방지문자 검증에 실패했습니다.");
-            return "member/find_password";
+        if (isVerified) {
+            System.out.println("isVerified = " + isVerified);
+        } else {
+            System.out.println("isVerified = " + isVerified);
         }
 
         String loginId = memberService.findLoginId(name, email);
@@ -127,7 +127,7 @@ public class MemberController {
         }
 
         model.addAttribute("loginId", loginId);
-        return "redirect:/member/find_result";
+        return "member/find_result";
 
     }
 
