@@ -6,6 +6,7 @@ import com.example.yakbang.dto.member.MemberModifyDTO;
 import com.example.yakbang.dto.member.MemberMypageDTO;
 import com.example.yakbang.service.member.ExpertService;
 import com.example.yakbang.service.member.MemberService;
+import com.example.yakbang.service.member.RecaptchaService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 public class MemberController {
     private final MemberService memberService;
     private final ExpertService expertService;
+    private final RecaptchaService recaptchaService;
 
     @GetMapping("/login")
     public String login() {
@@ -58,38 +60,6 @@ public class MemberController {
         return "member/find_id";
     }
 
-    @PostMapping("/find_id")
-    public String findId(String name, String email, HttpSession session, Model model) {
-        String loginId = null;
-
-        try {
-            // MemberService와 ExpertService의 공통 로직을 처리하는 통합 서비스 호출
-            loginId = findLoginId(name, email);
-        } catch (Exception e) {
-            log.error("ID 찾기 실패: ", e);
-            model.addAttribute("errorMessage", "ID를 찾는 데 문제가 발생했습니다.");
-            return "member/find-id";  // 실패 페이지로 리턴
-        }
-
-        if (loginId == null) {
-            model.addAttribute("errorMessage", "해당 정보와 일치하는 ID가 없습니다.");
-            return "member/find-id";  // 실패 페이지로 리턴
-        }
-
-        model.addAttribute("loginId", loginId);
-        return "member/find-result";  // 성공 페이지로 리턴
-    }
-
-    /**
-     * ID를 찾는 공통 로직을 처리하는 메소드
-     */
-    private String findLoginId(String name, String email) throws Exception {
-        String loginId = memberService.findLoginId(name, email);
-        if (loginId == null) {
-            loginId = expertService.findExpertLoginId(name, email);
-        }
-        return loginId;
-    }
 
     @GetMapping("/find_password")
     public String findPassword() {
@@ -97,26 +67,46 @@ public class MemberController {
     }
 
     @PostMapping("/find_password")
-    public String findPassword(String email,String loginId,
-                               HttpSession session,Model model) {
-        String password=null;
+    public String findPassword(@RequestParam("id") String loginId,
+                               @RequestParam("email") String email,
+                               @RequestParam("g-recaptcha-response") String recaptchaToken, // reCAPTCHA 토큰
+                               Model model) {
+
+        // reCAPTCHA 검증 서비스 호출
+        boolean isRecaptchaValid = recaptchaService.verifyRecaptcha(recaptchaToken);
+        System.out.println("isRecaptchaValid = " + isRecaptchaValid);
+        if (!isRecaptchaValid) {
+            // reCAPTCHA 검증 실패 시 에러 메시지 처리
+            model.addAttribute("error", "자동 입력 방지문자 검증에 실패했습니다.");
+            return "member/find_password";
+        }
+        log.info(loginId);
+        log.info(email);
+        String password = null;
+        log.info(password);
         try {
             password = memberService.findPassword(loginId, email);
+            log.info(loginId);
+            log.info(email);
+            log.info(password);
         } catch (Exception e) {
+            // 예외를 로그로 기록
+            log.error("Error finding password with memberService", e);
             try {
                 password = expertService.findExpertPassword(loginId, email);
             } catch (Exception ex) {
+                // 또 다른 예외를 로그로 기록
+                log.error("Error finding password with expertService", ex);
                 password = "존재하지 않음";
             }
         }
         model.addAttribute("password", password);
 
-        return "member/find-result2";
+        return "redirect:/member/find-result2";
     }
 
     @GetMapping("/find_id_email")
     public String findIdEmail() {
-
         return "member/find_id_email";
     }
 
@@ -126,12 +116,21 @@ public class MemberController {
                               @RequestParam("g-recaptcha-response") String recaptchaToken, // reCAPTCHA 토큰
                               Model model) {
 
+        // reCAPTCHA 검증 서비스 호출
+        boolean isRecaptchaValid = recaptchaService.verifyRecaptcha(recaptchaToken);
+        System.out.println("isRecaptchaValid = " + isRecaptchaValid);
+        if (!isRecaptchaValid) {
+            // reCAPTCHA 검증 실패 시 에러 메시지 처리
+            model.addAttribute("error", "자동 입력 방지문자 검증에 실패했습니다.");
+            return "member/find_id_email";
+        }
+
         // 이후 로직: 이름과 이메일로 회원 ID 찾기
         String memberId = memberService.findLoginId(name, email);
 
         if (memberId == null) {
             model.addAttribute("error", "해당 정보를 가진 회원을 찾을 수 없습니다.");
-            return "member/find_id_email";
+            return "redirect:/member/find-result";
         }
 
         model.addAttribute("memberId", memberId);
