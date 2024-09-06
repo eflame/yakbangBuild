@@ -14,7 +14,7 @@ import java.util.UUID;
 @RequestMapping("/tui-editor")
 public class FileApi {
     // 파일을 업로드할 디렉터리 경로
-    private final String uploadDir = Paths.get("C:", "tui-editor", "upload").toString();
+    private final String uploadDir = Paths.get("home", "ubuntu", "project", "tui-editor", "upload").toString();
 
     /**
      * 에디터 이미지 업로드
