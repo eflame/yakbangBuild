@@ -19,28 +19,22 @@
       <div class="main-tilte-heder">
         <a href="#" class="title-img"><img th:src="@{/images/common/logo.svg}" alt=""></a>
       </div>
-      <form th:action="@{/member/find_id_email}" method="post">
+      <form th:action="@{/member/find_id_email}" onsubmit="validation()" method="post">
         <div class="main-frame-body">
           <div class="frame-body-text1">
             <p class="body-text1">이메일 입력</p>
           </div>
           <div class="frame-body-text2">
-            <p class="body-text2">회원가입시 입력한 이름과 이메일</p>
-            <p class="body-text2">자동 입력 방지문자를 함께 입력해주세요.</p>
+            <p class="body-text2">회원가입시 입력한 이름과 이메일 <br> 함께 입력해주세요.</p>
           </div>
-            <div class="input-box">
-              <label class="form-control row">
-                <input type="text" id="user-name" name="name" placeholder="이름" maxlength="20" >
-              </label>
-            </div>
-            <div class="input-box">
-              <label class="form-control row">
-                <input type="text" id="user-email" name="email" placeholder="이메일" maxlength="20">
-              </label>
-            </div>
-            <div class="g-recaptcha" data-sitekey="6LflFS8qAAAAAKV_ANEzLehO8asihLHfcO41z1wO">
-            </div>
-            <button type="submit" id="submitButton" class="btn-big btn-primary">확인</button>
+          <label class="form-control">
+            <input class="input-box" type="text" id="user-name" name="name" pattern="^[가-힣a-zA-Z\s]+$" placeholder="이름" maxlength="20" required>
+          </label>
+          <label class="form-control">
+            <input class="input-box" type="text" id="user-email" name="email" pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" placeholder="이메일" maxlength="20" required>
+          </label>
+          <div class="g-recaptcha" data-sitekey="6LflFS8qAAAAAKV_ANEzLehO8asihLHfcO41z1wO" data-callback="onRecaptchaSuccess"></div>
+          <button type="submit" id="submitButton" class="btn-big btn-primary" disabled >확인</button>
           <div class="bottom-text">
             <p class="body-text2">비밀번호를 찾으시나요?</p>
             <a th:href="@{/member/find_password}">비밀번호 찾기</a>

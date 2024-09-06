@@ -18,8 +18,13 @@
         <a href="#" class="title-img"><img src="/images/common/logo.svg" alt=""></a>
       </div>
       <div class="main-frame-body">
-        <div id="id-box">회원님의 아이디</div>
-        <div class="input-box" th:text="${loginId}"></div>
+        <th:block th:if="${loginId}">
+          <div id="id-box">회원님의 아이디</div>
+          <div class="input-box" th:text="${loginId}"></div>
+        </th:block>
+        <th:block th:if="${msg}">
+          <div class="input-box" th:text="${msg}"></div>
+        </th:block>
       </div>
     </div>
   </main>

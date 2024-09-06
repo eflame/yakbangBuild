@@ -71,31 +71,44 @@ public class MemberController {
     @PostMapping("/find_password")
     public String findPassword(@RequestParam("id") String loginId,
                                @RequestParam("email") String email,
-                               @RequestParam("g-recaptcha-response") String recaptchaToken, // reCAPTCHA 토큰
+                               @RequestParam("g-recaptcha-response") String recaptchaToken,
                                Model model) {
-
-
 
         String password = null;
 
         try {
-            password = memberService.findPassword(loginId, email);
-            log.info(loginId);
-            log.info(email);
-            log.info(password);
-        } catch (Exception e) {
-            // 예외를 로그로 기록
-            log.error("Error finding password with memberService", e);
-            try {
-                password = expertService.findExpertPassword(loginId, email);
-            } catch (Exception ex) {
-                // 또 다른 예외를 로그로 기록
-                log.error("Error finding password with expertService", ex);
-                password = "존재하지 않음";
+            // reCAPTCHA 검증 서비스 호출
+            boolean isVerified = recaptchaService.verifyRecaptcha(recaptchaToken);
+            if (!isVerified) {
+                model.addAttribute("msg", "reCAPTCHA 검증에 실패했습니다.");
+                return "member/find_result2";
             }
-        }
-        model.addAttribute("password", password);
 
+            // 비밀번호 찾기 시도
+            try {
+                password = memberService.findPassword(loginId, email);
+                log.info("memberService - ID: {}, Email: {}, Password: {}", loginId, email, password);
+            } catch (Exception e) {
+                // memberService에서 예외 발생 시
+                log.error("Error finding password with memberService", e);
+                try {
+                    password = expertService.findExpertPassword(loginId, email);
+                    log.info("expertService - ID: {}, Email: {}, Password: {}", loginId, email, password);
+                } catch (Exception ex) {
+                    // expertService에서 또 다른 예외 발생 시
+                    log.error("Error finding password with expertService", ex);
+                    password = "아이디, 이메일 정보가 일치하지 않습니다.";
+                }
+            }
+
+        } catch (Exception e) {
+            // reCAPTCHA 검증 중 예외 발생 시
+            log.error("Error verifying reCAPTCHA", e);
+            model.addAttribute("msg", "문제가 발생했습니다. 나중에 다시 시도해 주세요.");
+            return "member/find_result2";
+        }
+
+        model.addAttribute("password", password);
         return "member/find_result2";
     }
 
@@ -107,28 +120,38 @@ public class MemberController {
     @PostMapping("/find_id_email")
     public String findIdEmail(@RequestParam("name") String name,
                               @RequestParam("email") String email,
-                              @RequestParam("g-recaptcha-response") String recaptchaToken, // reCAPTCHA 토큰
+                              @RequestParam("g-recaptcha-response") String recaptchaToken,
                               Model model) {
 
-        // reCAPTCHA 검증 서비스 호출
-        boolean isVerified = recaptchaService.verifyRecaptcha(recaptchaToken);
+        String loginId = null;
 
-        if (isVerified) {
+        try {
+            // reCAPTCHA 검증 서비스 호출
+            boolean isVerified = recaptchaService.verifyRecaptcha(recaptchaToken);
             System.out.println("isVerified = " + isVerified);
-        } else {
-            System.out.println("isVerified = " + isVerified);
+
+            if (isVerified) {
+                // 검증 완료시 Id값 입력
+                loginId = memberService.findLoginId(name, email);
+            } else {
+                model.addAttribute("msg", "reCAPTCHA 검증에 실패했습니다.");
+                return "member/find_result";
+            }
+
+            if (loginId == null) {
+                model.addAttribute("msg", "일치하는 회원의 ID가 없습니다.");
+                return "member/find_result";
+            }
+
+            model.addAttribute("loginId", loginId);
+            return "member/find_result";
+
+        } catch (Exception e) {
+            // 예외 처리
+            e.printStackTrace(); // 디버깅 용도로 예외 스택 추적
+            model.addAttribute("msg", "이름,이메일 정보가 일치하지 않습니다.");
+            return "member/find_result";
         }
-
-        String loginId = memberService.findLoginId(name, email);
-
-        if (loginId == null) {
-            model.addAttribute("msg", "일치하는 회원의 ID가 없습니다.");
-            return "member/find_id_email";
-        }
-
-        model.addAttribute("loginId", loginId);
-        return "member/find_result";
-
     }
 
 

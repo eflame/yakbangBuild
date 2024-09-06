@@ -16,24 +16,20 @@ import java.util.Map;
 @Transactional
 @RequiredArgsConstructor
 public class RecaptchaService {
-    @Value("${recaptcha.secret.key}")
-    private String recaptchaSecret; // Google reCAPTCHA 비밀 키
+
+    private static final String RECAPTCHA_SECRET_KEY = "6LflFS8qAAAAAGv3Ga07w5xU4UxwQv4jRa9RTmVr";
+    private static final String RECAPTCHA_VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify";
 
     public boolean verifyRecaptcha(String userResponse) {
-        String url = "https://www.google.com/recaptcha/api/siteverify";
-
         RestTemplate restTemplate = new RestTemplate();
-        Map<String, String> requestBody = new HashMap<>();
-        requestBody.put("secret", recaptchaSecret);
-        requestBody.put("response", userResponse);
 
-        ResponseEntity<RecaptchaResponse> response = restTemplate.postForEntity(url, requestBody, RecaptchaResponse.class);
+        String params = "?secret=" + RECAPTCHA_SECRET_KEY + "&response=" + userResponse;
+        String verifyUrl = RECAPTCHA_VERIFY_URL + params;
 
-        if (response.getStatusCode().is2xxSuccessful()) {
-            RecaptchaResponse recaptchaResponse = response.getBody();
-            return recaptchaResponse != null && recaptchaResponse.isSuccess();
-        }
-        return false;
+        String response = restTemplate.postForObject(verifyUrl, null, String.class);
+        JSONObject jsonResponse = new JSONObject(response);
+
+        return jsonResponse.getBoolean("success");
     }
 }
 
