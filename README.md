@@ -12,9 +12,10 @@
 <li><a href="#%EC%82%AC%EC%9A%A9-%EA%B8%B0%EC%88%A0">사용기술</a></li>
 </ul>
 
-<a href="http://ec2-43-203-236-232.ap-northeast-2.compute.amazonaws.com:10000" onclick="window.open(this.href); return false;" >약방 페이지</a>
+Tip: Shift를 누른 채 링크를 클릭하면 새 창에서 열립니다!
+<a href="http://ec2-43-203-236-232.ap-northeast-2.compute.amazonaws.com:10000" >약방 페이지</a>
 
-<a href="http://ec2-43-203-236-232.ap-northeast-2.compute.amazonaws.com:10000/admin" target="_blank">약방 어드민 페이지</a>
+<a href="http://ec2-43-203-236-232.ap-northeast-2.compute.amazonaws.com:10000/admin">약방 어드민 페이지</a>
 
 
 <div class="markdown-heading" dir="auto"><h2 tabindex="-1" class="heading-element" dir="auto">주요기능</h2><a id="user-content-주요기능" class="anchor" aria-label="Permalink: 주요기능" href="#주요기능"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a></div>
