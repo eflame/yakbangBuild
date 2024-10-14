@@ -10,8 +10,8 @@
 <ul dir="auto">
 <li><a href="#%EC%A3%BC%EC%9A%94%EA%B8%B0%EB%8A%A5">주요기능</a></li>
 <li><a href="#%EC%82%AC%EC%9A%A9-%EA%B8%B0%EC%88%A0">사용기술</a></li>
-<li>[약방 페이지]([https://www.google.com/](http://ec2-43-203-236-232.ap-northeast-2.compute.amazonaws.com:10000){:target="_blank"}</li>
-<li>[약방 어드민 페이지]([https://www.google.com/](http://ec2-43-203-236-232.ap-northeast-2.compute.amazonaws.com:10000/admin){:target="_blank"}</li>
+<li>[약방 페이지](http://ec2-43-203-236-232.ap-northeast-2.compute.amazonaws.com:10000){:target="_blank"}</li>
+<li>[약방 어드민 페이지](http://ec2-43-203-236-232.ap-northeast-2.compute.amazonaws.com:10000/admin){:target="_blank"}</li>
 </ul>
 
 
