@@ -13,7 +13,7 @@
 </ul>
 
 Tip: Ctal를 누른 채 링크를 클릭하면 새 창에서 열립니다! <br>
-<a href="http://ec2-43-203-236-232.ap-northeast-2.compute.amazonaws.com:10000" >약방 페이지</a>
+<a href="http://ec2-43-203-236-232.ap-northeast-2.compute.amazonaws.com:10000" >약방 페이지</a><br>
 <a href="http://ec2-43-203-236-232.ap-northeast-2.compute.amazonaws.com:10000/admin">약방 어드민 페이지</a>
 
 
