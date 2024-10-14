@@ -12,7 +12,7 @@
 <li><a href="#%EC%82%AC%EC%9A%A9-%EA%B8%B0%EC%88%A0">사용기술</a></li>
 </ul>
 
-<a href="http://ec2-43-203-236-232.ap-northeast-2.compute.amazonaws.com:10000" target="_blank">약방 페이지</a>
+<a href="http://ec2-43-203-236-232.ap-northeast-2.compute.amazonaws.com:10000" onclick="window.open(this.href); return false;" >약방 페이지</a>
 
 <a href="http://ec2-43-203-236-232.ap-northeast-2.compute.amazonaws.com:10000/admin" target="_blank">약방 어드민 페이지</a>
 
